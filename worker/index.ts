@@ -105,6 +105,32 @@ function toFrontmatter(fields: Record<string, unknown>): string {
   return lines.join('\n');
 }
 
+function parseFrontmatter(raw: string): { data: Record<string, any>; body: string } {
+  const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!match) return { data: {}, body: raw };
+  const [, fm, body] = match;
+  const data: Record<string, any> = {};
+  fm.split('\n').forEach((line) => {
+    if (!line.trim() || line.trim().startsWith('#')) return;
+    const idx = line.indexOf(':');
+    if (idx === -1) return;
+    const key = line.slice(0, idx).trim();
+    const value = line.slice(idx + 1).trim();
+    if (value.startsWith('[') || value.startsWith('{')) {
+      try {
+        data[key] = JSON.parse(value);
+      } catch {
+        data[key] = value.startsWith('[') ? [] : {};
+      }
+    } else if (value === 'true' || value === 'false') {
+      data[key] = value === 'true';
+    } else {
+      data[key] = value.replace(/^"|"$/g, '');
+    }
+  });
+  return { data, body: body.trim() };
+}
+
 async function githubRequest(env: Env, path: string, init: RequestInit = {}): Promise<Response> {
   const url = `https://api.github.com/repos/${env.GITHUB_REPO}/contents/${path}`;
   return fetch(url, {
@@ -160,6 +186,13 @@ function handleLogout(): Response {
   return json({ ok: true }, 200, { 'Set-Cookie': clearedCookieHeader() });
 }
 
+async function listVideoSlugs(env: Env): Promise<string[] | null> {
+  const res = await githubRequest(env, `${VIDEOS_DIR}?ref=${env.GITHUB_BRANCH}`);
+  if (!res.ok) return null;
+  const files = (await res.json()) as { name: string }[];
+  return files.filter((f) => f.name.endsWith('.md')).map((f) => f.name.replace(/\.md$/, ''));
+}
+
 async function handleVideosGet(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const slug = url.searchParams.get('slug');
@@ -172,11 +205,103 @@ async function handleVideosGet(request: Request, env: Env): Promise<Response> {
     return json({ slug, raw });
   }
 
-  const res = await githubRequest(env, `${VIDEOS_DIR}?ref=${env.GITHUB_BRANCH}`);
-  if (!res.ok) return json({ error: 'Could not list videos' }, 502);
-  const files = (await res.json()) as { name: string }[];
-  const slugs = files.filter((f) => f.name.endsWith('.md')).map((f) => f.name.replace(/\.md$/, ''));
-  return json({ slugs });
+  const slugs = await listVideoSlugs(env);
+  if (!slugs) return json({ error: 'Could not list videos' }, 502);
+
+  if (url.searchParams.get('full') !== '1') {
+    return json({ slugs });
+  }
+
+  // Full metadata listing — fetches + parses every file in parallel. Used
+  // by the admin panel's Work list, the Featured Work item picker, and the
+  // tag manager. (Deliberately light: title/tags/date/flags only — Edit
+  // still loads the raw file for the rest, same as before.)
+  const items = await Promise.all(
+    slugs.map(async (s) => {
+      const fileRes = await githubRequest(env, `${VIDEOS_DIR}/${s}.md?ref=${env.GITHUB_BRANCH}`);
+      if (!fileRes.ok) return null;
+      const fileData = (await fileRes.json()) as { content: string };
+      const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+      const { data } = parseFrontmatter(raw);
+      return {
+        slug: s,
+        title: data.title ?? s,
+        tags: Array.isArray(data.tags) ? data.tags : [],
+        uploadDate: data.uploadDate ?? '',
+        featured: !!data.featured,
+        hidden: !!data.hidden,
+      };
+    })
+  );
+
+  return json({ items: items.filter(Boolean) });
+}
+
+async function handleVideosDelete(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const slug = url.searchParams.get('slug');
+  if (!slug) return json({ error: 'Missing slug' }, 400);
+
+  const filePath = `${VIDEOS_DIR}/${slug}.md`;
+  const existing = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
+  if (!existing.ok) return json({ error: 'Video not found' }, 404);
+  const { sha } = (await existing.json()) as { sha: string };
+
+  const res = await githubRequest(env, filePath, {
+    method: 'DELETE',
+    body: JSON.stringify({ message: `Delete video: ${slug}`, sha, branch: env.GITHUB_BRANCH }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    return json({ error: 'GitHub delete failed', details: err }, 502);
+  }
+  return json({ ok: true, slug });
+}
+
+async function handleTagsPost(request: Request, env: Env): Promise<Response> {
+  const body = (await request.json().catch(() => ({}))) as {
+    action?: 'rename' | 'delete';
+    tag?: string;
+    newTag?: string;
+  };
+  if (!body.tag || (body.action !== 'rename' && body.action !== 'delete')) {
+    return json({ error: 'Expects { action: "rename"|"delete", tag, newTag? }' }, 400);
+  }
+  if (body.action === 'rename' && !body.newTag?.trim()) {
+    return json({ error: 'newTag is required for rename' }, 400);
+  }
+
+  const slugs = await listVideoSlugs(env);
+  if (!slugs) return json({ error: 'Could not list videos' }, 502);
+
+  const updated: string[] = [];
+  const failed: string[] = [];
+
+  // Sequential, not parallel: each match is its own commit to the same
+  // directory, and doing them one at a time avoids racing GitHub's API.
+  for (const slug of slugs) {
+    const filePath = `${VIDEOS_DIR}/${slug}.md`;
+    const fileRes = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
+    if (!fileRes.ok) continue;
+    const fileData = (await fileRes.json()) as { content: string; sha: string };
+    const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+    const { data, body: mdBody } = parseFrontmatter(raw);
+    const tags: string[] = Array.isArray(data.tags) ? data.tags : [];
+    if (!tags.includes(body.tag)) continue;
+
+    const newTags =
+      body.action === 'delete' ? tags.filter((t) => t !== body.tag) : tags.map((t) => (t === body.tag ? body.newTag : t));
+
+    const frontmatter = toFrontmatter({ ...data, tags: newTags });
+    const fileContent = `${frontmatter}\n\n${mdBody}\n`;
+    const message =
+      body.action === 'delete' ? `Remove tag "${body.tag}" from ${slug}` : `Rename tag "${body.tag}" to "${body.newTag}" on ${slug}`;
+    const res = await putFile(env, filePath, fileContent, fileData.sha, message);
+    if (res.ok) updated.push(slug);
+    else failed.push(slug);
+  }
+
+  return json({ ok: true, updated, failed });
 }
 
 async function handleVideosPost(request: Request, env: Env): Promise<Response> {
@@ -224,14 +349,20 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
 async function handleSettingsGet(_request: Request, env: Env): Promise<Response> {
   const settings = await getFile(env, 'src/data/site.json');
   const contact = await getFile(env, 'src/content/pages/contact.md');
+  const contactParsed = contact ? parseFrontmatter(contact.content) : null;
   return json({
     settings: settings ? JSON.parse(settings.content) : null,
-    contact: contact?.content ?? null,
+    contact: contactParsed
+      ? { title: contactParsed.data.title ?? '', summary: contactParsed.data.summary ?? '', body: contactParsed.body }
+      : null,
   });
 }
 
 async function handleSettingsPost(request: Request, env: Env): Promise<Response> {
-  const body = (await request.json()) as { settings?: Record<string, any>; contactMarkdown?: string };
+  const body = (await request.json()) as {
+    settings?: Record<string, any>;
+    contact?: { title?: string; summary?: string; body?: string };
+  };
 
   if (body.settings) {
     const existing = await getFile(env, 'src/data/site.json');
@@ -245,15 +376,14 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
     if (!res.ok) return json({ error: 'Failed to update settings' }, 502);
   }
 
-  if (body.contactMarkdown) {
+  if (body.contact) {
+    const frontmatter = toFrontmatter({
+      title: body.contact.title || 'Contact',
+      summary: body.contact.summary || undefined,
+    });
+    const fileContent = `${frontmatter}\n\n${body.contact.body || ''}\n`;
     const existing = await getFile(env, 'src/content/pages/contact.md');
-    const res = await putFile(
-      env,
-      'src/content/pages/contact.md',
-      body.contactMarkdown,
-      existing?.sha,
-      'Update contact page'
-    );
+    const res = await putFile(env, 'src/content/pages/contact.md', fileContent, existing?.sha, 'Update contact page');
     if (!res.ok) return json({ error: 'Failed to update contact page' }, 502);
   }
 
@@ -270,7 +400,7 @@ export default {
 
     const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/';
     const isAdminPage = !isLoginPage && (pathname === '/admin' || pathname === '/admin/' || pathname.startsWith('/admin/'));
-    const isProtectedApi = pathname === '/api/videos' || pathname === '/api/settings';
+    const isProtectedApi = pathname === '/api/videos' || pathname === '/api/settings' || pathname === '/api/tags';
 
     if (isAdminPage || isProtectedApi) {
       const authed = await isAuthenticated(request, env);
@@ -283,11 +413,16 @@ export default {
     if (pathname === '/api/videos') {
       if (request.method === 'GET') return handleVideosGet(request, env);
       if (request.method === 'POST') return handleVideosPost(request, env);
+      if (request.method === 'DELETE') return handleVideosDelete(request, env);
     }
 
     if (pathname === '/api/settings') {
       if (request.method === 'GET') return handleSettingsGet(request, env);
       if (request.method === 'POST') return handleSettingsPost(request, env);
+    }
+
+    if (pathname === '/api/tags' && request.method === 'POST') {
+      return handleTagsPost(request, env);
     }
 
     // Everything else — every static page, image, and the login page

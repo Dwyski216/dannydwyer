@@ -6,9 +6,10 @@ export const site = raw as {
   name: string;
   role: string;
   tagline: string;
-  introCopy: string;
+  introCopy: string; // HTML, edited via the admin panel's rich text field
   email: string;
   location: string;
   socials: Record<string, string>;
-  homeReelSlug: string;
+  heroVideo: { platform: 'youtube' | 'vimeo'; videoId: string } | null;
+  featuredSlugs: string[]; // urlSlugs of videos shown in the home page's Featured Work row
 };

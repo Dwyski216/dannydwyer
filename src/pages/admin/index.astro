@@ -7,175 +7,487 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="Admin" description="Site content admin." noindex={true}>
-  <main class="admin">
+  <main class="admin container">
     <div class="admin-header">
       <h1>Site Admin</h1>
-      <button type="button" id="logout-btn" class="logout-btn">Log Out</button>
+      <button type="button" id="logout-btn" class="btn btn-ghost">Log Out</button>
     </div>
     <p class="hint">Changes here commit directly to the site's GitHub repo and trigger a live redeploy (usually live within a minute or two).</p>
 
-    <nav class="tabs">
-      <button class="tab active" data-tab="add-video">Add Video</button>
-      <button class="tab" data-tab="edit-video">Edit Video</button>
-      <button class="tab" data-tab="settings">Site Settings</button>
-      <button class="tab" data-tab="contact">Contact Page</button>
-    </nav>
+    <div class="admin-layout">
+      <div class="admin-content">
+        <!-- ============ HOME ============ -->
+        <section id="page-home" class="page-panel" data-page="home">
+          <h2>Home page</h2>
+          <p class="section-hint">Mirrors the home page top to bottom: the video that plays there, the intro text below it, then the Featured Work row.</p>
 
-    <section data-panel="add-video" class="panel">
-      <form id="video-form">
-        <label>Title <input name="title" required /></label>
-        <div class="row">
-          <label>Platform
-            <select name="platform">
-              <option value="youtube">YouTube</option>
-              <option value="vimeo">Vimeo</option>
-            </select>
-          </label>
-          <label>Video ID
-            <input name="videoId" required placeholder="YouTube: dQw4w9WgXcQ · Vimeo: 76979871" />
-          </label>
-        </div>
-        <label>Thumbnail URL (required for Vimeo; optional override for YouTube)
-          <input name="thumbnailUrl" placeholder="https://…" />
-        </label>
-        <label>Short Summary (150–160 characters, used for SEO & search snippets)
-          <textarea name="summary" maxlength="200" rows="2" required></textarea>
-        </label>
-        <label>Full Description (shown on the video's page)
-          <textarea name="description" rows="5"></textarea>
-        </label>
-        <div class="row">
-          <label>Role <input name="role" value="Director of Photography" /></label>
-          <label>Upload / Shoot Date <input name="uploadDate" type="date" required /></label>
-        </div>
-        <div class="row">
-          <label>Project Name <input name="projectName" /></label>
-          <label>Client <input name="client" /></label>
-        </div>
-        <label>Tags (comma-separated) <input name="tags" placeholder="narrative, 35mm, night exterior" /></label>
-        <label>Still images — one per line, as: image URL | alt text | caption (caption optional)
-          <textarea name="stills" rows="3" placeholder="/images/videos/midnight-harbor/01.jpg | Dock lamps lighting the wide shot | Night one, camera A"></textarea>
-        </label>
-        <label>URL slug (leave blank to auto-generate from title)
-          <input name="slug" placeholder="midnight-harbor" />
-        </label>
-        <label class="checkbox"><input type="checkbox" name="featured" /> Feature this on the home page</label>
-        <button type="submit">Publish Video</button>
-        <p class="status" id="video-status"></p>
-      </form>
-    </section>
+          <form id="home-form">
+            <fieldset>
+              <legend>Hero video</legend>
+              <p class="section-hint">The video embedded at the top of the home page.</p>
+              <div class="row">
+                <label>Platform
+                  <select name="heroPlatform">
+                    <option value="youtube">YouTube</option>
+                    <option value="vimeo">Vimeo</option>
+                  </select>
+                </label>
+                <label>Video ID
+                  <input name="heroVideoId" placeholder="YouTube: dQw4w9WgXcQ · Vimeo: 76979871" />
+                </label>
+              </div>
+            </fieldset>
 
-    <section data-panel="edit-video" class="panel" hidden>
-      <label>Choose a video
-        <select id="video-select"><option>Loading…</option></select>
-      </label>
-      <p class="hint">Editing loads the video's raw file. Edit the text, then click Save — it reuses the Add Video form above.</p>
-      <textarea id="raw-editor" rows="16"></textarea>
-      <button id="save-raw">Save Changes</button>
-      <p class="status" id="edit-status"></p>
-    </section>
+            <fieldset>
+              <legend>Intro text</legend>
+              <p class="section-hint">The paragraph under the headline. Basic formatting only.</p>
+              <div class="richtext-toolbar" data-target="intro-editor">
+                <button type="button" data-cmd="bold"><b>B</b></button>
+                <button type="button" data-cmd="italic"><i>I</i></button>
+                <button type="button" data-cmd="createLink">Link</button>
+                <button type="button" data-cmd="formatBlock" data-value="p">¶</button>
+              </div>
+              <div id="intro-editor" class="richtext-editor" contenteditable="true"></div>
+              <textarea name="introCopy" id="intro-html" hidden></textarea>
+            </fieldset>
 
-    <section data-panel="settings" class="panel" hidden>
-      <form id="settings-form">
-        <label>Name <input name="name" /></label>
-        <label>Role / Title <input name="role" /></label>
-        <label>Tagline <input name="tagline" /></label>
-        <label>Intro Copy (home page) <textarea name="introCopy" rows="4"></textarea></label>
-        <label>Email <input name="email" type="email" /></label>
-        <label>Location <input name="location" /></label>
-        <label>Instagram URL <input name="instagram" /></label>
-        <label>IMDb URL <input name="imdb" /></label>
-        <label>Vimeo URL <input name="vimeo" /></label>
-        <label>Home page featured video slug <input name="homeReelSlug" /></label>
-        <button type="submit">Save Settings</button>
-        <p class="status" id="settings-status"></p>
-      </form>
-    </section>
+            <fieldset>
+              <legend>Featured Work</legend>
+              <p class="section-hint">Pick which work items show in the Featured Work row. Loads from the Work catalog.</p>
+              <div id="featured-picker" class="item-picker">
+                <p class="section-hint">Loading…</p>
+              </div>
+            </fieldset>
 
-    <section data-panel="contact" class="panel" hidden>
-      <p class="hint">Edit the Contact page markdown below (the top frontmatter block controls the page title and SEO description; everything after it is the page body).</p>
-      <textarea id="contact-editor" rows="16"></textarea>
-      <button id="save-contact">Save Contact Page</button>
-      <p class="status" id="contact-status"></p>
-    </section>
+            <button type="submit" class="btn btn-solid">Save Home Page</button>
+            <p class="status" id="home-status"></p>
+          </form>
+        </section>
+
+        <!-- ============ WORK ============ -->
+        <section id="page-work" class="page-panel" data-page="work" hidden>
+          <h2>Work</h2>
+          <p class="section-hint">Add, edit, and delete work items, and manage the tags used to filter them.</p>
+
+          <div id="work-list-view">
+            <div class="work-list-controls">
+              <input id="work-search" type="search" placeholder="Search by title…" />
+              <button type="button" id="work-add-btn" class="btn btn-solid">+ Add Work Item</button>
+            </div>
+            <div id="work-list" class="work-list">
+              <p class="section-hint">Loading…</p>
+            </div>
+
+            <fieldset class="tag-manager">
+              <legend>Manage tags</legend>
+              <p class="section-hint">Rename or delete a tag everywhere it's used across the catalog.</p>
+              <div id="tag-manager-list" class="tag-manager-list"></div>
+            </fieldset>
+          </div>
+
+          <div id="work-item-view" hidden>
+            <button type="button" id="work-back-btn" class="btn btn-ghost">← Back to Work list</button>
+            <form id="work-item-form">
+              <input type="hidden" name="originalSlug" />
+              <label>Title <input name="title" required /></label>
+
+              <fieldset>
+                <legend>Video link</legend>
+                <div class="row">
+                  <label>Platform
+                    <select name="platform">
+                      <option value="youtube">YouTube</option>
+                      <option value="vimeo">Vimeo</option>
+                    </select>
+                  </label>
+                  <label>Video ID
+                    <input name="videoId" required placeholder="YouTube: dQw4w9WgXcQ · Vimeo: 76979871" />
+                  </label>
+                </div>
+                <label>Thumbnail URL (required for Vimeo; optional override for YouTube)
+                  <input name="thumbnailUrl" placeholder="https://…" />
+                </label>
+              </fieldset>
+
+              <label>Short Summary (150–160 characters, used for SEO & search snippets)
+                <textarea name="summary" maxlength="200" rows="2" required></textarea>
+              </label>
+              <label>Description (shown on the item's page)
+                <textarea name="description" rows="5"></textarea>
+              </label>
+
+              <fieldset>
+                <legend>Credits</legend>
+                <div class="row">
+                  <label>Role <input name="role" value="Director of Photography" /></label>
+                  <label>Client <input name="client" /></label>
+                </div>
+                <label>Project Name <input name="projectName" /></label>
+              </fieldset>
+
+              <div class="row">
+                <label>Date <input name="uploadDate" type="date" required /></label>
+                <label>URL slug (leave blank to auto-generate from title)
+                  <input name="slug" placeholder="midnight-harbor" />
+                </label>
+              </div>
+
+              <fieldset>
+                <legend>Tags</legend>
+                <div id="work-tag-picker" class="tag-picker"></div>
+                <label>Add a new tag <input id="work-new-tag" placeholder="Type a tag and press Enter" /></label>
+              </fieldset>
+
+              <label>Still images — one per line, as: image URL | alt text | caption (caption optional)
+                <textarea name="stills" rows="3" placeholder="/images/videos/midnight-harbor/01.jpg | Dock lamps lighting the wide shot | Night one, camera A"></textarea>
+              </label>
+
+              <label class="checkbox"><input type="checkbox" name="featured" /> Eligible for Featured Work / home reel</label>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-solid">Save Work Item</button>
+                <button type="button" id="work-delete-btn" class="btn btn-danger" hidden>Delete Item</button>
+              </div>
+              <p class="status" id="work-item-status"></p>
+            </form>
+          </div>
+        </section>
+
+        <!-- ============ CONTACT ============ -->
+        <section id="page-contact" class="page-panel" data-page="contact" hidden>
+          <h2>Contact page</h2>
+          <p class="section-hint">Mirrors the contact page: the heading, then the description under it.</p>
+          <form id="contact-form">
+            <label>Contact Heading <input name="contactHeading" required /></label>
+            <label>Contact Description
+              <textarea name="contactDescription" rows="8"></textarea>
+            </label>
+            <button type="submit" class="btn btn-solid">Save Contact Page</button>
+            <p class="status" id="contact-status"></p>
+          </form>
+        </section>
+
+        <!-- ============ SETTINGS ============ -->
+        <section id="page-settings" class="page-panel" data-page="settings" hidden>
+          <h2>Site settings</h2>
+          <p class="section-hint">Sitewide info that isn't specific to one page — shows up in the header, footer, and contact links.</p>
+          <form id="settings-form">
+            <label>Name <input name="name" /></label>
+            <label>Role / Title <input name="role" /></label>
+            <label>Tagline <input name="tagline" /></label>
+            <label>Email <input name="email" type="email" /></label>
+            <label>Location <input name="location" /></label>
+            <label>Instagram URL <input name="instagram" /></label>
+            <label>LinkedIn URL <input name="linkedin" /></label>
+            <label>IMDb URL <input name="imdb" /></label>
+            <label>Vimeo URL <input name="vimeo" /></label>
+            <button type="submit" class="btn btn-solid">Save Settings</button>
+            <p class="status" id="settings-status"></p>
+          </form>
+        </section>
+      </div>
+
+      <aside class="admin-nav">
+        <nav>
+          <button type="button" class="nav-link active" data-page="home">Home</button>
+          <button type="button" class="nav-link" data-page="work">Work</button>
+          <button type="button" class="nav-link" data-page="contact">Contact</button>
+          <button type="button" class="nav-link" data-page="settings">Settings</button>
+        </nav>
+      </aside>
+    </div>
   </main>
 </Layout>
 
 <script>
+  // ---------------------------------------------------------------------
+  // Shared state — loaded once, mutated in place, and re-POSTed whole on
+  // every save so one panel's save can never clobber another panel's
+  // unsaved-in-this-load fields.
+  // ---------------------------------------------------------------------
+  type Settings = {
+    name: string;
+    role: string;
+    tagline: string;
+    introCopy: string;
+    email: string;
+    location: string;
+    socials: Record<string, string>;
+    heroVideo: { platform: string; videoId: string } | null;
+    featuredSlugs: string[];
+  };
+
+  type WorkItem = {
+    slug: string;
+    title: string;
+    tags: string[];
+    uploadDate: string;
+    featured: boolean;
+    hidden: boolean;
+  };
+
+  let settings: Settings | null = null;
+  let workItems: WorkItem[] = [];
+  let workItemsLoaded = false;
+
+  function slugify(input: string): string {
+    return input
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+  }
+
+  function allTags(): string[] {
+    return [...new Set(workItems.flatMap((v) => v.tags))].sort();
+  }
+
+  async function loadSettings(): Promise<Settings> {
+    if (settings) return settings;
+    const res = await fetch('/api/settings');
+    const data = await res.json();
+    settings = data.settings as Settings;
+    return settings;
+  }
+
+  async function saveSettings(status: HTMLElement) {
+    status.textContent = 'Saving…';
+    const res = await fetch('/api/settings', { method: 'POST', body: JSON.stringify({ settings }) });
+    status.textContent = res.ok ? 'Saved.' : 'Error saving.';
+  }
+
+  async function loadWorkItems(force = false): Promise<WorkItem[]> {
+    if (workItemsLoaded && !force) return workItems;
+    const res = await fetch('/api/videos?full=1');
+    const data = await res.json();
+    workItems = (data.items ?? []).sort((a: WorkItem, b: WorkItem) => a.title.localeCompare(b.title));
+    workItemsLoaded = true;
+    return workItems;
+  }
+
+  // ---------------------------------------------------------------------
+  // Nav
+  // ---------------------------------------------------------------------
+  const navLinks = document.querySelectorAll('.nav-link');
+  const pagePanels = document.querySelectorAll('.page-panel');
+
+  async function showPage(page: string) {
+    navLinks.forEach((l) => l.classList.toggle('active', (l as HTMLElement).dataset.page === page));
+    pagePanels.forEach((p) => {
+      (p as HTMLElement).hidden = (p as HTMLElement).dataset.page !== page;
+    });
+    if (page === 'home') await initHomePanel();
+    if (page === 'work') await initWorkPanel();
+    if (page === 'contact') await initContactPanel();
+    if (page === 'settings') await initSettingsPanel();
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => showPage((link as HTMLElement).dataset.page!));
+  });
+
   document.getElementById('logout-btn')?.addEventListener('click', async () => {
     await fetch('/api/logout', { method: 'POST' });
     location.href = '/admin/login';
   });
 
-  const tabs = document.querySelectorAll('.tab');
-  const panels = document.querySelectorAll('.panel');
+  // ---------------------------------------------------------------------
+  // Home panel
+  // ---------------------------------------------------------------------
+  const introEditor = document.getElementById('intro-editor') as HTMLElement;
+  const introHtmlField = document.getElementById('intro-html') as HTMLTextAreaElement;
 
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach((t) => t.classList.remove('active'));
-      tab.classList.add('active');
-      const target = (tab as HTMLElement).dataset.tab;
-      panels.forEach((p) => {
-        (p as HTMLElement).hidden = (p as HTMLElement).dataset.panel !== target;
-      });
-      if (target === 'edit-video') loadVideoList();
-      if (target === 'settings') loadSettings();
-      if (target === 'contact') loadContact();
+  document.querySelectorAll('.richtext-toolbar button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      introEditor.focus();
+      const cmd = (btn as HTMLElement).dataset.cmd!;
+      if (cmd === 'createLink') {
+        const url = prompt('Link URL:');
+        if (url) document.execCommand('createLink', false, url);
+      } else if (cmd === 'formatBlock') {
+        document.execCommand('formatBlock', false, (btn as HTMLElement).dataset.value!);
+      } else {
+        document.execCommand(cmd);
+      }
+      introHtmlField.value = introEditor.innerHTML;
     });
   });
 
-  // --- Add Video ---
-  const videoForm = document.getElementById('video-form') as HTMLFormElement;
-  videoForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const status = document.getElementById('video-status')!;
-    status.textContent = 'Publishing…';
-    const fd = new FormData(videoForm);
-    const payload: Record<string, any> = Object.fromEntries(fd.entries());
-    payload.tags = String(payload.tags || '').split(',').map((t) => t.trim()).filter(Boolean);
-    payload.featured = fd.get('featured') === 'on';
-    payload.stills = String(payload.stills || '')
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .map((line) => {
-        const [src, alt, caption] = line.split('|').map((p) => p.trim());
-        return { src, alt: alt || '', ...(caption ? { caption } : {}) };
-      });
-
-    const res = await fetch('/api/videos', { method: 'POST', body: JSON.stringify(payload) });
-    const data = await res.json();
-    status.textContent = res.ok ? `Published: /work/${data.slug}` : `Error: ${data.error}`;
-    if (res.ok) videoForm.reset();
+  introEditor.addEventListener('input', () => {
+    introHtmlField.value = introEditor.innerHTML;
   });
 
-  // --- Edit Video ---
-  async function loadVideoList() {
-    const select = document.getElementById('video-select') as HTMLSelectElement;
-    select.innerHTML = '<option>Loading…</option>';
-    const res = await fetch('/api/videos');
-    const data = await res.json();
-    select.innerHTML = data.slugs.map((s: string) => `<option value="${s}">${s}</option>`).join('');
-    select.onchange = () => loadRaw(select.value);
-    if (data.slugs[0]) loadRaw(data.slugs[0]);
+  let homeInitialized = false;
+  async function initHomePanel() {
+    const s = await loadSettings();
+    const items = await loadWorkItems();
+
+    const form = document.getElementById('home-form') as HTMLFormElement;
+    (form.elements.namedItem('heroPlatform') as HTMLSelectElement).value = s.heroVideo?.platform ?? 'youtube';
+    (form.elements.namedItem('heroVideoId') as HTMLInputElement).value = s.heroVideo?.videoId ?? '';
+    introEditor.innerHTML = s.introCopy ?? '';
+    introHtmlField.value = s.introCopy ?? '';
+
+    const picker = document.getElementById('featured-picker') as HTMLElement;
+    picker.innerHTML = items
+      .map(
+        (item) => `
+        <label class="tag-option">
+          <input type="checkbox" name="featuredSlug" value="${item.slug}" ${s.featuredSlugs.includes(item.slug) ? 'checked' : ''} />
+          <span>${item.title}</span>
+        </label>`
+      )
+      .join('');
+
+    if (homeInitialized) return;
+    homeInitialized = true;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('home-status')!;
+      const fd = new FormData(form);
+      const cur = await loadSettings();
+      cur.heroVideo = { platform: String(fd.get('heroPlatform')), videoId: String(fd.get('heroVideoId') || '') };
+      cur.introCopy = introHtmlField.value;
+      cur.featuredSlugs = Array.from(form.querySelectorAll('input[name="featuredSlug"]:checked')).map(
+        (el) => (el as HTMLInputElement).value
+      );
+      await saveSettings(status);
+    });
   }
 
-  async function loadRaw(slug: string) {
-    const res = await fetch(`/api/videos?slug=${encodeURIComponent(slug)}`);
-    const data = await res.json();
-    (document.getElementById('raw-editor') as HTMLTextAreaElement).value = data.raw ?? '';
+  // ---------------------------------------------------------------------
+  // Work panel
+  // ---------------------------------------------------------------------
+  const workListView = document.getElementById('work-list-view') as HTMLElement;
+  const workItemView = document.getElementById('work-item-view') as HTMLElement;
+  const workListEl = document.getElementById('work-list') as HTMLElement;
+  const workSearch = document.getElementById('work-search') as HTMLInputElement;
+  const tagManagerList = document.getElementById('tag-manager-list') as HTMLElement;
+  const workItemForm = document.getElementById('work-item-form') as HTMLFormElement;
+  const workTagPicker = document.getElementById('work-tag-picker') as HTMLElement;
+  const workNewTagInput = document.getElementById('work-new-tag') as HTMLInputElement;
+  const workDeleteBtn = document.getElementById('work-delete-btn') as HTMLButtonElement;
+
+  let workInitialized = false;
+  let editingSlug: string | null = null;
+  let pendingTags = new Set<string>();
+
+  function renderWorkList() {
+    const query = workSearch.value.trim().toLowerCase();
+    const filtered = workItems.filter((i) => !query || i.title.toLowerCase().includes(query));
+    if (filtered.length === 0) {
+      workListEl.innerHTML = '<p class="section-hint">No items match.</p>';
+      return;
+    }
+    workListEl.innerHTML = filtered
+      .map(
+        (item) => `
+        <div class="work-row" data-slug="${item.slug}">
+          <div class="work-row-info">
+            <strong>${item.title}</strong>
+            <span class="work-row-meta">${item.tags.join(', ') || 'no tags'} · ${item.uploadDate || 'no date'}${item.hidden ? ' · hidden' : ''}</span>
+          </div>
+          <div class="work-row-actions">
+            <button type="button" class="btn btn-ghost" data-edit="${item.slug}">Edit</button>
+          </div>
+        </div>`
+      )
+      .join('');
+
+    workListEl.querySelectorAll('[data-edit]').forEach((btn) => {
+      btn.addEventListener('click', () => openWorkItem((btn as HTMLElement).dataset.edit!));
+    });
   }
 
-  document.getElementById('save-raw')?.addEventListener('click', async () => {
-    const status = document.getElementById('edit-status')!;
-    const select = document.getElementById('video-select') as HTMLSelectElement;
-    const raw = (document.getElementById('raw-editor') as HTMLTextAreaElement).value;
+  function renderTagManager() {
+    const tags = allTags();
+    if (tags.length === 0) {
+      tagManagerList.innerHTML = '<p class="section-hint">No tags yet.</p>';
+      return;
+    }
+    tagManagerList.innerHTML = tags
+      .map(
+        (tag) => `
+        <span class="tag-chip">
+          ${tag}
+          <button type="button" data-rename="${tag}" title="Rename everywhere" aria-label="Rename ${tag}">✎</button>
+          <button type="button" data-delete="${tag}" title="Delete everywhere" aria-label="Delete ${tag}">×</button>
+        </span>`
+      )
+      .join('');
 
-    // Parse the frontmatter back out of the raw markdown so we can reuse the /api/videos POST handler.
+    tagManagerList.querySelectorAll('[data-rename]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const tag = (btn as HTMLElement).dataset.rename!;
+        const newTag = prompt(`Rename "${tag}" to:`, tag);
+        if (!newTag || newTag === tag) return;
+        await fetch('/api/tags', { method: 'POST', body: JSON.stringify({ action: 'rename', tag, newTag }) });
+        await loadWorkItems(true);
+        renderWorkList();
+        renderTagManager();
+      });
+    });
+
+    tagManagerList.querySelectorAll('[data-delete]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const tag = (btn as HTMLElement).dataset.delete!;
+        if (!confirm(`Delete tag "${tag}" from every item that uses it?`)) return;
+        await fetch('/api/tags', { method: 'POST', body: JSON.stringify({ action: 'delete', tag }) });
+        await loadWorkItems(true);
+        renderWorkList();
+        renderTagManager();
+      });
+    });
+  }
+
+  function renderWorkTagPicker() {
+    const tags = allTags();
+    workTagPicker.innerHTML = tags
+      .map(
+        (tag) => `
+        <label class="tag-option">
+          <input type="checkbox" value="${tag}" ${pendingTags.has(tag) ? 'checked' : ''} />
+          <span>${tag}</span>
+        </label>`
+      )
+      .join('');
+    workTagPicker.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+      cb.addEventListener('change', () => {
+        const el = cb as HTMLInputElement;
+        if (el.checked) pendingTags.add(el.value);
+        else pendingTags.delete(el.value);
+      });
+    });
+  }
+
+  workNewTagInput.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const value = workNewTagInput.value.trim();
+    if (!value) return;
+    pendingTags.add(value);
+    if (!allTags().includes(value)) {
+      // Not in the catalog yet — add it to this render pass so it shows as
+      // a checked option immediately.
+      workTagPicker.insertAdjacentHTML(
+        'beforeend',
+        `<label class="tag-option"><input type="checkbox" value="${value}" checked /><span>${value}</span></label>`
+      );
+      workTagPicker.querySelector(`input[value="${value}"]`)?.addEventListener('change', (e) => {
+        const el = e.target as HTMLInputElement;
+        if (el.checked) pendingTags.add(el.value);
+        else pendingTags.delete(el.value);
+      });
+    }
+    workNewTagInput.value = '';
+  });
+
+  function parseRawVideo(raw: string): Record<string, any> {
     const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-    if (!match) { status.textContent = 'Could not parse frontmatter.'; return; }
+    if (!match) return { description: raw };
     const [, fm, body] = match;
-    const fields: Record<string, any> = { description: body.trim(), slug: select.value };
+    const fields: Record<string, any> = { description: body.trim() };
     fm.split('\n').forEach((line) => {
       if (line.trim().startsWith('#') || !line.trim()) return;
       const idx = line.indexOf(':');
@@ -194,79 +506,202 @@ import Layout from '../../layouts/Layout.astro';
         fields[key] = value.replace(/^"|"$/g, '');
       }
     });
-    // The Add Video form's /api/videos handler expects `stills` as an array
-    // of objects and `tags` as an array of strings — both already parsed above
-    // since toFrontmatter writes them as JSON.
+    return fields;
+  }
 
-    status.textContent = 'Saving…';
-    const res = await fetch('/api/videos', { method: 'POST', body: JSON.stringify(fields) });
-    const data = await res.json();
-    status.textContent = res.ok ? 'Saved.' : `Error: ${data.error}`;
+  function resetWorkItemForm() {
+    workItemForm.reset();
+    (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = '';
+    editingSlug = null;
+    pendingTags = new Set();
+    renderWorkTagPicker();
+    workDeleteBtn.hidden = true;
+    document.getElementById('work-item-status')!.textContent = '';
+  }
+
+  async function openWorkItem(slug: string | null) {
+    resetWorkItemForm();
+    workListView.hidden = true;
+    workItemView.hidden = false;
+
+    if (slug) {
+      editingSlug = slug;
+      workDeleteBtn.hidden = false;
+      const res = await fetch(`/api/videos?slug=${encodeURIComponent(slug)}`);
+      const data = await res.json();
+      const fields = parseRawVideo(data.raw ?? '');
+
+      (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = slug;
+      (workItemForm.elements.namedItem('title') as HTMLInputElement).value = fields.title ?? '';
+      (workItemForm.elements.namedItem('platform') as HTMLSelectElement).value = fields.platform ?? 'youtube';
+      (workItemForm.elements.namedItem('videoId') as HTMLInputElement).value = fields.videoId ?? '';
+      (workItemForm.elements.namedItem('thumbnailUrl') as HTMLInputElement).value = fields.thumbnailUrl ?? '';
+      (workItemForm.elements.namedItem('summary') as HTMLTextAreaElement).value = fields.summary ?? '';
+      (workItemForm.elements.namedItem('description') as HTMLTextAreaElement).value = fields.description ?? '';
+      (workItemForm.elements.namedItem('role') as HTMLInputElement).value = fields.role ?? 'Director of Photography';
+      (workItemForm.elements.namedItem('client') as HTMLInputElement).value = fields.client ?? '';
+      (workItemForm.elements.namedItem('projectName') as HTMLInputElement).value = fields.projectName ?? '';
+      (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate ?? '';
+      (workItemForm.elements.namedItem('slug') as HTMLInputElement).value = fields.urlSlug ?? slug;
+      (workItemForm.elements.namedItem('featured') as HTMLInputElement).checked = !!fields.featured;
+      pendingTags = new Set(Array.isArray(fields.tags) ? fields.tags : []);
+      if (Array.isArray(fields.stills)) {
+        (workItemForm.elements.namedItem('stills') as HTMLTextAreaElement).value = fields.stills
+          .map((s: any) => [s.src, s.alt, s.caption].filter(Boolean).join(' | '))
+          .join('\n');
+      }
+    }
+
+    renderWorkTagPicker();
+  }
+
+  document.getElementById('work-add-btn')?.addEventListener('click', () => openWorkItem(null));
+  document.getElementById('work-back-btn')?.addEventListener('click', () => {
+    workItemView.hidden = true;
+    workListView.hidden = false;
   });
 
-  // --- Settings ---
-  async function loadSettings() {
+  workSearch?.addEventListener('input', renderWorkList);
+
+  workItemForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('work-item-status')!;
+    status.textContent = 'Saving…';
+    const fd = new FormData(workItemForm);
+    const payload: Record<string, any> = Object.fromEntries(fd.entries());
+    payload.tags = Array.from(pendingTags);
+    payload.featured = fd.get('featured') === 'on';
+    payload.stills = String(payload.stills || '')
+      .split('\n')
+      .map((line: string) => line.trim())
+      .filter(Boolean)
+      .map((line: string) => {
+        const [src, alt, caption] = line.split('|').map((p) => p.trim());
+        return { src, alt: alt || '', ...(caption ? { caption } : {}) };
+      });
+    if (!payload.slug) payload.slug = slugify(payload.title);
+
+    const res = await fetch('/api/videos', { method: 'POST', body: JSON.stringify(payload) });
+    const data = await res.json();
+    if (!res.ok) {
+      status.textContent = `Error: ${data.error}`;
+      return;
+    }
+
+    // If the slug changed, the old file is now orphaned — remove it.
+    if (editingSlug && editingSlug !== data.slug) {
+      await fetch(`/api/videos?slug=${encodeURIComponent(editingSlug)}`, { method: 'DELETE' });
+    }
+
+    status.textContent = 'Saved.';
+    await loadWorkItems(true);
+    renderWorkList();
+    renderTagManager();
+    workItemView.hidden = true;
+    workListView.hidden = false;
+  });
+
+  workDeleteBtn.addEventListener('click', async () => {
+    if (!editingSlug) return;
+    if (!confirm(`Delete "${editingSlug}"? This can't be undone from here.`)) return;
+    const res = await fetch(`/api/videos?slug=${encodeURIComponent(editingSlug)}`, { method: 'DELETE' });
+    if (!res.ok) {
+      document.getElementById('work-item-status')!.textContent = 'Error deleting.';
+      return;
+    }
+    await loadWorkItems(true);
+    renderWorkList();
+    renderTagManager();
+    workItemView.hidden = true;
+    workListView.hidden = false;
+  });
+
+  async function initWorkPanel() {
+    await loadWorkItems();
+    renderWorkList();
+    renderTagManager();
+    if (workInitialized) return;
+    workInitialized = true;
+  }
+
+  // ---------------------------------------------------------------------
+  // Contact panel
+  // ---------------------------------------------------------------------
+  let contactInitialized = false;
+  async function initContactPanel() {
     const res = await fetch('/api/settings');
     const data = await res.json();
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    (form.elements.namedItem('contactHeading') as HTMLInputElement).value = data.contact?.title ?? '';
+    (form.elements.namedItem('contactDescription') as HTMLTextAreaElement).value = data.contact?.body ?? '';
+
+    if (contactInitialized) return;
+    contactInitialized = true;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('contact-status')!;
+      status.textContent = 'Saving…';
+      const fd = new FormData(form);
+      const res = await fetch('/api/settings', {
+        method: 'POST',
+        body: JSON.stringify({
+          contact: {
+            title: fd.get('contactHeading'),
+            body: fd.get('contactDescription'),
+          },
+        }),
+      });
+      status.textContent = res.ok ? 'Saved.' : 'Error saving.';
+    });
+  }
+
+  // ---------------------------------------------------------------------
+  // Settings panel
+  // ---------------------------------------------------------------------
+  let settingsInitialized = false;
+  async function initSettingsPanel() {
+    const s = await loadSettings();
     const form = document.getElementById('settings-form') as HTMLFormElement;
-    if (!data.settings) return;
-    const s = data.settings;
     (form.elements.namedItem('name') as HTMLInputElement).value = s.name ?? '';
     (form.elements.namedItem('role') as HTMLInputElement).value = s.role ?? '';
     (form.elements.namedItem('tagline') as HTMLInputElement).value = s.tagline ?? '';
-    (form.elements.namedItem('introCopy') as HTMLTextAreaElement).value = s.introCopy ?? '';
     (form.elements.namedItem('email') as HTMLInputElement).value = s.email ?? '';
     (form.elements.namedItem('location') as HTMLInputElement).value = s.location ?? '';
     (form.elements.namedItem('instagram') as HTMLInputElement).value = s.socials?.instagram ?? '';
+    (form.elements.namedItem('linkedin') as HTMLInputElement).value = s.socials?.linkedin ?? '';
     (form.elements.namedItem('imdb') as HTMLInputElement).value = s.socials?.imdb ?? '';
     (form.elements.namedItem('vimeo') as HTMLInputElement).value = s.socials?.vimeo ?? '';
-    (form.elements.namedItem('homeReelSlug') as HTMLInputElement).value = s.homeReelSlug ?? '';
+
+    if (settingsInitialized) return;
+    settingsInitialized = true;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('settings-status')!;
+      const fd = new FormData(form);
+      const cur = await loadSettings();
+      cur.name = String(fd.get('name') || '');
+      cur.role = String(fd.get('role') || '');
+      cur.tagline = String(fd.get('tagline') || '');
+      cur.email = String(fd.get('email') || '');
+      cur.location = String(fd.get('location') || '');
+      cur.socials = {
+        instagram: String(fd.get('instagram') || ''),
+        linkedin: String(fd.get('linkedin') || ''),
+        imdb: String(fd.get('imdb') || ''),
+        vimeo: String(fd.get('vimeo') || ''),
+      };
+      await saveSettings(status);
+    });
   }
 
-  document.getElementById('settings-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const status = document.getElementById('settings-status')!;
-    const form = e.target as HTMLFormElement;
-    const fd = new FormData(form);
-    const settings = {
-      name: fd.get('name'),
-      role: fd.get('role'),
-      tagline: fd.get('tagline'),
-      introCopy: fd.get('introCopy'),
-      email: fd.get('email'),
-      location: fd.get('location'),
-      socials: {
-        instagram: fd.get('instagram'),
-        imdb: fd.get('imdb'),
-        vimeo: fd.get('vimeo'),
-      },
-      homeReelSlug: fd.get('homeReelSlug'),
-    };
-    status.textContent = 'Saving…';
-    const res = await fetch('/api/settings', { method: 'POST', body: JSON.stringify({ settings }) });
-    status.textContent = res.ok ? 'Saved.' : 'Error saving settings.';
-  });
-
-  // --- Contact page ---
-  async function loadContact() {
-    const res = await fetch('/api/settings');
-    const data = await res.json();
-    (document.getElementById('contact-editor') as HTMLTextAreaElement).value = data.contact ?? '';
-  }
-
-  document.getElementById('save-contact')?.addEventListener('click', async () => {
-    const status = document.getElementById('contact-status')!;
-    const contactMarkdown = (document.getElementById('contact-editor') as HTMLTextAreaElement).value;
-    status.textContent = 'Saving…';
-    const res = await fetch('/api/settings', { method: 'POST', body: JSON.stringify({ contactMarkdown }) });
-    status.textContent = res.ok ? 'Saved.' : 'Error saving contact page.';
-  });
+  // Kick off with the Home panel already visible on page load.
+  initHomePanel();
 </script>
 
 <style>
   .admin {
-    max-width: 720px;
-    margin: 0 auto;
     padding: 3rem clamp(1.25rem, 4vw, 2rem) 5rem;
   }
 
@@ -282,19 +717,9 @@ import Layout from '../../layouts/Layout.astro';
     margin-bottom: 0.5rem;
   }
 
-  .logout-btn {
-    font-family: var(--font-body);
-    background: none;
-    border: 1px solid var(--hairline);
-    color: var(--text-muted);
-    padding: 0.4rem 0.9rem;
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-
-  .logout-btn:hover {
-    color: var(--text);
-    border-color: var(--text-muted);
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.35rem;
   }
 
   .hint {
@@ -303,35 +728,101 @@ import Layout from '../../layouts/Layout.astro';
     margin-bottom: 1.5rem;
   }
 
-  .tabs {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    border-bottom: 1px solid var(--hairline);
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-  }
-
-  .tab {
-    font-family: var(--font-body);
-    background: none;
-    border: 1px solid var(--hairline);
+  .section-hint {
     color: var(--text-muted);
-    padding: 0.5rem 1rem;
-    cursor: pointer;
     font-size: 0.85rem;
+    margin: 0 0 0.75rem;
   }
 
-  .tab.active {
+  .admin-layout {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: var(--gutter);
+    align-items: start;
+  }
+
+  @media (max-width: 800px) {
+    .admin-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .admin-nav {
+    position: sticky;
+    top: 2rem;
+    order: 2;
+  }
+
+  @media (max-width: 800px) {
+    .admin-nav {
+      position: static;
+      order: -1;
+    }
+  }
+
+  .admin-nav nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px solid var(--hairline);
+    padding: 0.75rem;
+  }
+
+  @media (max-width: 800px) {
+    .admin-nav nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  .nav-link {
+    font-family: var(--font-body);
+    text-align: left;
+    background: none;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+  }
+
+  .nav-link.active {
     background: var(--accent);
     color: var(--on-accent);
     border-color: var(--accent);
+  }
+
+  .page-panel {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 2rem;
   }
 
   form, .panel {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  fieldset {
+    border: 1px solid var(--hairline);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  legend {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tag-muted);
+    padding: 0 0.4rem;
   }
 
   label {
@@ -374,25 +865,178 @@ import Layout from '../../layouts/Layout.astro';
     outline-offset: 1px;
   }
 
-  #raw-editor, #contact-editor {
-    font-family: 'Menlo', 'Consolas', monospace;
-    font-size: 0.85rem;
+  .richtext-toolbar {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .richtext-toolbar button {
+    font-family: var(--font-body);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    color: var(--text);
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+
+  .richtext-toolbar button:hover {
+    border-color: var(--accent);
+  }
+
+  .richtext-editor {
+    min-height: 8rem;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    color: var(--text);
+    padding: 0.75rem;
+    font-size: 0.95rem;
     line-height: 1.5;
   }
 
-  button {
+  .richtext-editor:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .item-picker,
+  .tag-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .tag-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .tag-option input {
+    accent-color: var(--accent);
+  }
+
+  .work-list-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .work-list-controls input {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .work-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--hairline);
+    margin-bottom: 2rem;
+  }
+
+  .work-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .work-row-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.9rem;
+  }
+
+  .work-row-meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .tag-manager-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border: 1px solid var(--hairline);
+    padding: 0.3rem 0.5rem;
+  }
+
+  .tag-chip button {
+    font-family: var(--font-body);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .tag-chip button:hover {
+    color: var(--accent);
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .btn {
     align-self: flex-start;
     font-family: var(--font-body);
-    background: var(--accent);
-    color: var(--on-accent);
-    border: none;
+    border: 1px solid transparent;
     padding: 0.7rem 1.4rem;
     font-size: 0.9rem;
     cursor: pointer;
   }
 
-  button:hover {
+  .btn-solid {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .btn-solid:hover {
     background: var(--accent-dim);
+  }
+
+  .btn-ghost {
+    background: none;
+    border-color: var(--hairline);
+    color: var(--text-muted);
+  }
+
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  .btn-danger {
+    background: none;
+    border-color: var(--accent-dim);
+    color: var(--accent-dim);
+  }
+
+  .btn-danger:hover {
+    background: var(--accent-dim);
+    color: var(--on-accent);
   }
 
   .status {

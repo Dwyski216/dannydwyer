@@ -9,49 +9,51 @@ import { site } from '../data/site';
 import { getEmbedUrl, getThumbnailUrl } from '../lib/video';
 
 const videos = await getCollection('videos');
-const reel =
-  videos.find((v) => v.data.urlSlug === site.homeReelSlug) ??
-  videos.find((v) => v.data.featured) ??
-  videos[0];
 
-const FEATURED_SLUGS = ['ryan-gosling-mens-health', 'zoe-kravitz-harpers-bazaar', 'bored-final-dwyer'];
-const featured = FEATURED_SLUGS.map((slug) => videos.find((v) => v.data.urlSlug === slug)).filter(
-  (v): v is NonNullable<typeof v> => Boolean(v)
-);
+// The hero video is a standalone platform+videoId pair set directly in the
+// admin panel — it doesn't have to be a catalog entry. If it happens to
+// match one anyway, use that entry's real title/summary/duration for
+// richer JSON-LD instead of generic site copy.
+const heroVideo = site.heroVideo;
+const matchedReel = heroVideo
+  ? videos.find((v) => v.data.platform === heroVideo.platform && v.data.videoId === heroVideo.videoId)
+  : undefined;
+
+const featured = site.featuredSlugs
+  .map((slug) => videos.find((v) => v.data.urlSlug === slug))
+  .filter((v): v is NonNullable<typeof v> => Boolean(v));
 const featuredThumbnails = await Promise.all(featured.map((v) => getThumbnailUrl(v.data)));
 
-const jsonLd = reel
+const jsonLd = heroVideo
   ? [
       {
         '@context': 'https://schema.org',
         '@type': 'VideoObject',
-        name: reel.data.title,
-        description: reel.data.summary,
-        thumbnailUrl: await getThumbnailUrl(reel.data),
-        uploadDate: reel.data.uploadDate,
-        duration: reel.data.durationISO,
-        embedUrl: getEmbedUrl(reel.data),
+        name: matchedReel?.data.title ?? site.name,
+        description: matchedReel?.data.summary ?? site.tagline,
+        ...(matchedReel ? { thumbnailUrl: await getThumbnailUrl(matchedReel.data) } : {}),
+        ...(matchedReel?.data.uploadDate ? { uploadDate: matchedReel.data.uploadDate } : {}),
+        ...(matchedReel?.data.durationISO ? { duration: matchedReel.data.durationISO } : {}),
+        embedUrl: getEmbedUrl(heroVideo),
       },
     ]
   : [];
 ---
 
-<Layout
-  title="Home"
-  description={site.tagline}
-  jsonLd={jsonLd}
->
+<Layout title="Home" description={site.tagline} jsonLd={jsonLd}>
   <SiteHeader />
 
   <main class="main container">
     <div class="grid">
       <div class="col-12">
-        {reel && <VideoPlayer platform={reel.data.platform} videoId={reel.data.videoId} title={reel.data.title} />}
+        {heroVideo && (
+          <VideoPlayer platform={heroVideo.platform} videoId={heroVideo.videoId} title={matchedReel?.data.title ?? site.name} />
+        )}
       </div>
 
       <section class="intro col-12">
         <h1>{site.role}</h1>
-        <p>{site.introCopy}</p>
+        <div class="intro-copy" set:html={site.introCopy} />
         <a class="cta" href="/work">View the work &nbsp;→</a>
       </section>
 
@@ -93,9 +95,22 @@ const jsonLd = reel
     margin-bottom: 1rem;
   }
 
-  .intro p {
+  .intro-copy {
     color: var(--text-muted);
     font-size: 1.05rem;
+  }
+
+  .intro-copy :global(p) {
+    margin: 0 0 1rem;
+  }
+
+  .intro-copy :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .intro-copy :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
   }
 
   .cta {
