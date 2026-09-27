@@ -24,18 +24,12 @@ import Layout from '../../layouts/Layout.astro';
           <form id="home-form">
             <fieldset>
               <legend>Hero video</legend>
-              <p class="section-hint">The video embedded at the top of the home page.</p>
-              <div class="row">
-                <label>Platform
-                  <select name="heroPlatform">
-                    <option value="youtube">YouTube</option>
-                    <option value="vimeo">Vimeo</option>
-                  </select>
-                </label>
-                <label>Video ID
-                  <input name="heroVideoId" placeholder="YouTube: dQw4w9WgXcQ · Vimeo: 76979871" />
-                </label>
-              </div>
+              <p class="section-hint">The video embedded at the top of the home page. Picked from the Work catalog — including hidden items, so a temporary reel can be used without showing up in the Work grid.</p>
+              <label>Video
+                <select name="heroSlug" id="hero-select">
+                  <option value="">— None —</option>
+                </select>
+              </label>
             </fieldset>
 
             <fieldset>
@@ -213,7 +207,7 @@ import Layout from '../../layouts/Layout.astro';
     email: string;
     location: string;
     socials: Record<string, string>;
-    heroVideo: { platform: string; videoId: string } | null;
+    heroSlug: string | null;
     featuredSlugs: string[];
   };
 
@@ -323,8 +317,11 @@ import Layout from '../../layouts/Layout.astro';
     const items = await loadWorkItems();
 
     const form = document.getElementById('home-form') as HTMLFormElement;
-    (form.elements.namedItem('heroPlatform') as HTMLSelectElement).value = s.heroVideo?.platform ?? 'youtube';
-    (form.elements.namedItem('heroVideoId') as HTMLInputElement).value = s.heroVideo?.videoId ?? '';
+    const heroSelect = document.getElementById('hero-select') as HTMLSelectElement;
+    heroSelect.innerHTML =
+      '<option value="">— None —</option>' +
+      items.map((item) => `<option value="${item.slug}">${item.title}${item.hidden ? ' (hidden)' : ''}</option>`).join('');
+    heroSelect.value = s.heroSlug ?? '';
     introEditor.innerHTML = s.introCopy ?? '';
     introHtmlField.value = s.introCopy ?? '';
 
@@ -347,7 +344,7 @@ import Layout from '../../layouts/Layout.astro';
       const status = document.getElementById('home-status')!;
       const fd = new FormData(form);
       const cur = await loadSettings();
-      cur.heroVideo = { platform: String(fd.get('heroPlatform')), videoId: String(fd.get('heroVideoId') || '') };
+      cur.heroSlug = String(fd.get('heroSlug') || '') || null;
       cur.introCopy = introHtmlField.value;
       cur.featuredSlugs = Array.from(form.querySelectorAll('input[name="featuredSlug"]:checked')).map(
         (el) => (el as HTMLInputElement).value

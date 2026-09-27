@@ -10,6 +10,6 @@ export const site = raw as {
   email: string;
   location: string;
   socials: Record<string, string>;
-  heroVideo: { platform: 'youtube' | 'vimeo'; videoId: string } | null;
+  heroSlug: string | null; // urlSlug of the video collection entry played on the home page
   featuredSlugs: string[]; // urlSlugs of videos shown in the home page's Featured Work row
 };

@@ -10,14 +10,11 @@ import { getEmbedUrl, getThumbnailUrl } from '../lib/video';
 
 const videos = await getCollection('videos');
 
-// The hero video is a standalone platform+videoId pair set directly in the
-// admin panel — it doesn't have to be a catalog entry. If it happens to
-// match one anyway, use that entry's real title/summary/duration for
-// richer JSON-LD instead of generic site copy.
-const heroVideo = site.heroVideo;
-const matchedReel = heroVideo
-  ? videos.find((v) => v.data.platform === heroVideo.platform && v.data.videoId === heroVideo.videoId)
-  : undefined;
+// The hero video is picked from the Work catalog in the admin panel (by
+// slug), same as Featured Work — it can be a hidden item, like a temporary
+// reel that isn't meant to show up in the Work grid itself.
+const matchedReel = site.heroSlug ? videos.find((v) => v.data.urlSlug === site.heroSlug) : undefined;
+const heroVideo = matchedReel ? { platform: matchedReel.data.platform, videoId: matchedReel.data.videoId } : null;
 
 const featured = site.featuredSlugs
   .map((slug) => videos.find((v) => v.data.urlSlug === slug))
