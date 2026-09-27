@@ -228,7 +228,6 @@ async function handleVideosGet(request: Request, env: Env): Promise<Response> {
         title: data.title ?? s,
         tags: Array.isArray(data.tags) ? data.tags : [],
         uploadDate: data.uploadDate ?? '',
-        featured: !!data.featured,
         hidden: !!data.hidden,
       };
     })
@@ -323,7 +322,6 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     tags: body.tags || [],
     stills: body.stills || [],
     urlSlug: slug,
-    featured: !!body.featured,
   });
 
   const fileContent = `${frontmatter}\n\n${body.description || ''}\n`;

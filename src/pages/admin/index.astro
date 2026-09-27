@@ -136,8 +136,6 @@ import Layout from '../../layouts/Layout.astro';
                 <textarea name="stills" rows="3" placeholder="/images/videos/midnight-harbor/01.jpg | Dock lamps lighting the wide shot | Night one, camera A"></textarea>
               </label>
 
-              <label class="checkbox"><input type="checkbox" name="featured" /> Eligible for Featured Work / home reel</label>
-
               <div class="form-actions">
                 <button type="submit" class="btn btn-solid">Save Work Item</button>
                 <button type="button" id="work-delete-btn" class="btn btn-danger" hidden>Delete Item</button>
@@ -216,7 +214,6 @@ import Layout from '../../layouts/Layout.astro';
     title: string;
     tags: string[];
     uploadDate: string;
-    featured: boolean;
     hidden: boolean;
   };
 
@@ -540,7 +537,6 @@ import Layout from '../../layouts/Layout.astro';
       (workItemForm.elements.namedItem('projectName') as HTMLInputElement).value = fields.projectName ?? '';
       (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate ?? '';
       (workItemForm.elements.namedItem('slug') as HTMLInputElement).value = fields.urlSlug ?? slug;
-      (workItemForm.elements.namedItem('featured') as HTMLInputElement).checked = !!fields.featured;
       pendingTags = new Set(Array.isArray(fields.tags) ? fields.tags : []);
       if (Array.isArray(fields.stills)) {
         (workItemForm.elements.namedItem('stills') as HTMLTextAreaElement).value = fields.stills
@@ -567,7 +563,6 @@ import Layout from '../../layouts/Layout.astro';
     const fd = new FormData(workItemForm);
     const payload: Record<string, any> = Object.fromEntries(fd.entries());
     payload.tags = Array.from(pendingTags);
-    payload.featured = fd.get('featured') === 'on';
     payload.stills = String(payload.stills || '')
       .split('\n')
       .map((line: string) => line.trim())
