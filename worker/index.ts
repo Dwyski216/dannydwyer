@@ -216,26 +216,38 @@ async function handleVideosGet(request: Request, env: Env): Promise<Response> {
     return json({ slugs });
   }
 
-  // Full metadata listing — fetches + parses every file in parallel. Used
-  // by the admin panel's Work list, the Featured Work item picker, and the
-  // tag manager. (Deliberately light: title/tags/date/flags only — Edit
-  // still loads the raw file for the rest, same as before.)
-  const items = await Promise.all(
-    slugs.map(async (s) => {
-      const fileRes = await githubRequest(env, `${VIDEOS_DIR}/${s}.md?ref=${env.GITHUB_BRANCH}`);
-      if (!fileRes.ok) return null;
-      const fileData = (await fileRes.json()) as { content: string };
-      const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
-      const { data } = parseFrontmatter(raw);
-      return {
-        slug: s,
-        title: data.title ?? s,
-        tags: Array.isArray(data.tags) ? data.tags : [],
-        uploadDate: data.uploadDate ?? '',
-        hidden: !!data.hidden,
-      };
-    })
-  );
+  // Full metadata listing — fetches + parses every file. Used by the admin
+  // panel's Work list, the Featured Work item picker, and the tag manager.
+  // (Deliberately light: title/tags/date/flags only — Edit still loads the
+  // raw file for the rest, same as before.)
+  //
+  // Fetched in small batches rather than all at once: Workers cap
+  // subrequests per invocation, and firing one request per catalog item in
+  // parallel (already 52+ here) risks quietly blowing past that limit as
+  // the catalog grows, which throws and turns into an opaque HTML error
+  // page instead of a JSON response.
+  const BATCH_SIZE = 10;
+  const items: (Record<string, unknown> | null)[] = [];
+  for (let i = 0; i < slugs.length; i += BATCH_SIZE) {
+    const batch = slugs.slice(i, i + BATCH_SIZE);
+    const batchResults = await Promise.all(
+      batch.map(async (s) => {
+        const fileRes = await githubRequest(env, `${VIDEOS_DIR}/${s}.md?ref=${env.GITHUB_BRANCH}`);
+        if (!fileRes.ok) return null;
+        const fileData = (await fileRes.json()) as { content: string };
+        const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+        const { data } = parseFrontmatter(raw);
+        return {
+          slug: s,
+          title: data.title ?? s,
+          tags: Array.isArray(data.tags) ? data.tags : [],
+          uploadDate: data.uploadDate ?? '',
+          hidden: !!data.hidden,
+        };
+      })
+    );
+    items.push(...batchResults);
+  }
 
   return json({ items: items.filter(Boolean) });
 }
@@ -411,43 +423,61 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
   return json({ ok: true });
 }
 
+async function router(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const { pathname } = url;
+
+  if (pathname === '/api/login' && request.method === 'POST') return handleLogin(request, env);
+  if (pathname === '/api/logout' && request.method === 'POST') return handleLogout();
+
+  const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/';
+  const isAdminPage = !isLoginPage && (pathname === '/admin' || pathname === '/admin/' || pathname.startsWith('/admin/'));
+  const isProtectedApi = pathname === '/api/videos' || pathname === '/api/settings' || pathname === '/api/tags';
+
+  if (isAdminPage || isProtectedApi) {
+    const authed = await isAuthenticated(request, env);
+    if (!authed) {
+      if (isProtectedApi) return json({ error: 'Unauthorized' }, 401);
+      return Response.redirect(`${url.origin}/admin/login`, 302);
+    }
+  }
+
+  if (pathname === '/api/videos') {
+    if (request.method === 'GET') return handleVideosGet(request, env);
+    if (request.method === 'POST') return handleVideosPost(request, env);
+    if (request.method === 'DELETE') return handleVideosDelete(request, env);
+  }
+
+  if (pathname === '/api/settings') {
+    if (request.method === 'GET') return handleSettingsGet(request, env);
+    if (request.method === 'POST') return handleSettingsPost(request, env);
+  }
+
+  if (pathname === '/api/tags' && request.method === 'POST') {
+    return handleTagsPost(request, env);
+  }
+
+  // Everything else — every static page, image, and the login page
+  // itself — is served straight from the build.
+  return env.ASSETS.fetch(request);
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const url = new URL(request.url);
-    const { pathname } = url;
-
-    if (pathname === '/api/login' && request.method === 'POST') return handleLogin(request, env);
-    if (pathname === '/api/logout' && request.method === 'POST') return handleLogout();
-
-    const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/';
-    const isAdminPage = !isLoginPage && (pathname === '/admin' || pathname === '/admin/' || pathname.startsWith('/admin/'));
-    const isProtectedApi = pathname === '/api/videos' || pathname === '/api/settings' || pathname === '/api/tags';
-
-    if (isAdminPage || isProtectedApi) {
-      const authed = await isAuthenticated(request, env);
-      if (!authed) {
-        if (isProtectedApi) return json({ error: 'Unauthorized' }, 401);
-        return Response.redirect(`${url.origin}/admin/login`, 302);
+    try {
+      return await router(request, env);
+    } catch (err) {
+      // Anything uncaught here (a thrown exception mid-handler, hitting the
+      // Worker's subrequest cap, etc.) would otherwise surface as
+      // Cloudflare's own generic HTML error page — which breaks every
+      // admin panel fetch() call expecting JSON with a confusing
+      // "Unexpected token '<'" parse error. Always answer API routes with
+      // JSON so failures are diagnosable from the admin UI itself.
+      const isApi = new URL(request.url).pathname.startsWith('/api/');
+      if (isApi) {
+        return json({ error: `Worker error: ${err instanceof Error ? err.message : String(err)}` }, 500);
       }
+      throw err;
     }
-
-    if (pathname === '/api/videos') {
-      if (request.method === 'GET') return handleVideosGet(request, env);
-      if (request.method === 'POST') return handleVideosPost(request, env);
-      if (request.method === 'DELETE') return handleVideosDelete(request, env);
-    }
-
-    if (pathname === '/api/settings') {
-      if (request.method === 'GET') return handleSettingsGet(request, env);
-      if (request.method === 'POST') return handleSettingsPost(request, env);
-    }
-
-    if (pathname === '/api/tags' && request.method === 'POST') {
-      return handleTagsPost(request, env);
-    }
-
-    // Everything else — every static page, image, and the login page
-    // itself — is served straight from the build.
-    return env.ASSETS.fetch(request);
   },
 };
