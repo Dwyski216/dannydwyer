@@ -240,6 +240,9 @@ import Layout from '../../layouts/Layout.astro';
     if (settings) return settings;
     const res = await fetch('/api/settings');
     const data = await res.json();
+    if (!res.ok || !data.settings) {
+      throw new Error(data.error || 'The site\'s settings file could not be read from GitHub. Check the Worker\'s GITHUB_TOKEN/GITHUB_REPO/GITHUB_BRANCH secrets.');
+    }
     settings = data.settings as Settings;
     return settings;
   }
@@ -255,6 +258,9 @@ import Layout from '../../layouts/Layout.astro';
     if (workItemsLoaded && !force) return workItems;
     const res = await fetch('/api/videos?full=1');
     const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'The Work catalog could not be read from GitHub. Check the Worker\'s GITHUB_TOKEN/GITHUB_REPO/GITHUB_BRANCH secrets.');
+    }
     workItems = (data.items ?? []).sort((a: WorkItem, b: WorkItem) => a.title.localeCompare(b.title));
     workItemsLoaded = true;
     return workItems;
@@ -365,8 +371,17 @@ import Layout from '../../layouts/Layout.astro';
 
   let homeInitialized = false;
   async function initHomePanel() {
-    const s = await loadSettings();
-    const items = await loadWorkItems();
+    const homeStatus = document.getElementById('home-status')!;
+    let s: Settings;
+    let items: WorkItem[];
+    try {
+      s = await loadSettings();
+      items = await loadWorkItems();
+    } catch (err) {
+      homeStatus.textContent = (err as Error).message;
+      return;
+    }
+    homeStatus.textContent = '';
 
     const form = document.getElementById('home-form') as HTMLFormElement;
     const heroSelect = document.getElementById('hero-select') as HTMLSelectElement;
@@ -693,7 +708,13 @@ import Layout from '../../layouts/Layout.astro';
   });
 
   async function initWorkPanel() {
-    await loadWorkItems();
+    try {
+      await loadWorkItems();
+    } catch (err) {
+      workListEl.innerHTML = `<p class="section-hint">${(err as Error).message}</p>`;
+      tagManagerList.innerHTML = '';
+      return;
+    }
     renderWorkList();
     renderTagManager();
     if (workInitialized) return;
@@ -705,8 +726,15 @@ import Layout from '../../layouts/Layout.astro';
   // ---------------------------------------------------------------------
   let contactInitialized = false;
   async function initContactPanel() {
+    const contactStatus = document.getElementById('contact-status')!;
     const res = await fetch('/api/settings');
     const data = await res.json();
+    if (!res.ok || !data.contact) {
+      contactStatus.textContent =
+        data.error || 'The contact page could not be read from GitHub. Check the Worker\'s GITHUB_TOKEN/GITHUB_REPO/GITHUB_BRANCH secrets.';
+      return;
+    }
+    contactStatus.textContent = '';
     const form = document.getElementById('contact-form') as HTMLFormElement;
     (form.elements.namedItem('contactHeading') as HTMLInputElement).value = data.contact?.title ?? '';
     (form.elements.namedItem('contactDescription') as HTMLTextAreaElement).value = data.contact?.body ?? '';
@@ -738,7 +766,15 @@ import Layout from '../../layouts/Layout.astro';
   // ---------------------------------------------------------------------
   let settingsInitialized = false;
   async function initSettingsPanel() {
-    const s = await loadSettings();
+    const settingsStatus = document.getElementById('settings-status')!;
+    let s: Settings;
+    try {
+      s = await loadSettings();
+    } catch (err) {
+      settingsStatus.textContent = (err as Error).message;
+      return;
+    }
+    settingsStatus.textContent = '';
     const form = document.getElementById('settings-form') as HTMLFormElement;
     (form.elements.namedItem('name') as HTMLInputElement).value = s.name ?? '';
     (form.elements.namedItem('role') as HTMLInputElement).value = s.role ?? '';

@@ -186,11 +186,14 @@ function handleLogout(): Response {
   return json({ ok: true }, 200, { 'Set-Cookie': clearedCookieHeader() });
 }
 
-async function listVideoSlugs(env: Env): Promise<string[] | null> {
+async function listVideoSlugs(env: Env): Promise<{ slugs: string[] } | { error: string }> {
   const res = await githubRequest(env, `${VIDEOS_DIR}?ref=${env.GITHUB_BRANCH}`);
-  if (!res.ok) return null;
+  if (!res.ok) {
+    const detail = await res.text().catch(() => '');
+    return { error: `GitHub API returned ${res.status} listing ${VIDEOS_DIR}${detail ? `: ${detail}` : ''}` };
+  }
   const files = (await res.json()) as { name: string }[];
-  return files.filter((f) => f.name.endsWith('.md')).map((f) => f.name.replace(/\.md$/, ''));
+  return { slugs: files.filter((f) => f.name.endsWith('.md')).map((f) => f.name.replace(/\.md$/, '')) };
 }
 
 async function handleVideosGet(request: Request, env: Env): Promise<Response> {
@@ -205,8 +208,9 @@ async function handleVideosGet(request: Request, env: Env): Promise<Response> {
     return json({ slug, raw });
   }
 
-  const slugs = await listVideoSlugs(env);
-  if (!slugs) return json({ error: 'Could not list videos' }, 502);
+  const listing = await listVideoSlugs(env);
+  if ('error' in listing) return json({ error: listing.error }, 502);
+  const slugs = listing.slugs;
 
   if (url.searchParams.get('full') !== '1') {
     return json({ slugs });
@@ -270,8 +274,9 @@ async function handleTagsPost(request: Request, env: Env): Promise<Response> {
     return json({ error: 'newTag is required for rename' }, 400);
   }
 
-  const slugs = await listVideoSlugs(env);
-  if (!slugs) return json({ error: 'Could not list videos' }, 502);
+  const listing = await listVideoSlugs(env);
+  if ('error' in listing) return json({ error: listing.error }, 502);
+  const slugs = listing.slugs;
 
   const updated: string[] = [];
   const failed: string[] = [];
@@ -346,14 +351,31 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
 }
 
 async function handleSettingsGet(_request: Request, env: Env): Promise<Response> {
-  const settings = await getFile(env, 'src/data/site.json');
-  const contact = await getFile(env, 'src/content/pages/contact.md');
-  const contactParsed = contact ? parseFrontmatter(contact.content) : null;
+  const settingsRes = await githubRequest(env, `src/data/site.json?ref=${env.GITHUB_BRANCH}`);
+  const contactRes = await githubRequest(env, `src/content/pages/contact.md?ref=${env.GITHUB_BRANCH}`);
+
+  if (!settingsRes.ok || !contactRes.ok) {
+    const failed = !settingsRes.ok ? settingsRes : contactRes;
+    const detail = await failed.text().catch(() => '');
+    return json(
+      {
+        settings: null,
+        contact: null,
+        error: `GitHub API returned ${failed.status} reading site settings${detail ? `: ${detail}` : ''}`,
+      },
+      502
+    );
+  }
+
+  const settingsData = (await settingsRes.json()) as { content: string };
+  const contactData = (await contactRes.json()) as { content: string };
+  const settingsContent = decodeURIComponent(escape(atob(settingsData.content.replace(/\n/g, ''))));
+  const contactContent = decodeURIComponent(escape(atob(contactData.content.replace(/\n/g, ''))));
+  const contactParsed = parseFrontmatter(contactContent);
+
   return json({
-    settings: settings ? JSON.parse(settings.content) : null,
-    contact: contactParsed
-      ? { title: contactParsed.data.title ?? '', summary: contactParsed.data.summary ?? '', body: contactParsed.body }
-      : null,
+    settings: JSON.parse(settingsContent),
+    contact: { title: contactParsed.data.title ?? '', summary: contactParsed.data.summary ?? '', body: contactParsed.body },
   });
 }
 
