@@ -78,6 +78,16 @@ import Layout from '../../layouts/Layout.astro';
               <div id="tag-manager-list" class="tag-manager-list"></div>
               <p class="status" id="tag-manager-status"></p>
             </fieldset>
+
+            <fieldset>
+              <legend>Repair</legend>
+              <p class="section-hint">
+                The Work list, picker, and tag manager read from a lightweight index kept in sync automatically on every
+                save. If it ever looks out of date (e.g. after a save reports an index warning), rebuild it here.
+              </p>
+              <button type="button" id="reindex-btn" class="btn btn-ghost">Rebuild Index</button>
+              <p class="status" id="reindex-status"></p>
+            </fieldset>
           </div>
 
           <div id="work-item-view" hidden>
@@ -472,7 +482,9 @@ import Layout from '../../layouts/Layout.astro';
     }
     const data = await res.json();
     const failed: string[] = data.failed ?? [];
-    statusEl.textContent = failed.length ? `Updated, but failed on: ${failed.join(', ')}. Try again for those.` : 'Done.';
+    const parts = [failed.length ? `Updated, but failed on: ${failed.join(', ')}. Try again for those.` : 'Done.'];
+    if (data.indexWarning) parts.push(data.indexWarning);
+    statusEl.textContent = parts.join(' ');
   }
 
   function renderTagManager() {
@@ -682,7 +694,7 @@ import Layout from '../../layouts/Layout.astro';
       await fetch(`/api/videos?slug=${encodeURIComponent(editingSlug)}`, { method: 'DELETE' });
     }
 
-    status.textContent = 'Saved.';
+    status.textContent = data.indexWarning ? `Saved. ${data.indexWarning}` : 'Saved.';
     clearDirty('work-item-form');
     await loadWorkItems(true);
     renderWorkList();
@@ -695,10 +707,12 @@ import Layout from '../../layouts/Layout.astro';
     if (!editingSlug) return;
     if (!confirm(`Delete "${editingSlug}"? This can't be undone from here.`)) return;
     const res = await fetch(`/api/videos?slug=${encodeURIComponent(editingSlug)}`, { method: 'DELETE' });
+    const data = await res.json();
     if (!res.ok) {
-      document.getElementById('work-item-status')!.textContent = 'Error deleting.';
+      document.getElementById('work-item-status')!.textContent = `Error deleting: ${data.error ?? ''}`;
       return;
     }
+    if (data.indexWarning) alert(data.indexWarning);
     clearDirty('work-item-form');
     await loadWorkItems(true);
     renderWorkList();
@@ -719,6 +733,21 @@ import Layout from '../../layouts/Layout.astro';
     renderTagManager();
     if (workInitialized) return;
     workInitialized = true;
+
+    document.getElementById('reindex-btn')?.addEventListener('click', async () => {
+      const status = document.getElementById('reindex-status')!;
+      status.textContent = 'Rebuilding…';
+      const res = await fetch('/api/videos/reindex', { method: 'POST' });
+      const data = await res.json();
+      if (!res.ok) {
+        status.textContent = `Error: ${data.error}`;
+        return;
+      }
+      status.textContent = `Rebuilt — ${data.count} items indexed.`;
+      await loadWorkItems(true);
+      renderWorkList();
+      renderTagManager();
+    });
   }
 
   // ---------------------------------------------------------------------

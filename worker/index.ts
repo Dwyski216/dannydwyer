@@ -77,6 +77,15 @@ function clearedCookieHeader(): string {
 }
 
 const VIDEOS_DIR = 'src/content/videos';
+const INDEX_PATH = 'src/data/work-index.json';
+
+interface WorkIndexItem {
+  slug: string;
+  title: string;
+  tags: string[];
+  uploadDate: string;
+  hidden: boolean;
+}
 
 function slugify(input: string): string {
   return input
@@ -196,6 +205,39 @@ async function listVideoSlugs(env: Env): Promise<{ slugs: string[] } | { error: 
   return { slugs: files.filter((f) => f.name.endsWith('.md')).map((f) => f.name.replace(/\.md$/, '')) };
 }
 
+// The lightweight index (src/data/work-index.json) is a derived cache of
+// title/tags/date/hidden for every video, kept in sync on every write path
+// below. It exists so the admin's Work list, Featured Work picker, and tag
+// manager cost a single GitHub API call regardless of catalog size — the
+// old approach fetched every video file individually on every page load,
+// which scales linearly and eventually exceeds the Worker's subrequest cap
+// per invocation. The video markdown files remain the actual source of
+// truth; this index can always be rebuilt from them via /api/videos/reindex.
+async function readIndex(env: Env): Promise<{ items: WorkIndexItem[]; sha: string | undefined } | { error: string }> {
+  const res = await githubRequest(env, `${INDEX_PATH}?ref=${env.GITHUB_BRANCH}`);
+  // A real 404 means the index hasn't been built yet — that's a legitimate
+  // empty starting state (the first write will create the file). Any other
+  // failure (bad credentials, wrong repo, a network hiccup, ...) must NOT
+  // be treated the same way, or a real error would silently look like "no
+  // items" instead of surfacing as the failure it actually is.
+  if (res.status === 404) return { items: [], sha: undefined };
+  if (!res.ok) {
+    const detail = await res.text().catch(() => '');
+    return { error: `GitHub API returned ${res.status} reading ${INDEX_PATH}${detail ? `: ${detail}` : ''}` };
+  }
+  const data = (await res.json()) as { content: string; sha: string };
+  const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+  try {
+    return { items: JSON.parse(content) as WorkIndexItem[], sha: data.sha };
+  } catch {
+    return { error: `${INDEX_PATH} contains invalid JSON. Use "Rebuild Index" to regenerate it.` };
+  }
+}
+
+async function writeIndex(env: Env, items: WorkIndexItem[], sha: string | undefined, message: string) {
+  return putFile(env, INDEX_PATH, JSON.stringify(items, null, 2) + '\n', sha, message);
+}
+
 async function handleVideosGet(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const slug = url.searchParams.get('slug');
@@ -208,48 +250,15 @@ async function handleVideosGet(request: Request, env: Env): Promise<Response> {
     return json({ slug, raw });
   }
 
+  if (url.searchParams.get('full') === '1') {
+    const index = await readIndex(env);
+    if ('error' in index) return json({ error: index.error }, 502);
+    return json({ items: index.items });
+  }
+
   const listing = await listVideoSlugs(env);
   if ('error' in listing) return json({ error: listing.error }, 502);
-  const slugs = listing.slugs;
-
-  if (url.searchParams.get('full') !== '1') {
-    return json({ slugs });
-  }
-
-  // Full metadata listing — fetches + parses every file. Used by the admin
-  // panel's Work list, the Featured Work item picker, and the tag manager.
-  // (Deliberately light: title/tags/date/flags only — Edit still loads the
-  // raw file for the rest, same as before.)
-  //
-  // Fetched in small batches rather than all at once: Workers cap
-  // subrequests per invocation, and firing one request per catalog item in
-  // parallel (already 52+ here) risks quietly blowing past that limit as
-  // the catalog grows, which throws and turns into an opaque HTML error
-  // page instead of a JSON response.
-  const BATCH_SIZE = 10;
-  const items: (Record<string, unknown> | null)[] = [];
-  for (let i = 0; i < slugs.length; i += BATCH_SIZE) {
-    const batch = slugs.slice(i, i + BATCH_SIZE);
-    const batchResults = await Promise.all(
-      batch.map(async (s) => {
-        const fileRes = await githubRequest(env, `${VIDEOS_DIR}/${s}.md?ref=${env.GITHUB_BRANCH}`);
-        if (!fileRes.ok) return null;
-        const fileData = (await fileRes.json()) as { content: string };
-        const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
-        const { data } = parseFrontmatter(raw);
-        return {
-          slug: s,
-          title: data.title ?? s,
-          tags: Array.isArray(data.tags) ? data.tags : [],
-          uploadDate: data.uploadDate ?? '',
-          hidden: !!data.hidden,
-        };
-      })
-    );
-    items.push(...batchResults);
-  }
-
-  return json({ items: items.filter(Boolean) });
+  return json({ slugs: listing.slugs });
 }
 
 async function handleVideosDelete(request: Request, env: Env): Promise<Response> {
@@ -270,7 +279,22 @@ async function handleVideosDelete(request: Request, env: Env): Promise<Response>
     const err = await res.text();
     return json({ error: 'GitHub delete failed', details: err }, 502);
   }
-  return json({ ok: true, slug });
+
+  const index = await readIndex(env);
+  let indexWarning: string | undefined;
+  if ('error' in index) {
+    indexWarning = index.error;
+  } else {
+    const updateRes = await writeIndex(
+      env,
+      index.items.filter((it) => it.slug !== slug),
+      index.sha,
+      `Remove ${slug} from work index`
+    );
+    if (!updateRes.ok) indexWarning = 'Video deleted, but the Work index could not be updated — use "Rebuild Index".';
+  }
+
+  return json({ ok: true, slug, ...(indexWarning ? { indexWarning } : {}) });
 }
 
 async function handleTagsPost(request: Request, env: Env): Promise<Response> {
@@ -286,24 +310,30 @@ async function handleTagsPost(request: Request, env: Env): Promise<Response> {
     return json({ error: 'newTag is required for rename' }, 400);
   }
 
-  const listing = await listVideoSlugs(env);
-  if ('error' in listing) return json({ error: listing.error }, 502);
-  const slugs = listing.slugs;
+  const index = await readIndex(env);
+  if ('error' in index) return json({ error: index.error }, 502);
+
+  // The index already knows which slugs have this tag, so only those files
+  // need to be touched at all — no need to read (or even list) every video
+  // in the catalog just to check membership.
+  const affectedSlugs = index.items.filter((it) => it.tags.includes(body.tag)).map((it) => it.slug);
 
   const updated: string[] = [];
   const failed: string[] = [];
 
   // Sequential, not parallel: each match is its own commit to the same
   // directory, and doing them one at a time avoids racing GitHub's API.
-  for (const slug of slugs) {
+  for (const slug of affectedSlugs) {
     const filePath = `${VIDEOS_DIR}/${slug}.md`;
     const fileRes = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
-    if (!fileRes.ok) continue;
+    if (!fileRes.ok) {
+      failed.push(slug);
+      continue;
+    }
     const fileData = (await fileRes.json()) as { content: string; sha: string };
     const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
     const { data, body: mdBody } = parseFrontmatter(raw);
     const tags: string[] = Array.isArray(data.tags) ? data.tags : [];
-    if (!tags.includes(body.tag)) continue;
 
     const newTags =
       body.action === 'delete' ? tags.filter((t) => t !== body.tag) : tags.map((t) => (t === body.tag ? body.newTag : t));
@@ -317,7 +347,24 @@ async function handleTagsPost(request: Request, env: Env): Promise<Response> {
     else failed.push(slug);
   }
 
-  return json({ ok: true, updated, failed });
+  // Update the index's cached tags for every item that actually got
+  // updated (skip ones that failed, so the index doesn't drift ahead of
+  // what's actually committed).
+  const newIndexItems = index.items.map((it) => {
+    if (!updated.includes(it.slug)) return it;
+    const newTags =
+      body.action === 'delete' ? it.tags.filter((t) => t !== body.tag) : it.tags.map((t) => (t === body.tag ? body.newTag! : t));
+    return { ...it, tags: newTags };
+  });
+  const indexRes = await writeIndex(
+    env,
+    newIndexItems,
+    index.sha,
+    body.action === 'delete' ? `Remove tag "${body.tag}" from work index` : `Rename tag "${body.tag}" to "${body.newTag}" in work index`
+  );
+  const indexWarning = !indexRes.ok ? 'Tags updated, but the Work index could not be updated — use "Rebuild Index".' : undefined;
+
+  return json({ ok: true, updated, failed, ...(indexWarning ? { indexWarning } : {}) });
 }
 
 async function handleVideosPost(request: Request, env: Env): Promise<Response> {
@@ -359,7 +406,67 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     return json({ error: 'GitHub commit failed', details: err }, 502);
   }
 
-  return json({ ok: true, slug });
+  const index = await readIndex(env);
+  let indexWarning: string | undefined;
+  if ('error' in index) {
+    indexWarning = index.error;
+  } else {
+    const originalSlug = typeof body.originalSlug === 'string' ? body.originalSlug : '';
+    const items = index.items.filter((it) => it.slug !== slug && it.slug !== originalSlug);
+    items.push({
+      slug,
+      title: body.title,
+      tags: Array.isArray(body.tags) ? body.tags : [],
+      uploadDate: body.uploadDate || '',
+      hidden: !!body.hidden,
+    });
+    const updateRes = await writeIndex(env, items, index.sha, `Update work index for ${slug}`);
+    if (!updateRes.ok) indexWarning = 'Video saved, but the Work index could not be updated — use "Rebuild Index".';
+  }
+
+  return json({ ok: true, slug, ...(indexWarning ? { indexWarning } : {}) });
+}
+
+// Rebuilds work-index.json from scratch by reading every video file — an
+// explicit, admin-triggered repair action for when the index has drifted
+// (e.g. a prior write's index update failed). Unlike the old per-page-load
+// listing this replaced, this is rare enough that scanning every file in
+// small batches is an acceptable cost.
+async function handleVideosReindex(_request: Request, env: Env): Promise<Response> {
+  const listing = await listVideoSlugs(env);
+  if ('error' in listing) return json({ error: listing.error }, 502);
+
+  const BATCH_SIZE = 10;
+  const items: WorkIndexItem[] = [];
+  for (let i = 0; i < listing.slugs.length; i += BATCH_SIZE) {
+    const batch = listing.slugs.slice(i, i + BATCH_SIZE);
+    const batchResults = await Promise.all(
+      batch.map(async (s): Promise<WorkIndexItem | null> => {
+        const fileRes = await githubRequest(env, `${VIDEOS_DIR}/${s}.md?ref=${env.GITHUB_BRANCH}`);
+        if (!fileRes.ok) return null;
+        const fileData = (await fileRes.json()) as { content: string };
+        const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+        const { data } = parseFrontmatter(raw);
+        return {
+          slug: s,
+          title: data.title ?? s,
+          tags: Array.isArray(data.tags) ? data.tags : [],
+          uploadDate: data.uploadDate ?? '',
+          hidden: !!data.hidden,
+        };
+      })
+    );
+    items.push(...batchResults.filter((it): it is WorkIndexItem => it !== null));
+  }
+
+  const existing = await getFile(env, INDEX_PATH);
+  const res = await writeIndex(env, items, existing?.sha, 'Rebuild work index');
+  if (!res.ok) {
+    const err = await res.text();
+    return json({ error: 'Failed to write rebuilt index', details: err }, 502);
+  }
+
+  return json({ ok: true, count: items.length });
 }
 
 async function handleSettingsGet(_request: Request, env: Env): Promise<Response> {
@@ -432,7 +539,8 @@ async function router(request: Request, env: Env): Promise<Response> {
 
   const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/';
   const isAdminPage = !isLoginPage && (pathname === '/admin' || pathname === '/admin/' || pathname.startsWith('/admin/'));
-  const isProtectedApi = pathname === '/api/videos' || pathname === '/api/settings' || pathname === '/api/tags';
+  const isProtectedApi =
+    pathname === '/api/videos' || pathname === '/api/videos/reindex' || pathname === '/api/settings' || pathname === '/api/tags';
 
   if (isAdminPage || isProtectedApi) {
     const authed = await isAuthenticated(request, env);
@@ -446,6 +554,10 @@ async function router(request: Request, env: Env): Promise<Response> {
     if (request.method === 'GET') return handleVideosGet(request, env);
     if (request.method === 'POST') return handleVideosPost(request, env);
     if (request.method === 'DELETE') return handleVideosDelete(request, env);
+  }
+
+  if (pathname === '/api/videos/reindex' && request.method === 'POST') {
+    return handleVideosReindex(request, env);
   }
 
   if (pathname === '/api/settings') {
