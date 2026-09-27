@@ -76,6 +76,7 @@ import Layout from '../../layouts/Layout.astro';
               <legend>Manage tags</legend>
               <p class="section-hint">Rename or delete a tag everywhere it's used across the catalog.</p>
               <div id="tag-manager-list" class="tag-manager-list"></div>
+              <p class="status" id="tag-manager-status"></p>
             </fieldset>
           </div>
 
@@ -135,6 +136,8 @@ import Layout from '../../layouts/Layout.astro';
               <label>Still images — one per line, as: image URL | alt text | caption (caption optional)
                 <textarea name="stills" rows="3" placeholder="/images/videos/midnight-harbor/01.jpg | Dock lamps lighting the wide shot | Night one, camera A"></textarea>
               </label>
+
+              <label class="checkbox"><input type="checkbox" name="hidden" /> Hidden — has its own page, but excluded from the Work grid (e.g. a temporary home-page reel)</label>
 
               <div class="form-actions">
                 <button type="submit" class="btn btn-solid">Save Work Item</button>
@@ -241,10 +244,11 @@ import Layout from '../../layouts/Layout.astro';
     return settings;
   }
 
-  async function saveSettings(status: HTMLElement) {
+  async function saveSettings(status: HTMLElement, formId: string) {
     status.textContent = 'Saving…';
     const res = await fetch('/api/settings', { method: 'POST', body: JSON.stringify({ settings }) });
     status.textContent = res.ok ? 'Saved.' : 'Error saving.';
+    if (res.ok) clearDirty(formId);
   }
 
   async function loadWorkItems(force = false): Promise<WorkItem[]> {
@@ -257,10 +261,56 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   // ---------------------------------------------------------------------
+  // Unsaved-changes tracking — a form is "dirty" once the user edits it by
+  // hand (programmatic population via .value/.checked doesn't fire these
+  // events, so loading data never marks a form dirty). Cleared on a
+  // successful save or a confirmed discard.
+  // ---------------------------------------------------------------------
+  const dirtyFormIds = ['home-form', 'work-item-form', 'contact-form', 'settings-form'];
+  dirtyFormIds.forEach((id) => {
+    const form = document.getElementById(id);
+    form?.addEventListener('input', () => (form.dataset.dirty = '1'));
+    form?.addEventListener('change', () => (form.dataset.dirty = '1'));
+  });
+
+  function isDirty(id: string | null): boolean {
+    return !!id && document.getElementById(id)?.dataset.dirty === '1';
+  }
+
+  function clearDirty(id: string) {
+    const form = document.getElementById(id);
+    if (form) form.dataset.dirty = '';
+  }
+
+  function confirmDiscardIfDirty(id: string | null): boolean {
+    if (!isDirty(id)) return true;
+    return confirm('You have unsaved changes. Discard them?');
+  }
+
+  window.addEventListener('beforeunload', (e) => {
+    if (dirtyFormIds.some((id) => isDirty(id))) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+
+  // ---------------------------------------------------------------------
   // Nav
   // ---------------------------------------------------------------------
   const navLinks = document.querySelectorAll('.nav-link');
   const pagePanels = document.querySelectorAll('.page-panel');
+
+  function currentFormId(): string | null {
+    const activePage = document.querySelector('.nav-link.active')?.getAttribute('data-page');
+    if (activePage === 'home') return 'home-form';
+    if (activePage === 'contact') return 'contact-form';
+    if (activePage === 'settings') return 'settings-form';
+    if (activePage === 'work') {
+      const itemView = document.getElementById('work-item-view') as HTMLElement | null;
+      return itemView && !itemView.hidden ? 'work-item-form' : null;
+    }
+    return null;
+  }
 
   async function showPage(page: string) {
     navLinks.forEach((l) => l.classList.toggle('active', (l as HTMLElement).dataset.page === page));
@@ -274,7 +324,12 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   navLinks.forEach((link) => {
-    link.addEventListener('click', () => showPage((link as HTMLElement).dataset.page!));
+    link.addEventListener('click', () => {
+      const targetPage = (link as HTMLElement).dataset.page!;
+      if (targetPage === document.querySelector('.nav-link.active')?.getAttribute('data-page')) return;
+      if (!confirmDiscardIfDirty(currentFormId())) return;
+      showPage(targetPage);
+    });
   });
 
   document.getElementById('logout-btn')?.addEventListener('click', async () => {
@@ -346,7 +401,7 @@ import Layout from '../../layouts/Layout.astro';
       cur.featuredSlugs = Array.from(form.querySelectorAll('input[name="featuredSlug"]:checked')).map(
         (el) => (el as HTMLInputElement).value
       );
-      await saveSettings(status);
+      await saveSettings(status, 'home-form');
     });
   }
 
@@ -394,6 +449,17 @@ import Layout from '../../layouts/Layout.astro';
     });
   }
 
+  async function reportTagResult(res: Response) {
+    const statusEl = document.getElementById('tag-manager-status')!;
+    if (!res.ok) {
+      statusEl.textContent = 'Error updating tag.';
+      return;
+    }
+    const data = await res.json();
+    const failed: string[] = data.failed ?? [];
+    statusEl.textContent = failed.length ? `Updated, but failed on: ${failed.join(', ')}. Try again for those.` : 'Done.';
+  }
+
   function renderTagManager() {
     const tags = allTags();
     if (tags.length === 0) {
@@ -416,7 +482,8 @@ import Layout from '../../layouts/Layout.astro';
         const tag = (btn as HTMLElement).dataset.rename!;
         const newTag = prompt(`Rename "${tag}" to:`, tag);
         if (!newTag || newTag === tag) return;
-        await fetch('/api/tags', { method: 'POST', body: JSON.stringify({ action: 'rename', tag, newTag }) });
+        const res = await fetch('/api/tags', { method: 'POST', body: JSON.stringify({ action: 'rename', tag, newTag }) });
+        await reportTagResult(res);
         await loadWorkItems(true);
         renderWorkList();
         renderTagManager();
@@ -427,7 +494,8 @@ import Layout from '../../layouts/Layout.astro';
       btn.addEventListener('click', async () => {
         const tag = (btn as HTMLElement).dataset.delete!;
         if (!confirm(`Delete tag "${tag}" from every item that uses it?`)) return;
-        await fetch('/api/tags', { method: 'POST', body: JSON.stringify({ action: 'delete', tag }) });
+        const res = await fetch('/api/tags', { method: 'POST', body: JSON.stringify({ action: 'delete', tag }) });
+        await reportTagResult(res);
         await loadWorkItems(true);
         renderWorkList();
         renderTagManager();
@@ -511,6 +579,7 @@ import Layout from '../../layouts/Layout.astro';
     renderWorkTagPicker();
     workDeleteBtn.hidden = true;
     document.getElementById('work-item-status')!.textContent = '';
+    clearDirty('work-item-form');
   }
 
   async function openWorkItem(slug: string | null) {
@@ -537,6 +606,7 @@ import Layout from '../../layouts/Layout.astro';
       (workItemForm.elements.namedItem('projectName') as HTMLInputElement).value = fields.projectName ?? '';
       (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate ?? '';
       (workItemForm.elements.namedItem('slug') as HTMLInputElement).value = fields.urlSlug ?? slug;
+      (workItemForm.elements.namedItem('hidden') as HTMLInputElement).checked = !!fields.hidden;
       pendingTags = new Set(Array.isArray(fields.tags) ? fields.tags : []);
       if (Array.isArray(fields.stills)) {
         (workItemForm.elements.namedItem('stills') as HTMLTextAreaElement).value = fields.stills
@@ -548,8 +618,12 @@ import Layout from '../../layouts/Layout.astro';
     renderWorkTagPicker();
   }
 
-  document.getElementById('work-add-btn')?.addEventListener('click', () => openWorkItem(null));
+  document.getElementById('work-add-btn')?.addEventListener('click', () => {
+    if (!confirmDiscardIfDirty('work-item-form')) return;
+    openWorkItem(null);
+  });
   document.getElementById('work-back-btn')?.addEventListener('click', () => {
+    if (!confirmDiscardIfDirty('work-item-form')) return;
     workItemView.hidden = true;
     workListView.hidden = false;
   });
@@ -563,15 +637,23 @@ import Layout from '../../layouts/Layout.astro';
     const fd = new FormData(workItemForm);
     const payload: Record<string, any> = Object.fromEntries(fd.entries());
     payload.tags = Array.from(pendingTags);
+    payload.hidden = fd.get('hidden') === 'on';
     payload.stills = String(payload.stills || '')
       .split('\n')
       .map((line: string) => line.trim())
       .filter(Boolean)
       .map((line: string) => {
-        const [src, alt, caption] = line.split('|').map((p) => p.trim());
+        const [src, alt, ...rest] = line.split('|').map((p) => p.trim());
+        const caption = rest.length ? rest.join(' | ') : '';
         return { src, alt: alt || '', ...(caption ? { caption } : {}) };
       });
     if (!payload.slug) payload.slug = slugify(payload.title);
+
+    const collision = workItems.find((item) => item.slug === payload.slug && item.slug !== editingSlug);
+    if (collision) {
+      status.textContent = `Error: slug "${payload.slug}" is already used by "${collision.title}". Choose a different slug.`;
+      return;
+    }
 
     const res = await fetch('/api/videos', { method: 'POST', body: JSON.stringify(payload) });
     const data = await res.json();
@@ -586,6 +668,7 @@ import Layout from '../../layouts/Layout.astro';
     }
 
     status.textContent = 'Saved.';
+    clearDirty('work-item-form');
     await loadWorkItems(true);
     renderWorkList();
     renderTagManager();
@@ -601,6 +684,7 @@ import Layout from '../../layouts/Layout.astro';
       document.getElementById('work-item-status')!.textContent = 'Error deleting.';
       return;
     }
+    clearDirty('work-item-form');
     await loadWorkItems(true);
     renderWorkList();
     renderTagManager();
@@ -645,6 +729,7 @@ import Layout from '../../layouts/Layout.astro';
         }),
       });
       status.textContent = res.ok ? 'Saved.' : 'Error saving.';
+      if (res.ok) clearDirty('contact-form');
     });
   }
 
@@ -684,7 +769,7 @@ import Layout from '../../layouts/Layout.astro';
         imdb: String(fd.get('imdb') || ''),
         vimeo: String(fd.get('vimeo') || ''),
       };
-      await saveSettings(status);
+      await saveSettings(status, 'settings-form');
     });
   }
 

@@ -322,6 +322,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     tags: body.tags || [],
     stills: body.stills || [],
     urlSlug: slug,
+    hidden: !!body.hidden,
   });
 
   const fileContent = `${frontmatter}\n\n${body.description || ''}\n`;
