@@ -447,27 +447,77 @@ import Layout from '../../layouts/Layout.astro';
   let editingSlug: string | null = null;
   let pendingTags = new Set<string>();
 
+  type SortKey = 'title' | 'tags' | 'uploadDate' | 'hidden';
+  let sortKey: SortKey = 'title';
+  let sortAsc = true;
+
+  function escapeHtml(s: string): string {
+    return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+  }
+
+  const SORT_COLUMNS: { key: SortKey; label: string }[] = [
+    { key: 'title', label: 'Title' },
+    { key: 'tags', label: 'Tags' },
+    { key: 'uploadDate', label: 'Date' },
+    { key: 'hidden', label: 'Status' },
+  ];
+
   function renderWorkList() {
     const query = workSearch.value.trim().toLowerCase();
     const filtered = workItems.filter((i) => !query || i.title.toLowerCase().includes(query));
-    if (filtered.length === 0) {
+
+    if (workItems.length === 0) {
       workListEl.innerHTML = '<p class="section-hint">No items match.</p>';
       return;
     }
-    workListEl.innerHTML = filtered
-      .map(
-        (item) => `
-        <div class="work-row" data-slug="${item.slug}">
-          <div class="work-row-info">
-            <strong>${item.title}</strong>
-            <span class="work-row-meta">${item.tags.join(', ') || 'no tags'} · ${item.uploadDate || 'no date'}${item.hidden ? ' · hidden' : ''}</span>
-          </div>
-          <div class="work-row-actions">
-            <button type="button" class="btn btn-ghost" data-edit="${item.slug}">Edit</button>
-          </div>
-        </div>`
-      )
-      .join('');
+
+    const dir = sortAsc ? 1 : -1;
+    const sorted = [...filtered].sort((a, b) => {
+      if (sortKey === 'tags') return a.tags.join(', ').localeCompare(b.tags.join(', ')) * dir;
+      if (sortKey === 'hidden') return (Number(a.hidden) - Number(b.hidden)) * dir;
+      return String(a[sortKey]).localeCompare(String(b[sortKey])) * dir;
+    });
+
+    const headerHtml = SORT_COLUMNS.map(({ key, label }) => {
+      const active = sortKey === key;
+      const arrow = active ? (sortAsc ? ' ▲' : ' ▼') : '';
+      return `<th data-sort-key="${key}" class="${active ? 'sorted' : ''}">${label}${arrow}</th>`;
+    }).join('');
+
+    const rowsHtml = sorted.length
+      ? sorted
+          .map(
+            (item) => `
+        <tr data-slug="${item.slug}">
+          <td>${escapeHtml(item.title)}</td>
+          <td class="work-cell-tags">${item.tags.length ? item.tags.map((t) => `<span class="tag-chip-sm">${escapeHtml(t)}</span>`).join('') : '<span class="work-cell-empty">—</span>'}</td>
+          <td>${escapeHtml(item.uploadDate) || '<span class="work-cell-empty">—</span>'}</td>
+          <td>${item.hidden ? '<span class="status-badge status-hidden">Hidden</span>' : '<span class="status-badge status-visible">Visible</span>'}</td>
+          <td><button type="button" class="btn btn-ghost" data-edit="${item.slug}">Edit</button></td>
+        </tr>`
+          )
+          .join('')
+      : `<tr><td colspan="5" class="section-hint">No items match.</td></tr>`;
+
+    workListEl.innerHTML = `
+      <table class="work-table">
+        <thead><tr>${headerHtml}<th></th></tr></thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+      <p class="work-count section-hint">${sorted.length} of ${workItems.length} item${workItems.length === 1 ? '' : 's'}</p>
+    `;
+
+    workListEl.querySelectorAll('th[data-sort-key]').forEach((th) => {
+      th.addEventListener('click', () => {
+        const key = (th as HTMLElement).dataset.sortKey as SortKey;
+        if (sortKey === key) sortAsc = !sortAsc;
+        else {
+          sortKey = key;
+          sortAsc = true;
+        }
+        renderWorkList();
+      });
+    });
 
     workListEl.querySelectorAll('[data-edit]').forEach((btn) => {
       btn.addEventListener('click', () => openWorkItem((btn as HTMLElement).dataset.edit!));
@@ -591,8 +641,14 @@ import Layout from '../../layouts/Layout.astro';
         }
       } else if (value === 'true' || value === 'false') {
         fields[key] = value === 'true';
+      } else if (value.startsWith('"') && value.endsWith('"')) {
+        try {
+          fields[key] = JSON.parse(value);
+        } catch {
+          fields[key] = value.replace(/^"|"$/g, '');
+        }
       } else {
-        fields[key] = value.replace(/^"|"$/g, '');
+        fields[key] = value;
       }
     });
     return fields;
@@ -842,7 +898,15 @@ import Layout from '../../layouts/Layout.astro';
   initHomePanel();
 </script>
 
-<style>
+<style is:global>
+  /* This whole stylesheet is global rather than Astro's default
+     component-scoped CSS: a large amount of this admin panel's markup
+     (the Work table, tag chips, item pickers, ...) is generated client-side
+     via innerHTML, and elements created that way never receive the
+     data-astro-cid attribute scoped CSS relies on to match — so a scoped
+     rule silently never applies to anything rendered dynamically. Nothing
+     on this page shares components or class names with the public site, so
+     going global here has no collision risk. */
   .admin {
     padding: 3rem clamp(1.25rem, 4vw, 2rem) 5rem;
   }
@@ -1077,31 +1141,88 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   .work-list {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--hairline);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
   }
 
-  .work-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.75rem 0;
+  .work-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .work-table th,
+  .work-table td {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
     border-bottom: 1px solid var(--hairline);
+    vertical-align: middle;
   }
 
-  .work-row-info {
+  .work-table th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tag-muted);
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--hairline);
+  }
+
+  .work-table th:hover {
+    color: var(--accent);
+  }
+
+  .work-table th.sorted {
+    color: var(--accent);
+  }
+
+  .work-table tbody tr:hover {
+    background: var(--surface);
+  }
+
+  .work-cell-tags {
     display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    font-size: 0.9rem;
+    flex-wrap: wrap;
+    gap: 0.3rem;
   }
 
-  .work-row-meta {
-    font-size: 0.78rem;
+  .work-cell-empty {
     color: var(--text-muted);
+  }
+
+  .tag-chip-sm {
+    display: inline-block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    border: 1px solid var(--hairline);
+    padding: 0.1rem 0.4rem;
+    white-space: nowrap;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .status-visible {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  .status-hidden {
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+  }
+
+  .work-count {
+    margin: 0.5rem 0 1.5rem;
   }
 
   .tag-manager-list {

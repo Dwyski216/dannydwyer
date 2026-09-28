@@ -133,8 +133,18 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; body: strin
       }
     } else if (value === 'true' || value === 'false') {
       data[key] = value === 'true';
+    } else if (value.startsWith('"') && value.endsWith('"')) {
+      // toFrontmatter writes strings via JSON.stringify, so this is valid
+      // JSON string syntax — parse it properly instead of just trimming the
+      // outer quotes, or an escaped character like \" survives as a literal
+      // backslash instead of becoming the quote it represents.
+      try {
+        data[key] = JSON.parse(value);
+      } catch {
+        data[key] = value.replace(/^"|"$/g, '');
+      }
     } else {
-      data[key] = value.replace(/^"|"$/g, '');
+      data[key] = value;
     }
   });
   return { data, body: body.trim() };
