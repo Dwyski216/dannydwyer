@@ -11,6 +11,10 @@
     "imdb": "https://www.imdb.com/name/nm3590643/",
     "vimeo": "https://vimeo.com/dannydwyer"
   },
-  "heroSlug": "temp-reel",
-  "featuredSlugs": ["ryan-gosling-mens-health", "zoe-kravitz-harpers-bazaar", "bored-final-dwyer"]
+  "heroSlug": "the-brave-butler-reel",
+  "featuredSlugs": [
+    "ryan-gosling-mens-health",
+    "zoe-kravitz-harpers-bazaar",
+    "bored-final-dwyer"
+  ]
 }
