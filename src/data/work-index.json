@@ -21,7 +21,7 @@
   },
   {
     "slug": "bandits-bandana",
-    "title": "Bandits \u2014 Bandana",
+    "title": "Bandits — Bandana",
     "tags": [
       "commercial",
       "product"
@@ -31,7 +31,7 @@
   },
   {
     "slug": "big-age-audible-trailer-alt-cut",
-    "title": "Big Age \u2014 Audible Trailer (Alt Cut)",
+    "title": "Big Age — Audible Trailer (Alt Cut)",
     "tags": [
       "trailer",
       "audio drama",
@@ -42,7 +42,7 @@
   },
   {
     "slug": "big-age-audible-trailer",
-    "title": "Big Age \u2014 Audible Trailer",
+    "title": "Big Age — Audible Trailer",
     "tags": [
       "trailer",
       "audio drama",
@@ -70,7 +70,7 @@
   },
   {
     "slug": "chesterland-teaser",
-    "title": "Chesterland \u2014 Teaser",
+    "title": "Chesterland — Teaser",
     "tags": [
       "pilot",
       "dramedy",
@@ -112,7 +112,7 @@
   },
   {
     "slug": "copywrite-martin-shkreli-killa",
-    "title": "Copywrite \u2014 \"Martin Shkreli Killah\"",
+    "title": "Copywrite — \"Martin Shkreli Killah\"",
     "tags": [
       "music video"
     ],
@@ -121,7 +121,7 @@
   },
   {
     "slug": "dark-bardo-midnight-cowboy",
-    "title": "Dark Bardo \u2014 \"Midnight Cowboy\"",
+    "title": "Dark Bardo — \"Midnight Cowboy\"",
     "tags": [
       "music video"
     ],
@@ -182,7 +182,7 @@
   },
   {
     "slug": "honduras-hollywood",
-    "title": "Honduras \u2014 \"Hollywood\" (Official Music Video)",
+    "title": "Honduras — \"Hollywood\" (Official Music Video)",
     "tags": [
       "music video"
     ],
@@ -191,7 +191,7 @@
   },
   {
     "slug": "honduras-paralyzed",
-    "title": "Honduras \u2014 \"Paralyzed\" (Music Video)",
+    "title": "Honduras — \"Paralyzed\" (Music Video)",
     "tags": [
       "music video"
     ],
@@ -211,7 +211,7 @@
   },
   {
     "slug": "joe-and-the-whale-trailer",
-    "title": "Joe and the Whale \u2014 Official Trailer",
+    "title": "Joe and the Whale — Official Trailer",
     "tags": [
       "short film",
       "trailer"
@@ -232,7 +232,7 @@
   },
   {
     "slug": "made-on-earth-trailer",
-    "title": "Made on Earth \u2014 Trailer",
+    "title": "Made on Earth — Trailer",
     "tags": [
       "documentary",
       "trailer"
@@ -283,7 +283,7 @@
   },
   {
     "slug": "paramount-viking-funeral",
-    "title": "Paramount \u2014 Viking Funeral",
+    "title": "Paramount — Viking Funeral",
     "tags": [
       "branded content",
       "event",
@@ -294,7 +294,7 @@
   },
   {
     "slug": "peter-dinklage-esquire",
-    "title": "Peter Dinklage \u2014 Esquire Magazine Cover (March)",
+    "title": "Peter Dinklage — Esquire Magazine Cover (March)",
     "tags": [
       "editorial",
       "celebrity"
@@ -304,7 +304,7 @@
   },
   {
     "slug": "pixies-on-graveyard-hill",
-    "title": "The Pixies \u2014 \"On Graveyard Hill\"",
+    "title": "The Pixies — \"On Graveyard Hill\"",
     "tags": [
       "music video"
     ],
@@ -313,7 +313,7 @@
   },
   {
     "slug": "puma-beatbot",
-    "title": "PUMA \u2014 Beatbot",
+    "title": "PUMA — Beatbot",
     "tags": [
       "commercial",
       "sports",
@@ -447,17 +447,8 @@
     "hidden": false
   },
   {
-    "slug": "werdperfect-kickdrums-pretty-orange",
-    "title": "\"Pretty Orange\" \u2014 Werdperfect x The Kickdrums",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2023-02-01",
-    "hidden": false
-  },
-  {
     "slug": "wolf-shepherd-chukka",
-    "title": "Wolf & Shepherd \u2014 Chukka",
+    "title": "Wolf & Shepherd — Chukka",
     "tags": [
       "commercial",
       "product",
@@ -468,7 +459,7 @@
   },
   {
     "slug": "wolf-shepherd-crossover",
-    "title": "Wolf & Shepherd \u2014 Crossover",
+    "title": "Wolf & Shepherd — Crossover",
     "tags": [
       "commercial",
       "product",
@@ -479,7 +470,7 @@
   },
   {
     "slug": "wolf-shepherd-monaco",
-    "title": "Wolf & Shepherd \u2014 Monaco",
+    "title": "Wolf & Shepherd — Monaco",
     "tags": [
       "commercial",
       "product",
@@ -490,7 +481,7 @@
   },
   {
     "slug": "wolf-shepherd-swiftknit",
-    "title": "Wolf & Shepherd \u2014 SwiftKnit",
+    "title": "Wolf & Shepherd — SwiftKnit",
     "tags": [
       "commercial",
       "product",
@@ -521,13 +512,23 @@
   },
   {
     "slug": "zoe-kravitz-harpers-bazaar",
-    "title": "Zo\u00eb Kravitz for Harper's Bazaar",
+    "title": "Zoë Kravitz for Harper's Bazaar",
     "tags": [
       "editorial",
       "behind-the-scenes",
       "celebrity"
     ],
     "uploadDate": "2018-08-24",
+    "hidden": false
+  },
+  {
+    "slug": "werdperfect-kickdrums-pretty-orange",
+    "title": "\"Pretty Orange\" — Werdperfect x The Kickdrums",
+    "tags": [
+      "music video",
+      "comedy"
+    ],
+    "uploadDate": "2023-02-01",
     "hidden": false
   }
 ]
