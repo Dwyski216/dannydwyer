@@ -6,11 +6,10 @@ videoId: "875654186"
 role: "Director of Photography"
 projectName: "\"Pretty Orange\" (Music Video)"
 uploadDate: "2023-02-01"
-tags: ["music video"]
-urlSlug: "werdperfect-kickdrums-pretty-orange"
-featured: false
+tags: ["music video","comedy"]
 stills: []
-# NEEDS REVIEW: client/project inferred loosely or missing — confirm before treating as fact.
+urlSlug: "werdperfect-kickdrums-pretty-orange"
+hidden: false
 ---
 
 Official music video for "Pretty Orange," a collaboration between Werdperfect and The Kickdrums.
