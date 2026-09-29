@@ -42,18 +42,19 @@ import Layout from '../../layouts/Layout.astro';
               </label>
             </fieldset>
 
-            <label>Heading <input name="pageHeading" required /></label>
-
             <fieldset>
-              <legend>Intro text</legend>
-              <p class="section-hint">The paragraph under the headline. Basic formatting only.</p>
-              <div class="richtext-toolbar" data-target="intro-editor">
-                <button type="button" data-cmd="bold"><b>B</b></button>
-                <button type="button" data-cmd="italic"><i>I</i></button>
-                <button type="button" data-cmd="createLink">Link</button>
-                <button type="button" data-cmd="formatBlock" data-value="p">¶</button>
+              <legend>Intro</legend>
+              <label>Heading <input name="pageHeading" required /></label>
+              <div class="field-group">
+                <span class="field-label">Description</span>
+                <div class="richtext-toolbar" data-target="intro-editor">
+                  <button type="button" data-cmd="bold" aria-label="Bold"><b>B</b></button>
+                  <button type="button" data-cmd="italic" aria-label="Italic"><i>I</i></button>
+                  <button type="button" data-cmd="createLink" aria-label="Insert link">Link</button>
+                  <button type="button" data-cmd="formatBlock" data-value="p" aria-label="Paragraph">¶</button>
+                </div>
+                <div id="intro-editor" class="richtext-editor" contenteditable="true"></div>
               </div>
-              <div id="intro-editor" class="richtext-editor" contenteditable="true"></div>
               <textarea name="introCopy" id="intro-html" hidden></textarea>
             </fieldset>
 
@@ -1202,9 +1203,20 @@ import Layout from '../../layouts/Layout.astro';
     outline-offset: 1px;
   }
 
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .field-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
   .richtext-toolbar {
     display: flex;
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
   .richtext-toolbar button {
@@ -1212,13 +1224,20 @@ import Layout from '../../layouts/Layout.astro';
     background: var(--surface);
     border: 1px solid var(--hairline);
     color: var(--text);
-    width: 2rem;
+    min-width: 2rem;
     height: 2rem;
+    padding: 0 0.6rem;
+    font-size: 0.8rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
 
   .richtext-toolbar button:hover {
     border-color: var(--accent);
+    color: var(--accent);
   }
 
   .richtext-editor {
