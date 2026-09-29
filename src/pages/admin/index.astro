@@ -57,9 +57,25 @@ import Layout from '../../layouts/Layout.astro';
 
             <fieldset>
               <legend>Featured Work</legend>
-              <p class="section-hint">Pick which work items show in the Featured Work row. Loads from the Work catalog.</p>
-              <div id="featured-picker" class="item-picker">
-                <p class="section-hint">Loading…</p>
+              <p class="section-hint">
+                Pick which work items show in the Featured Work row. Click an item then use the arrows to move it, or
+                double-click to move it directly. Drag items in the Selected box to reorder them.
+              </p>
+              <div class="dual-list">
+                <div class="dual-list-col">
+                  <div class="dual-list-label">All items</div>
+                  <div id="featured-available" class="dual-list-box">
+                    <p class="section-hint">Loading…</p>
+                  </div>
+                </div>
+                <div class="dual-list-arrows">
+                  <button type="button" id="featured-add-btn" class="btn btn-ghost" aria-label="Add to Featured Work">›</button>
+                  <button type="button" id="featured-remove-btn" class="btn btn-ghost" aria-label="Remove from Featured Work">‹</button>
+                </div>
+                <div class="dual-list-col">
+                  <div class="dual-list-label">Selected (drag to reorder)</div>
+                  <div id="featured-selected" class="dual-list-box"></div>
+                </div>
               </div>
             </fieldset>
 
@@ -307,6 +323,11 @@ import Layout from '../../layouts/Layout.astro';
     if (form) form.dataset.dirty = '';
   }
 
+  function markDirty(id: string) {
+    const form = document.getElementById(id);
+    if (form) form.dataset.dirty = '1';
+  }
+
   function confirmDiscardIfDirty(id: string | null): boolean {
     if (!isDirty(id)) return true;
     return confirm('You have unsaved changes. Discard them?');
@@ -389,6 +410,98 @@ import Layout from '../../layouts/Layout.astro';
     introHtmlField.value = introEditor.innerHTML;
   });
 
+  // Featured Work dual-list state — kept separate from the form itself since
+  // it isn't backed by standard form controls (drag-and-drop reordering,
+  // click-to-select rows). featuredOrder is the authoritative, ordered list
+  // written back to site.featuredSlugs on save.
+  let featuredOrder: string[] = [];
+  let featuredItemsBySlug = new Map<string, WorkItem>();
+  let featuredAvailableSel: string | null = null;
+  let featuredSelectedSel: string | null = null;
+  let featuredDragSlug: string | null = null;
+
+  function renderFeaturedLists() {
+    const availableBox = document.getElementById('featured-available') as HTMLElement;
+    const selectedBox = document.getElementById('featured-selected') as HTMLElement;
+
+    const available = [...featuredItemsBySlug.values()]
+      .filter((it) => !featuredOrder.includes(it.slug))
+      .sort((a, b) => a.title.localeCompare(b.title));
+
+    availableBox.innerHTML = available.length
+      ? available
+          .map(
+            (it) =>
+              `<div class="dual-list-row${it.slug === featuredAvailableSel ? ' active' : ''}" data-slug="${it.slug}">${escapeHtml(it.title)}</div>`
+          )
+          .join('')
+      : '<p class="section-hint">All items selected.</p>';
+
+    selectedBox.innerHTML = featuredOrder.length
+      ? featuredOrder
+          .map((slug) => {
+            const title = featuredItemsBySlug.get(slug)?.title ?? slug;
+            return `<div class="dual-list-row${slug === featuredSelectedSel ? ' active' : ''}" data-slug="${slug}" draggable="true">${escapeHtml(title)}</div>`;
+          })
+          .join('')
+      : '<p class="section-hint">No items selected.</p>';
+
+    availableBox.querySelectorAll('.dual-list-row').forEach((row) => {
+      row.addEventListener('click', () => {
+        featuredAvailableSel = (row as HTMLElement).dataset.slug!;
+        renderFeaturedLists();
+      });
+      row.addEventListener('dblclick', () => addToFeatured((row as HTMLElement).dataset.slug!));
+    });
+
+    selectedBox.querySelectorAll('.dual-list-row').forEach((row) => {
+      row.addEventListener('click', () => {
+        featuredSelectedSel = (row as HTMLElement).dataset.slug!;
+        renderFeaturedLists();
+      });
+      row.addEventListener('dblclick', () => removeFromFeatured((row as HTMLElement).dataset.slug!));
+      row.addEventListener('dragstart', () => {
+        featuredDragSlug = (row as HTMLElement).dataset.slug!;
+      });
+      row.addEventListener('dragover', (e) => e.preventDefault());
+      row.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const targetSlug = (row as HTMLElement).dataset.slug!;
+        if (!featuredDragSlug || featuredDragSlug === targetSlug) return;
+        const from = featuredOrder.indexOf(featuredDragSlug);
+        const to = featuredOrder.indexOf(targetSlug);
+        if (from === -1 || to === -1) return;
+        featuredOrder.splice(from, 1);
+        featuredOrder.splice(to, 0, featuredDragSlug);
+        featuredDragSlug = null;
+        markDirty('home-form');
+        renderFeaturedLists();
+      });
+    });
+  }
+
+  function addToFeatured(slug: string) {
+    if (!slug || featuredOrder.includes(slug)) return;
+    featuredOrder.push(slug);
+    featuredAvailableSel = null;
+    markDirty('home-form');
+    renderFeaturedLists();
+  }
+
+  function removeFromFeatured(slug: string) {
+    featuredOrder = featuredOrder.filter((s) => s !== slug);
+    featuredSelectedSel = null;
+    markDirty('home-form');
+    renderFeaturedLists();
+  }
+
+  document.getElementById('featured-add-btn')?.addEventListener('click', () => {
+    if (featuredAvailableSel) addToFeatured(featuredAvailableSel);
+  });
+  document.getElementById('featured-remove-btn')?.addEventListener('click', () => {
+    if (featuredSelectedSel) removeFromFeatured(featuredSelectedSel);
+  });
+
   let homeInitialized = false;
   async function initHomePanel() {
     const homeStatus = document.getElementById('home-status')!;
@@ -412,16 +525,11 @@ import Layout from '../../layouts/Layout.astro';
     introEditor.innerHTML = s.introCopy ?? '';
     introHtmlField.value = s.introCopy ?? '';
 
-    const picker = document.getElementById('featured-picker') as HTMLElement;
-    picker.innerHTML = items
-      .map(
-        (item) => `
-        <label class="tag-option">
-          <input type="checkbox" name="featuredSlug" value="${item.slug}" ${s.featuredSlugs.includes(item.slug) ? 'checked' : ''} />
-          <span>${item.title}</span>
-        </label>`
-      )
-      .join('');
+    featuredItemsBySlug = new Map(items.map((item) => [item.slug, item]));
+    featuredOrder = s.featuredSlugs.filter((slug) => featuredItemsBySlug.has(slug));
+    featuredAvailableSel = null;
+    featuredSelectedSel = null;
+    renderFeaturedLists();
 
     if (homeInitialized) return;
     homeInitialized = true;
@@ -433,9 +541,7 @@ import Layout from '../../layouts/Layout.astro';
       const cur = await loadSettings();
       cur.heroSlug = String(fd.get('heroSlug') || '') || null;
       cur.introCopy = introHtmlField.value;
-      cur.featuredSlugs = Array.from(form.querySelectorAll('input[name="featuredSlug"]:checked')).map(
-        (el) => (el as HTMLInputElement).value
-      );
+      cur.featuredSlugs = [...featuredOrder];
       await saveSettings(status, 'home-form');
     });
   }
@@ -1126,31 +1232,91 @@ import Layout from '../../layouts/Layout.astro';
     outline-offset: 1px;
   }
 
-  .item-picker {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
-    max-height: 220px;
-    overflow-y: auto;
-  }
-
   .tag-pills {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
 
-  .tag-option {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    cursor: pointer;
+  .dual-list {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: start;
   }
 
-  .tag-option input {
-    accent-color: var(--accent);
+  @media (max-width: 560px) {
+    .dual-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .dual-list-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  .dual-list-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tag-muted);
+  }
+
+  .dual-list-box {
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    height: 260px;
+    overflow-y: auto;
+  }
+
+  .dual-list-box .section-hint {
+    padding: 0.75rem;
+    margin: 0;
+  }
+
+  .dual-list-row {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--hairline);
+    user-select: none;
+  }
+
+  .dual-list-row:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+
+  .dual-list-row.active {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .dual-list-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-self: center;
+    padding-top: 1.5rem;
+  }
+
+  @media (max-width: 560px) {
+    .dual-list-arrows {
+      flex-direction: row;
+      justify-content: center;
+      padding-top: 0;
+    }
+  }
+
+  .dual-list-arrows .btn {
+    width: 2.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0.5rem 0;
   }
 
   .work-list-controls {
