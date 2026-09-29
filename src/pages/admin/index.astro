@@ -42,6 +42,8 @@ import Layout from '../../layouts/Layout.astro';
               </label>
             </fieldset>
 
+            <label>Heading <input name="pageHeading" required /></label>
+
             <fieldset>
               <legend>Intro text</legend>
               <p class="section-hint">The paragraph under the headline. Basic formatting only.</p>
@@ -522,6 +524,7 @@ import Layout from '../../layouts/Layout.astro';
       '<option value="">— None —</option>' +
       items.map((item) => `<option value="${item.slug}">${item.title}${item.hidden ? ' (hidden)' : ''}</option>`).join('');
     heroSelect.value = s.heroSlug ?? '';
+    (form.elements.namedItem('pageHeading') as HTMLInputElement).value = s.role ?? '';
     introEditor.innerHTML = s.introCopy ?? '';
     introHtmlField.value = s.introCopy ?? '';
 
@@ -540,6 +543,7 @@ import Layout from '../../layouts/Layout.astro';
       const fd = new FormData(form);
       const cur = await loadSettings();
       cur.heroSlug = String(fd.get('heroSlug') || '') || null;
+      cur.role = String(fd.get('pageHeading') || '');
       cur.introCopy = introHtmlField.value;
       cur.featuredSlugs = [...featuredOrder];
       await saveSettings(status, 'home-form');
