@@ -38,7 +38,10 @@ const { Content } = await page.render();
   }
 
   .prose {
+    font-family: var(--font-body);
     color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.75;
   }
 
   .prose :global(p) {
@@ -47,20 +50,23 @@ const { Content } = await page.render();
 
   .details {
     margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--hairline);
+    background: var(--shit-kicker);
+    border: 1px solid var(--shit-kicker);
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
   }
 
   .email {
-    color: var(--accent);
+    color: var(--headlight);
     font-size: 1.1rem;
+    text-decoration: underline;
   }
 
   .location {
-    color: var(--text-muted);
+    color: var(--headlight);
+    opacity: 0.75;
     font-size: 0.9rem;
   }
 </style>

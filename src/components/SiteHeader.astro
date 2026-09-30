@@ -15,7 +15,8 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     <span aria-hidden="true"></span>
   ) : (
     <a class="wordmark" href="/">
-      <img src="/images/dwyski.png" alt={site.name} />
+      <img class="bolt" src="/images/dd-logo-128.png" alt="" width="40" height="40" />
+      <span class="name">{site.name}</span>
     </a>
   )}
   <nav class="nav">
@@ -37,14 +38,27 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   }
 
   .wordmark {
-    display: block;
-    line-height: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
   }
 
-  .wordmark img {
-    height: 35px;
-    width: auto;
+  .bolt {
+    height: 40px;
+    width: 40px;
     display: block;
+  }
+
+  /* The Signature Treatment: Barn Red letters with a hard-edge Headlight
+     drop shadow on Ink, offset down-and-right at roughly 37° — no blur. */
+  .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 1.15rem;
+    color: var(--barn-red);
+    text-shadow: 0.075em 0.056em 0 var(--headlight);
   }
 
   .nav {

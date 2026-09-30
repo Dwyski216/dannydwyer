@@ -36,7 +36,7 @@ const personSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
     <title>{title} · {site.name}</title>
     <meta name="description" content={description} />
@@ -64,8 +64,16 @@ const personSchema = {
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- The brand's actual typefaces — Futura Bold and Trade Gothic — are
+         commercial and aren't available as web fonts. Each font stack below
+         lists the real name first (so a visitor who has it installed
+         locally, e.g. Futura ships with macOS, sees the genuine thing) and
+         falls back to the closest free Google Fonts equivalent: Jost for
+         Futura's geometric circles, Oswald for Trade Gothic Bold No.2's
+         condensed storefront-sign feel, and Public Sans for Trade Gothic
+         Regular's plain, easy-to-read body text. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&family=Oswald:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -76,20 +84,39 @@ const personSchema = {
 
 <style is:global>
   :root {
-    /* Color tokens — light powder-blue ground with a dark teal ink and a
-       coral accent, matching the DWYSKI wordmark's palette. */
-    --bg: #faebd7;
-    --surface: #cddce0;
-    --text: #1f4547;
-    --text-muted: #3f6d6e;
-    --accent: #d97662; /* coral, used for active/interactive states */
-    --accent-dim: #b85c4a;
-    --on-accent: #fdf6f4; /* text color for content sitting on top of --accent */
-    --hairline: #bdd0d4;
-    --tag-muted: #5f8385;
+    /* Color tokens — from the DWYER_STYLE_GUIDE brand system: "five colors,
+       three do the work, two back 'em up." Ink is the dark stage everything
+       sits on; Headlight is the readable voice; Barn Red is the name in
+       lights (big sizes only — never small body text); Olympic Gold means
+       go (links, buttons, anything interactive); Shit Kicker is the warm
+       neutral reserved for one special panel at a time (featured project,
+       footer band, contact block) so it doesn't turn muddy repeated
+       everywhere. Night Shift is Ink "with the lights turned up a notch" —
+       the everyday box/card/panel color, used instead of Shit Kicker so
+       footage and Gold stay the things that pop.  */
+    --ink: #081d23;
+    --headlight: #fff3b0;
+    --barn-red: #9e2a2b;
+    --olympic-gold: #e09f3e;
+    --shit-kicker: #5c3b23;
+    --night-shift: #12323b;
 
-    --font-display: 'Poppins', -apple-system, sans-serif;
-    --font-body: 'Poppins', -apple-system, sans-serif;
+    --bg: var(--ink);
+    --surface: var(--night-shift);
+    --text: var(--headlight);
+    --text-muted: color-mix(in srgb, var(--headlight) 60%, var(--ink));
+    --accent: var(--olympic-gold);
+    --accent-dim: color-mix(in srgb, var(--olympic-gold) 72%, black);
+    --on-accent: var(--ink); /* text color for content sitting on top of --accent */
+    --hairline: color-mix(in srgb, var(--headlight) 16%, var(--ink));
+    --tag-muted: color-mix(in srgb, var(--olympic-gold) 55%, var(--headlight));
+
+    /* Futura Bold — the name, the logo, section headings (title case). */
+    --font-display: Futura, 'Futura PT', Jost, 'Century Gothic', -apple-system, sans-serif;
+    /* Trade Gothic Bold No. 2 — video titles and project names, ALL CAPS. */
+    --font-title: 'Trade Gothic Bold No. 2', 'Trade Gothic Bold', Oswald, 'Arial Narrow', sans-serif;
+    /* Trade Gothic Regular — descriptions, credits, captions, reading text. */
+    --font-body: 'Trade Gothic', 'Trade Gothic Regular', 'Public Sans', -apple-system, sans-serif;
 
     --content-width: 1100px;
     --side-padding: clamp(1.25rem, 4vw, 2rem);

@@ -35,12 +35,14 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   .card {
     display: flex;
     flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
   }
 
   .thumb {
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: var(--surface);
+    background: var(--ink);
   }
 
   .thumb img {
@@ -56,10 +58,14 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   }
 
   .meta {
-    padding-top: 0.85rem;
+    padding: 0.85rem 1rem 1rem;
   }
 
   .meta h3 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
     font-size: 1rem;
     line-height: 1.3;
     margin-bottom: 0.4rem;

@@ -25,7 +25,7 @@ const displayNames: Record<string, string> = {
 
 <style>
   .footer {
-    border-top: 1px solid var(--hairline);
+    background: var(--shit-kicker);
     margin-top: 4rem;
   }
 
@@ -36,7 +36,7 @@ const displayNames: Record<string, string> = {
     flex-direction: column;
     gap: 0.75rem;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--headlight);
   }
 
   .links {
@@ -44,6 +44,10 @@ const displayNames: Record<string, string> = {
     flex-wrap: wrap;
     row-gap: 0.5rem;
     column-gap: 1.5rem;
+  }
+
+  .links a {
+    text-decoration: underline;
   }
 
   .links .social {
