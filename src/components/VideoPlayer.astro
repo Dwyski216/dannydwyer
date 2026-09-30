@@ -16,30 +16,17 @@ const allow =
     : 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
 ---
 
-<div class="frame">
-  <div class="letterbox top"></div>
-  <div class="embed-wrap">
-    <iframe
-      src={src}
-      title={title}
-      loading="lazy"
-      allow={allow}
-      allowfullscreen
-    ></iframe>
-  </div>
-  <div class="letterbox bottom"></div>
+<div class="embed-wrap">
+  <iframe
+    src={src}
+    title={title}
+    loading="lazy"
+    allow={allow}
+    allowfullscreen
+  ></iframe>
 </div>
 
 <style>
-  .frame {
-    border: 1px solid var(--hairline);
-  }
-
-  .letterbox {
-    height: 6px;
-    background: var(--surface);
-  }
-
   .embed-wrap {
     position: relative;
     width: 100%;
