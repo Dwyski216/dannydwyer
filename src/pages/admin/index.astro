@@ -569,7 +569,7 @@ import Layout from '../../layouts/Layout.astro';
   let editingSlug: string | null = null;
   let pendingTags = new Set<string>();
 
-  type SortKey = 'title' | 'tags' | 'uploadDate' | 'hidden';
+  type SortKey = 'title' | 'uploadDate' | 'hidden';
   let sortKey: SortKey = 'title';
   let sortAsc = true;
 
@@ -579,7 +579,6 @@ import Layout from '../../layouts/Layout.astro';
 
   const SORT_COLUMNS: { key: SortKey; label: string }[] = [
     { key: 'title', label: 'Title' },
-    { key: 'tags', label: 'Tags' },
     { key: 'uploadDate', label: 'Date' },
     { key: 'hidden', label: 'Status' },
   ];
@@ -595,7 +594,6 @@ import Layout from '../../layouts/Layout.astro';
 
     const dir = sortAsc ? 1 : -1;
     const sorted = [...filtered].sort((a, b) => {
-      if (sortKey === 'tags') return a.tags.join(', ').localeCompare(b.tags.join(', ')) * dir;
       if (sortKey === 'hidden') return (Number(a.hidden) - Number(b.hidden)) * dir;
       return String(a[sortKey]).localeCompare(String(b[sortKey])) * dir;
     });
@@ -612,14 +610,13 @@ import Layout from '../../layouts/Layout.astro';
             (item) => `
         <tr data-slug="${item.slug}">
           <td>${escapeHtml(item.title)}</td>
-          <td class="work-cell-tags">${item.tags.length ? item.tags.map((t) => `<span class="tag-chip-sm">${escapeHtml(t)}</span>`).join('') : '<span class="work-cell-empty">—</span>'}</td>
           <td>${escapeHtml(item.uploadDate) || '<span class="work-cell-empty">—</span>'}</td>
           <td>${item.hidden ? '<span class="status-badge status-hidden">Hidden</span>' : '<span class="status-badge status-visible">Visible</span>'}</td>
           <td><button type="button" class="btn btn-ghost" data-edit="${item.slug}">Edit</button></td>
         </tr>`
           )
           .join('')
-      : `<tr><td colspan="5" class="section-hint">No items match.</td></tr>`;
+      : `<tr><td colspan="4" class="section-hint">No items match.</td></tr>`;
 
     workListEl.innerHTML = `
       <table class="work-table">
@@ -1398,23 +1395,8 @@ import Layout from '../../layouts/Layout.astro';
     background: var(--surface);
   }
 
-  .work-cell-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-  }
-
   .work-cell-empty {
     color: var(--text-muted);
-  }
-
-  .tag-chip-sm {
-    display: inline-block;
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    border: 1px solid var(--hairline);
-    padding: 0.1rem 0.4rem;
-    white-space: nowrap;
   }
 
   .status-badge {
