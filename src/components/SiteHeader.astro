@@ -14,10 +14,12 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   {hideLogo ? (
     <span aria-hidden="true"></span>
   ) : (
-    <a class="wordmark" href="/">
-      <img class="bolt" src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_01_PRIMARY.png" alt="" width="100" height="100" />
-      <span class="name">{site.name}</span>
-    </a>
+    <>
+      <a class="logo-mark" href="/" aria-label={site.name}>
+        <img class="bolt" src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_01_PRIMARY.png" alt="" width="100" height="100" />
+      </a>
+      <a class="name" href="/">{site.name}</a>
+    </>
   )}
   <nav class="nav">
     <a href="/" class:list={{ active: isActive('/') && path === '/' }}>Home</a>
@@ -28,6 +30,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 
 <style>
   .header {
+    position: relative;
     padding-top: 2rem;
     padding-bottom: 1.5rem;
     display: flex;
@@ -37,10 +40,10 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     flex-wrap: wrap;
   }
 
-  .wordmark {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  .logo-mark {
+    display: block;
+    line-height: 0;
+    flex-shrink: 0;
   }
 
   .bolt {
@@ -50,10 +53,6 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   }
 
   @media (max-width: 600px) {
-    .wordmark {
-      gap: 0.6rem;
-    }
-
     .bolt {
       height: 48px;
       width: 48px;
@@ -63,8 +62,16 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   /* The Signature Treatment: Barn Red letters with a hard-edge Headlight
      drop shadow on Ink, offset down-and-right at roughly 37° — no blur.
      Sized in em so the shadow's offset stays proportional to the text at
-     any size, mobile included. */
+     any size, mobile included. Centered across the full header on desktop
+     (independent of the logo mark, which stays pinned top-left); on
+     narrow screens there isn't room to center it without overlapping the
+     logo or nav, so it drops back into the normal flex flow next to them. */
   .name {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
     font-family: var(--font-display);
     font-weight: 700;
     text-transform: uppercase;
@@ -76,6 +83,8 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 
   @media (max-width: 600px) {
     .name {
+      position: static;
+      transform: none;
       font-size: 1.45rem;
     }
   }
