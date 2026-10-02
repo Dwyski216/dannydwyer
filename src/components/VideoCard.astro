@@ -61,6 +61,13 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
     padding: 0.85rem 1rem 1rem;
   }
 
+  /* Title and summary both get a fixed height matched to a line-clamp of
+     the same line count (2 and 3 respectively — the catalog's longest
+     titles/summaries run roughly 2x the average, so this covers the
+     typical case in full and truncates the outliers with an ellipsis).
+     Reserving the height (not just capping it) is what makes every card
+     the same height regardless of content length — a short title still
+     takes up its full 2-line slot instead of shrinking the card. */
   .meta h3 {
     font-family: var(--font-title);
     font-weight: 700;
@@ -68,7 +75,13 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
     letter-spacing: 0.01em;
     font-size: 1rem;
     line-height: 1.3;
+    height: 2.6em;
     margin-bottom: 0.4rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .card:hover h3 {
@@ -78,11 +91,18 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   .summary {
     color: var(--headlight);
     font-size: 0.85rem;
+    line-height: 1.5;
+    height: 4.5em;
     margin: 0 0 0.65rem;
     text-align: justify;
     text-justify: inter-word;
     hyphens: auto;
     -webkit-hyphens: auto;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
 
   .tags {
