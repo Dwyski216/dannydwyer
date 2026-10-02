@@ -1,8 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// TODO: replace with your real domain before deploying
-const SITE_URL = 'https://www.yourdomain.com';
+const SITE_URL = 'https://dannydwyer.sarujump.workers.dev';
 
 export default defineConfig({
   site: SITE_URL,
