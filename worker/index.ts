@@ -659,6 +659,31 @@ async function handleLayoutPost(request: Request, env: Env): Promise<Response> {
   return json({ ok: true });
 }
 
+const SEO_PATH = 'src/data/seo.json';
+
+async function handleSeoGet(_request: Request, env: Env): Promise<Response> {
+  const file = await getFile(env, SEO_PATH);
+  if (!file) return json({ error: `Could not read ${SEO_PATH} from GitHub.` }, 502);
+  try {
+    return json({ seo: JSON.parse(file.content) });
+  } catch {
+    return json({ error: `${SEO_PATH} contains invalid JSON.` }, 502);
+  }
+}
+
+async function handleSeoPost(request: Request, env: Env): Promise<Response> {
+  const body = (await request.json().catch(() => ({}))) as {
+    seo?: Record<string, { title: string; description: string; ogImage: string }>;
+  };
+  if (!body.seo) return json({ error: 'Expects { seo }' }, 400);
+
+  const existing = await getFile(env, SEO_PATH);
+  const res = await putFile(env, SEO_PATH, JSON.stringify(body.seo, null, 2) + '\n', existing?.sha, 'Update page SEO metadata');
+  if (!res.ok) return json({ error: 'Failed to update SEO metadata' }, 502);
+
+  return json({ ok: true });
+}
+
 async function router(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const { pathname } = url;
@@ -716,6 +741,11 @@ async function router(request: Request, env: Env): Promise<Response> {
   if (pathname === '/api/layout') {
     if (request.method === 'GET') return handleLayoutGet(request, env);
     if (request.method === 'POST') return handleLayoutPost(request, env);
+  }
+
+  if (pathname === '/api/seo') {
+    if (request.method === 'GET') return handleSeoGet(request, env);
+    if (request.method === 'POST') return handleSeoPost(request, env);
   }
 
   // Everything else — every static page, image, and the login page

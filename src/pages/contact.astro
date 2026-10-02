@@ -7,13 +7,19 @@ import ContactBody from '../components/sections/ContactBody.astro';
 import { getEntry } from 'astro:content';
 import { site } from '../data/site';
 import { getEnabledSections } from '../data/layout';
+import { getSeoOverride } from '../data/seo';
 
 const sections = getEnabledSections('contact');
+const seo = getSeoOverride('contact');
 const page = await getEntry('pages', 'contact');
 const { Content } = await page.render();
 ---
 
-<Layout title="Contact" description={page.data.summary ?? site.tagline}>
+<Layout
+  title={seo.title || 'Contact'}
+  description={seo.description || page.data.summary || site.tagline}
+  ogImage={seo.ogImage || undefined}
+>
   <SiteHeader />
   <main class="main container">
     {sections.map((section) => {

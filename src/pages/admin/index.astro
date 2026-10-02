@@ -22,6 +22,7 @@ import Layout from '../../layouts/Layout.astro';
           <button type="button" class="nav-link" data-page="contact">Contact</button>
           <button type="button" class="nav-link" data-page="tags">Tags</button>
           <button type="button" class="nav-link" data-page="layout">Layout</button>
+          <button type="button" class="nav-link" data-page="seo">SEO</button>
           <button type="button" class="nav-link" data-page="settings">Settings</button>
         </nav>
       </aside>
@@ -245,6 +246,21 @@ import Layout from '../../layouts/Layout.astro';
           <p class="status" id="layout-status"></p>
         </section>
 
+        <!-- ============ SEO ============ -->
+        <section id="page-seo" class="page-panel" data-page="seo" hidden>
+          <h2>SEO &amp; GEO metadata</h2>
+          <p class="section-hint">
+            Overrides for each page's browser-tab title, meta/AI description, and social share image. Leave a field
+            blank to keep the page's own built-in default (shown as its placeholder). The AI-crawler file at
+            <code>/llms.txt</code> and each video's own SEO fields are managed elsewhere (Home bio, Work items).
+          </p>
+          <div id="seo-pages"></div>
+          <div class="form-actions">
+            <button type="button" id="seo-save-btn" class="btn btn-solid">Save SEO</button>
+          </div>
+          <p class="status" id="seo-status"></p>
+        </section>
+
         <!-- ============ SETTINGS ============ -->
         <section id="page-settings" class="page-panel" data-page="settings" hidden>
           <h2>Site settings</h2>
@@ -347,7 +363,7 @@ import Layout from '../../layouts/Layout.astro';
   // events, so loading data never marks a form dirty). Cleared on a
   // successful save or a confirmed discard.
   // ---------------------------------------------------------------------
-  const dirtyFormIds = ['home-form', 'work-item-form', 'contact-form', 'settings-form', 'layout-pages'];
+  const dirtyFormIds = ['home-form', 'work-item-form', 'contact-form', 'settings-form', 'layout-pages', 'seo-pages'];
   dirtyFormIds.forEach((id) => {
     const form = document.getElementById(id);
     form?.addEventListener('input', () => (form.dataset.dirty = '1'));
@@ -392,6 +408,7 @@ import Layout from '../../layouts/Layout.astro';
     if (activePage === 'contact') return 'contact-form';
     if (activePage === 'settings') return 'settings-form';
     if (activePage === 'layout') return 'layout-pages';
+    if (activePage === 'seo') return 'seo-pages';
     if (activePage === 'work') {
       const itemView = document.getElementById('work-item-view') as HTMLElement | null;
       return itemView && !itemView.hidden ? 'work-item-form' : null;
@@ -409,6 +426,7 @@ import Layout from '../../layouts/Layout.astro';
     if (page === 'contact') await initContactPanel();
     if (page === 'tags') await initTagsPanel();
     if (page === 'layout') await initLayoutPanel();
+    if (page === 'seo') await initSeoPanel();
     if (page === 'settings') await initSettingsPanel();
   }
 
@@ -1261,6 +1279,86 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   // ---------------------------------------------------------------------
+  // SEO panel — per-page title/description/OG image overrides. An empty
+  // field means "use the page's own built-in default," never "blank it
+  // out," so saving never has to know what that default currently is.
+  // ---------------------------------------------------------------------
+  type SeoOverride = { title: string; description: string; ogImage: string };
+  type SeoData = Record<string, SeoOverride>;
+
+  const SEO_PAGES: { key: string; label: string; titlePlaceholder: string; descriptionPlaceholder: string }[] = [
+    { key: 'home', label: 'Home', titlePlaceholder: 'Home', descriptionPlaceholder: "Defaults to the site tagline (Settings tab)." },
+    {
+      key: 'work',
+      label: 'Work',
+      titlePlaceholder: 'Work',
+      descriptionPlaceholder: 'Defaults to an auto-generated summary with the live project count.',
+    },
+    {
+      key: 'contact',
+      label: 'Contact',
+      titlePlaceholder: 'Contact',
+      descriptionPlaceholder: "Defaults to the Contact page's own summary (Contact tab), or the site tagline.",
+    },
+  ];
+
+  let seoData: SeoData = {};
+  let seoInitialized = false;
+
+  function renderSeoPanel() {
+    const container = document.getElementById('seo-pages')!;
+    container.innerHTML = SEO_PAGES.map((page) => {
+      const override = seoData[page.key] ?? { title: '', description: '', ogImage: '' };
+      return `
+        <fieldset class="seo-page-group" data-page-key="${page.key}">
+          <legend>${page.label}</legend>
+          <label>Title override
+            <input class="seo-title" placeholder="${escapeHtml(page.titlePlaceholder)}" value="${escapeHtml(override.title)}" />
+          </label>
+          <label>Description override
+            <textarea class="seo-description" rows="2" maxlength="200" placeholder="${escapeHtml(page.descriptionPlaceholder)}">${escapeHtml(override.description)}</textarea>
+          </label>
+          <label>Social share image (OG image) URL
+            <input class="seo-ogimage" placeholder="/images/og-default.jpg" value="${escapeHtml(override.ogImage)}" />
+          </label>
+        </fieldset>`;
+    }).join('');
+  }
+
+  document.getElementById('seo-save-btn')?.addEventListener('click', async () => {
+    const status = document.getElementById('seo-status')!;
+    status.textContent = 'Saving…';
+    document.querySelectorAll('.seo-page-group').forEach((group) => {
+      const pageKey = (group as HTMLElement).dataset.pageKey!;
+      seoData[pageKey] = {
+        title: (group.querySelector('.seo-title') as HTMLInputElement).value.trim(),
+        description: (group.querySelector('.seo-description') as HTMLTextAreaElement).value.trim(),
+        ogImage: (group.querySelector('.seo-ogimage') as HTMLInputElement).value.trim(),
+      };
+    });
+    const res = await fetch('/api/seo', { method: 'POST', body: JSON.stringify({ seo: seoData }) });
+    const data = await res.json();
+    status.textContent = res.ok ? 'Saved.' : `Error: ${data.error ?? 'failed'}`;
+    if (res.ok) clearDirty('seo-pages');
+  });
+
+  async function initSeoPanel() {
+    const status = document.getElementById('seo-status')!;
+    if (!seoInitialized) {
+      const res = await fetch('/api/seo');
+      const data = await res.json();
+      if (!res.ok || !data.seo) {
+        status.textContent = `Error: ${data.error ?? 'Could not load SEO metadata.'}`;
+        return;
+      }
+      seoData = data.seo;
+      seoInitialized = true;
+    }
+    status.textContent = '';
+    renderSeoPanel();
+  }
+
+  // ---------------------------------------------------------------------
   // Contact panel
   // ---------------------------------------------------------------------
   let contactInitialized = false;
@@ -1812,19 +1910,29 @@ import Layout from '../../layouts/Layout.astro';
     margin: 0;
   }
 
-  .layout-page-group {
+  .layout-page-group,
+  .seo-page-group {
     border: 1px solid var(--hairline);
     padding: 1rem 1.25rem 1.25rem;
     margin-bottom: 1.5rem;
   }
 
-  .layout-page-group legend {
+  .layout-page-group legend,
+  .seo-page-group legend {
     font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--tag-muted);
     padding: 0 0.4rem;
+  }
+
+  .seo-page-group label {
+    margin-top: 0.85rem;
+  }
+
+  .seo-page-group label:first-of-type {
+    margin-top: 0.25rem;
   }
 
   .layout-list {

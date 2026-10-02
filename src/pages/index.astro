@@ -9,8 +9,10 @@ import { getCollection } from 'astro:content';
 import { site } from '../data/site';
 import { getEmbedUrl, getThumbnailUrl } from '../lib/video';
 import { getEnabledSections } from '../data/layout';
+import { getSeoOverride } from '../data/seo';
 
 const sections = getEnabledSections('home');
+const seo = getSeoOverride('home');
 
 const videos = await getCollection('videos');
 
@@ -41,7 +43,12 @@ const jsonLd = heroVideo
   : [];
 ---
 
-<Layout title="Home" description={site.tagline} jsonLd={jsonLd}>
+<Layout
+  title={seo.title || 'Home'}
+  description={seo.description || site.tagline}
+  ogImage={seo.ogImage || undefined}
+  jsonLd={jsonLd}
+>
   <SiteHeader />
 
   <main class="main container">

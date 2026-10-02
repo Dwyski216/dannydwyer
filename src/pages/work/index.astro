@@ -8,8 +8,10 @@ import WorkGrid from '../../components/sections/WorkGrid.astro';
 import { getCollection } from 'astro:content';
 import { getThumbnailUrl, byDisplayOrder } from '../../lib/video';
 import { getEnabledSections } from '../../data/layout';
+import { getSeoOverride } from '../../data/seo';
 
 const sections = getEnabledSections('work');
+const seo = getSeoOverride('work');
 const videos = (await getCollection('videos', (v) => !v.data.hidden)).sort((a, b) => byDisplayOrder(a.data, b.data));
 
 const thumbnails = await Promise.all(videos.map((v) => getThumbnailUrl(v.data)));
@@ -33,8 +35,12 @@ const jsonLd = [
 ---
 
 <Layout
-  title="Work"
-  description={`Selected narrative, commercial, and documentary cinematography — ${videos.length} projects, searchable by tag, role, and format.`}
+  title={seo.title || 'Work'}
+  description={
+    seo.description ||
+    `Selected narrative, commercial, and documentary cinematography — ${videos.length} projects, searchable by tag, role, and format.`
+  }
+  ogImage={seo.ogImage || undefined}
   jsonLd={jsonLd}
 >
   <SiteHeader />
