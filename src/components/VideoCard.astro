@@ -76,9 +76,13 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   }
 
   .summary {
-    color: var(--text-muted);
+    color: var(--headlight);
     font-size: 0.85rem;
     margin: 0 0 0.65rem;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 
   .tags {
@@ -89,10 +93,8 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
     color: var(--tag-muted);
   }
 
-  .tag::after {
-    content: '·';
-    margin-left: 0.6rem;
-    color: var(--hairline);
+  .tag {
+    display: none;
   }
 
   .year {

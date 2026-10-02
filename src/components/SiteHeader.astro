@@ -15,7 +15,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     <span aria-hidden="true"></span>
   ) : (
     <a class="wordmark" href="/">
-      <img class="bolt" src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_01_PRIMARY.png" alt="" width="40" height="40" />
+      <img class="bolt" src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_01_PRIMARY.png" alt="" width="100" height="100" />
       <span class="name">{site.name}</span>
     </a>
   )}
@@ -31,7 +31,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     padding-top: 2rem;
     padding-bottom: 1.5rem;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
     flex-wrap: wrap;
@@ -40,25 +40,44 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   .wordmark {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1.5rem;
   }
 
   .bolt {
-    height: 40px;
-    width: 40px;
+    height: 100px;
+    width: 100px;
     display: block;
   }
 
+  @media (max-width: 600px) {
+    .wordmark {
+      gap: 0.6rem;
+    }
+
+    .bolt {
+      height: 48px;
+      width: 48px;
+    }
+  }
+
   /* The Signature Treatment: Barn Red letters with a hard-edge Headlight
-     drop shadow on Ink, offset down-and-right at roughly 37° — no blur. */
+     drop shadow on Ink, offset down-and-right at roughly 37° — no blur.
+     Sized in em so the shadow's offset stays proportional to the text at
+     any size, mobile included. */
   .name {
     font-family: var(--font-display);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    font-size: 1.15rem;
+    font-size: 2.875rem;
     color: var(--barn-red);
     text-shadow: 0.075em 0.056em 0 var(--headlight);
+  }
+
+  @media (max-width: 600px) {
+    .name {
+      font-size: 1.45rem;
+    }
   }
 
   .nav {
