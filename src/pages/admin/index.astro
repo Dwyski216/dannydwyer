@@ -21,6 +21,7 @@ import Layout from '../../layouts/Layout.astro';
           <button type="button" class="nav-link" data-page="work">Work</button>
           <button type="button" class="nav-link" data-page="contact">Contact</button>
           <button type="button" class="nav-link" data-page="tags">Tags</button>
+          <button type="button" class="nav-link" data-page="layout">Layout</button>
           <button type="button" class="nav-link" data-page="settings">Settings</button>
         </nav>
       </aside>
@@ -230,6 +231,20 @@ import Layout from '../../layouts/Layout.astro';
           <p class="status" id="tag-manager-status"></p>
         </section>
 
+        <!-- ============ LAYOUT ============ -->
+        <section id="page-layout" class="page-panel" data-page="layout" hidden>
+          <h2>Page layout</h2>
+          <p class="section-hint">
+            Show, hide, and reorder each page's sections. This controls arrangement only — what a section shows still
+            comes from the Home, Work, and Contact tabs.
+          </p>
+          <div id="layout-pages"></div>
+          <div class="form-actions">
+            <button type="button" id="layout-save-btn" class="btn btn-solid">Save Layout</button>
+          </div>
+          <p class="status" id="layout-status"></p>
+        </section>
+
         <!-- ============ SETTINGS ============ -->
         <section id="page-settings" class="page-panel" data-page="settings" hidden>
           <h2>Site settings</h2>
@@ -332,7 +347,7 @@ import Layout from '../../layouts/Layout.astro';
   // events, so loading data never marks a form dirty). Cleared on a
   // successful save or a confirmed discard.
   // ---------------------------------------------------------------------
-  const dirtyFormIds = ['home-form', 'work-item-form', 'contact-form', 'settings-form'];
+  const dirtyFormIds = ['home-form', 'work-item-form', 'contact-form', 'settings-form', 'layout-pages'];
   dirtyFormIds.forEach((id) => {
     const form = document.getElementById(id);
     form?.addEventListener('input', () => (form.dataset.dirty = '1'));
@@ -376,6 +391,7 @@ import Layout from '../../layouts/Layout.astro';
     if (activePage === 'home') return 'home-form';
     if (activePage === 'contact') return 'contact-form';
     if (activePage === 'settings') return 'settings-form';
+    if (activePage === 'layout') return 'layout-pages';
     if (activePage === 'work') {
       const itemView = document.getElementById('work-item-view') as HTMLElement | null;
       return itemView && !itemView.hidden ? 'work-item-form' : null;
@@ -392,6 +408,7 @@ import Layout from '../../layouts/Layout.astro';
     if (page === 'work') await initWorkPanel();
     if (page === 'contact') await initContactPanel();
     if (page === 'tags') await initTagsPanel();
+    if (page === 'layout') await initLayoutPanel();
     if (page === 'settings') await initSettingsPanel();
   }
 
@@ -1097,6 +1114,153 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   // ---------------------------------------------------------------------
+  // Layout panel — show/hide and reorder each page's sections. This is
+  // arrangement only: what a section contains is still edited on its own
+  // tab (Home/Work/Contact). The canonical section list per page mirrors
+  // src/data/layout.ts's DEFAULTS/SECTION_LABELS — duplicated here rather
+  // than imported, matching this file's existing self-contained style.
+  // ---------------------------------------------------------------------
+  type LayoutSection = { type: string; enabled: boolean };
+  type LayoutData = Record<string, LayoutSection[]>;
+
+  const LAYOUT_PAGES: { key: string; label: string; sections: { type: string; label: string }[] }[] = [
+    {
+      key: 'home',
+      label: 'Home',
+      sections: [
+        { type: 'hero', label: 'Hero video' },
+        { type: 'intro', label: 'Intro / bio' },
+        { type: 'featured', label: 'Featured Work grid' },
+      ],
+    },
+    {
+      key: 'work',
+      label: 'Work',
+      sections: [
+        { type: 'banner', label: 'Title + description' },
+        { type: 'controls', label: 'Filters + search' },
+        { type: 'grid', label: 'Video grid' },
+      ],
+    },
+    {
+      key: 'contact',
+      label: 'Contact',
+      sections: [
+        { type: 'title', label: 'Page title' },
+        { type: 'body', label: 'Photo, copy & contact button' },
+      ],
+    },
+  ];
+
+  let layoutData: LayoutData = {};
+  let layoutInitialized = false;
+
+  // Normalizes stored layout.json against the canonical section list for a
+  // page: drops entries whose type no longer matches a real section, and
+  // appends (as enabled) any real section missing from storage — same
+  // fallback getAllSections() applies on the live site, so the admin never
+  // shows a page as having fewer sections than actually exist.
+  function normalizedSections(pageKey: string): LayoutSection[] {
+    const page = LAYOUT_PAGES.find((p) => p.key === pageKey)!;
+    const validTypes = page.sections.map((s) => s.type);
+    const stored = (layoutData[pageKey] ?? []).filter((s) => validTypes.includes(s.type));
+    const present = new Set(stored.map((s) => s.type));
+    const missing = validTypes.filter((t) => !present.has(t)).map((type) => ({ type, enabled: true }));
+    return [...stored, ...missing];
+  }
+
+  function renderLayoutPanel() {
+    const container = document.getElementById('layout-pages')!;
+    container.innerHTML = LAYOUT_PAGES.map((page) => {
+      const sections = normalizedSections(page.key);
+      const rows = sections
+        .map((s, i) => {
+          const def = page.sections.find((d) => d.type === s.type)!;
+          return `
+          <li class="layout-row" data-page-key="${page.key}" data-type="${s.type}">
+            <label class="checkbox">
+              <input type="checkbox" class="layout-enabled" ${s.enabled ? 'checked' : ''} /> ${def.label}
+            </label>
+            <span class="layout-move">
+              <button type="button" class="btn-move" data-move-up ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
+              <button type="button" class="btn-move" data-move-down ${i === sections.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>
+            </span>
+          </li>`;
+        })
+        .join('');
+      return `
+        <fieldset class="layout-page-group">
+          <legend>${page.label}</legend>
+          <ul class="layout-list">${rows}</ul>
+        </fieldset>`;
+    }).join('');
+
+    container.querySelectorAll('.layout-enabled').forEach((cb) => {
+      cb.addEventListener('change', () => {
+        const row = (cb as HTMLElement).closest('.layout-row') as HTMLElement;
+        const pageKey = row.dataset.pageKey!;
+        const type = row.dataset.type!;
+        const sections = normalizedSections(pageKey);
+        const entry = sections.find((s) => s.type === type)!;
+        entry.enabled = (cb as HTMLInputElement).checked;
+        layoutData[pageKey] = sections;
+      });
+    });
+
+    container.querySelectorAll('[data-move-up]').forEach((btn) => {
+      btn.addEventListener('click', () => moveSection(btn as HTMLElement, -1));
+    });
+    container.querySelectorAll('[data-move-down]').forEach((btn) => {
+      btn.addEventListener('click', () => moveSection(btn as HTMLElement, 1));
+    });
+  }
+
+  function moveSection(btn: HTMLElement, direction: -1 | 1) {
+    const row = btn.closest('.layout-row') as HTMLElement;
+    const pageKey = row.dataset.pageKey!;
+    const type = row.dataset.type!;
+    const sections = normalizedSections(pageKey);
+    const i = sections.findIndex((s) => s.type === type);
+    const j = i + direction;
+    if (j < 0 || j >= sections.length) return;
+    [sections[i], sections[j]] = [sections[j], sections[i]];
+    layoutData[pageKey] = sections;
+    markDirty('layout-pages');
+    renderLayoutPanel();
+  }
+
+  document.getElementById('layout-save-btn')?.addEventListener('click', async () => {
+    const status = document.getElementById('layout-status')!;
+    status.textContent = 'Saving…';
+    // Make sure every page's current (possibly normalized-but-unedited)
+    // section list is what actually gets saved, not just the ones a
+    // checkbox/move touched this session.
+    LAYOUT_PAGES.forEach((page) => {
+      layoutData[page.key] = normalizedSections(page.key);
+    });
+    const res = await fetch('/api/layout', { method: 'POST', body: JSON.stringify({ layout: layoutData }) });
+    const data = await res.json();
+    status.textContent = res.ok ? 'Saved.' : `Error: ${data.error ?? 'failed'}`;
+    if (res.ok) clearDirty('layout-pages');
+  });
+
+  async function initLayoutPanel() {
+    const status = document.getElementById('layout-status')!;
+    if (!layoutInitialized) {
+      const res = await fetch('/api/layout');
+      const data = await res.json();
+      if (!res.ok || !data.layout) {
+        status.textContent = `Error: ${data.error ?? 'Could not load layout.'}`;
+        return;
+      }
+      layoutData = data.layout;
+      layoutInitialized = true;
+    }
+    status.textContent = '';
+    renderLayoutPanel();
+  }
+
+  // ---------------------------------------------------------------------
   // Contact panel
   // ---------------------------------------------------------------------
   let contactInitialized = false;
@@ -1646,6 +1810,46 @@ import Layout from '../../layouts/Layout.astro';
   .work-bulk-bar .status {
     width: 100%;
     margin: 0;
+  }
+
+  .layout-page-group {
+    border: 1px solid var(--hairline);
+    padding: 1rem 1.25rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .layout-page-group legend {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tag-muted);
+    padding: 0 0.4rem;
+  }
+
+  .layout-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .layout-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .layout-row:last-child {
+    border-bottom: none;
+  }
+
+  .layout-move {
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
   }
 
   .tag-manager-list {

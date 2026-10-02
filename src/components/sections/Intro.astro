@@ -1,0 +1,52 @@
+---
+// Home page section: the bio heading + rich-text intro copy + CTA into Work.
+interface Props {
+  role: string;
+  introCopy: string;
+}
+const { role, introCopy } = Astro.props;
+---
+
+<section class="intro col-12">
+  <h1>{role}</h1>
+  <div class="intro-copy" set:html={introCopy} />
+  <a class="cta" href="/work">View the work &nbsp;→</a>
+</section>
+
+<style>
+  .intro {
+    margin: 3rem 0 1rem;
+  }
+
+  .intro h1 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    margin-bottom: 1rem;
+  }
+
+  .intro-copy {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+  }
+
+  .intro-copy :global(p) {
+    margin: 0 0 1rem;
+  }
+
+  .intro-copy :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .intro-copy :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .cta {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--accent);
+    color: var(--accent);
+    padding-bottom: 0.15rem;
+  }
+</style>

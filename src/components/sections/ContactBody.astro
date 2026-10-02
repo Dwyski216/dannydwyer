@@ -1,0 +1,178 @@
+---
+// Contact page section: the two-column photo + copy + CTA composition.
+// Kept as one section (not split further) because the photo's offset
+// Signature Treatment shadow, the copy, the button, and the sign-off mark
+// below it are a deliberately choreographed unit — letting the admin
+// reorder its pieces independently risks nonsensical combinations (e.g. the
+// sign-off mark floating above the button it's meant to sit under).
+interface Props {
+  email: string;
+  location: string;
+}
+const { email, location } = Astro.props;
+---
+
+<div class="layout">
+  <div class="photo-col">
+    <div class="photo-frame">
+      <img
+        class="photo"
+        src="/images/dwyer-on-set.webp"
+        alt="Danny Dwyer, cinematographer, on set"
+        width="1600"
+        height="2000"
+        loading="eager"
+      />
+    </div>
+  </div>
+
+  <div class="copy-col">
+    <div class="prose">
+      <slot />
+    </div>
+
+    <div class="action">
+      <a class="button" href={`mailto:${email}`}>Get in touch</a>
+      <a class="email-plain" href={`mailto:${email}`}>{email}</a>
+      {location && <span class="location">{location}</span>}
+    </div>
+
+    <img class="sign-off" src="/DWYER_MONOGRAM_VARIATIONS/FLAT/DD_FLAT_HEADLIGHT_RED.png" alt="" width="56" height="56" />
+  </div>
+</div>
+
+<style>
+  .layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 801px) {
+    .layout {
+      /* photo-col is first in the DOM (so it's the element that stacks on
+         top on mobile, per spec) but row-reverse puts it on the right on
+         desktop without needing a second markup order. */
+      flex-direction: row-reverse;
+      align-items: flex-start;
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+  }
+
+  .photo-col {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+    /* The offset shadow block behind the photo overflows past the
+       column's own flowed height (it's an absolutely-positioned
+       ::before, translated down-right) — without this, that overflow
+       eats straight into the page's bottom padding and the shadow ends
+       up nearly touching the footer. */
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 801px) {
+    .photo-col {
+      flex-basis: 42%;
+      max-width: none;
+      margin-inline: 0;
+    }
+  }
+
+  /* Signature Treatment, photo variant: a solid hard-edge Headlight block
+     offset down-and-right behind the photo (same family as the wordmark's
+     drop shadow, just scaled to a photo instead of text) — no blur. */
+  .photo-frame {
+    position: relative;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--headlight);
+    transform: translate(12%, 9%);
+    z-index: 0;
+  }
+
+  .photo {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .copy-col {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .prose {
+    font-family: var(--font-body);
+    color: color-mix(in srgb, var(--headlight) 88%, transparent);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    max-width: 68ch;
+    margin-top: 1.5rem;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .prose :global(p) {
+    margin: 0 0 1.1rem;
+  }
+
+  .prose :global(a) {
+    color: var(--olympic-gold);
+    text-decoration: underline;
+  }
+
+  .action {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .button {
+    display: inline-block;
+    background: var(--olympic-gold);
+    color: var(--on-accent);
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    padding: 0.9rem 1.75rem;
+    transition: background 0.15s ease;
+  }
+
+  .button:hover {
+    background: var(--accent-dim);
+  }
+
+  .email-plain {
+    color: color-mix(in srgb, var(--headlight) 75%, transparent);
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+
+  .location {
+    color: color-mix(in srgb, var(--headlight) 60%, transparent);
+    font-size: 0.85rem;
+  }
+
+  .sign-off {
+    display: block;
+    margin: 3rem auto 0;
+    height: clamp(48px, 6vw, 64px);
+    width: clamp(48px, 6vw, 64px);
+  }
+</style>

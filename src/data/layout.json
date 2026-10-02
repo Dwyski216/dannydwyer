@@ -1,0 +1,16 @@
+{
+  "home": [
+    { "type": "hero", "enabled": true },
+    { "type": "intro", "enabled": true },
+    { "type": "featured", "enabled": true }
+  ],
+  "work": [
+    { "type": "banner", "enabled": true },
+    { "type": "controls", "enabled": true },
+    { "type": "grid", "enabled": true }
+  ],
+  "contact": [
+    { "type": "title", "enabled": true },
+    { "type": "body", "enabled": true }
+  ]
+}

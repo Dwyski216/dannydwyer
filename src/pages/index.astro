@@ -2,11 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import VideoPlayer from '../components/VideoPlayer.astro';
-import VideoCard from '../components/VideoCard.astro';
+import Hero from '../components/sections/Hero.astro';
+import Intro from '../components/sections/Intro.astro';
+import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import { getCollection } from 'astro:content';
 import { site } from '../data/site';
 import { getEmbedUrl, getThumbnailUrl } from '../lib/video';
+import { getEnabledSections } from '../data/layout';
+
+const sections = getEnabledSections('home');
 
 const videos = await getCollection('videos');
 
@@ -42,37 +46,12 @@ const jsonLd = heroVideo
 
   <main class="main container">
     <div class="grid">
-      <div class="col-12">
-        {heroVideo && (
-          <VideoPlayer platform={heroVideo.platform} videoId={heroVideo.videoId} title={matchedReel?.data.title ?? site.name} />
-        )}
-      </div>
-
-      <section class="intro col-12">
-        <h1>{site.role}</h1>
-        <div class="intro-copy" set:html={site.introCopy} />
-        <a class="cta" href="/work">View the work &nbsp;→</a>
-      </section>
-
-      {featured.length > 0 && (
-        <section class="featured col-12" aria-label="Featured work">
-          <h2>Featured Work</h2>
-          <div class="grid featured-grid">
-            {featured.map((v, i) => (
-              <div class="col-4">
-                <VideoCard
-                  slug={v.data.urlSlug}
-                  title={v.data.title}
-                  summary={v.data.summary}
-                  tags={v.data.tags}
-                  thumbnailUrl={featuredThumbnails[i]}
-                  uploadDate={v.data.uploadDate}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      {sections.map((section) => {
+        if (section === 'hero') return <Hero heroVideo={heroVideo} title={matchedReel?.data.title ?? site.name} />;
+        if (section === 'intro') return <Intro role={site.role} introCopy={site.introCopy} />;
+        if (section === 'featured') return <FeaturedWork featured={featured} thumbnails={featuredThumbnails} />;
+        return null;
+      })}
     </div>
   </main>
   <SiteFooter />
@@ -81,57 +60,5 @@ const jsonLd = heroVideo
 <style>
   .main {
     padding-bottom: 2rem;
-  }
-
-  .intro {
-    margin: 3rem 0 1rem;
-  }
-
-  .intro h1 {
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    margin-bottom: 1rem;
-  }
-
-  .intro-copy {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-  }
-
-  .intro-copy :global(p) {
-    margin: 0 0 1rem;
-  }
-
-  .intro-copy :global(p:last-child) {
-    margin-bottom: 0;
-  }
-
-  .intro-copy :global(a) {
-    color: var(--accent);
-    text-decoration: underline;
-  }
-
-  .cta {
-    display: inline-block;
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    border-bottom: 1px solid var(--accent);
-    color: var(--accent);
-    padding-bottom: 0.15rem;
-  }
-
-  .featured {
-    margin: 1.5rem 0 3rem;
-  }
-
-  .featured h2 {
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--tag-muted);
-    margin-bottom: 1.25rem;
-  }
-
-  .featured-grid {
-    row-gap: 2rem;
   }
 </style>

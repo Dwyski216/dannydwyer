@@ -636,6 +636,29 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
   return json({ ok: true });
 }
 
+const LAYOUT_PATH = 'src/data/layout.json';
+
+async function handleLayoutGet(_request: Request, env: Env): Promise<Response> {
+  const file = await getFile(env, LAYOUT_PATH);
+  if (!file) return json({ error: `Could not read ${LAYOUT_PATH} from GitHub.` }, 502);
+  try {
+    return json({ layout: JSON.parse(file.content) });
+  } catch {
+    return json({ error: `${LAYOUT_PATH} contains invalid JSON.` }, 502);
+  }
+}
+
+async function handleLayoutPost(request: Request, env: Env): Promise<Response> {
+  const body = (await request.json().catch(() => ({}))) as { layout?: Record<string, { type: string; enabled: boolean }[]> };
+  if (!body.layout) return json({ error: 'Expects { layout }' }, 400);
+
+  const existing = await getFile(env, LAYOUT_PATH);
+  const res = await putFile(env, LAYOUT_PATH, JSON.stringify(body.layout, null, 2) + '\n', existing?.sha, 'Update page layout');
+  if (!res.ok) return json({ error: 'Failed to update layout' }, 502);
+
+  return json({ ok: true });
+}
+
 async function router(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const { pathname } = url;
@@ -688,6 +711,11 @@ async function router(request: Request, env: Env): Promise<Response> {
 
   if (pathname === '/api/tags/bulk' && request.method === 'POST') {
     return handleTagsBulkPost(request, env);
+  }
+
+  if (pathname === '/api/layout') {
+    if (request.method === 'GET') return handleLayoutGet(request, env);
+    if (request.method === 'POST') return handleLayoutPost(request, env);
   }
 
   // Everything else — every static page, image, and the login page

@@ -2,10 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
-import VideoCard from '../../components/VideoCard.astro';
+import WorkBanner from '../../components/sections/WorkBanner.astro';
+import WorkControls from '../../components/sections/WorkControls.astro';
+import WorkGrid from '../../components/sections/WorkGrid.astro';
 import { getCollection } from 'astro:content';
 import { getThumbnailUrl, byDisplayOrder } from '../../lib/video';
+import { getEnabledSections } from '../../data/layout';
 
+const sections = getEnabledSections('work');
 const videos = (await getCollection('videos', (v) => !v.data.hidden)).sort((a, b) => byDisplayOrder(a.data, b.data));
 
 const thumbnails = await Promise.all(videos.map((v) => getThumbnailUrl(v.data)));
@@ -35,135 +39,40 @@ const jsonLd = [
 >
   <SiteHeader />
   <main class="main container">
-    <section class="description-banner">
-      <h1 class="page-title">Work</h1>
-      <p class="description">
-        Selected narrative, commercial, and documentary work from fifteen years behind the camera — campaigns for
-        A-list celebrities and global brands, and the everyday heroes whose stories deserve just as much care.
-      </p>
-    </section>
-
-    <div class="controls">
-      <div class="preset-filters">
-        <a class="preset-btn" href="/work/?tag=branded%20content">Branded Content</a>
-        <a class="preset-btn" href="/work/?tag=celebrity">Celebrity</a>
-        <a class="preset-btn" href="/work/?tag=fashion">Fashion</a>
-        <a class="preset-btn" href="/work/?tag=documentary">Documentary</a>
-      </div>
-
-      <div class="filter-row">
-        <input
-          id="search"
-          type="search"
-          placeholder="Search by title, client, or keyword…"
-          aria-label="Search videos"
-        />
-
-        <button
-          type="button"
-          id="filters-toggle"
-          class="filters-toggle"
-          aria-expanded="false"
-          aria-controls="filters-panel"
-        >
-          Filters
-          <span id="filters-badge" class="badge" hidden>0</span>
-        </button>
-      </div>
-    </div>
-
-    <div id="selected-chips" class="selected-chips"></div>
-
-    <div id="filters-panel" class="filters-panel" hidden>
-      <div class="filters-panel-tags">
-        {allTags.map((tag) => (
-          <button type="button" class="tag-toggle" data-tag={tag.toLowerCase()} aria-pressed="false">
-            {tag}
-          </button>
-        ))}
-      </div>
-      <div class="filters-panel-actions">
-        <button type="button" id="filters-clear" class="btn btn-ghost">Clear All</button>
-        <button type="button" id="filters-apply" class="btn btn-solid">Apply</button>
-      </div>
-    </div>
-
-    <div class="video-area">
-      <div id="video-list">
-        {videos.map((v, i) => (
-          <VideoCard
-            slug={v.data.urlSlug}
-            title={v.data.title}
-            summary={v.data.summary}
-            tags={v.data.tags}
-            thumbnailUrl={thumbnails[i]}
-            uploadDate={v.data.uploadDate}
-          />
-        ))}
-      </div>
-
-      <p id="empty-state" hidden>No videos match your search yet.</p>
-    </div>
+    {sections.map((section) => {
+      if (section === 'banner') {
+        return (
+          <WorkBanner description="Selected narrative, commercial, and documentary work from fifteen years behind the camera — campaigns for A-list celebrities and global brands, and the everyday heroes whose stories deserve just as much care." />
+        );
+      }
+      if (section === 'controls') return <WorkControls allTags={allTags} />;
+      if (section === 'grid') return <WorkGrid videos={videos} thumbnails={thumbnails} />;
+      return null;
+    })}
   </main>
   <SiteFooter />
 </Layout>
 
 <script>
-  const searchInput = document.getElementById('search') as HTMLInputElement;
+  // This script coordinates two independently-toggleable sections (Filters +
+  // search live in WorkControls, the cards live in WorkGrid), so either one
+  // can be disabled from the admin's Layout tab without breaking the other:
+  // no controls -> every video just shows, unfiltered; no grid -> the
+  // controls still render but there's nothing for them to filter.
+  const searchInput = document.getElementById('search') as HTMLInputElement | null;
   const rows = Array.from(document.querySelectorAll('#video-list .card')) as HTMLElement[];
-  const emptyState = document.getElementById('empty-state') as HTMLElement;
+  const emptyState = document.getElementById('empty-state') as HTMLElement | null;
 
-  const toggleBtn = document.getElementById('filters-toggle') as HTMLButtonElement;
-  const badge = document.getElementById('filters-badge') as HTMLElement;
-  const selectedChips = document.getElementById('selected-chips') as HTMLElement;
-  const panel = document.getElementById('filters-panel') as HTMLElement;
-  const tagToggles = Array.from(panel.querySelectorAll('.tag-toggle')) as HTMLButtonElement[];
-  const clearBtn = document.getElementById('filters-clear') as HTMLButtonElement;
-  const applyBtn = document.getElementById('filters-apply') as HTMLButtonElement;
+  const toggleBtn = document.getElementById('filters-toggle') as HTMLButtonElement | null;
+  const badge = document.getElementById('filters-badge') as HTMLElement | null;
+  const selectedChips = document.getElementById('selected-chips') as HTMLElement | null;
+  const panel = document.getElementById('filters-panel') as HTMLElement | null;
+  const tagToggles = Array.from(panel?.querySelectorAll('.tag-toggle') ?? []) as HTMLButtonElement[];
+  const clearBtn = document.getElementById('filters-clear') as HTMLButtonElement | null;
+  const applyBtn = document.getElementById('filters-apply') as HTMLButtonElement | null;
 
-  // The applied (committed) set of selected tags — what actually drives
-  // filtering and the chip row. Checkbox state inside the panel is only
-  // "pending" until Apply commits it (or Clear All zeroes everything).
-  let selected = new Set<string>();
-
-  const initialTags = new URLSearchParams(location.search).getAll('tag');
-  initialTags.forEach((tag) => selected.add(tag.toLowerCase()));
-
-  // Keep the address bar in sync with the active filters, one repeated
-  // ?tag= param per selected tag, so the current view can always be
-  // copied and shared (or reloaded) as-is.
-  function syncUrl() {
-    const params = new URLSearchParams(location.search);
-    params.delete('tag');
-    selected.forEach((tag) => params.append('tag', tag));
-    const qs = params.toString();
-    history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : ''));
-  }
-
-  function syncTogglesToSelected() {
-    tagToggles.forEach((btn) => {
-      const active = selected.has(btn.dataset.tag!);
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-pressed', String(active));
-    });
-  }
-
-  function renderChips() {
-    selectedChips.innerHTML = '';
-    selected.forEach((tag) => {
-      const chip = document.createElement('button');
-      chip.type = 'button';
-      chip.className = 'selected-chip';
-      chip.dataset.tag = tag;
-      chip.innerHTML = `${tag} <span aria-hidden="true">&times;</span>`;
-      chip.setAttribute('aria-label', `Remove ${tag} filter`);
-      selectedChips.appendChild(chip);
-    });
-    badge.hidden = selected.size === 0;
-    badge.textContent = String(selected.size);
-  }
-
-  function applyFilters() {
+  function applyFilters(selected: Set<string>) {
+    if (!searchInput) return;
     const query = searchInput.value.trim().toLowerCase();
     let visibleCount = 0;
 
@@ -176,336 +85,125 @@ const jsonLd = [
       if (show) visibleCount++;
     });
 
-    emptyState.hidden = visibleCount > 0;
+    if (emptyState) emptyState.hidden = visibleCount > 0;
   }
 
-  function openPanel() {
-    syncTogglesToSelected();
-    panel.hidden = false;
-    toggleBtn.setAttribute('aria-expanded', 'true');
-  }
+  // The controls section (search/filters) only exists if WorkControls is
+  // enabled — everything below this guard wires it up.
+  if (searchInput && toggleBtn && badge && selectedChips && panel && clearBtn && applyBtn) {
+    // The applied (committed) set of selected tags — what actually drives
+    // filtering and the chip row. Checkbox state inside the panel is only
+    // "pending" until Apply commits it (or Clear All zeroes everything).
+    let selected = new Set<string>();
 
-  function closePanel() {
-    panel.hidden = true;
-    toggleBtn.setAttribute('aria-expanded', 'false');
-  }
+    const initialTags = new URLSearchParams(location.search).getAll('tag');
+    initialTags.forEach((tag) => selected.add(tag.toLowerCase()));
 
-  toggleBtn.addEventListener('click', () => {
-    if (panel.hidden) openPanel();
-    else closePanel();
-  });
+    // Keep the address bar in sync with the active filters, one repeated
+    // ?tag= param per selected tag, so the current view can always be
+    // copied and shared (or reloaded) as-is.
+    function syncUrl() {
+      const params = new URLSearchParams(location.search);
+      params.delete('tag');
+      selected.forEach((tag) => params.append('tag', tag));
+      const qs = params.toString();
+      history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : ''));
+    }
 
-  tagToggles.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const nowActive = btn.getAttribute('aria-pressed') !== 'true';
-      btn.classList.toggle('active', nowActive);
-      btn.setAttribute('aria-pressed', String(nowActive));
+    function syncTogglesToSelected() {
+      tagToggles.forEach((btn) => {
+        const active = selected.has(btn.dataset.tag!);
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    function renderChips() {
+      selectedChips!.innerHTML = '';
+      selected.forEach((tag) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'selected-chip';
+        chip.dataset.tag = tag;
+        chip.innerHTML = `${tag} <span aria-hidden="true">&times;</span>`;
+        chip.setAttribute('aria-label', `Remove ${tag} filter`);
+        selectedChips!.appendChild(chip);
+      });
+      badge!.hidden = selected.size === 0;
+      badge!.textContent = String(selected.size);
+    }
+
+    function openPanel() {
+      syncTogglesToSelected();
+      panel!.hidden = false;
+      toggleBtn!.setAttribute('aria-expanded', 'true');
+    }
+
+    function closePanel() {
+      panel!.hidden = true;
+      toggleBtn!.setAttribute('aria-expanded', 'false');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (panel!.hidden) openPanel();
+      else closePanel();
     });
-  });
 
-  applyBtn.addEventListener('click', () => {
-    selected = new Set(
-      tagToggles.filter((btn) => btn.getAttribute('aria-pressed') === 'true').map((btn) => btn.dataset.tag!)
-    );
-    renderChips();
-    applyFilters();
-    syncUrl();
-    closePanel();
-  });
-
-  clearBtn.addEventListener('click', () => {
     tagToggles.forEach((btn) => {
-      btn.classList.remove('active');
-      btn.setAttribute('aria-pressed', 'false');
+      btn.addEventListener('click', () => {
+        const nowActive = btn.getAttribute('aria-pressed') !== 'true';
+        btn.classList.toggle('active', nowActive);
+        btn.setAttribute('aria-pressed', String(nowActive));
+      });
     });
-    selected = new Set();
+
+    applyBtn.addEventListener('click', () => {
+      selected = new Set(
+        tagToggles.filter((btn) => btn.getAttribute('aria-pressed') === 'true').map((btn) => btn.dataset.tag!)
+      );
+      renderChips();
+      applyFilters(selected);
+      syncUrl();
+      closePanel();
+    });
+
+    clearBtn.addEventListener('click', () => {
+      tagToggles.forEach((btn) => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      selected = new Set();
+      renderChips();
+      applyFilters(selected);
+      syncUrl();
+      closePanel();
+    });
+
+    selectedChips.addEventListener('click', (e) => {
+      const chip = (e.target as HTMLElement).closest('.selected-chip') as HTMLElement | null;
+      if (!chip?.dataset.tag) return;
+      selected.delete(chip.dataset.tag);
+      renderChips();
+      applyFilters(selected);
+      syncUrl();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (panel!.hidden) return;
+      const target = e.target as Node;
+      if (!panel!.contains(target) && !toggleBtn!.contains(target)) closePanel();
+    });
+
     renderChips();
-    applyFilters();
+    applyFilters(selected);
     syncUrl();
-    closePanel();
-  });
-
-  selectedChips.addEventListener('click', (e) => {
-    const chip = (e.target as HTMLElement).closest('.selected-chip') as HTMLElement | null;
-    if (!chip?.dataset.tag) return;
-    selected.delete(chip.dataset.tag);
-    renderChips();
-    applyFilters();
-    syncUrl();
-  });
-
-  document.addEventListener('click', (e) => {
-    if (panel.hidden) return;
-    const target = e.target as Node;
-    if (!panel.contains(target) && !toggleBtn.contains(target)) closePanel();
-  });
-
-  renderChips();
-  applyFilters();
-  syncUrl();
-  searchInput?.addEventListener('input', applyFilters);
+    searchInput.addEventListener('input', () => applyFilters(selected));
+  }
 </script>
 
 <style>
   .main {
     padding-top: 1rem;
     padding-bottom: 3rem;
-  }
-
-  .description-banner {
-    margin-bottom: 1.5rem;
-  }
-
-  .description-banner h1 {
-    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
-    margin: 0 0 0.5rem;
-  }
-
-  .description {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin: 0;
-  }
-
-  .preset-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    min-width: 0;
-  }
-
-  .preset-btn {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text);
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-    padding: 0.6rem 1rem;
-    text-align: left;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-
-  .preset-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-  }
-
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-bottom: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  #search {
-    font-family: var(--font-body);
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-    color: var(--text);
-    padding: 0.6rem 0.8rem;
-    font-size: 0.95rem;
-    flex: 1 1 220px;
-  }
-
-  #search:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
-  }
-
-  .filter-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 0.75rem;
-    flex: 0 0 auto;
-  }
-
-  @media (max-width: 480px) {
-    .filter-row {
-      flex-wrap: wrap;
-    }
-  }
-
-  .filters-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text);
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: border-color 0.15s ease;
-  }
-
-  .filters-toggle:hover {
-    border-color: var(--text-muted);
-  }
-
-  .filters-toggle[aria-expanded='true'] {
-    border-color: var(--accent);
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1.2rem;
-    height: 1.2rem;
-    padding: 0 0.35rem;
-    border-radius: 999px;
-    background: var(--accent);
-    color: var(--on-accent);
-    font-size: 0.72rem;
-    font-weight: 700;
-  }
-
-  .badge[hidden] {
-    display: none;
-  }
-
-  .selected-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .selected-chips:not(:empty) {
-    margin-bottom: 1.5rem;
-  }
-
-  .selected-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    color: var(--on-accent);
-    background: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 0.3rem 0.7rem;
-    cursor: pointer;
-  }
-
-  .selected-chip:hover {
-    background: var(--accent-dim);
-    border-color: var(--accent-dim);
-  }
-
-  .selected-chip span {
-    font-size: 0.95rem;
-    line-height: 1;
-  }
-
-  .filters-panel {
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-    padding: 1.25rem;
-    margin-bottom: 2rem;
-  }
-
-  .filters-panel-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    max-height: 260px;
-    overflow-y: auto;
-    padding-bottom: 1rem;
-  }
-
-  .tag-toggle {
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    background: none;
-    border: 1px solid var(--hairline);
-    border-radius: 999px;
-    padding: 0.4rem 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-  }
-
-  .tag-toggle:hover {
-    border-color: var(--accent);
-    color: var(--text);
-  }
-
-  .tag-toggle.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--on-accent);
-    font-weight: 600;
-  }
-
-  .filters-panel-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--hairline);
-  }
-
-  .btn {
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.55rem 1.2rem;
-    cursor: pointer;
-    border: 1px solid transparent;
-  }
-
-  .btn-ghost {
-    background: none;
-    border-color: var(--hairline);
-    color: var(--text-muted);
-  }
-
-  .btn-ghost:hover {
-    color: var(--text);
-    border-color: var(--text-muted);
-  }
-
-  .btn-solid {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--on-accent);
-  }
-
-  .btn-solid:hover {
-    background: var(--accent-dim);
-    border-color: var(--accent-dim);
-  }
-
-  #empty-state {
-    color: var(--text-muted);
-    padding: 2rem 0;
-    text-align: center;
-  }
-
-  #video-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem var(--gutter);
-  }
-
-  @media (max-width: 900px) {
-    #video-list {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 560px) {
-    #video-list {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

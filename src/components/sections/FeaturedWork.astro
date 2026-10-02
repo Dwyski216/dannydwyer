@@ -1,0 +1,50 @@
+---
+// Home page section: the Featured Work grid (picked in the admin panel by
+// slug). Renders nothing if there's nothing to feature.
+import VideoCard from '../VideoCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  featured: CollectionEntry<'videos'>[];
+  thumbnails: string[];
+}
+const { featured, thumbnails } = Astro.props;
+---
+
+{featured.length > 0 && (
+  <section class="featured col-12" aria-label="Featured work">
+    <h2>Featured Work</h2>
+    <div class="grid featured-grid">
+      {featured.map((v, i) => (
+        <div class="col-4">
+          <VideoCard
+            slug={v.data.urlSlug}
+            title={v.data.title}
+            summary={v.data.summary}
+            tags={v.data.tags}
+            thumbnailUrl={thumbnails[i]}
+            uploadDate={v.data.uploadDate}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .featured {
+    margin: 1.5rem 0 3rem;
+  }
+
+  .featured h2 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--tag-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .featured-grid {
+    row-gap: 2rem;
+  }
+</style>

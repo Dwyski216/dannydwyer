@@ -1,0 +1,19 @@
+---
+// Home page section: the hero video embed (picked in the admin panel by
+// slug, same mechanism as Featured Work — it can be a hidden catalog item,
+// like a temporary reel that isn't meant to show up in the Work grid).
+import VideoPlayer from '../VideoPlayer.astro';
+import type { VideoPlatform } from '../../lib/video';
+
+interface Props {
+  heroVideo: { platform: VideoPlatform; videoId: string } | null;
+  title: string;
+}
+const { heroVideo, title } = Astro.props;
+---
+
+{heroVideo && (
+  <div class="col-12">
+    <VideoPlayer platform={heroVideo.platform} videoId={heroVideo.videoId} title={title} />
+  </div>
+)}

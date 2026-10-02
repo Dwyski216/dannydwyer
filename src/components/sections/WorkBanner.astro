@@ -1,0 +1,30 @@
+---
+// Work page section: the "Work" title + description paragraph above the
+// filter controls and grid.
+interface Props {
+  description: string;
+}
+const { description } = Astro.props;
+---
+
+<section class="description-banner">
+  <h1 class="page-title">Work</h1>
+  <p class="description">{description}</p>
+</section>
+
+<style>
+  .description-banner {
+    margin-bottom: 1.5rem;
+  }
+
+  .description-banner h1 {
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    margin: 0 0 0.5rem;
+  }
+
+  .description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+</style>

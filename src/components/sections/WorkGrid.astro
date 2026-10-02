@@ -1,0 +1,55 @@
+---
+// Work page section: the video card grid itself, plus the "no matches"
+// empty state the controls-section script toggles.
+import VideoCard from '../VideoCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  videos: CollectionEntry<'videos'>[];
+  thumbnails: string[];
+}
+const { videos, thumbnails } = Astro.props;
+---
+
+<div class="video-area">
+  <div id="video-list">
+    {videos.map((v, i) => (
+      <VideoCard
+        slug={v.data.urlSlug}
+        title={v.data.title}
+        summary={v.data.summary}
+        tags={v.data.tags}
+        thumbnailUrl={thumbnails[i]}
+        uploadDate={v.data.uploadDate}
+      />
+    ))}
+  </div>
+
+  <p id="empty-state" hidden>No videos match your search yet.</p>
+</div>
+
+<style>
+  #empty-state {
+    color: var(--text-muted);
+    padding: 2rem 0;
+    text-align: center;
+  }
+
+  #video-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem var(--gutter);
+  }
+
+  @media (max-width: 900px) {
+    #video-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    #video-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
