@@ -78,6 +78,12 @@ const { Content } = await page.render();
     width: 100%;
     max-width: 420px;
     margin-inline: auto;
+    /* The offset shadow block behind the photo overflows past the
+       column's own flowed height (it's an absolutely-positioned
+       ::before, translated down-right) — without this, that overflow
+       eats straight into the page's bottom padding and the shadow ends
+       up nearly touching the footer. */
+    margin-bottom: 3rem;
   }
 
   @media (min-width: 801px) {
