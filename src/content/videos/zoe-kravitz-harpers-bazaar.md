@@ -1,6 +1,6 @@
 ---
 title: "Zoë Kravitz for Harper's Bazaar"
-summary: "Cover shoot behind-the-scenes film for Harper's Bazaar, featuring Zoë Kravitz."
+summary: "White gowns, blue sky, and wolves on the Mojave dunes. Cinematographer Danny Dwyer on shooting Zo\u00eb Kravitz for Harper's Bazaar."
 platform: "vimeo"
 videoId: "289597669"
 role: "Director of Photography"
@@ -13,4 +13,8 @@ featured: false
 stills: []
 ---
 
-Behind-the-scenes film from a Harper's Bazaar cover shoot with Zoë Kravitz. Shot to capture the energy of the set alongside the still photography, cutting between camera and stills coverage.
+We were somewhere deep in the Mojave. The landscape was breathtaking, and so was the styling.
+
+Crisp white fabric against a hard blue sky, pale sand, and wolves. Zoë Kravitz bravely ran down the dunes in a gown with wolves at her side, which is every bit as brave as it sounds, and it meant we didn't get many takes.
+
+Nature, fashion, and beauty almost never cooperate. Here all three lined up at once. Those are the moments you chase.

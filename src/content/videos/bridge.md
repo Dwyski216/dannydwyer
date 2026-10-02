@@ -1,9 +1,9 @@
 ---
 title: "Bridge"
-summary: "A short film examining failure and fate, following an aging dancer at the end of her rope."
+summary: "A studio apartment set rotated by hand in a mechanic's garage. Bridge, by filmmaker Danny Dwyer, premiered at the Cleveland International Film Festival."
 platform: "vimeo"
 videoId: "153922218"
-role: "Director"
+role: "Co-Director, DP & Editor"
 projectName: "Bridge"
 uploadDate: "2013-05-01"
 tags: ["short film", "narrative"]
@@ -12,4 +12,8 @@ featured: false
 stills: []
 ---
 
-Bridge is a short film that examines failure and fate. An aging dancer at the end of her rope decides to cut her time short, but her plans are disrupted by a disturbing turn of events. Produced by Callie Peck & Danny Dwyer. Written by Callie Peck & Danny Dwyer. Directed by Danny Dwyer. Production design by Callie Peck. Shot in Brooklyn, New York.
+What if a house tilted every time a drawbridge rose?
+
+That was the idea behind Bridge, a short I made with my very talented friend Callie Peck, which premiered at the Cleveland International Film Festival. Neither of us had ever built a rotating set. So we built a full studio apartment inside a mechanic's garage and turned the whole thing on block and tackle, like a giant washing machine.
+
+As the bridge went up, the room shifted, and so did the story. When the room settled, so did everything else. We pulled it off with a crew of family and friends, and I wouldn't have done it any other way.

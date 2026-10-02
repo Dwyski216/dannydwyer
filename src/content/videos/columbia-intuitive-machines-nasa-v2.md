@@ -1,6 +1,6 @@
 ---
 title: "Columbia // Intuitive Machines / NASA (Alt Cut)"
-summary: "An alternate cut covering Columbia's thermal technology aboard Intuitive Machines' NASA lunar lander mission."
+summary: "Trailer: cinematographer Danny Dwyer's film on NASA, Intuitive Machines, and Columbia's return to the Moon, more than fifty years after Apollo."
 platform: "vimeo"
 videoId: "914546880"
 role: "Director of Photography"
@@ -13,4 +13,4 @@ featured: false
 stills: []
 ---
 
-A second edit from the same Columbia Sportswear / Intuitive Machines lunar lander coverage — Omni-Heat Infinity thermal technology built for a NASA-contracted Moon mission.
+Half a century after Apollo, America went back to the Moon, and I got to film it from the ground up. This is the short cut. The full story lives in the main cut of this project.

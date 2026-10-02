@@ -1,9 +1,9 @@
 ---
 title: "Diana Marks for Lexus"
-summary: "Branded video featuring Diana Marks for Lexus."
+summary: "Cinematographer Danny Dwyer rides along with luxury travel and car creator Diana Marks for Lexus. Handheld, polished, and a little enviable."
 platform: "vimeo"
 videoId: "327413703"
-role: "Director of Photography"
+role: "Director, DP, & Editor"
 client: "Lexus"
 projectName: "Diana Marks Campaign"
 uploadDate: "2018-01-01"
@@ -13,4 +13,6 @@ featured: false
 stills: []
 ---
 
-Branded video piece for Lexus featuring Diana Marks.
+Following my friend Diana Marks for Lexus was a pretty sweet assignment. She lives in the world of luxury travel and cars, and for a moment, so did I, including some time behind the wheel of a seriously fast, seriously good-looking Lexus.
+
+Diana makes that life look effortless, so we shot it the same way: fast, handheld, on the go, keeping it polished, and just a little bit enviable. What a life.

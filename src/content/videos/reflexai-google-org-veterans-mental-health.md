@@ -1,6 +1,6 @@
 ---
 title: "Using AI to Help Veterans Train for Mental Health Conversations"
-summary: "A short documentary on ReflexAI and Google.org's tool that helps veterans practice difficult mental health conversations."
+summary: "Director of photography Danny Dwyer on ReflexAI, backed by Google, which helps veterans with PTSD connect with the people who understand them best."
 platform: "vimeo"
 videoId: "1074104148"
 role: "Director of Photography"
@@ -13,4 +13,10 @@ featured: false
 stills: []
 ---
 
-A documentary piece on ReflexAI, an organization partnered with Google.org building AI-driven roleplay tools that help veterans and the people who support them practice difficult mental health conversations before having them for real.
+I never served, but family, and people I love closely did. I can't think of anything heavier than putting your life on the line so others can live free.
+
+When this project came to the table, I knew what it would ask of us, and all I wanted was to help and pay something forward.
+
+ReflexAI uses AI to help veterans living with PTSD connect with other veterans who understand. That's the whole point. Those of us who haven't served can't truly know what it costs, and this gives veterans a way to reach someone who does. It's still changing lives as you read this.
+
+Every interview was heavy, and every one held the room silent. It was an honor to hold the camera. It's the least we can do.

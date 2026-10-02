@@ -1,6 +1,6 @@
 ---
 title: "PUMA — Beatbot"
-summary: "Commercial spot for PUMA titled Beatbot."
+summary: "A brand doc on PUMA's BeatBot, a robot built with NASA and MIT engineers to run at Usain Bolt's pace. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "166239962"
 role: "Director of Photography"
@@ -13,4 +13,6 @@ featured: false
 stills: []
 ---
 
-A commercial spot for PUMA, titled Beatbot.
+PUMA built a robot that runs at Usain Bolt's world-record pace. Then they put it on the track for you to chase.
+
+Designed with engineers from NASA and MIT, BeatBot can also replay your personal best so you're racing yourself. The idea is simple: a number in your head won't make you faster, but a rabbit in front of you will.

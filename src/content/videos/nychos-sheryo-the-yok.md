@@ -1,9 +1,9 @@
 ---
 title: "Nychos x Sheryo x The Yok"
-summary: "Documentary short on a mural collaboration between street artists Nychos, Sheryo, and The Yok."
+summary: "Filmmaker Danny Dwyer films Nychos, Sheryo, and The Yok freestyling a mural on a corrugated garage door for King Brown Magazine."
 platform: "vimeo"
 videoId: "72496004"
-role: "Director of Photography"
+role: "Director, DP, & Editor"
 projectName: "King Brown Magazine Issue 9 Release"
 uploadDate: "2013-08-01"
 tags: ["documentary", "street art"]
@@ -12,4 +12,10 @@ featured: false
 stills: []
 ---
 
-Watch the outside wall of the Schoolhouse Gallery get painted by The Yok, Sheryo, and Nychos, for the release of King Brown magazine's issue 9.
+When some of the best street artists on the planet are also your friends, and they ask you to make them a video, the answer is always yes.
+
+Nychos, Sheryo, and The Yok are on another level, more talented than anything I could dream up. So instead of just hanging out while they worked, I grabbed my camera.
+
+They took on a corrugated roll-down garage door with nothing but spray cans. If you've ever tried to keep a line clean on ribbed metal, you know how insane that is. And they freestyled the whole thing, figuring it out as they went.
+
+Freaks of nature, in the best way. Made for King Brown Magazine, and a blast to watch come together.

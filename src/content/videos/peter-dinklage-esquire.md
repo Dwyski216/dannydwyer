@@ -1,9 +1,9 @@
 ---
 title: "Peter Dinklage — Esquire Magazine Cover (March)"
-summary: "Video cover story for Peter Dinklage's March cover of Esquire Magazine."
+summary: "Peter Dinklage in custom Giorgio Armani for Esquire. By filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "87905027"
-role: "Director of Photography"
+role: "Director, DP & Editor"
 client: "Esquire"
 projectName: "Peter Dinklage Cover Story"
 uploadDate: "2012-02-01"
@@ -13,4 +13,8 @@ featured: false
 stills: []
 ---
 
-Video piece for Peter Dinklage's March cover story with Esquire Magazine.
+A custom Giorgio Armani suit, made for Peter Dinklage, filmed for Esquire. If you know, you know. The man is the greatest.
+
+A few weeks after it came out, I passed him walking his dog. He stopped me and said, "Hey man, awesome job."
+
+One of the highlights of my career. It came from a sidewalk.

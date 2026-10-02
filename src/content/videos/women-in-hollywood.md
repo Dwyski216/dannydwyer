@@ -1,6 +1,6 @@
 ---
 title: "Women in Hollywood"
-summary: "Video coverage from a Women in Hollywood feature, produced alongside a Harper's Bazaar shoot."
+summary: "Twelve months filming ELLE's Women in Hollywood alongside photographer Zoey Grossman. Director of photography Danny Dwyer."
 platform: "vimeo"
 videoId: "368942744"
 role: "Director of Photography"
@@ -11,7 +11,10 @@ tags: ["editorial", "documentary"]
 urlSlug: "women-in-hollywood"
 featured: false
 stills: []
-# NEEDS REVIEW: client/project inferred loosely or missing — confirm before treating as fact.
 ---
 
-Video coverage tied to a "Women in Hollywood" feature, produced in the same batch as a Harper's Bazaar shoot. Confirm exact client/publication before publishing.
+I still don't have the words for this one.
+
+For twelve months I was wall to wall with some of the most powerful women in entertainment. Every shoot was its own world.
+
+I worked hand in hand with photographer Zoey Grossman, and we fed off each other the whole way. The atmosphere was so creatively alive that you'd have to remind yourself it was work. Being around these women changed how I shoot, and it still does. I'm grateful to have been part of it.

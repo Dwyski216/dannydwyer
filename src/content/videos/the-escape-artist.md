@@ -1,16 +1,17 @@
 ---
 title: "The Escape Artist"
-summary: "A narrative short with Kimbra Audrey, shot in 4K."
+summary: "An art film with Kimbra Audrey Lo at a secret New York spot, following her through her self-portraits. By filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "144151076"
-role: "Director of Photography"
+role: "Director, DP & Editor"
 projectName: "The Escape Artist"
 uploadDate: "2013-02-01"
 tags: ["short film", "narrative"]
 urlSlug: "the-escape-artist"
 featured: false
 stills: []
-# NEEDS REVIEW: client/project inferred loosely or missing — confirm before treating as fact.
 ---
 
-Dark skies, digging holes, and pushing up daisies, with Kimbra Audrey. Available in 4K. Edited by Fer Santa Cruz.
+An afternoon with Kimbra Audrey Lo at her favorite secret spot in New York City, filming her doing what she does best: self-portraits.
+
+It was quiet and intimate, a camera watching another artist turn her camera on herself.

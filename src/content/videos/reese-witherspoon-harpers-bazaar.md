@@ -1,6 +1,6 @@
 ---
 title: "Reese Witherspoon for Harper's Bazaar"
-summary: "Video companion to Reese Witherspoon's Harper's Bazaar cover feature."
+summary: "A snake, a cover story, and Reese Witherspoon, completely unbothered. Director of photography Danny Dwyer on her Harper's Bazaar video promo."
 platform: "vimeo"
 videoId: "368946293"
 role: "Director of Photography"
@@ -13,4 +13,4 @@ featured: false
 stills: []
 ---
 
-Video piece accompanying a Harper's Bazaar cover story and interview with Reese Witherspoon.
+We shot the video promo for Reese Witherspoon's Harper's Bazaar cover, and at one point a live snake was draped over her shoulders. She didn't flinch. I'm still not over it.

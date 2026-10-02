@@ -1,6 +1,6 @@
 ---
 title: "Back on Two Feet"
-summary: "A mini-documentary for Cosmopolitan on Marine veteran Kristie Ennis."
+summary: "Following Marine veteran Kirstie Ennis through surgery and recovery. Back on 2 Feet, presented by Channing Tatum in NYC. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "174059585"
 role: "Director of Photography"
@@ -13,4 +13,10 @@ featured: false
 stills: []
 ---
 
-A mini-documentary produced for Cosmopolitan Magazine following Marine veteran Kristie Ennis.
+I was on set the night before when the phone rang: "Can you fly to San Diego and film a Marine veteran going into surgery?"
+
+Twelve hours later I was behind the lens with Kirstie Ennis as she faced losing her leg from injuries sustained in her service.
+
+Access was tight. More than once I broke the camera down into pieces, handed them out to the crew, carried it through in sections, and rebuilt it on the other side just to get an interview.
+
+Kirstie and I became friends. She's an American hero, an athlete, and an all-around badass, and the film premiered in New York City, presented by Channing Tatum. It was an honor to help tell her story.

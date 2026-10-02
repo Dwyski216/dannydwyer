@@ -1,9 +1,9 @@
 ---
 title: "Mr. Cartoon // Cazadores Collab for Saucey"
-summary: "Branded video for a Cazadores x Mr. Cartoon collaboration, produced for Saucey."
+summary: "Mr. Cartoon freestyles a D\u00eda de los Muertos Cazadores bottle, then a lowrider ride through the Valley. By filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "244121988"
-role: "Director of Photography"
+role: "Director, DP & Editor"
 client: "Cazadores / Saucey"
 projectName: "Mr. Cartoon Collaboration"
 uploadDate: "2017-01-01"
@@ -13,4 +13,8 @@ featured: false
 stills: []
 ---
 
-Branded video covering a collaboration between tequila brand Cazadores and tattoo artist Mr. Cartoon, produced for alcohol delivery app Saucey.
+A day in Mr. Cartoon's studio, watching him freestyle a Día de los Muertos design straight onto a Cazadores bottle. No sketch, no hesitation, just a master working.
+
+His good friend Estevan Oriel was there too, and then we piled into the backseat of a lowrider and cruised the streets of the San Fernando Valley, tequila in hand.
+
+Art, culture, and a low-and-slow ride through the Valley. Hard to top that.

@@ -1,6 +1,6 @@
 ---
 title: "Honduras — \"Hollywood\" (Official Music Video)"
-summary: "Official music video for \"Hollywood\" by the band Honduras."
+summary: "Dolly, Elvis, and Sinatra look-alikes in a Brooklyn dive bar. Honduras' \"Hollywood,\" shot by director of photography Danny Dwyer."
 platform: "vimeo"
 videoId: "158380205"
 role: "Director of Photography"
@@ -12,4 +12,6 @@ featured: false
 stills: []
 ---
 
-Official music video for "Hollywood" by the Brooklyn band Honduras.
+A Brooklyn dive bar. A Dolly Parton look-alike, an Elvis look-alike, and a Frank Sinatra look-alike. By the end of the night, one of the guys in the band had turned into Elvis too.
+
+It got really weird, and it was really fun. Premiered on Vice's Noisey.

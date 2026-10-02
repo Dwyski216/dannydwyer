@@ -1,6 +1,6 @@
 ---
 title: "Made on Earth — Trailer"
-summary: "Trailer for the documentary series Made on Earth."
+summary: "Cinematographer Danny Dwyer on Made on Earth, a travel show pilot following designer Heather Ross to the origins of the designs we use today."
 platform: "vimeo"
 videoId: "230197221"
 role: "Director of Photography"
@@ -10,7 +10,10 @@ tags: ["documentary", "trailer"]
 urlSlug: "made-on-earth-trailer"
 featured: false
 stills: []
-# NEEDS REVIEW: client/project inferred loosely or missing — confirm before treating as fact.
 ---
 
-Trailer for the documentary series Made on Earth. Confirm broadcaster/client before publishing.
+Every pattern starts somewhere.
+
+Made on Earth is a pilot for a travel series that follows designer Heather Ross around the world, tracing the designs we live with today back to where they began, from textiles and fabric to painting and beyond.
+
+It was run-and-gun from start to finish. I came home with a deeper respect for history, and for the long line of makers behind the things we wear, hang on our walls, and take for granted.
