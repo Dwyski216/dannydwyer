@@ -101,22 +101,24 @@ import Layout from '../../layouts/Layout.astro';
             </div>
 
             <div id="work-bulk-bar" class="work-bulk-bar" hidden>
-              <span id="work-bulk-count" class="work-bulk-count"></span>
-              <label>Add tag
+              <div class="wb-head">
+                <span id="work-bulk-count" class="work-bulk-count"></span>
+                <button type="button" id="work-bulk-clear-btn" class="btn btn-ghost">Clear selection</button>
+              </div>
+              <label class="wb-add-label">Add tag
                 <select id="work-bulk-add-select">
                   <option value="">Select…</option>
                 </select>
               </label>
-              <input id="work-bulk-add-new" placeholder="or type a new tag" />
-              <button type="button" id="work-bulk-add-btn" class="btn btn-ghost">Add to selected</button>
-              <label>Remove tag
+              <input id="work-bulk-add-new" class="wb-add-input" placeholder="or type a new tag" />
+              <button type="button" id="work-bulk-add-btn" class="btn btn-ghost wb-add-btn">Add to selected</button>
+              <label class="wb-remove-label">Remove tag
                 <select id="work-bulk-remove-select">
                   <option value="">Select…</option>
                 </select>
               </label>
-              <button type="button" id="work-bulk-remove-btn" class="btn btn-ghost">Remove from selected</button>
-              <button type="button" id="work-bulk-clear-btn" class="btn btn-ghost">Clear selection</button>
-              <p class="status" id="work-bulk-status"></p>
+              <button type="button" id="work-bulk-remove-btn" class="btn btn-ghost wb-remove-btn">Remove from selected</button>
+              <p class="status wb-status" id="work-bulk-status"></p>
             </div>
 
             <div id="work-list" class="work-list">
@@ -1849,27 +1851,64 @@ import Layout from '../../layouts/Layout.astro';
     cursor: default;
   }
 
+  /* One shared grid (not two independent per-row grids) so the Add and
+     Remove rows' select/input/button columns genuinely line up — a column
+     track is only guaranteed to match width across rows when it's the same
+     grid, not visually-similar-but-independent ones. */
+  /* [hidden] and a class-based `display` rule are equal CSS specificity, so
+     without this the later-in-cascade author rule below would always win
+     and the browser's default `[hidden] { display: none }` would never
+     actually hide this element. */
+  .work-bulk-bar[hidden] {
+    display: none;
+  }
+
   .work-bulk-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: minmax(160px, 240px) 1fr auto;
+    grid-template-areas:
+      'head head head'
+      'addl addi addb'
+      'reml . remb'
+      'status status status';
+    column-gap: 1rem;
+    row-gap: 0.6rem;
     background: var(--surface);
     border: 1px solid var(--hairline);
-    padding: 0.85rem 1rem;
+    padding: 1rem 1.25rem 1.25rem;
     margin-bottom: 1rem;
   }
 
-  .work-bulk-bar label {
+  .wb-head {
+    grid-area: head;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.15rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .wb-add-label { grid-area: addl; }
+  .wb-add-input { grid-area: addi; align-self: end; }
+  .wb-add-btn { grid-area: addb; align-self: end; }
+  .wb-remove-label { grid-area: reml; }
+  .wb-remove-btn { grid-area: remb; align-self: end; }
+  .wb-status { grid-area: status; }
+
+  .work-bulk-bar label {
+    display: flex;
+    flex-direction: column;
     gap: 0.4rem;
     font-size: 0.85rem;
+    color: var(--text-muted);
   }
 
   .work-bulk-bar input,
   .work-bulk-bar select {
     font-size: 0.85rem;
+    width: 100%;
   }
 
   .work-bulk-count {
@@ -1878,9 +1917,22 @@ import Layout from '../../layouts/Layout.astro';
     white-space: nowrap;
   }
 
-  .work-bulk-bar .status {
-    width: 100%;
+  .wb-status {
     margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .work-bulk-bar {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'head'
+        'addl'
+        'addi'
+        'addb'
+        'reml'
+        'remb'
+        'status';
+    }
   }
 
   .layout-page-group,
