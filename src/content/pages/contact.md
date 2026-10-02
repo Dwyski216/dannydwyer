@@ -3,14 +3,5 @@ title: "Contact"
 summary: "Get in touch about narrative, commercial, or documentary cinematography work."
 ---
 
-I believe that the best work comes from a collaborative environment, where
-everyone involved feels comfortable sharing their ideas and being
-themselves. Over the years, I've been lucky enough to work as a Director of
-Photography with some pretty amazing people, from celebrities to our
-everyday heroes with inspiring stories to tell. My love for storytelling is
-never limited. I approach every project, big or small, with the same level
-of creativity, enthusiasm, and professionalism. Finding and executing the
-perfect shot to convey the emotion and essence of each story is what drives
-me. I'm always looking for innovative ways to showcase stories that matter.
-
-Give me a shout, let's make something awesome together!
+Got a story worth telling? I want to hear it. Narrative, commercial, or
+documentary — if it's got a true thing at the center of it, I'm in.

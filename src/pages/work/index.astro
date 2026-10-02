@@ -38,13 +38,10 @@ const jsonLd = [
   <SiteHeader />
   <main class="main container">
     <section class="description-banner">
-      <h1>Work</h1>
+      <h1 class="page-title">Work</h1>
       <p class="description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Selected narrative, commercial, and documentary work from fifteen years behind the camera — campaigns for
+        A-list celebrities and global brands, and the everyday heroes whose stories deserve just as much care.
       </p>
     </section>
 
@@ -261,17 +258,8 @@ const jsonLd = [
     margin-bottom: 1.5rem;
   }
 
-  /* Present for accessibility/SEO (every page needs exactly one h1) without
-     reintroducing the logo-style treatment — plain body type, same visual
-     weight as the description it sits above. */
   .description-banner h1 {
-    font-family: var(--font-body);
-    font-weight: 700;
-    text-transform: none;
-    color: var(--text);
-    font-size: 1.26rem;
-    letter-spacing: normal;
-    text-shadow: none;
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
     margin: 0 0 0.5rem;
   }
 

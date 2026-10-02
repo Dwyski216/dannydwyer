@@ -153,6 +153,21 @@ const personSchema = {
     /* Safety net: a flex/grid row that forgets to wrap on narrow screens
        should never be able to push the whole page into horizontal scroll. */
     overflow-x: hidden;
+    /* Pins the footer to the bottom of the viewport on short pages instead
+       of leaving empty Ink below it — the footer's own margin-top: auto
+       (SiteFooter.astro) absorbs whatever space main doesn't fill. */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* header/main/footer all carry .container, whose margin-inline: auto
+     disables flex's default cross-axis stretch (an auto margin on the
+     cross axis always wins over align-items: stretch) — without this
+     they'd shrink-wrap to their content width and center themselves
+     instead of spanning the page. */
+  body > * {
+    width: 100%;
   }
 
   h1, h2, h3 {
@@ -160,6 +175,21 @@ const personSchema = {
     font-weight: 700;
     line-height: 1.15;
     margin: 0;
+  }
+
+  /* The Signature Treatment, reused for every top-level page heading (Home,
+     Work, Contact): Barn Red text on a hard-edge Headlight drop shadow, no
+     blur, offset down-and-right at roughly 37°. Sized in em so the shadow
+     stays proportional at any font-size a page sets locally. A video
+     project's own title (work/[slug]) intentionally does NOT use this — it
+     keeps its separate Trade Gothic Bold No. 2 identity instead. */
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--barn-red);
+    text-shadow: 0.075em 0.056em 0 var(--headlight);
   }
 
   a {
