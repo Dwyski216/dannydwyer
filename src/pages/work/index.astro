@@ -38,6 +38,7 @@ const jsonLd = [
   <SiteHeader />
   <main class="main container">
     <section class="description-banner">
+      <h1>Work</h1>
       <p class="description">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
@@ -258,6 +259,20 @@ const jsonLd = [
 
   .description-banner {
     margin-bottom: 1.5rem;
+  }
+
+  /* Present for accessibility/SEO (every page needs exactly one h1) without
+     reintroducing the logo-style treatment — plain body type, same visual
+     weight as the description it sits above. */
+  .description-banner h1 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: none;
+    color: var(--text);
+    font-size: 0.95rem;
+    letter-spacing: normal;
+    text-shadow: none;
+    margin: 0 0 0.5rem;
   }
 
   .description {
