@@ -39,79 +39,77 @@ const jsonLd = [
   <main class="main container">
     <h1>Work</h1>
 
-    <div class="work-layout">
-      <aside class="sidebar">
-        <p class="description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-          mollit anim id est laborum.
-        </p>
+    <section class="description-banner">
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    </section>
 
-        <div class="preset-filters">
-          <a class="preset-btn" href="/work/?tag=branded%20content">Branded Content</a>
-          <a class="preset-btn" href="/work/?tag=celebrity">Celebrity</a>
-          <a class="preset-btn" href="/work/?tag=fashion">Fashion</a>
-          <a class="preset-btn" href="/work/?tag=documentary">Documentary</a>
-        </div>
-
-        <div class="controls">
-          <input
-            id="search"
-            type="search"
-            placeholder="Search by title, client, or keyword…"
-            aria-label="Search videos"
-          />
-
-          <div class="filter-row">
-            <button
-              type="button"
-              id="filters-toggle"
-              class="filters-toggle"
-              aria-expanded="false"
-              aria-controls="filters-panel"
-            >
-              Filters
-              <span id="filters-badge" class="badge" hidden>0</span>
-            </button>
-          </div>
-
-          <div id="selected-chips" class="selected-chips"></div>
-
-          <div id="filters-panel" class="filters-panel" hidden>
-            <div class="filters-panel-tags">
-              {allTags.map((tag) => (
-                <label class="tag-option">
-                  <input type="checkbox" name="tag" value={tag.toLowerCase()} />
-                  <span>{tag}</span>
-                </label>
-              ))}
-            </div>
-            <div class="filters-panel-actions">
-              <button type="button" id="filters-clear" class="btn btn-ghost">Clear All</button>
-              <button type="button" id="filters-apply" class="btn btn-solid">Apply</button>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <div class="video-area">
-        <div id="video-list">
-          {videos.map((v, i) => (
-            <VideoCard
-              slug={v.data.urlSlug}
-              title={v.data.title}
-              summary={v.data.summary}
-              tags={v.data.tags}
-              thumbnailUrl={thumbnails[i]}
-              uploadDate={v.data.uploadDate}
-            />
-          ))}
-        </div>
-
-        <p id="empty-state" hidden>No videos match your search yet.</p>
+    <div class="controls">
+      <div class="preset-filters">
+        <a class="preset-btn" href="/work/?tag=branded%20content">Branded Content</a>
+        <a class="preset-btn" href="/work/?tag=celebrity">Celebrity</a>
+        <a class="preset-btn" href="/work/?tag=fashion">Fashion</a>
+        <a class="preset-btn" href="/work/?tag=documentary">Documentary</a>
       </div>
+
+      <div class="filter-row">
+        <input
+          id="search"
+          type="search"
+          placeholder="Search by title, client, or keyword…"
+          aria-label="Search videos"
+        />
+
+        <button
+          type="button"
+          id="filters-toggle"
+          class="filters-toggle"
+          aria-expanded="false"
+          aria-controls="filters-panel"
+        >
+          Filters
+          <span id="filters-badge" class="badge" hidden>0</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="selected-chips" class="selected-chips"></div>
+
+    <div id="filters-panel" class="filters-panel" hidden>
+      <div class="filters-panel-tags">
+        {allTags.map((tag) => (
+          <label class="tag-option">
+            <input type="checkbox" name="tag" value={tag.toLowerCase()} />
+            <span>{tag}</span>
+          </label>
+        ))}
+      </div>
+      <div class="filters-panel-actions">
+        <button type="button" id="filters-clear" class="btn btn-ghost">Clear All</button>
+        <button type="button" id="filters-apply" class="btn btn-solid">Apply</button>
+      </div>
+    </div>
+
+    <div class="video-area">
+      <div id="video-list">
+        {videos.map((v, i) => (
+          <VideoCard
+            slug={v.data.urlSlug}
+            title={v.data.title}
+            summary={v.data.summary}
+            tags={v.data.tags}
+            thumbnailUrl={thumbnails[i]}
+            uploadDate={v.data.uploadDate}
+          />
+        ))}
+      </div>
+
+      <p id="empty-state" hidden>No videos match your search yet.</p>
     </div>
   </main>
   <SiteFooter />
@@ -251,41 +249,20 @@ const jsonLd = [
     margin-bottom: 1.25rem;
   }
 
-  .work-layout {
-    display: grid;
-    grid-template-columns: 22.5% 1fr;
-    gap: var(--gutter);
-    align-items: start;
-  }
-
-  @media (max-width: 900px) {
-    .work-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .sidebar {
-    position: sticky;
-    top: 2rem;
-  }
-
-  @media (max-width: 900px) {
-    .sidebar {
-      position: static;
-    }
+  .description-banner {
+    margin-bottom: 1.5rem;
   }
 
   .description {
     color: var(--text-muted);
     font-size: 0.95rem;
-    margin: 0 0 1.5rem;
+    margin: 0;
   }
 
   .preset-filters {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
   }
 
   .preset-btn {
@@ -308,9 +285,12 @@ const jsonLd = [
 
   .controls {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--hairline);
   }
 
@@ -321,7 +301,7 @@ const jsonLd = [
     color: var(--text);
     padding: 0.6rem 0.8rem;
     font-size: 0.95rem;
-    width: 100%;
+    flex: 1 1 220px;
   }
 
   #search:focus {
@@ -383,6 +363,10 @@ const jsonLd = [
     gap: 0.5rem;
   }
 
+  .selected-chips:not(:empty) {
+    margin-bottom: 1.5rem;
+  }
+
   .selected-chip {
     display: inline-flex;
     align-items: center;
@@ -410,6 +394,7 @@ const jsonLd = [
     background: var(--surface);
     border: 1px solid var(--hairline);
     padding: 1.25rem;
+    margin-bottom: 2rem;
   }
 
   .filters-panel-tags {
