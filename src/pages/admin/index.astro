@@ -285,6 +285,8 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <script>
+  import { PAGE_KEYS, SECTION_LABELS, normalizeSections, type PageKey, type SectionEntry } from '../../data/layout';
+
   // ---------------------------------------------------------------------
   // Shared state — loaded once, mutated in place, and re-POSTed whole on
   // every save so one panel's save can never clobber another panel's
@@ -652,15 +654,31 @@ import Layout from '../../layouts/Layout.astro';
     const a = workItems.find((it) => it.slug === sortedSlugsInView[i])!;
     const b = workItems.find((it) => it.slug === sortedSlugsInView[j])!;
     // Swapping the two neighbors' order values keeps every value's spacing
-    // intact forever — no fractional/midpoint math needed, and each move
-    // only ever touches these two files.
+    // intact forever — no fractional/midpoint math needed. Both moves go in
+    // one request with one work-index.json read/write (not two independent
+    // ones): the index write uses an optimistic-concurrency sha, and two
+    // concurrent requests racing to update it could lose that race and fail.
     const [aOrder, bOrder] = [b.order, a.order];
-    await Promise.all([
-      fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ slug: a.slug, order: aOrder }) }),
-      fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ slug: b.slug, order: bOrder }) }),
-    ]);
-    a.order = aOrder;
-    b.order = bOrder;
+    const res = await fetch('/api/videos/reorder', {
+      method: 'POST',
+      body: JSON.stringify({
+        moves: [
+          { slug: a.slug, order: aOrder },
+          { slug: b.slug, order: bOrder },
+        ],
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert(`Error reordering: ${data.error ?? 'failed'}`);
+      return;
+    }
+    const failed: string[] = data.failed ?? [];
+    if (failed.includes(a.slug)) alert(`Could not move "${a.title}" — try again.`);
+    else a.order = aOrder;
+    if (failed.includes(b.slug)) alert(`Could not move "${b.title}" — try again.`);
+    else b.order = bOrder;
+    if (data.indexWarning) alert(data.indexWarning);
     renderWorkList();
   }
 
@@ -1134,81 +1152,36 @@ import Layout from '../../layouts/Layout.astro';
   // ---------------------------------------------------------------------
   // Layout panel — show/hide and reorder each page's sections. This is
   // arrangement only: what a section contains is still edited on its own
-  // tab (Home/Work/Contact). The canonical section list per page mirrors
-  // src/data/layout.ts's DEFAULTS/SECTION_LABELS — duplicated here rather
-  // than imported, matching this file's existing self-contained style.
+  // tab (Home/Work/Contact). The canonical section list, labels, and the
+  // normalize-stored-against-canonical rule all come from src/data/layout.ts
+  // — the same module the live site uses — so there's exactly one place
+  // that knows what sections exist and how to fall back when storage is
+  // stale, instead of a second hand-copied version here that could drift.
   // ---------------------------------------------------------------------
-  type LayoutSection = { type: string; enabled: boolean };
-  type LayoutData = Record<string, LayoutSection[]>;
+  const PAGE_LABELS: Record<PageKey, string> = { home: 'Home', work: 'Work', contact: 'Contact' };
 
-  const LAYOUT_PAGES: { key: string; label: string; sections: { type: string; label: string }[] }[] = [
-    {
-      key: 'home',
-      label: 'Home',
-      sections: [
-        { type: 'hero', label: 'Hero video' },
-        { type: 'intro', label: 'Intro / bio' },
-        { type: 'featured', label: 'Featured Work grid' },
-      ],
-    },
-    {
-      key: 'work',
-      label: 'Work',
-      sections: [
-        { type: 'banner', label: 'Title + description' },
-        { type: 'controls', label: 'Filters + search' },
-        { type: 'grid', label: 'Video grid' },
-      ],
-    },
-    {
-      key: 'contact',
-      label: 'Contact',
-      sections: [
-        { type: 'title', label: 'Page title' },
-        { type: 'body', label: 'Photo, copy & contact button' },
-      ],
-    },
-  ];
-
-  let layoutData: LayoutData = {};
+  let layoutData: Record<string, SectionEntry[]> = {};
   let layoutInitialized = false;
-
-  // Normalizes stored layout.json against the canonical section list for a
-  // page: drops entries whose type no longer matches a real section, and
-  // appends (as enabled) any real section missing from storage — same
-  // fallback getAllSections() applies on the live site, so the admin never
-  // shows a page as having fewer sections than actually exist.
-  function normalizedSections(pageKey: string): LayoutSection[] {
-    const page = LAYOUT_PAGES.find((p) => p.key === pageKey)!;
-    const validTypes = page.sections.map((s) => s.type);
-    const stored = (layoutData[pageKey] ?? []).filter((s) => validTypes.includes(s.type));
-    const present = new Set(stored.map((s) => s.type));
-    const missing = validTypes.filter((t) => !present.has(t)).map((type) => ({ type, enabled: true }));
-    return [...stored, ...missing];
-  }
 
   function renderLayoutPanel() {
     const container = document.getElementById('layout-pages')!;
-    container.innerHTML = LAYOUT_PAGES.map((page) => {
-      const sections = normalizedSections(page.key);
+    container.innerHTML = PAGE_KEYS.map((pageKey) => {
+      const sections = normalizeSections(pageKey, layoutData[pageKey]);
       const rows = sections
-        .map((s, i) => {
-          const def = page.sections.find((d) => d.type === s.type)!;
-          return `
-          <li class="layout-row" data-page-key="${page.key}" data-type="${s.type}">
+        .map((s, i) => `
+          <li class="layout-row" data-page-key="${pageKey}" data-type="${s.type}">
             <label class="checkbox">
-              <input type="checkbox" class="layout-enabled" ${s.enabled ? 'checked' : ''} /> ${def.label}
+              <input type="checkbox" class="layout-enabled" ${s.enabled ? 'checked' : ''} /> ${SECTION_LABELS[s.type]}
             </label>
             <span class="layout-move">
               <button type="button" class="btn-move" data-move-up ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
               <button type="button" class="btn-move" data-move-down ${i === sections.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>
             </span>
-          </li>`;
-        })
+          </li>`)
         .join('');
       return `
         <fieldset class="layout-page-group">
-          <legend>${page.label}</legend>
+          <legend>${PAGE_LABELS[pageKey]}</legend>
           <ul class="layout-list">${rows}</ul>
         </fieldset>`;
     }).join('');
@@ -1216,9 +1189,9 @@ import Layout from '../../layouts/Layout.astro';
     container.querySelectorAll('.layout-enabled').forEach((cb) => {
       cb.addEventListener('change', () => {
         const row = (cb as HTMLElement).closest('.layout-row') as HTMLElement;
-        const pageKey = row.dataset.pageKey!;
+        const pageKey = row.dataset.pageKey as PageKey;
         const type = row.dataset.type!;
-        const sections = normalizedSections(pageKey);
+        const sections = normalizeSections(pageKey, layoutData[pageKey]);
         const entry = sections.find((s) => s.type === type)!;
         entry.enabled = (cb as HTMLInputElement).checked;
         layoutData[pageKey] = sections;
@@ -1235,9 +1208,9 @@ import Layout from '../../layouts/Layout.astro';
 
   function moveSection(btn: HTMLElement, direction: -1 | 1) {
     const row = btn.closest('.layout-row') as HTMLElement;
-    const pageKey = row.dataset.pageKey!;
+    const pageKey = row.dataset.pageKey as PageKey;
     const type = row.dataset.type!;
-    const sections = normalizedSections(pageKey);
+    const sections = normalizeSections(pageKey, layoutData[pageKey]);
     const i = sections.findIndex((s) => s.type === type);
     const j = i + direction;
     if (j < 0 || j >= sections.length) return;
@@ -1253,8 +1226,8 @@ import Layout from '../../layouts/Layout.astro';
     // Make sure every page's current (possibly normalized-but-unedited)
     // section list is what actually gets saved, not just the ones a
     // checkbox/move touched this session.
-    LAYOUT_PAGES.forEach((page) => {
-      layoutData[page.key] = normalizedSections(page.key);
+    PAGE_KEYS.forEach((pageKey) => {
+      layoutData[pageKey] = normalizeSections(pageKey, layoutData[pageKey]);
     });
     const res = await fetch('/api/layout', { method: 'POST', body: JSON.stringify({ layout: layoutData }) });
     const data = await res.json();

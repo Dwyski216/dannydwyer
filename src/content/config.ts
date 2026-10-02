@@ -39,9 +39,9 @@ const videos = defineCollection({
     hidden: z.boolean().default(false), // true = still has its own page, but excluded from /work and llms.txt (e.g. a temporary home-page reel)
 
     // Manual display order for the Work grid and llms.txt (lower = earlier).
-    // Admin-settable via drag-reorder; ties fall back to uploadDate (newest
-    // first). Uses fractional values so moving one item only ever requires
-    // rewriting that one file — see worker/index.ts's reorder handler.
+    // Admin-settable via up/down move, which swaps this value between two
+    // adjacent items — see worker/index.ts's reorder handler. Ties fall
+    // back to uploadDate (newest first).
     order: z.number().default(0),
   }),
 });

@@ -10,51 +10,26 @@ export type HomeSectionId = 'hero' | 'intro' | 'featured';
 export type WorkSectionId = 'banner' | 'controls' | 'grid';
 export type ContactSectionId = 'title' | 'body';
 
-interface SectionEntry {
+export interface SectionEntry {
   type: string;
   enabled: boolean;
 }
 
 const layoutData = raw as Record<string, SectionEntry[] | undefined>;
 
-// The canonical section list per page, in default order — the source of
-// truth for "what sections exist at all." layout.json only ever reorders or
-// toggles these; it can't introduce new section types. Used both as the
-// fallback when a page is missing from layout.json (e.g. a fresh deploy
-// before the admin has touched Layout at all) and to silently drop any
-// stored entry whose type no longer matches a real section (e.g. after a
-// future code change retires one).
-const DEFAULTS: Record<PageKey, SectionId[]> = {
+// The canonical section list per page, in default order — the single source
+// of truth for "what sections exist at all." layout.json only ever reorders
+// or toggles these; it can't introduce new section types. Exported (not just
+// used internally) so the admin's Layout tab can build its page/section list
+// from the same data this module normalizes against, instead of keeping its
+// own hand-written copy that could silently drift from this one.
+export const DEFAULTS: Record<PageKey, SectionId[]> = {
   home: ['hero', 'intro', 'featured'],
   work: ['banner', 'controls', 'grid'],
   contact: ['title', 'body'],
 };
 
-// Returns the enabled section ids for a page, in display order. Falls back
-// to that page's full default list (all enabled, default order) if
-// layout.json has nothing stored for it yet.
-export function getEnabledSections<K extends PageKey>(page: K): SectionId[] {
-  const stored = layoutData[page];
-  if (!stored || stored.length === 0) return DEFAULTS[page];
-  const valid = new Set(DEFAULTS[page]);
-  return stored.filter((s): s is SectionEntry & { type: SectionId } => s.enabled && valid.has(s.type as SectionId)).map((s) => s.type);
-}
-
-// Returns every section for a page (enabled or not), in stored order, for
-// the admin's Layout tab — falls back to the full default list (all
-// enabled) the same way getEnabledSections does.
-export function getAllSections(page: PageKey): { type: SectionId; enabled: boolean }[] {
-  const stored = layoutData[page];
-  const valid = new Set(DEFAULTS[page]);
-  if (!stored || stored.length === 0) return DEFAULTS[page].map((type) => ({ type, enabled: true }));
-  const filtered = stored.filter((s): s is SectionEntry & { type: SectionId } => valid.has(s.type as SectionId));
-  // Any default section missing from the stored list (e.g. added by a code
-  // change after the admin last saved Layout) is appended as enabled, so it
-  // doesn't silently disappear until someone visits the Layout tab.
-  const present = new Set(filtered.map((s) => s.type));
-  const missing = DEFAULTS[page].filter((t) => !present.has(t)).map((type) => ({ type, enabled: true }));
-  return [...filtered, ...missing];
-}
+export const PAGE_KEYS = Object.keys(DEFAULTS) as PageKey[];
 
 export const SECTION_LABELS: Record<SectionId, string> = {
   hero: 'Hero video',
@@ -66,3 +41,32 @@ export const SECTION_LABELS: Record<SectionId, string> = {
   title: 'Page title',
   body: 'Photo, copy & contact button',
 };
+
+// The actual normalization rule — "drop any stored entry whose type isn't
+// real, append any real section missing from storage (as enabled)" — lives
+// here ONCE, as a pure function over whatever section list is handed to it.
+// Both getAllSections below (the statically-imported, build-time data) and
+// the admin's Layout tab (live data fetched from GET /api/layout) call this
+// same function, so there's no second copy of the rule to fall out of sync.
+export function normalizeSections<K extends PageKey>(page: K, stored: SectionEntry[] | undefined): { type: SectionId; enabled: boolean }[] {
+  const valid = new Set(DEFAULTS[page]);
+  const filtered = (stored ?? []).filter((s): s is SectionEntry & { type: SectionId } => valid.has(s.type as SectionId));
+  const present = new Set(filtered.map((s) => s.type));
+  const missing = DEFAULTS[page].filter((t) => !present.has(t)).map((type) => ({ type, enabled: true }));
+  return [...filtered, ...missing];
+}
+
+// Returns the enabled section ids for a page, in display order. Falls back
+// to that page's full default list (all enabled, default order) if
+// layout.json has nothing stored for it yet.
+export function getEnabledSections<K extends PageKey>(page: K): SectionId[] {
+  return getAllSections(page)
+    .filter((s) => s.enabled)
+    .map((s) => s.type);
+}
+
+// Returns every section for a page (enabled or not), in stored order, for
+// the admin's Layout tab.
+export function getAllSections<K extends PageKey>(page: K): { type: SectionId; enabled: boolean }[] {
+  return normalizeSections(page, layoutData[page]);
+}

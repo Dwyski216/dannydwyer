@@ -96,6 +96,16 @@ function slugify(input: string): string {
     .replace(/(^-|-$)/g, '');
 }
 
+// Every endpoint that takes a slug from the client (query param or body)
+// and interpolates it into a GitHub Contents API path validates it against
+// this first — slugify()'s own output always matches it, so this only ever
+// rejects something that didn't come from slugify (a hand-crafted request,
+// a stray "../"), not a real slug a save produced.
+const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+function isValidSlug(slug: string): boolean {
+  return SLUG_PATTERN.test(slug);
+}
+
 function toFrontmatter(fields: Record<string, unknown>): string {
   const lines = ['---'];
   for (const [key, value] of Object.entries(fields)) {
@@ -184,6 +194,30 @@ async function putFile(env: Env, path: string, content: string, sha: string | un
   });
 }
 
+// Reads one video's frontmatter, lets the caller transform it, and commits
+// the result — the single shared "patch a video file" primitive behind
+// every endpoint that edits one or more videos without replacing their
+// whole content (reorder, tag rename/delete, bulk tag edit). Each of those
+// endpoints still owns its own index.json read/write: a patch here only
+// ever touches the one video file, on purpose, so callers that need to
+// patch many videos can batch (e.g. Promise.all) these calls freely and
+// settle the shared index exactly once afterward, rather than once per
+// video.
+async function patchVideoFrontmatter(
+  env: Env,
+  slug: string,
+  patch: (data: Record<string, any>) => Record<string, any>,
+  message: string
+): Promise<boolean> {
+  const file = await getFile(env, `${VIDEOS_DIR}/${slug}.md`);
+  if (!file) return false;
+  const { data, body: mdBody } = parseFrontmatter(file.content);
+  const frontmatter = toFrontmatter(patch(data));
+  const fileContent = `${frontmatter}\n\n${mdBody}\n`;
+  const res = await putFile(env, `${VIDEOS_DIR}/${slug}.md`, fileContent, file.sha, message);
+  return res.ok;
+}
+
 const json = (data: unknown, status = 200, extraHeaders: Record<string, string> = {}) =>
   new Response(JSON.stringify(data), {
     status,
@@ -254,6 +288,7 @@ async function handleVideosGet(request: Request, env: Env): Promise<Response> {
   const slug = url.searchParams.get('slug');
 
   if (slug) {
+    if (!isValidSlug(slug)) return json({ error: 'Invalid slug' }, 400);
     const res = await githubRequest(env, `${VIDEOS_DIR}/${slug}.md?ref=${env.GITHUB_BRANCH}`);
     if (!res.ok) return json({ error: 'Video not found' }, 404);
     const data = (await res.json()) as { content: string };
@@ -276,6 +311,7 @@ async function handleVideosDelete(request: Request, env: Env): Promise<Response>
   const url = new URL(request.url);
   const slug = url.searchParams.get('slug');
   if (!slug) return json({ error: 'Missing slug' }, 400);
+  if (!isValidSlug(slug)) return json({ error: 'Invalid slug' }, 400);
 
   const filePath = `${VIDEOS_DIR}/${slug}.md`;
   const existing = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
@@ -308,42 +344,47 @@ async function handleVideosDelete(request: Request, env: Env): Promise<Response>
   return json({ ok: true, slug, ...(indexWarning ? { indexWarning } : {}) });
 }
 
-// Reordering writes just the `order` field on a single file — the admin
-// computes a fractional value (the midpoint of the item's new neighbors)
-// client-side, so a drag-and-drop move never needs to touch, read, or even
-// know about any file but the one that moved.
+// Reordering (the admin's up/down move) swaps the `order` value of two
+// adjacent items, which means patching two video files — both moves must
+// land in a single request with a single work-index.json read/write.
+// Sending them as two separate requests was tried first and had a real
+// race: each one independently reads the index's current sha, so two
+// concurrent writes could both read the same pre-move sha and one would
+// lose GitHub's optimistic-concurrency check and fail (silently, since
+// nothing surfaced it) — see the per-move loop below, which patches every
+// video file first (safe to do concurrently; each touches a different file
+// with its own sha) and only then does the index's one read-then-write.
 async function handleVideosReorder(request: Request, env: Env): Promise<Response> {
-  const body = (await request.json().catch(() => ({}))) as { slug?: string; order?: number };
-  if (!body.slug || typeof body.order !== 'number') {
-    return json({ error: 'Expects { slug, order }' }, 400);
+  const body = (await request.json().catch(() => ({}))) as { moves?: { slug?: string; order?: number }[] };
+  const moves = Array.isArray(body.moves) ? body.moves : [];
+  if (moves.length === 0) return json({ error: 'Expects { moves: [{ slug, order }, ...] }' }, 400);
+  for (const m of moves) {
+    if (!m.slug || typeof m.order !== 'number') return json({ error: 'Each move needs a slug and a numeric order' }, 400);
+    if (!isValidSlug(m.slug)) return json({ error: `Invalid slug: ${m.slug}` }, 400);
+  }
+  const validMoves = moves as { slug: string; order: number }[];
+
+  const results = await Promise.all(
+    validMoves.map((m) => patchVideoFrontmatter(env, m.slug, (data) => ({ ...data, order: m.order }), `Reorder ${m.slug}`))
+  );
+  const failed = validMoves.filter((_, i) => !results[i]).map((m) => m.slug);
+  if (failed.length === validMoves.length) {
+    return json({ error: 'GitHub commit failed for all moved videos', failed }, 502);
   }
 
-  const filePath = `${VIDEOS_DIR}/${body.slug}.md`;
-  const fileRes = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
-  if (!fileRes.ok) return json({ error: 'Video not found' }, 404);
-  const fileData = (await fileRes.json()) as { content: string; sha: string };
-  const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
-  const { data, body: mdBody } = parseFrontmatter(raw);
-
-  const frontmatter = toFrontmatter({ ...data, order: body.order });
-  const fileContent = `${frontmatter}\n\n${mdBody}\n`;
-  const res = await putFile(env, filePath, fileContent, fileData.sha, `Reorder ${body.slug}`);
-  if (!res.ok) {
-    const err = await res.text();
-    return json({ error: 'GitHub commit failed', details: err }, 502);
-  }
-
+  const succeeded = new Set(validMoves.filter((_, i) => results[i]).map((m) => m.slug));
+  const orderBySlug = new Map(validMoves.map((m) => [m.slug, m.order]));
   const index = await readIndex(env);
   let indexWarning: string | undefined;
   if ('error' in index) {
     indexWarning = index.error;
   } else {
-    const items = index.items.map((it) => (it.slug === body.slug ? { ...it, order: body.order! } : it));
-    const updateRes = await writeIndex(env, items, index.sha, `Reorder ${body.slug} in work index`);
+    const items = index.items.map((it) => (succeeded.has(it.slug) ? { ...it, order: orderBySlug.get(it.slug)! } : it));
+    const updateRes = await writeIndex(env, items, index.sha, `Reorder ${[...succeeded].join(', ')} in work index`);
     if (!updateRes.ok) indexWarning = 'Reordered, but the Work index could not be updated — use "Rebuild Index".';
   }
 
-  return json({ ok: true, ...(indexWarning ? { indexWarning } : {}) });
+  return json({ ok: true, ...(failed.length ? { failed } : {}), ...(indexWarning ? { indexWarning } : {}) });
 }
 
 async function handleTagsPost(request: Request, env: Env): Promise<Response> {
@@ -368,44 +409,25 @@ async function handleTagsPost(request: Request, env: Env): Promise<Response> {
   // in the catalog just to check membership.
   const affectedSlugs = index.items.filter((it) => it.tags.includes(tag)).map((it) => it.slug);
 
+  const newTagsFor = (tags: string[]) =>
+    body.action === 'delete' ? tags.filter((t) => t !== tag) : tags.map((t) => (t === tag ? body.newTag! : t));
+
   const updated: string[] = [];
   const failed: string[] = [];
 
   // Sequential, not parallel: each match is its own commit to the same
   // directory, and doing them one at a time avoids racing GitHub's API.
   for (const slug of affectedSlugs) {
-    const filePath = `${VIDEOS_DIR}/${slug}.md`;
-    const fileRes = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
-    if (!fileRes.ok) {
-      failed.push(slug);
-      continue;
-    }
-    const fileData = (await fileRes.json()) as { content: string; sha: string };
-    const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
-    const { data, body: mdBody } = parseFrontmatter(raw);
-    const tags: string[] = Array.isArray(data.tags) ? data.tags : [];
-
-    const newTags =
-      body.action === 'delete' ? tags.filter((t) => t !== tag) : tags.map((t) => (t === tag ? body.newTag : t));
-
-    const frontmatter = toFrontmatter({ ...data, tags: newTags });
-    const fileContent = `${frontmatter}\n\n${mdBody}\n`;
     const message =
       body.action === 'delete' ? `Remove tag "${tag}" from ${slug}` : `Rename tag "${tag}" to "${body.newTag}" on ${slug}`;
-    const res = await putFile(env, filePath, fileContent, fileData.sha, message);
-    if (res.ok) updated.push(slug);
-    else failed.push(slug);
+    const ok = await patchVideoFrontmatter(env, slug, (data) => ({ ...data, tags: newTagsFor(Array.isArray(data.tags) ? data.tags : []) }), message);
+    (ok ? updated : failed).push(slug);
   }
 
   // Update the index's cached tags for every item that actually got
   // updated (skip ones that failed, so the index doesn't drift ahead of
   // what's actually committed).
-  const newIndexItems = index.items.map((it) => {
-    if (!updated.includes(it.slug)) return it;
-    const newTags =
-      body.action === 'delete' ? it.tags.filter((t) => t !== tag) : it.tags.map((t) => (t === tag ? body.newTag! : t));
-    return { ...it, tags: newTags };
-  });
+  const newIndexItems = index.items.map((it) => (updated.includes(it.slug) ? { ...it, tags: newTagsFor(it.tags) } : it));
   const indexRes = await writeIndex(
     env,
     newIndexItems,
@@ -427,7 +449,7 @@ async function handleTagsBulkPost(request: Request, env: Env): Promise<Response>
     add?: string[];
     remove?: string[];
   };
-  const slugs = Array.isArray(body.slugs) ? body.slugs.filter((s) => typeof s === 'string' && s) : [];
+  const slugs = Array.isArray(body.slugs) ? body.slugs.filter((s) => typeof s === 'string' && isValidSlug(s)) : [];
   const add = Array.isArray(body.add) ? body.add.filter((t) => typeof t === 'string' && t.trim()) : [];
   const remove = Array.isArray(body.remove) ? body.remove.filter((t) => typeof t === 'string' && t.trim()) : [];
   if (slugs.length === 0) return json({ error: 'slugs must be a non-empty array' }, 400);
@@ -436,34 +458,31 @@ async function handleTagsBulkPost(request: Request, env: Env): Promise<Response>
   const index = await readIndex(env);
   if ('error' in index) return json({ error: index.error }, 502);
 
+  const newTagsFor = (tags: string[]) => [...new Set([...tags.filter((t) => !remove.includes(t)), ...add])];
+
+  // Each slug's read+patch+write only ever touches that one video file, so
+  // these are safe to run concurrently (in batches, to stay well under the
+  // Worker's per-invocation subrequest cap) — unlike the shared index
+  // below, which this does exactly once, after every file is settled.
+  const BATCH_SIZE = 10;
   const updated: string[] = [];
   const failed: string[] = [];
-
-  for (const slug of slugs) {
-    const filePath = `${VIDEOS_DIR}/${slug}.md`;
-    const fileRes = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
-    if (!fileRes.ok) {
-      failed.push(slug);
-      continue;
-    }
-    const fileData = (await fileRes.json()) as { content: string; sha: string };
-    const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
-    const { data, body: mdBody } = parseFrontmatter(raw);
-    const tags: string[] = Array.isArray(data.tags) ? data.tags : [];
-
-    const newTags = [...new Set([...tags.filter((t) => !remove.includes(t)), ...add])];
-
-    const frontmatter = toFrontmatter({ ...data, tags: newTags });
-    const fileContent = `${frontmatter}\n\n${mdBody}\n`;
-    const res = await putFile(env, filePath, fileContent, fileData.sha, `Bulk tag update: ${slug}`);
-    if (res.ok) updated.push(slug);
-    else failed.push(slug);
+  for (let i = 0; i < slugs.length; i += BATCH_SIZE) {
+    const batch = slugs.slice(i, i + BATCH_SIZE);
+    const results = await Promise.all(
+      batch.map((slug) =>
+        patchVideoFrontmatter(
+          env,
+          slug,
+          (data) => ({ ...data, tags: newTagsFor(Array.isArray(data.tags) ? data.tags : []) }),
+          `Bulk tag update: ${slug}`
+        )
+      )
+    );
+    batch.forEach((slug, idx) => (results[idx] ? updated : failed).push(slug));
   }
 
-  const newIndexItems = index.items.map((it) => {
-    if (!updated.includes(it.slug)) return it;
-    return { ...it, tags: [...new Set([...it.tags.filter((t) => !remove.includes(t)), ...add])] };
-  });
+  const newIndexItems = index.items.map((it) => (updated.includes(it.slug) ? { ...it, tags: newTagsFor(it.tags) } : it));
   const indexRes = await writeIndex(env, newIndexItems, index.sha, `Bulk tag update for ${updated.length} video(s)`);
   const indexWarning = !indexRes.ok ? 'Tags updated, but the Work index could not be updated — use "Rebuild Index".' : undefined;
 
@@ -472,7 +491,9 @@ async function handleTagsBulkPost(request: Request, env: Env): Promise<Response>
 
 async function handleVideosPost(request: Request, env: Env): Promise<Response> {
   const body = (await request.json()) as Record<string, any>;
+  if (!body.slug && !body.title) return json({ error: 'A title or slug is required' }, 400);
   const slug = slugify(body.slug || body.title);
+  if (!slug) return json({ error: 'Could not derive a valid slug from the title/slug given' }, 400);
   const filePath = `${VIDEOS_DIR}/${slug}.md`;
 
   const frontmatter = toFrontmatter({
@@ -576,8 +597,10 @@ async function handleVideosReindex(_request: Request, env: Env): Promise<Respons
 }
 
 async function handleSettingsGet(_request: Request, env: Env): Promise<Response> {
-  const settingsRes = await githubRequest(env, `src/data/site.json?ref=${env.GITHUB_BRANCH}`);
-  const contactRes = await githubRequest(env, `src/content/pages/contact.md?ref=${env.GITHUB_BRANCH}`);
+  const [settingsRes, contactRes] = await Promise.all([
+    githubRequest(env, `src/data/site.json?ref=${env.GITHUB_BRANCH}`),
+    githubRequest(env, `src/content/pages/contact.md?ref=${env.GITHUB_BRANCH}`),
+  ]);
 
   if (!settingsRes.ok || !contactRes.ok) {
     const failed = !settingsRes.ok ? settingsRes : contactRes;
@@ -636,16 +659,33 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
   return json({ ok: true });
 }
 
+// Reads and JSON-parses a small admin-managed data file (layout.json,
+// seo.json, ...), distinguishing "doesn't exist yet" (a legitimate blank
+// starting state — same convention as readIndex for work-index.json) from
+// a real failure (bad credentials, wrong repo, invalid JSON), which must
+// surface as an error rather than silently looking like "nothing saved".
+async function readJsonFile<T>(env: Env, path: string, fallback: T): Promise<{ value: T } | { error: string }> {
+  const res = await githubRequest(env, `${path}?ref=${env.GITHUB_BRANCH}`);
+  if (res.status === 404) return { value: fallback };
+  if (!res.ok) {
+    const detail = await res.text().catch(() => '');
+    return { error: `GitHub API returned ${res.status} reading ${path}${detail ? `: ${detail}` : ''}` };
+  }
+  const data = (await res.json()) as { content: string };
+  const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+  try {
+    return { value: JSON.parse(content) as T };
+  } catch {
+    return { error: `${path} contains invalid JSON.` };
+  }
+}
+
 const LAYOUT_PATH = 'src/data/layout.json';
 
 async function handleLayoutGet(_request: Request, env: Env): Promise<Response> {
-  const file = await getFile(env, LAYOUT_PATH);
-  if (!file) return json({ error: `Could not read ${LAYOUT_PATH} from GitHub.` }, 502);
-  try {
-    return json({ layout: JSON.parse(file.content) });
-  } catch {
-    return json({ error: `${LAYOUT_PATH} contains invalid JSON.` }, 502);
-  }
+  const result = await readJsonFile(env, LAYOUT_PATH, {});
+  if ('error' in result) return json({ error: result.error }, 502);
+  return json({ layout: result.value });
 }
 
 async function handleLayoutPost(request: Request, env: Env): Promise<Response> {
@@ -662,13 +702,9 @@ async function handleLayoutPost(request: Request, env: Env): Promise<Response> {
 const SEO_PATH = 'src/data/seo.json';
 
 async function handleSeoGet(_request: Request, env: Env): Promise<Response> {
-  const file = await getFile(env, SEO_PATH);
-  if (!file) return json({ error: `Could not read ${SEO_PATH} from GitHub.` }, 502);
-  try {
-    return json({ seo: JSON.parse(file.content) });
-  } catch {
-    return json({ error: `${SEO_PATH} contains invalid JSON.` }, 502);
-  }
+  const result = await readJsonFile(env, SEO_PATH, {});
+  if ('error' in result) return json({ error: result.error }, 502);
+  return json({ seo: result.value });
 }
 
 async function handleSeoPost(request: Request, env: Env): Promise<Response> {
