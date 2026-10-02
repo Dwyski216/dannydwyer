@@ -97,6 +97,26 @@ import Layout from '../../layouts/Layout.astro';
               <input id="work-search" type="search" placeholder="Search by title…" />
               <button type="button" id="work-add-btn" class="btn btn-solid">+ Add Work Item</button>
             </div>
+
+            <div id="work-bulk-bar" class="work-bulk-bar" hidden>
+              <span id="work-bulk-count" class="work-bulk-count"></span>
+              <label>Add tag
+                <select id="work-bulk-add-select">
+                  <option value="">Select…</option>
+                </select>
+              </label>
+              <input id="work-bulk-add-new" placeholder="or type a new tag" />
+              <button type="button" id="work-bulk-add-btn" class="btn btn-ghost">Add to selected</button>
+              <label>Remove tag
+                <select id="work-bulk-remove-select">
+                  <option value="">Select…</option>
+                </select>
+              </label>
+              <button type="button" id="work-bulk-remove-btn" class="btn btn-ghost">Remove from selected</button>
+              <button type="button" id="work-bulk-clear-btn" class="btn btn-ghost">Clear selection</button>
+              <p class="status" id="work-bulk-status"></p>
+            </div>
+
             <div id="work-list" class="work-list">
               <p class="section-hint">Loading…</p>
             </div>
@@ -116,6 +136,7 @@ import Layout from '../../layouts/Layout.astro';
             <button type="button" id="work-back-btn" class="btn btn-ghost">← Back to Work list</button>
             <form id="work-item-form">
               <input type="hidden" name="originalSlug" />
+              <input type="hidden" name="order" value="0" />
               <label>Title <input name="title" required /></label>
 
               <fieldset>
@@ -256,6 +277,7 @@ import Layout from '../../layouts/Layout.astro';
     tags: string[];
     uploadDate: string;
     hidden: boolean;
+    order: number;
   };
 
   let settings: Settings | null = null;
@@ -568,9 +590,13 @@ import Layout from '../../layouts/Layout.astro';
   let workInitialized = false;
   let editingSlug: string | null = null;
   let pendingTags = new Set<string>();
+  let selectedSlugs = new Set<string>();
 
-  type SortKey = 'title' | 'uploadDate' | 'hidden';
-  let sortKey: SortKey = 'title';
+  type SortKey = 'order' | 'title' | 'uploadDate' | 'hidden';
+  // Defaults to the site's actual display order (see byDisplayOrder in
+  // src/lib/video.ts) — reorder controls only make sense, and only show up,
+  // when sorted this way.
+  let sortKey: SortKey = 'order';
   let sortAsc = true;
 
   function escapeHtml(s: string): string {
@@ -578,10 +604,93 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   const SORT_COLUMNS: { key: SortKey; label: string }[] = [
+    { key: 'order', label: 'Order' },
     { key: 'title', label: 'Title' },
     { key: 'uploadDate', label: 'Date' },
     { key: 'hidden', label: 'Status' },
   ];
+
+  async function moveWorkItem(sortedSlugsInView: string[], slug: string, direction: -1 | 1) {
+    const i = sortedSlugsInView.indexOf(slug);
+    const j = i + direction;
+    if (i === -1 || j < 0 || j >= sortedSlugsInView.length) return;
+    const a = workItems.find((it) => it.slug === sortedSlugsInView[i])!;
+    const b = workItems.find((it) => it.slug === sortedSlugsInView[j])!;
+    // Swapping the two neighbors' order values keeps every value's spacing
+    // intact forever — no fractional/midpoint math needed, and each move
+    // only ever touches these two files.
+    const [aOrder, bOrder] = [b.order, a.order];
+    await Promise.all([
+      fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ slug: a.slug, order: aOrder }) }),
+      fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ slug: b.slug, order: bOrder }) }),
+    ]);
+    a.order = aOrder;
+    b.order = bOrder;
+    renderWorkList();
+  }
+
+  function populateBulkTagSelects() {
+    const tags = allTags();
+    const options = '<option value="">Select…</option>' + tags.map((t) => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+    (document.getElementById('work-bulk-add-select') as HTMLSelectElement).innerHTML = options;
+    (document.getElementById('work-bulk-remove-select') as HTMLSelectElement).innerHTML = options;
+  }
+
+  function renderBulkTagControls() {
+    populateBulkTagSelects();
+    const bar = document.getElementById('work-bulk-bar') as HTMLElement;
+    if (selectedSlugs.size === 0) {
+      bar.hidden = true;
+      return;
+    }
+    bar.hidden = false;
+    const countEl = document.getElementById('work-bulk-count')!;
+    countEl.textContent = `${selectedSlugs.size} selected`;
+  }
+
+  async function applyBulkTags(add: string[], remove: string[]) {
+    const statusEl = document.getElementById('work-bulk-status')!;
+    if (selectedSlugs.size === 0) return;
+    statusEl.textContent = 'Saving…';
+    const res = await fetch('/api/tags/bulk', {
+      method: 'POST',
+      body: JSON.stringify({ slugs: [...selectedSlugs], add, remove }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      statusEl.textContent = `Error: ${data.error ?? 'failed'}`;
+      return;
+    }
+    const failed: string[] = data.failed ?? [];
+    const parts = [failed.length ? `Updated, but failed on: ${failed.join(', ')}.` : 'Done.'];
+    if (data.indexWarning) parts.push(data.indexWarning);
+    statusEl.textContent = parts.join(' ');
+    await loadWorkItems(true);
+    renderWorkList();
+    renderTagManager();
+  }
+
+  document.getElementById('work-bulk-add-btn')?.addEventListener('click', () => {
+    const select = document.getElementById('work-bulk-add-select') as HTMLSelectElement;
+    const newInput = document.getElementById('work-bulk-add-new') as HTMLInputElement;
+    const tag = newInput.value.trim() || select.value;
+    if (!tag) return;
+    applyBulkTags([tag], []);
+    select.value = '';
+    newInput.value = '';
+  });
+
+  document.getElementById('work-bulk-remove-btn')?.addEventListener('click', () => {
+    const select = document.getElementById('work-bulk-remove-select') as HTMLSelectElement;
+    if (!select.value) return;
+    applyBulkTags([], [select.value]);
+    select.value = '';
+  });
+
+  document.getElementById('work-bulk-clear-btn')?.addEventListener('click', () => {
+    selectedSlugs = new Set();
+    renderWorkList();
+  });
 
   function renderWorkList() {
     const query = workSearch.value.trim().toLowerCase();
@@ -595,8 +704,18 @@ import Layout from '../../layouts/Layout.astro';
     const dir = sortAsc ? 1 : -1;
     const sorted = [...filtered].sort((a, b) => {
       if (sortKey === 'hidden') return (Number(a.hidden) - Number(b.hidden)) * dir;
+      if (sortKey === 'order') {
+        if (a.order !== b.order) return (a.order - b.order) * dir;
+        return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
+      }
       return String(a[sortKey]).localeCompare(String(b[sortKey])) * dir;
     });
+    const sortedSlugs = sorted.map((i) => i.slug);
+    // Reordering (swapping neighbors) only makes unambiguous sense in the
+    // unfiltered, ascending, order-sorted view — any other view mixes in
+    // search/sort state that would make "move up" silently reorder items
+    // that aren't adjacent in the real catalog order.
+    const canReorder = sortKey === 'order' && sortAsc && !query;
 
     const headerHtml = SORT_COLUMNS.map(({ key, label }) => {
       const active = sortKey === key;
@@ -607,8 +726,17 @@ import Layout from '../../layouts/Layout.astro';
     const rowsHtml = sorted.length
       ? sorted
           .map(
-            (item) => `
+            (item, i) => `
         <tr data-slug="${item.slug}">
+          <td><input type="checkbox" class="work-row-select" data-slug="${item.slug}" ${selectedSlugs.has(item.slug) ? 'checked' : ''} /></td>
+          <td class="work-order-cell">
+            ${
+              canReorder
+                ? `<button type="button" class="btn-move" data-move-up="${item.slug}" ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
+                   <button type="button" class="btn-move" data-move-down="${item.slug}" ${i === sorted.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>`
+                : '<span class="work-cell-empty">—</span>'
+            }
+          </td>
           <td>${escapeHtml(item.title)}</td>
           <td>${escapeHtml(item.uploadDate) || '<span class="work-cell-empty">—</span>'}</td>
           <td>${item.hidden ? '<span class="status-badge status-hidden">Hidden</span>' : '<span class="status-badge status-visible">Visible</span>'}</td>
@@ -616,14 +744,14 @@ import Layout from '../../layouts/Layout.astro';
         </tr>`
           )
           .join('')
-      : `<tr><td colspan="4" class="section-hint">No items match.</td></tr>`;
+      : `<tr><td colspan="6" class="section-hint">No items match.</td></tr>`;
 
     workListEl.innerHTML = `
       <table class="work-table">
-        <thead><tr>${headerHtml}<th></th></tr></thead>
+        <thead><tr><th><input type="checkbox" id="work-select-all" aria-label="Select all" /></th><th class="work-move-header">Move</th>${headerHtml}<th></th></tr></thead>
         <tbody>${rowsHtml}</tbody>
       </table>
-      <p class="work-count section-hint">${sorted.length} of ${workItems.length} item${workItems.length === 1 ? '' : 's'}</p>
+      <p class="work-count section-hint">${sorted.length} of ${workItems.length} item${workItems.length === 1 ? '' : 's'}${sortKey === 'order' ? ' — sorted by Order; switch sort to search by Title/Date/Status' : ''}</p>
     `;
 
     workListEl.querySelectorAll('th[data-sort-key]').forEach((th) => {
@@ -641,6 +769,35 @@ import Layout from '../../layouts/Layout.astro';
     workListEl.querySelectorAll('[data-edit]').forEach((btn) => {
       btn.addEventListener('click', () => openWorkItem((btn as HTMLElement).dataset.edit!));
     });
+
+    workListEl.querySelectorAll('[data-move-up]').forEach((btn) => {
+      btn.addEventListener('click', () => moveWorkItem(sortedSlugs, (btn as HTMLElement).dataset.moveUp!, -1));
+    });
+    workListEl.querySelectorAll('[data-move-down]').forEach((btn) => {
+      btn.addEventListener('click', () => moveWorkItem(sortedSlugs, (btn as HTMLElement).dataset.moveDown!, 1));
+    });
+
+    workListEl.querySelectorAll('.work-row-select').forEach((cb) => {
+      cb.addEventListener('change', () => {
+        const slug = (cb as HTMLElement).dataset.slug!;
+        if ((cb as HTMLInputElement).checked) selectedSlugs.add(slug);
+        else selectedSlugs.delete(slug);
+        renderBulkTagControls();
+      });
+    });
+
+    const selectAll = document.getElementById('work-select-all') as HTMLInputElement | null;
+    if (selectAll) {
+      selectAll.checked = sorted.length > 0 && sorted.every((i) => selectedSlugs.has(i.slug));
+      selectAll.addEventListener('change', () => {
+        if (selectAll.checked) sorted.forEach((i) => selectedSlugs.add(i.slug));
+        else sorted.forEach((i) => selectedSlugs.delete(i.slug));
+        renderWorkList();
+        renderBulkTagControls();
+      });
+    }
+
+    renderBulkTagControls();
   }
 
   async function reportTagResult(res: Response) {
@@ -799,6 +956,7 @@ import Layout from '../../layouts/Layout.astro';
       const fields = parseRawVideo(data.raw ?? '');
 
       (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = slug;
+      (workItemForm.elements.namedItem('order') as HTMLInputElement).value = String(fields.order ?? 0);
       (workItemForm.elements.namedItem('title') as HTMLInputElement).value = fields.title ?? '';
       (workItemForm.elements.namedItem('platform') as HTMLSelectElement).value = fields.platform ?? 'youtube';
       (workItemForm.elements.namedItem('videoId') as HTMLInputElement).value = fields.videoId ?? '';
@@ -842,6 +1000,7 @@ import Layout from '../../layouts/Layout.astro';
     const payload: Record<string, any> = Object.fromEntries(fd.entries());
     payload.tags = Array.from(pendingTags);
     payload.hidden = fd.get('hidden') === 'on';
+    payload.order = Number(payload.order) || 0;
     payload.stills = String(payload.stills || '')
       .split('\n')
       .map((line: string) => line.trim())
@@ -1420,6 +1579,73 @@ import Layout from '../../layouts/Layout.astro';
 
   .work-count {
     margin: 0.5rem 0 1.5rem;
+  }
+
+  .work-move-header {
+    cursor: default !important;
+  }
+
+  .work-move-header:hover {
+    color: var(--tag-muted) !important;
+  }
+
+  .work-order-cell {
+    white-space: nowrap;
+  }
+
+  .btn-move {
+    background: none;
+    border: 1px solid var(--hairline);
+    color: var(--text);
+    width: 1.8rem;
+    height: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .btn-move:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-move:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .work-bulk-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .work-bulk-bar label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .work-bulk-bar input,
+  .work-bulk-bar select {
+    font-size: 0.85rem;
+  }
+
+  .work-bulk-count {
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .work-bulk-bar .status {
+    width: 100%;
+    margin: 0;
   }
 
   .tag-manager-list {

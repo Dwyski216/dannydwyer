@@ -9,6 +9,7 @@ projectName: "Ryan Gosling Cover Story"
 uploadDate: "2024-02-01"
 tags: ["editorial", "celebrity", "behind-the-scenes"]
 urlSlug: "ryan-gosling-mens-health"
+order: 50
 featured: false
 stills: []
 ---

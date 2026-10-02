@@ -9,6 +9,7 @@ projectName: "Pixel \"Lookout\""
 uploadDate: "2023-09-01"
 tags: ["commercial", "technology", "accessibility"]
 urlSlug: "google-pixel-lookout"
+order: 80
 featured: false
 stills: []
 ---

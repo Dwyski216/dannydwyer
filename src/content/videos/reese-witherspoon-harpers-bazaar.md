@@ -9,6 +9,7 @@ projectName: "Reese Witherspoon Cover Story"
 uploadDate: "2018-09-01"
 tags: ["editorial", "celebrity", "behind-the-scenes"]
 urlSlug: "reese-witherspoon-harpers-bazaar"
+order: 220
 featured: false
 stills: []
 ---

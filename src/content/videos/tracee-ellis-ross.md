@@ -7,6 +7,7 @@ role: "Director of Photography"
 uploadDate: "2019-11-01"
 tags: ["celebrity"]
 urlSlug: "tracee-ellis-ross"
+order: 190
 featured: false
 stills: []
 ---

@@ -7,6 +7,7 @@ role: "Director of Photography"
 uploadDate: "2026-09-11"
 tags: ["reel"]
 urlSlug: "temp-reel"
+order: 10
 featured: true
 hidden: true
 stills: []

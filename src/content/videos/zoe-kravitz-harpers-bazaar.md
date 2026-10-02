@@ -9,6 +9,7 @@ projectName: "Zoë Kravitz Cover Shoot"
 uploadDate: "2018-08-24"
 tags: ["editorial", "behind-the-scenes", "celebrity"]
 urlSlug: "zoe-kravitz-harpers-bazaar"
+order: 240
 featured: false
 stills: []
 ---

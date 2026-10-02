@@ -8,6 +8,7 @@ client: "Shinola"
 uploadDate: "2015-10-01"
 tags: ["commercial", "product", "fashion"]
 urlSlug: "shinola"
+order: 450
 featured: false
 stills: []
 ---

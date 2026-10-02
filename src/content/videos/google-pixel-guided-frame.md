@@ -9,6 +9,7 @@ projectName: "Pixel \"Guided Frame\""
 uploadDate: "2023-09-01"
 tags: ["commercial", "technology", "accessibility"]
 urlSlug: "google-pixel-guided-frame"
+order: 90
 featured: false
 stills: []
 ---

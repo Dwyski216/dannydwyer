@@ -9,6 +9,7 @@ projectName: "Jane Fonda Feature"
 uploadDate: "2020-09-01"
 tags: ["editorial", "celebrity", "interview"]
 urlSlug: "jane-fonda-harpers-bazaar"
+order: 170
 featured: false
 stills: []
 ---

@@ -9,6 +9,7 @@ projectName: "Monaco"
 uploadDate: "2017-08-01"
 tags: ["commercial", "product", "fashion"]
 urlSlug: "wolf-shepherd-monaco"
+order: 290
 featured: false
 stills: []
 ---

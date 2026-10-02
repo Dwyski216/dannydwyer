@@ -8,6 +8,7 @@ projectName: "Chesterland"
 uploadDate: "2016-04-01"
 tags: ["pilot", "dramedy", "teaser"]
 urlSlug: "chesterland-teaser"
+order: 430
 featured: false
 stills: []
 ---

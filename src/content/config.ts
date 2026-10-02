@@ -37,6 +37,12 @@ const videos = defineCollection({
     tags: z.array(z.string()).default([]),
     urlSlug: z.string(), // controls the final URL: /work/[slug]
     hidden: z.boolean().default(false), // true = still has its own page, but excluded from /work and llms.txt (e.g. a temporary home-page reel)
+
+    // Manual display order for the Work grid and llms.txt (lower = earlier).
+    // Admin-settable via drag-reorder; ties fall back to uploadDate (newest
+    // first). Uses fractional values so moving one item only ever requires
+    // rewriting that one file — see worker/index.ts's reorder handler.
+    order: z.number().default(0),
   }),
 });
 

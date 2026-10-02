@@ -9,6 +9,7 @@ projectName: "Bandana"
 uploadDate: "2017-05-01"
 tags: ["commercial", "product"]
 urlSlug: "bandits-bandana"
+order: 340
 featured: false
 stills: []
 ---

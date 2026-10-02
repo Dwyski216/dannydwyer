@@ -9,6 +9,7 @@ projectName: "Jonas Brothers Feature"
 uploadDate: "2019-05-01"
 tags: ["editorial", "celebrity", "interview"]
 urlSlug: "jonas-brothers-harpers-bazaar"
+order: 200
 featured: false
 stills: []
 ---

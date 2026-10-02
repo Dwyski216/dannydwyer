@@ -9,6 +9,7 @@ projectName: "SwiftKnit"
 uploadDate: "2017-08-01"
 tags: ["commercial", "product", "fashion"]
 urlSlug: "wolf-shepherd-swiftknit"
+order: 300
 featured: false
 stills: []
 ---

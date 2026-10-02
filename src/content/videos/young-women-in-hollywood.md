@@ -9,6 +9,7 @@ projectName: "Young Women in Hollywood"
 uploadDate: "2017-10-01"
 tags: ["editorial", "celebrity"]
 urlSlug: "young-women-in-hollywood"
+order: 280
 featured: false
 stills: []
 ---

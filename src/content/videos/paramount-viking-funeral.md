@@ -9,6 +9,7 @@ projectName: "Vikings — Viking Funeral Event"
 uploadDate: "2020-11-01"
 tags: ["branded content", "event", "entertainment"]
 urlSlug: "paramount-viking-funeral"
+order: 160
 featured: false
 stills: []
 ---

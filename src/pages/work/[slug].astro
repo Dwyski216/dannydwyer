@@ -4,17 +4,15 @@ import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import VideoPlayer from '../../components/VideoPlayer.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { getEmbedUrl, getThumbnailUrl } from '../../lib/video';
+import { getEmbedUrl, getThumbnailUrl, byDisplayOrder } from '../../lib/video';
 
 export async function getStaticPaths() {
   const videos = await getCollection('videos');
 
-  // Prev/Next walks the same newest-first order as the Work grid, and only
+  // Prev/Next walks the same display order as the Work grid, and only
   // through visible entries — a hidden video (e.g. a temporary home-page
   // reel) is a valid page but not a valid stop on this chain.
-  const ordered = videos
-    .filter((v) => !v.data.hidden)
-    .sort((a, b) => new Date(b.data.uploadDate).getTime() - new Date(a.data.uploadDate).getTime());
+  const ordered = videos.filter((v) => !v.data.hidden).sort((a, b) => byDisplayOrder(a.data, b.data));
 
   return videos.map((video) => {
     const i = ordered.findIndex((v) => v.data.urlSlug === video.data.urlSlug);

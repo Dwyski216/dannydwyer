@@ -8,6 +8,7 @@ projectName: "SB 1391 Awareness"
 uploadDate: "2018-09-01"
 tags: ["advocacy", "documentary", "social issue"]
 urlSlug: "sb1391-awareness"
+order: 230
 featured: false
 stills: []
 ---

@@ -1,6 +1,15 @@
 // Small shared helpers so every page treats YouTube and Vimeo videos the
 // same way. Adding a third platform later just means adding a case here.
 
+// The Work grid's display order: admin-set `order` first (lower = earlier),
+// falling back to uploadDate (newest first) as a tiebreaker — every video
+// defaults to order: 0, so an un-reordered catalog sorts exactly as it did
+// before this field existed.
+export function byDisplayOrder(a: { order: number; uploadDate: string }, b: { order: number; uploadDate: string }): number {
+  if (a.order !== b.order) return a.order - b.order;
+  return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
+}
+
 export type VideoPlatform = 'youtube' | 'vimeo';
 
 export interface VideoSource {

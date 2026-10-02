@@ -8,6 +8,7 @@ projectName: "Dark Bardo — \"Midnight Cowboy\" (Music Video)"
 uploadDate: "2023-02-01"
 tags: ["music video"]
 urlSlug: "dark-bardo-midnight-cowboy"
+order: 130
 featured: false
 stills: []
 ---

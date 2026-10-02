@@ -9,6 +9,7 @@ projectName: "Intuitive Machines Lunar Lander (NASA CLPS mission)"
 uploadDate: "2024-02-01"
 tags: ["documentary", "branded content", "technology", "space"]
 urlSlug: "columbia-intuitive-machines-nasa-v2"
+order: 60
 featured: false
 stills: []
 ---

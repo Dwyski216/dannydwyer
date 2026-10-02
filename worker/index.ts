@@ -85,6 +85,7 @@ interface WorkIndexItem {
   tags: string[];
   uploadDate: string;
   hidden: boolean;
+  order: number;
 }
 
 function slugify(input: string): string {
@@ -307,6 +308,44 @@ async function handleVideosDelete(request: Request, env: Env): Promise<Response>
   return json({ ok: true, slug, ...(indexWarning ? { indexWarning } : {}) });
 }
 
+// Reordering writes just the `order` field on a single file — the admin
+// computes a fractional value (the midpoint of the item's new neighbors)
+// client-side, so a drag-and-drop move never needs to touch, read, or even
+// know about any file but the one that moved.
+async function handleVideosReorder(request: Request, env: Env): Promise<Response> {
+  const body = (await request.json().catch(() => ({}))) as { slug?: string; order?: number };
+  if (!body.slug || typeof body.order !== 'number') {
+    return json({ error: 'Expects { slug, order }' }, 400);
+  }
+
+  const filePath = `${VIDEOS_DIR}/${body.slug}.md`;
+  const fileRes = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
+  if (!fileRes.ok) return json({ error: 'Video not found' }, 404);
+  const fileData = (await fileRes.json()) as { content: string; sha: string };
+  const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+  const { data, body: mdBody } = parseFrontmatter(raw);
+
+  const frontmatter = toFrontmatter({ ...data, order: body.order });
+  const fileContent = `${frontmatter}\n\n${mdBody}\n`;
+  const res = await putFile(env, filePath, fileContent, fileData.sha, `Reorder ${body.slug}`);
+  if (!res.ok) {
+    const err = await res.text();
+    return json({ error: 'GitHub commit failed', details: err }, 502);
+  }
+
+  const index = await readIndex(env);
+  let indexWarning: string | undefined;
+  if ('error' in index) {
+    indexWarning = index.error;
+  } else {
+    const items = index.items.map((it) => (it.slug === body.slug ? { ...it, order: body.order! } : it));
+    const updateRes = await writeIndex(env, items, index.sha, `Reorder ${body.slug} in work index`);
+    if (!updateRes.ok) indexWarning = 'Reordered, but the Work index could not be updated — use "Rebuild Index".';
+  }
+
+  return json({ ok: true, ...(indexWarning ? { indexWarning } : {}) });
+}
+
 async function handleTagsPost(request: Request, env: Env): Promise<Response> {
   const body = (await request.json().catch(() => ({}))) as {
     action?: 'rename' | 'delete';
@@ -319,6 +358,7 @@ async function handleTagsPost(request: Request, env: Env): Promise<Response> {
   if (body.action === 'rename' && !body.newTag?.trim()) {
     return json({ error: 'newTag is required for rename' }, 400);
   }
+  const tag = body.tag; // narrowed to string above; re-bound so closures below see that
 
   const index = await readIndex(env);
   if ('error' in index) return json({ error: index.error }, 502);
@@ -326,7 +366,7 @@ async function handleTagsPost(request: Request, env: Env): Promise<Response> {
   // The index already knows which slugs have this tag, so only those files
   // need to be touched at all — no need to read (or even list) every video
   // in the catalog just to check membership.
-  const affectedSlugs = index.items.filter((it) => it.tags.includes(body.tag)).map((it) => it.slug);
+  const affectedSlugs = index.items.filter((it) => it.tags.includes(tag)).map((it) => it.slug);
 
   const updated: string[] = [];
   const failed: string[] = [];
@@ -346,12 +386,12 @@ async function handleTagsPost(request: Request, env: Env): Promise<Response> {
     const tags: string[] = Array.isArray(data.tags) ? data.tags : [];
 
     const newTags =
-      body.action === 'delete' ? tags.filter((t) => t !== body.tag) : tags.map((t) => (t === body.tag ? body.newTag : t));
+      body.action === 'delete' ? tags.filter((t) => t !== tag) : tags.map((t) => (t === tag ? body.newTag : t));
 
     const frontmatter = toFrontmatter({ ...data, tags: newTags });
     const fileContent = `${frontmatter}\n\n${mdBody}\n`;
     const message =
-      body.action === 'delete' ? `Remove tag "${body.tag}" from ${slug}` : `Rename tag "${body.tag}" to "${body.newTag}" on ${slug}`;
+      body.action === 'delete' ? `Remove tag "${tag}" from ${slug}` : `Rename tag "${tag}" to "${body.newTag}" on ${slug}`;
     const res = await putFile(env, filePath, fileContent, fileData.sha, message);
     if (res.ok) updated.push(slug);
     else failed.push(slug);
@@ -363,15 +403,68 @@ async function handleTagsPost(request: Request, env: Env): Promise<Response> {
   const newIndexItems = index.items.map((it) => {
     if (!updated.includes(it.slug)) return it;
     const newTags =
-      body.action === 'delete' ? it.tags.filter((t) => t !== body.tag) : it.tags.map((t) => (t === body.tag ? body.newTag! : t));
+      body.action === 'delete' ? it.tags.filter((t) => t !== tag) : it.tags.map((t) => (t === tag ? body.newTag! : t));
     return { ...it, tags: newTags };
   });
   const indexRes = await writeIndex(
     env,
     newIndexItems,
     index.sha,
-    body.action === 'delete' ? `Remove tag "${body.tag}" from work index` : `Rename tag "${body.tag}" to "${body.newTag}" in work index`
+    body.action === 'delete' ? `Remove tag "${tag}" from work index` : `Rename tag "${tag}" to "${body.newTag}" in work index`
   );
+  const indexWarning = !indexRes.ok ? 'Tags updated, but the Work index could not be updated — use "Rebuild Index".' : undefined;
+
+  return json({ ok: true, updated, failed, ...(indexWarning ? { indexWarning } : {}) });
+}
+
+// Bulk tag edit: apply the same add/remove tag sets to an explicit list of
+// selected videos in one action (the admin's Work list multi-select), as
+// opposed to handleTagsPost's rename/delete which acts on every video that
+// already carries a given tag.
+async function handleTagsBulkPost(request: Request, env: Env): Promise<Response> {
+  const body = (await request.json().catch(() => ({}))) as {
+    slugs?: string[];
+    add?: string[];
+    remove?: string[];
+  };
+  const slugs = Array.isArray(body.slugs) ? body.slugs.filter((s) => typeof s === 'string' && s) : [];
+  const add = Array.isArray(body.add) ? body.add.filter((t) => typeof t === 'string' && t.trim()) : [];
+  const remove = Array.isArray(body.remove) ? body.remove.filter((t) => typeof t === 'string' && t.trim()) : [];
+  if (slugs.length === 0) return json({ error: 'slugs must be a non-empty array' }, 400);
+  if (add.length === 0 && remove.length === 0) return json({ error: 'Provide at least one tag to add or remove' }, 400);
+
+  const index = await readIndex(env);
+  if ('error' in index) return json({ error: index.error }, 502);
+
+  const updated: string[] = [];
+  const failed: string[] = [];
+
+  for (const slug of slugs) {
+    const filePath = `${VIDEOS_DIR}/${slug}.md`;
+    const fileRes = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
+    if (!fileRes.ok) {
+      failed.push(slug);
+      continue;
+    }
+    const fileData = (await fileRes.json()) as { content: string; sha: string };
+    const raw = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+    const { data, body: mdBody } = parseFrontmatter(raw);
+    const tags: string[] = Array.isArray(data.tags) ? data.tags : [];
+
+    const newTags = [...new Set([...tags.filter((t) => !remove.includes(t)), ...add])];
+
+    const frontmatter = toFrontmatter({ ...data, tags: newTags });
+    const fileContent = `${frontmatter}\n\n${mdBody}\n`;
+    const res = await putFile(env, filePath, fileContent, fileData.sha, `Bulk tag update: ${slug}`);
+    if (res.ok) updated.push(slug);
+    else failed.push(slug);
+  }
+
+  const newIndexItems = index.items.map((it) => {
+    if (!updated.includes(it.slug)) return it;
+    return { ...it, tags: [...new Set([...it.tags.filter((t) => !remove.includes(t)), ...add])] };
+  });
+  const indexRes = await writeIndex(env, newIndexItems, index.sha, `Bulk tag update for ${updated.length} video(s)`);
   const indexWarning = !indexRes.ok ? 'Tags updated, but the Work index could not be updated — use "Rebuild Index".' : undefined;
 
   return json({ ok: true, updated, failed, ...(indexWarning ? { indexWarning } : {}) });
@@ -397,6 +490,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     stills: body.stills || [],
     urlSlug: slug,
     hidden: !!body.hidden,
+    order: typeof body.order === 'number' ? body.order : 0,
   });
 
   const fileContent = `${frontmatter}\n\n${body.description || ''}\n`;
@@ -429,6 +523,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
       tags: Array.isArray(body.tags) ? body.tags : [],
       uploadDate: body.uploadDate || '',
       hidden: !!body.hidden,
+      order: typeof body.order === 'number' ? body.order : 0,
     });
     const updateRes = await writeIndex(env, items, index.sha, `Update work index for ${slug}`);
     if (!updateRes.ok) indexWarning = 'Video saved, but the Work index could not be updated — use "Rebuild Index".';
@@ -463,6 +558,7 @@ async function handleVideosReindex(_request: Request, env: Env): Promise<Respons
           tags: Array.isArray(data.tags) ? data.tags : [],
           uploadDate: data.uploadDate ?? '',
           hidden: !!data.hidden,
+          order: typeof data.order === 'number' ? data.order : 0,
         };
       })
     );
@@ -550,7 +646,14 @@ async function router(request: Request, env: Env): Promise<Response> {
   const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/';
   const isAdminPage = !isLoginPage && (pathname === '/admin' || pathname === '/admin/' || pathname.startsWith('/admin/'));
   const isProtectedApi =
-    pathname === '/api/videos' || pathname === '/api/videos/reindex' || pathname === '/api/settings' || pathname === '/api/tags';
+    pathname === '/api/videos' ||
+    pathname === '/api/videos/reindex' ||
+    pathname === '/api/videos/reorder' ||
+    pathname === '/api/settings' ||
+    pathname === '/api/tags' ||
+    pathname === '/api/tags/bulk' ||
+    pathname === '/api/layout' ||
+    pathname === '/api/seo';
 
   if (isAdminPage || isProtectedApi) {
     const authed = await isAuthenticated(request, env);
@@ -570,6 +673,10 @@ async function router(request: Request, env: Env): Promise<Response> {
     return handleVideosReindex(request, env);
   }
 
+  if (pathname === '/api/videos/reorder' && request.method === 'POST') {
+    return handleVideosReorder(request, env);
+  }
+
   if (pathname === '/api/settings') {
     if (request.method === 'GET') return handleSettingsGet(request, env);
     if (request.method === 'POST') return handleSettingsPost(request, env);
@@ -577,6 +684,10 @@ async function router(request: Request, env: Env): Promise<Response> {
 
   if (pathname === '/api/tags' && request.method === 'POST') {
     return handleTagsPost(request, env);
+  }
+
+  if (pathname === '/api/tags/bulk' && request.method === 'POST') {
+    return handleTagsBulkPost(request, env);
   }
 
   // Everything else — every static page, image, and the login page

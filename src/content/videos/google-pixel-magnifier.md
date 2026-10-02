@@ -9,6 +9,7 @@ projectName: "Pixel \"Magnifier\""
 uploadDate: "2023-09-01"
 tags: ["commercial", "technology", "accessibility"]
 urlSlug: "google-pixel-magnifier"
+order: 100
 featured: false
 stills: []
 ---
