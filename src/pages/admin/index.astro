@@ -141,7 +141,16 @@ import Layout from '../../layouts/Layout.astro';
             <form id="work-item-form">
               <input type="hidden" name="originalSlug" />
               <input type="hidden" name="order" value="0" />
-              <label>Title <input name="title" required /></label>
+              <label>Header <input name="title" required /></label>
+              <p class="section-hint">The on-page heading above the description. Separate from the SEO Page Title below.</p>
+
+              <label>Page Title (optional — SEO)
+                <input name="pageTitle" placeholder='e.g. Beck × Gustaf "Close" | Filmmaker Danny Dwyer' />
+              </label>
+              <p class="section-hint">
+                Sets the browser tab title, Google search snippet, and link-preview title exactly as typed — nothing is
+                appended. Leave blank to use "Header · Danny Dwyer" automatically.
+              </p>
 
               <fieldset>
                 <legend>Video link</legend>
@@ -1149,6 +1158,7 @@ import Layout from '../../layouts/Layout.astro';
       (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = slug;
       (workItemForm.elements.namedItem('order') as HTMLInputElement).value = String(fields.order ?? 0);
       (workItemForm.elements.namedItem('title') as HTMLInputElement).value = fields.title ?? '';
+      (workItemForm.elements.namedItem('pageTitle') as HTMLInputElement).value = fields.pageTitle ?? '';
       (workItemForm.elements.namedItem('platform') as HTMLSelectElement).value = fields.platform ?? 'youtube';
       (workItemForm.elements.namedItem('videoId') as HTMLInputElement).value = fields.videoId ?? '';
       (workItemForm.elements.namedItem('thumbnailUrl') as HTMLInputElement).value = fields.thumbnailUrl ?? '';
@@ -1235,12 +1245,18 @@ import Layout from '../../layouts/Layout.astro';
     }
 
     status.textContent = data.indexWarning ? `Saved. ${data.indexWarning}` : 'Saved.';
+
+    // Stay on this item after saving — Danny often makes several edits in a
+    // row and shouldn't be bounced back to the list each time. Just sync the
+    // form/state to whatever was actually persisted (slug may have changed).
+    editingSlug = data.slug;
+    (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = data.slug;
+    (workItemForm.elements.namedItem('slug') as HTMLInputElement).value = data.slug;
+    workDeleteBtn.hidden = false;
     clearDirty('work-item-form');
     await loadWorkItems(true);
     renderWorkList();
     renderTagManager();
-    workItemView.hidden = true;
-    workListView.hidden = false;
   });
 
   workDeleteBtn.addEventListener('click', async () => {

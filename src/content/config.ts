@@ -4,7 +4,14 @@ const videos = defineCollection({
   type: 'content',
   schema: z.object({
     // Core content
-    title: z.string(),
+    title: z.string(), // the on-page heading (H1) — labeled "Header" in the admin
+    // Optional complete override for <title>/og:title/twitter:title (e.g.
+    // 'Beck × Gustaf "Close" | Filmmaker Danny Dwyer') — used verbatim, with
+    // no site-name suffix appended, since it already frames itself. Falls
+    // back to "{title} · Danny Dwyer" when unset. Distinct from `title`
+    // (the on-page H1) on purpose: a search-snippet-optimized title and a
+    // clean reader-facing heading don't have to be the same string.
+    pageTitle: z.string().optional(),
     // Short version for <meta description> and search/AI snippets — aim for 150-160 characters.
     summary: z.string().max(200),
     // Longer on-page description, can be a full paragraph or two. Written in the body (markdown) below the frontmatter.

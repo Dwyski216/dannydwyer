@@ -7,9 +7,24 @@ interface Props {
   ogImage?: string;
   jsonLd?: Record<string, any>[];
   noindex?: boolean;
+  // A complete, hand-written <title>/og:title/twitter:title — used verbatim,
+  // with no " · site.name" suffix appended (the caller's string already
+  // contains its own framing, e.g. "... | Filmmaker Danny Dwyer"). `title`
+  // is still required when this is set: it's what the rest of the page
+  // (JSON-LD name, breadcrumb label, etc.) continues to use — this prop
+  // only ever affects where the page announces itself outside its own body.
+  titleOverride?: string;
 }
 
-const { title, description, ogImage = '/images/og-default.jpg', jsonLd = [], noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  ogImage = '/images/og-default.jpg',
+  jsonLd = [],
+  noindex = false,
+  titleOverride,
+} = Astro.props;
+const fullTitle = titleOverride || `${title} · ${site.name}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Site-wide Person schema — this is the single highest-leverage AEO addition
@@ -38,21 +53,21 @@ const personSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/favicon.png" />
 
-    <title>{title} · {site.name}</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={`${title} · ${site.name}`} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:url" content={canonicalURL} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} · ${site.name}`} />
+    <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
 

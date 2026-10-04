@@ -498,6 +498,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
 
   const frontmatter = toFrontmatter({
     title: body.title,
+    pageTitle: body.pageTitle || undefined,
     summary: body.summary,
     platform: body.platform === 'vimeo' ? 'vimeo' : 'youtube',
     videoId: body.videoId,
