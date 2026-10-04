@@ -3,7 +3,7 @@ title: "Shinola"
 summary: "Motion, light, and precision. Director of photography Danny Dwyer on studio product cinematography for Shinola watches."
 platform: "vimeo"
 videoId: "196646985"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Shinola"
 uploadDate: "2015-10-01"
 tags: ["commercial", "product", "fashion"]

@@ -3,7 +3,7 @@ title: "Made on Earth — Trailer"
 summary: "Cinematographer Danny Dwyer on Made on Earth, a travel show pilot following designer Heather Ross to the origins of the designs we use today."
 platform: "vimeo"
 videoId: "230197221"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 projectName: "Made on Earth"
 uploadDate: "2016-08-01"
 tags: ["documentary", "trailer"]

@@ -3,7 +3,7 @@ title: "Paramount — Viking Funeral"
 summary: "Flaming arrows, dynamite, and an 1800s cannon. Director of photography Danny Dwyer on Spike TV's farewell and Paramount Network's launch."
 platform: "vimeo"
 videoId: "252745798"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Paramount / History Channel"
 projectName: "Vikings — Viking Funeral Event"
 uploadDate: "2020-11-01"

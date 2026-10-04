@@ -29,7 +29,7 @@ export const GET: APIRoute = async ({ site: astroSite }) => {
       const facts = [
         v.data.projectName ? `Project: ${v.data.projectName}` : null,
         v.data.client ? `Client: ${v.data.client}` : null,
-        `Role: ${v.data.role}`,
+        v.data.credits.length ? `Credits: ${v.data.credits.map((c) => [c.role, c.name].filter(Boolean).join(' — ')).join(', ')}` : null,
         `Tags: ${v.data.tags.join(', ')}`,
       ]
         .filter(Boolean)

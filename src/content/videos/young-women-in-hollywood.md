@@ -3,7 +3,7 @@ title: "Young Women in Hollywood"
 summary: "Kathryn Newton, Sasha Lane, and Lovie Simone in an abandoned LA hillside pool, speaking straight to camera. An ELLE shoot directed and shot by Danny Dwyer."
 platform: "vimeo"
 videoId: "296720683"
-role: "Director & Director of Photography"
+credits: [{"role": "Director & Director of Photography", "name": "Danny Dwyer"}]
 client: "Elle"
 projectName: "Young Women in Hollywood"
 uploadDate: "2017-10-01"

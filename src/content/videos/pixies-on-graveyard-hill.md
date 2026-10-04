@@ -3,7 +3,7 @@ title: "The Pixies — \"On Graveyard Hill\""
 summary: "Crash zooms, in-camera effects, and an underwater slow-mo scene. Danny Dwyer, director of photography on the Pixies' \"On Graveyard Hill.\""
 platform: "vimeo"
 videoId: "397085201"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 projectName: "The Pixies — \"On Graveyard Hill\" (Music Video)"
 uploadDate: "2016-09-01"
 tags: ["music video"]

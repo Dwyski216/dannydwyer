@@ -3,7 +3,7 @@ title: "The King of Jewish Baseball"
 summary: "Batting practice in the streets of New York with Nate Fish, the King of Jewish Baseball. A short by filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "49023898"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 projectName: "The King of Jewish Baseball"
 uploadDate: "2011-09-01"
 tags: ["short film", "comedy"]

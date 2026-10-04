@@ -3,7 +3,7 @@ title: "Gustaf \"Close\""
 summary: "Filmmaker Danny Dwyer co-directed, shot, and cut Gustaf's black-and-white punk video \"Close\" with Beck, inspired by 1970s French photography."
 platform: "vimeo"
 videoId: "938288114"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 projectName: "Gustaf — \"Close\" (Music Video)"
 uploadDate: "2023-05-01"
 tags: ["music video"]

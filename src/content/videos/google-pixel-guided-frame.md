@@ -3,7 +3,7 @@ title: "Google Pixel \"Guided Frame\""
 summary: "A Google Pixel campaign spot spotlighting the Guided Frame accessibility feature."
 platform: "vimeo"
 videoId: "970931647"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Google"
 projectName: "Pixel \"Guided Frame\""
 uploadDate: "2023-09-01"

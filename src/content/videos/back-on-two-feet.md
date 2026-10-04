@@ -3,7 +3,7 @@ title: "Back on Two Feet"
 summary: "Following Marine veteran Kirstie Ennis through surgery and recovery. Back on 2 Feet, presented by Channing Tatum in NYC. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "174059585"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Cosmopolitan"
 projectName: "Back on Two Feet"
 uploadDate: "2016-11-01"

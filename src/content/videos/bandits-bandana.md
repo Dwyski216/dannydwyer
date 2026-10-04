@@ -3,7 +3,7 @@ title: "Bandits — Bandana"
 summary: "Porsche donuts, desert dust, and 16mm reversal on a vintage Bolex. Danny Dwyer, director of photography on the Bandits Bandanas campaign."
 platform: "vimeo"
 videoId: "414178591"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Bandits"
 projectName: "Bandana"
 uploadDate: "2017-05-01"

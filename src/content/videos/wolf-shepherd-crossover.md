@@ -3,7 +3,7 @@ title: "Wolf & Shepherd — Crossover"
 summary: "15-second commercial for Wolf & Shepherd's Crossover shoe style."
 platform: "vimeo"
 videoId: "478342177"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Wolf & Shepherd"
 projectName: "Crossover"
 uploadDate: "2017-08-01"

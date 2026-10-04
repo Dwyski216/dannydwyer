@@ -3,7 +3,7 @@ title: "Reel (Temporary)"
 summary: "Temporary reel on the home page while the primary Vimeo reel is made public again."
 platform: "youtube"
 videoId: "Tsm2ZpD8fpM"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 uploadDate: "2026-09-11"
 tags: ["reel"]
 urlSlug: "temp-reel"

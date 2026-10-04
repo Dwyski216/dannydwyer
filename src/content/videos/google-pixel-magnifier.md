@@ -3,7 +3,7 @@ title: "Google Pixel \"Magnifier\""
 summary: "A Google Pixel campaign spot spotlighting the Magnifier accessibility feature."
 platform: "vimeo"
 videoId: "970932751"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Google"
 projectName: "Pixel \"Magnifier\""
 uploadDate: "2023-09-01"

@@ -3,7 +3,7 @@ title: "Mr. Cartoon // Cazadores Collab for Saucey"
 summary: "Mr. Cartoon freestyles a D\u00eda de los Muertos Cazadores bottle, then a lowrider ride through the Valley. By filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "244121988"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 client: "Cazadores / Saucey"
 projectName: "Mr. Cartoon Collaboration"
 uploadDate: "2017-01-01"

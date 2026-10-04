@@ -3,7 +3,7 @@ title: "Chesterland — Teaser"
 summary: "Teaser for Chesterland, a half-hour dramedy pilot set in blue-collar America."
 platform: "vimeo"
 videoId: "163481452"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 projectName: "Chesterland"
 uploadDate: "2016-04-01"
 tags: ["pilot", "dramedy", "teaser"]

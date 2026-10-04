@@ -3,7 +3,7 @@ title: "Dave Foley's Unwritten Mint Commercial"
 summary: "A Dave Foley tweet became a Mint Mobile commercial in under 24 hours. Cinematographer Danny Dwyer on a spot produced, shot, and cut in under 12."
 platform: "vimeo"
 videoId: "701361560"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 client: "Mint Mobile"
 projectName: "Dave Foley Spot"
 uploadDate: "2021-06-01"

@@ -3,7 +3,7 @@ title: "Wolf & Shepherd — Monaco"
 summary: "From a morning cast off the Malibu Pier to an afternoon meeting, same shoes. Filmmaker Danny Dwyer on the Wolf & Shepherd Monaco."
 platform: "vimeo"
 videoId: "478342393"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 client: "Wolf & Shepherd"
 projectName: "Monaco"
 uploadDate: "2017-08-01"

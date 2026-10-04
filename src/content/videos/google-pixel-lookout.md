@@ -3,7 +3,7 @@ title: "Google Pixel \"Lookout\""
 summary: "A Google Pixel campaign spot spotlighting the Lookout accessibility feature."
 platform: "vimeo"
 videoId: "970932116"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Google"
 projectName: "Pixel \"Lookout\""
 uploadDate: "2023-09-01"

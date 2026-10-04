@@ -3,7 +3,7 @@ title: "Copywrite — \"Martin Shkreli Killah\""
 summary: "Filmmaker Danny Dwyer on rapper Copywrite's \"Martin Shkreli Killah,\" a Columbus hang turned music video with pure gonzo energy."
 platform: "vimeo"
 videoId: "177432830"
-role: "Co-Director & Director of Photography"
+credits: [{"role": "Co-Director & Director of Photography", "name": "Danny Dwyer"}]
 projectName: "Copywrite — \"Martin Shkreli Killah\" (Music Video)"
 uploadDate: "2017-02-01"
 tags: ["music video"]

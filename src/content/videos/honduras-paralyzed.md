@@ -3,7 +3,7 @@ title: "Honduras — \"Paralyzed\" (Music Video)"
 summary: "A love hotel, a pillow fight, a blown breaker, and one hour to shoot it. Honduras' \"Paralyzed,\" shot by director of photography Danny Dwyer."
 platform: "vimeo"
 videoId: "132994777"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 projectName: "Honduras — \"Paralyzed\" (Music Video)"
 uploadDate: "2012-11-01"
 tags: ["music video"]

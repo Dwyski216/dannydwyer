@@ -3,7 +3,7 @@ title: "PUMA — Beatbot"
 summary: "A brand doc on PUMA's BeatBot, a robot built with NASA and MIT engineers to run at Usain Bolt's pace. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "166239962"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "PUMA"
 projectName: "Beatbot"
 uploadDate: "2016-06-01"

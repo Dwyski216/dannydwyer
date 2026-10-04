@@ -27,7 +27,17 @@ const videos = defineCollection({
 
     // Production facts — these power the VideoObject / CreativeWork structured data
     // and are the kind of concrete, extractable facts AI answer engines favor.
-    role: z.string().default('Director of Photography'),
+    // A flexible, ordered list of who worked on this and in what capacity —
+    // not just Danny's own role, so a project with a separate editor,
+    // producer, etc. can credit them too. Order is display order.
+    credits: z
+      .array(
+        z.object({
+          role: z.string(),
+          name: z.string(),
+        })
+      )
+      .default([]),
     client: z.string().optional(), // e.g. "A24" or "Independent"
     projectName: z.string().optional(), // e.g. "Midnight Harbor (short film)"
     uploadDate: z.string(), // ISO date, e.g. "2026-03-14" — used for both display and schema

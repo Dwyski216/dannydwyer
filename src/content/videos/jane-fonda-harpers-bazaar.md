@@ -3,7 +3,7 @@ title: "Jane Fonda's Guide to Love, Friendship, and Political Activism"
 summary: "A one-on-one sit-down with Jane Fonda for Harper's Bazaar. Cinematographer Danny Dwyer on filming a living legend."
 platform: "vimeo"
 videoId: "744782971"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Harper's Bazaar"
 projectName: "Jane Fonda Feature"
 uploadDate: "2020-09-01"

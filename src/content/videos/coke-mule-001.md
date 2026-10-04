@@ -3,7 +3,7 @@ title: "COKE_MULE_001"
 summary: "Working file — client and project details not yet confirmed."
 platform: "vimeo"
 videoId: "252245441"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 uploadDate: "2017-03-01"
 tags: []
 urlSlug: "coke-mule-001"

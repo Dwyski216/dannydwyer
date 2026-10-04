@@ -3,7 +3,7 @@ title: "BORED_FINAL_DWYER"
 summary: "A streetwear launch film built around one T-shirt, \"Cash for Souls,\" with full creative freedom. Filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "610269432"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 uploadDate: "2018-08-01"
 tags: []
 urlSlug: "bored-final-dwyer"

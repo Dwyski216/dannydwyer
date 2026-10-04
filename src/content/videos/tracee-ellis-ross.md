@@ -3,7 +3,7 @@ title: "Tracee Ellis Ross"
 summary: "Hot tubs and nonstop laughs. Director of photography Danny Dwyer on shooting Tracee Ellis Ross for Harper's Bazaar."
 platform: "vimeo"
 videoId: "641269866"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 uploadDate: "2019-11-01"
 tags: ["celebrity"]
 urlSlug: "tracee-ellis-ross"

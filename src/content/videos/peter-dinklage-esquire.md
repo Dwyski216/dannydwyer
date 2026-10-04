@@ -3,7 +3,7 @@ title: "Peter Dinklage — Esquire Magazine Cover (March)"
 summary: "Peter Dinklage in custom Giorgio Armani for Esquire. By filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "87905027"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 client: "Esquire"
 projectName: "Peter Dinklage Cover Story"
 uploadDate: "2012-02-01"

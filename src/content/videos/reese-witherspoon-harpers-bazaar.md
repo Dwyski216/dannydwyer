@@ -3,7 +3,7 @@ title: "Reese Witherspoon for Harper's Bazaar"
 summary: "A snake, a cover story, and Reese Witherspoon, completely unbothered. Director of photography Danny Dwyer on her Harper's Bazaar video promo."
 platform: "vimeo"
 videoId: "368946293"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Harper's Bazaar"
 projectName: "Reese Witherspoon Cover Story"
 uploadDate: "2018-09-01"

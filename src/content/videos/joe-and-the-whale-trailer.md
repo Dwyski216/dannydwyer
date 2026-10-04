@@ -3,7 +3,7 @@ title: "Joe and the Whale — Official Trailer"
 summary: "Joe and the Whale, directed by Fernando Santa Cruz and shot in the Tenderloin, screened at the Cannes Short Film Corner. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "161122594"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 projectName: "Joe and the Whale"
 uploadDate: "2016-03-01"
 tags: ["short film", "trailer"]

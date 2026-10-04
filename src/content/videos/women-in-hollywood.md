@@ -3,7 +3,7 @@ title: "Women in Hollywood"
 summary: "Twelve months filming ELLE's Women in Hollywood alongside photographer Zoey Grossman. Director of photography Danny Dwyer."
 platform: "vimeo"
 videoId: "368942744"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Harper's Bazaar"
 projectName: "Women in Hollywood"
 uploadDate: "2018-09-01"

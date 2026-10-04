@@ -3,7 +3,7 @@ title: "The Escape Artist"
 summary: "An art film with Kimbra Audrey Lo at a secret New York spot, following her through her self-portraits. By filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "144151076"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 projectName: "The Escape Artist"
 uploadDate: "2013-02-01"
 tags: ["short film", "narrative"]

@@ -3,7 +3,7 @@ title: "Mint Mobile's Customer Awards"
 summary: "Mint Mobile's own spin on the Oscars, starring Ryan Reynolds. Filmmaker Danny Dwyer on directing, shooting, and cutting it with Maximum Effort."
 platform: "vimeo"
 videoId: "701361598"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 client: "Mint Mobile"
 projectName: "Customer Awards"
 uploadDate: "2021-06-01"

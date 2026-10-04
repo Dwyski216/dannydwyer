@@ -168,13 +168,16 @@ import Layout from '../../layouts/Layout.astro';
                 <textarea name="description" rows="5"></textarea>
               </label>
 
+              <div class="row">
+                <label>Client <input name="client" /></label>
+                <label>Project Name <input name="projectName" /></label>
+              </div>
+
               <fieldset>
                 <legend>Credits</legend>
-                <div class="row">
-                  <label>Role <input name="role" value="Director of Photography" /></label>
-                  <label>Client <input name="client" /></label>
-                </div>
-                <label>Project Name <input name="projectName" /></label>
+                <p class="section-hint">Who worked on this, and in what role — add as many or as few as apply.</p>
+                <div id="credits-list" class="credits-list"></div>
+                <button type="button" id="credit-add-btn" class="btn btn-ghost">+ Add Credit</button>
               </fieldset>
 
               <div class="row">
@@ -629,6 +632,7 @@ import Layout from '../../layouts/Layout.astro';
   let workInitialized = false;
   let editingSlug: string | null = null;
   let pendingTags = new Set<string>();
+  let pendingCredits: { role: string; name: string }[] = [];
   let selectedSlugs = new Set<string>();
 
   type SortKey = 'order' | 'title' | 'uploadDate' | 'hidden';
@@ -955,6 +959,74 @@ import Layout from '../../layouts/Layout.astro';
     renderWorkTagPicker();
   });
 
+  // Credits are a flexible, admin-ordered list of {role, name} pairs — unlike
+  // tags, order matters (it's display order on the Work item page) and rows
+  // can repeat the same role, so this is plain inputs with add/remove, not a
+  // pill picker. Rows re-render only on add/remove/move; typing into a
+  // role/name field updates pendingCredits in place via one delegated
+  // 'input' listener, so the field the admin is actively typing in is never
+  // itself replaced mid-keystroke.
+  const creditsListEl = document.getElementById('credits-list') as HTMLElement;
+
+  function renderCreditsList() {
+    creditsListEl.innerHTML = pendingCredits.length
+      ? pendingCredits
+          .map(
+            (c, i) => `
+        <div class="credit-row" data-index="${i}">
+          <label>Role
+            <input data-credit-field="role" data-index="${i}" value="${escapeHtml(c.role)}" placeholder="e.g. Director of Photography" />
+          </label>
+          <label>Name
+            <input data-credit-field="name" data-index="${i}" value="${escapeHtml(c.name)}" placeholder="e.g. Danny Dwyer" />
+          </label>
+          <button type="button" class="btn-move" data-credit-up="${i}" ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
+          <button type="button" class="btn-move" data-credit-down="${i}" ${i === pendingCredits.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>
+          <button type="button" class="credit-remove" data-credit-remove="${i}" aria-label="Remove credit">×</button>
+        </div>`
+          )
+          .join('')
+      : '<p class="section-hint">No credits yet — add one below.</p>';
+
+    creditsListEl.querySelectorAll('[data-credit-remove]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        pendingCredits.splice(Number((btn as HTMLElement).dataset.creditRemove), 1);
+        markDirty('work-item-form');
+        renderCreditsList();
+      });
+    });
+    creditsListEl.querySelectorAll('[data-credit-up]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const i = Number((btn as HTMLElement).dataset.creditUp);
+        [pendingCredits[i - 1], pendingCredits[i]] = [pendingCredits[i], pendingCredits[i - 1]];
+        markDirty('work-item-form');
+        renderCreditsList();
+      });
+    });
+    creditsListEl.querySelectorAll('[data-credit-down]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const i = Number((btn as HTMLElement).dataset.creditDown);
+        [pendingCredits[i], pendingCredits[i + 1]] = [pendingCredits[i + 1], pendingCredits[i]];
+        markDirty('work-item-form');
+        renderCreditsList();
+      });
+    });
+  }
+
+  creditsListEl.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    const field = target.dataset.creditField as 'role' | 'name' | undefined;
+    if (!field) return;
+    pendingCredits[Number(target.dataset.index)][field] = target.value;
+  });
+
+  document.getElementById('credit-add-btn')?.addEventListener('click', () => {
+    pendingCredits.push({ role: '', name: '' });
+    markDirty('work-item-form');
+    renderCreditsList();
+    (creditsListEl.querySelector(`[data-index="${pendingCredits.length - 1}"][data-credit-field="role"]`) as HTMLInputElement)?.focus();
+  });
+
   function parseRawVideo(raw: string): Record<string, any> {
     const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
     if (!match) return { description: raw };
@@ -993,6 +1065,10 @@ import Layout from '../../layouts/Layout.astro';
     editingSlug = null;
     pendingTags = new Set();
     renderWorkTagPicker();
+    // A brand-new item starts with the same single default credit the old
+    // single-Role field used to — editable/removable like any other row.
+    pendingCredits = [{ role: 'Director of Photography', name: 'Danny Dwyer' }];
+    renderCreditsList();
     workDeleteBtn.hidden = true;
     document.getElementById('work-item-status')!.textContent = '';
     clearDirty('work-item-form');
@@ -1018,7 +1094,10 @@ import Layout from '../../layouts/Layout.astro';
       (workItemForm.elements.namedItem('thumbnailUrl') as HTMLInputElement).value = fields.thumbnailUrl ?? '';
       (workItemForm.elements.namedItem('summary') as HTMLTextAreaElement).value = fields.summary ?? '';
       (workItemForm.elements.namedItem('description') as HTMLTextAreaElement).value = fields.description ?? '';
-      (workItemForm.elements.namedItem('role') as HTMLInputElement).value = fields.role ?? 'Director of Photography';
+      pendingCredits = Array.isArray(fields.credits) && fields.credits.length
+        ? fields.credits.map((c: any) => ({ role: c.role ?? '', name: c.name ?? '' }))
+        : [{ role: 'Director of Photography', name: 'Danny Dwyer' }];
+      renderCreditsList();
       (workItemForm.elements.namedItem('client') as HTMLInputElement).value = fields.client ?? '';
       (workItemForm.elements.namedItem('projectName') as HTMLInputElement).value = fields.projectName ?? '';
       (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate ?? '';
@@ -1054,6 +1133,9 @@ import Layout from '../../layouts/Layout.astro';
     const fd = new FormData(workItemForm);
     const payload: Record<string, any> = Object.fromEntries(fd.entries());
     payload.tags = Array.from(pendingTags);
+    payload.credits = pendingCredits
+      .map((c) => ({ role: c.role.trim(), name: c.name.trim() }))
+      .filter((c) => c.role || c.name);
     payload.hidden = fd.get('hidden') === 'on';
     payload.order = Number(payload.order) || 0;
     payload.stills = String(payload.stills || '')
@@ -2014,6 +2096,52 @@ import Layout from '../../layouts/Layout.astro';
 
   .tag-chip button:hover {
     color: var(--accent);
+  }
+
+  .credits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .credit-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto auto auto;
+    gap: 0.6rem;
+    align-items: end;
+  }
+
+  .credit-row label {
+    margin: 0;
+  }
+
+  .credit-row .btn-move,
+  .credit-row .credit-remove {
+    align-self: end;
+  }
+
+  .credit-remove {
+    font-family: var(--font-body);
+    background: none;
+    border: 1px solid var(--hairline);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .credit-remove:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 560px) {
+    .credit-row {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   .form-actions {

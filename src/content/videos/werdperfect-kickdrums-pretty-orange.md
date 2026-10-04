@@ -3,7 +3,7 @@ title: "\"Pretty Orange\" — Werdperfect x The Kickdrums"
 summary: "An LA orange grove, 105-degree heat, bees, and turtles. Filmmaker Danny Dwyer on Werdperfect's \"Pretty Orange,\" all in camera."
 platform: "vimeo"
 videoId: "875654186"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 projectName: "\"Pretty Orange\" (Music Video)"
 uploadDate: "2023-02-01"
 tags: ["music video","comedy"]

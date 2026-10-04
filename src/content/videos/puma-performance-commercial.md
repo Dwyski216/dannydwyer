@@ -3,7 +3,7 @@ title: "PUMA Performance Commercial"
 summary: "Run-and-gun campaign shoot for PUMA 24/7 with Lewis Hamilton, Skylar Diggins-Smith, and Jade Chynoweth. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "252966771"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "PUMA"
 projectName: "Performance Commercial"
 uploadDate: "2017-03-01"

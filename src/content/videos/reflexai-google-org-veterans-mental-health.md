@@ -3,7 +3,7 @@ title: "Using AI to Help Veterans Train for Mental Health Conversations"
 summary: "Director of photography Danny Dwyer on ReflexAI, backed by Google, which helps veterans with PTSD connect with the people who understand them best."
 platform: "vimeo"
 videoId: "1074104148"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Google.org"
 projectName: "ReflexAI — Veteran Mental Health Training"
 uploadDate: "2025-02-01"

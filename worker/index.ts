@@ -502,7 +502,11 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     platform: body.platform === 'vimeo' ? 'vimeo' : 'youtube',
     videoId: body.videoId,
     thumbnailUrl: body.thumbnailUrl || undefined,
-    role: body.role || 'Director of Photography',
+    credits: Array.isArray(body.credits)
+      ? body.credits
+          .filter((c: any) => c && (c.role || c.name))
+          .map((c: any) => ({ role: String(c.role || ''), name: String(c.name || '') }))
+      : [],
     client: body.client || undefined,
     projectName: body.projectName || undefined,
     uploadDate: body.uploadDate,

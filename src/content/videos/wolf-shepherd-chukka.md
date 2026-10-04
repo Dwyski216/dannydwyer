@@ -3,7 +3,7 @@ title: "Wolf & Shepherd — Chukka"
 summary: "Filmmaker Danny Dwyer takes the Wolf & Shepherd Chukka into Malibu Canyon, where the colors of the Santa Monica Mountains match the boot."
 platform: "vimeo"
 videoId: "478341941"
-role: "Director, DP & Editor"
+credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
 client: "Wolf & Shepherd"
 projectName: "Chukka"
 uploadDate: "2017-08-01"

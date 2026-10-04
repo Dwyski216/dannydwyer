@@ -53,10 +53,9 @@ const jsonLd = [
     duration: d.durationISO,
     embedUrl,
     url: pageUrl,
-    creator: {
-      '@type': 'Person',
-      jobTitle: d.role,
-    },
+    ...(d.credits.length
+      ? { creator: d.credits.map((c) => ({ '@type': 'Person', name: c.name, jobTitle: c.role })) }
+      : {}),
     ...(d.client ? { productionCompany: d.client } : {}),
   },
   {
@@ -104,9 +103,6 @@ const jsonLd = [
 
       <aside class="facts col-4">
         <dl>
-          <dt>Role</dt>
-          <dd>{d.role}</dd>
-
           {d.projectName && (
             <>
               <dt>Project</dt>
@@ -123,6 +119,21 @@ const jsonLd = [
 
           <dt>Date</dt>
           <dd>{new Date(d.uploadDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</dd>
+
+          {d.credits.length > 0 && (
+            <>
+              <dt>Credits</dt>
+              <dd>
+                <ul class="credits">
+                  {d.credits.map((c) => (
+                    <li>
+                      {c.role}{c.role && c.name && ' — '}{c.name}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </>
+          )}
 
           <dt>Tags</dt>
           <dd class="tags">
@@ -262,6 +273,15 @@ const jsonLd = [
   dd {
     margin: 0.25rem 0 0;
     font-size: 0.95rem;
+  }
+
+  .credits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
   }
 
   dd.tags {

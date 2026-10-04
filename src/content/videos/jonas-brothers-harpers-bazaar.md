@@ -3,7 +3,7 @@ title: "The Jonas Brothers Really, Really Miss Game of Thrones"
 summary: "Imaginary dragons and the Jonas Brothers. Director of photography Danny Dwyer on the Game of Thrones final season spot."
 platform: "vimeo"
 videoId: "347821791"
-role: "Director of Photography"
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
 client: "Harper's Bazaar"
 projectName: "Jonas Brothers Feature"
 uploadDate: "2019-05-01"

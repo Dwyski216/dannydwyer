@@ -3,7 +3,7 @@ title: "Nychos x Sheryo x The Yok"
 summary: "Filmmaker Danny Dwyer films Nychos, Sheryo, and The Yok freestyling a mural on a corrugated garage door for King Brown Magazine."
 platform: "vimeo"
 videoId: "72496004"
-role: "Director, DP, & Editor"
+credits: [{"role": "Director, DP, & Editor", "name": "Danny Dwyer"}]
 projectName: "King Brown Magazine Issue 9 Release"
 uploadDate: "2013-08-01"
 tags: ["documentary", "street art"]
