@@ -10,16 +10,6 @@
     "hidden": false
   },
   {
-    "slug": "bandits-bandana",
-    "title": "Bandits — Bandana",
-    "tags": [
-      "commercial",
-      "product"
-    ],
-    "uploadDate": "2017-05-01",
-    "hidden": false
-  },
-  {
     "slug": "bridge",
     "title": "Bridge",
     "tags": [
@@ -544,5 +534,16 @@
     "uploadDate": "2017-06-01",
     "hidden": false,
     "order": 330
+  },
+  {
+    "slug": "bandits-bandana",
+    "title": "Bandits Bandana",
+    "tags": [
+      "commercial",
+      "product"
+    ],
+    "uploadDate": "2017-05-01",
+    "hidden": false,
+    "order": 340
   }
 ]
