@@ -340,15 +340,6 @@
     "hidden": false
   },
   {
-    "slug": "the-war-for-home",
-    "title": "The War for Home",
-    "tags": [
-      "documentary"
-    ],
-    "uploadDate": "2017-06-01",
-    "hidden": false
-  },
-  {
     "slug": "tracee-ellis-ross",
     "title": "Tracee Ellis Ross",
     "tags": [
@@ -543,5 +534,15 @@
     "uploadDate": "2024-06-01",
     "hidden": false,
     "order": 40
+  },
+  {
+    "slug": "the-war-for-home",
+    "title": "Born x Raised — War for Home",
+    "tags": [
+      "documentary"
+    ],
+    "uploadDate": "2017-06-01",
+    "hidden": false,
+    "order": 330
   }
 ]
