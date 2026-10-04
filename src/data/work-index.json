@@ -31,17 +31,6 @@
     "hidden": false
   },
   {
-    "slug": "big-age-audible-trailer",
-    "title": "Big Age — Audible Trailer",
-    "tags": [
-      "trailer",
-      "audio drama",
-      "commercial"
-    ],
-    "uploadDate": "2024-06-01",
-    "hidden": false
-  },
-  {
     "slug": "bridge",
     "title": "Bridge",
     "tags": [
@@ -541,5 +530,17 @@
     "uploadDate": "2018-04-01",
     "hidden": false,
     "order": 260
+  },
+  {
+    "slug": "big-age-audible-trailer",
+    "title": "Big Age × Cedric the Entertainer",
+    "tags": [
+      "trailer",
+      "audio drama",
+      "commercial"
+    ],
+    "uploadDate": "2024-06-01",
+    "hidden": false,
+    "order": 40
   }
 ]
