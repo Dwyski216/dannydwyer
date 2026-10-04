@@ -141,9 +141,6 @@ import Layout from '../../layouts/Layout.astro';
             <form id="work-item-form">
               <input type="hidden" name="originalSlug" />
               <input type="hidden" name="order" value="0" />
-              <label>Header <input name="title" required /></label>
-              <p class="section-hint">The on-page heading above the description. Separate from the SEO Page Title below.</p>
-
               <label>Page Title (optional — SEO)
                 <input name="pageTitle" placeholder='e.g. Beck × Gustaf "Close" | Filmmaker Danny Dwyer' />
               </label>
@@ -151,6 +148,10 @@ import Layout from '../../layouts/Layout.astro';
                 Sets the browser tab title, Google search snippet, and link-preview title exactly as typed — nothing is
                 appended. Leave blank to use "Header · Danny Dwyer" automatically.
               </p>
+
+              <label>Short Summary (150–160 characters, used for SEO & search snippets)
+                <textarea name="summary" maxlength="200" rows="2" required></textarea>
+              </label>
 
               <fieldset>
                 <legend>Video link</legend>
@@ -170,9 +171,9 @@ import Layout from '../../layouts/Layout.astro';
                 </label>
               </fieldset>
 
-              <label>Short Summary (150–160 characters, used for SEO & search snippets)
-                <textarea name="summary" maxlength="200" rows="2" required></textarea>
-              </label>
+              <label>Header <input name="title" required /></label>
+              <p class="section-hint">The on-page heading above the description. Separate from the SEO Page Title above.</p>
+
               <label>Description (shown on the item's page)
                 <textarea name="description" rows="5"></textarea>
               </label>
