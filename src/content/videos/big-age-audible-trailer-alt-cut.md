@@ -3,15 +3,16 @@ title: "Big Age — Audible Trailer (Alt Cut)"
 summary: "Director Danny Dwyer on working with Cedric the Entertainer, Jennifer Lewis, and Niecy Nash-Betts for Audible's Big Age."
 platform: "vimeo"
 videoId: "1179055798"
-credits: [{"role": "Director", "name": "Danny Dwyer"}]
+credits: [{"role":"Director","name":"Danny Dwyer"}]
+equipment: []
 client: "Audible"
 projectName: "Big Age (trailer, alternate cut)"
 uploadDate: "2024-06-01"
-tags: ["trailer", "audio drama", "commercial"]
-urlSlug: "big-age-audible-trailer-alt-cut"
-order: 30
-featured: false
+tags: ["trailer","audio drama","commercial"]
 stills: []
+urlSlug: "big-age-audible-trailer-alt-cut"
+hidden: true
+order: 30
 ---
 
 Cedric the Entertainer, Jennifer Lewis, Niecy Nash-Betts. A room full of comedy royalty, and I got to direct a really fun promo for Big Age, streaming on Audible.
