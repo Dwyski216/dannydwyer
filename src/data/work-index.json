@@ -165,15 +165,6 @@
     "hidden": false
   },
   {
-    "slug": "gustaf-close",
-    "title": "Gustaf \"Close\"",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2023-05-01",
-    "hidden": false
-  },
-  {
     "slug": "honduras-hollywood",
     "title": "Honduras — \"Hollywood\" (Official Music Video)",
     "tags": [
@@ -535,5 +526,16 @@
     "uploadDate": "2025-02-01",
     "hidden": false,
     "order": 20
+  },
+  {
+    "slug": "beck-gustaf-close",
+    "title": "Beck × Gustaf \"Close\"",
+    "tags": [
+      "music video",
+      "celebrity"
+    ],
+    "uploadDate": "2023-05-01",
+    "hidden": false,
+    "order": 110
   }
 ]
