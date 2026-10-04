@@ -478,18 +478,6 @@
     "order": 20
   },
   {
-    "slug": "ryan-gosling-mens-health",
-    "title": "Ryan Gosling x Men's Health | The Fall Guy",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "behind-the-scenes"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false,
-    "order": 50
-  },
-  {
     "slug": "pixies-on-graveyard-hill",
     "title": "The Pixies — \"On Graveyard Hill\"",
     "tags": [
@@ -542,5 +530,17 @@
     "uploadDate": "2023-02-01",
     "hidden": false,
     "order": 130
+  },
+  {
+    "slug": "ryan-gosling-mens-health",
+    "title": "Ryan Gosling x Men's Health | The Fall Guy",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "behind-the-scenes"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 50
   }
 ]
