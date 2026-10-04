@@ -1,17 +1,19 @@
 ---
-title: "Columbia // Intuitive Machines // NASA"
+title: "Columbia × Intuitive Machines × NASA"
+pageTitle: "Columbia × Intuitive Machines Moon Landing | DP Danny Dwyer"
 summary: "Filming the first American Moon landing since 1972. Danny Dwyer on Columbia, Intuitive Machines, and NASA in Houston, featuring astronaut Jack Fischer."
 platform: "vimeo"
 videoId: "914552796"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Jesse Canright"},{"role":"Cast","name":"Jack Fischer"}]
+equipment: [{"category":"Camera","item":"Sont FX6"},{"category":"Lens","item":"Cooke S8i Primes 💥🧨🚬"}]
 client: "Columbia Sportswear"
 projectName: "Intuitive Machines Lunar Lander (NASA CLPS mission)"
 uploadDate: "2024-02-01"
-tags: ["documentary", "branded content", "technology", "space"]
-urlSlug: "columbia-intuitive-machines-nasa-v1"
-order: 70
-featured: false
+tags: ["documentary","branded content","technology","space"]
 stills: []
+urlSlug: "columbia-intuitive-machines-nasa-v1"
+hidden: false
+order: 70
 ---
 
 America last landed on the Moon in December 1972. So when the call came asking if I wanted to film a mission going to the Moon, I thought it was a prank.
