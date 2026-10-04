@@ -135,6 +135,21 @@ const jsonLd = [
             </>
           )}
 
+          {d.equipment.length > 0 && (
+            <>
+              <dt>Equipment</dt>
+              <dd>
+                <ul class="credits">
+                  {d.equipment.map((e) => (
+                    <li>
+                      {e.category}{e.category && e.item && ' — '}{e.item}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </>
+          )}
+
           <dt>Tags</dt>
           <dd class="tags">
             {d.tags.map((t) => <a href={`/work?tag=${encodeURIComponent(t.toLowerCase())}`}>{t}</a>)}

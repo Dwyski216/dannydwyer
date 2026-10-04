@@ -38,6 +38,17 @@ const videos = defineCollection({
         })
       )
       .default([]),
+    // A flexible, ordered list of gear used on the shoot — same shape and
+    // admin mechanism as credits (add/remove/reorder rows), just category +
+    // item instead of role + name.
+    equipment: z
+      .array(
+        z.object({
+          category: z.string(),
+          item: z.string(),
+        })
+      )
+      .default([]),
     client: z.string().optional(), // e.g. "A24" or "Independent"
     projectName: z.string().optional(), // e.g. "Midnight Harbor (short film)"
     uploadDate: z.string(), // ISO date, e.g. "2026-03-14" — used for both display and schema

@@ -180,6 +180,13 @@ import Layout from '../../layouts/Layout.astro';
                 <button type="button" id="credit-add-btn" class="btn btn-ghost">+ Add Credit</button>
               </fieldset>
 
+              <fieldset>
+                <legend>Equipment</legend>
+                <p class="section-hint">Gear used on the shoot, by category — add as many or as few as apply.</p>
+                <div id="equipment-list" class="credits-list"></div>
+                <button type="button" id="equipment-add-btn" class="btn btn-ghost">+ Add Equipment</button>
+              </fieldset>
+
               <div class="row">
                 <label>Date <input name="uploadDate" type="date" required /></label>
                 <label>URL slug (leave blank to auto-generate from title)
@@ -633,6 +640,7 @@ import Layout from '../../layouts/Layout.astro';
   let editingSlug: string | null = null;
   let pendingTags = new Set<string>();
   let pendingCredits: { role: string; name: string }[] = [];
+  let pendingEquipment: { category: string; item: string }[] = [];
   let selectedSlugs = new Set<string>();
 
   type SortKey = 'order' | 'title' | 'uploadDate' | 'hidden';
@@ -959,72 +967,122 @@ import Layout from '../../layouts/Layout.astro';
     renderWorkTagPicker();
   });
 
-  // Credits are a flexible, admin-ordered list of {role, name} pairs — unlike
-  // tags, order matters (it's display order on the Work item page) and rows
-  // can repeat the same role, so this is plain inputs with add/remove, not a
-  // pill picker. Rows re-render only on add/remove/move; typing into a
-  // role/name field updates pendingCredits in place via one delegated
-  // 'input' listener, so the field the admin is actively typing in is never
-  // itself replaced mid-keystroke.
-  const creditsListEl = document.getElementById('credits-list') as HTMLElement;
+  // Credits and Equipment are both flexible, admin-ordered lists of
+  // two-field rows (role+name, category+item) — unlike tags, order matters
+  // (it's display order on the Work item page) and rows can repeat the same
+  // value, so this is plain inputs with add/remove/move, not a pill picker.
+  // Rows re-render only on add/remove/move; typing into a field updates the
+  // backing array in place via one delegated 'input' listener per list, so
+  // the field the admin is actively typing in is never itself replaced
+  // mid-keystroke. One generic setup covers both lists — they're mechanically
+  // identical, just different field names and labels.
+  function setupRepeatableRowList<A extends string, B extends string>(opts: {
+    listEl: HTMLElement;
+    addBtnId: string;
+    // A getter, not a direct array reference — the backing variable
+    // (pendingCredits/pendingEquipment) gets reassigned to a whole new
+    // array when a different item is opened, and reading it fresh each
+    // call is what keeps this list pointed at whichever array is current
+    // instead of a stale one captured at setup time.
+    getItems: () => Record<A, string>[];
+    fieldA: A;
+    labelA: string;
+    placeholderA: string;
+    fieldB: B;
+    labelB: string;
+    placeholderB: string;
+    emptyText: string;
+  }) {
+    function render() {
+      const items = opts.getItems();
+      opts.listEl.innerHTML = items.length
+        ? items
+            .map(
+              (row, i) => `
+          <div class="credit-row" data-index="${i}">
+            <label>${opts.labelA}
+              <input data-row-field="${opts.fieldA}" data-index="${i}" value="${escapeHtml((row as any)[opts.fieldA])}" placeholder="${escapeHtml(opts.placeholderA)}" />
+            </label>
+            <label>${opts.labelB}
+              <input data-row-field="${opts.fieldB}" data-index="${i}" value="${escapeHtml((row as any)[opts.fieldB])}" placeholder="${escapeHtml(opts.placeholderB)}" />
+            </label>
+            <button type="button" class="btn-move" data-row-up="${i}" ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
+            <button type="button" class="btn-move" data-row-down="${i}" ${i === items.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>
+            <button type="button" class="credit-remove" data-row-remove="${i}" aria-label="Remove">×</button>
+          </div>`
+            )
+            .join('')
+        : `<p class="section-hint">${escapeHtml(opts.emptyText)}</p>`;
 
-  function renderCreditsList() {
-    creditsListEl.innerHTML = pendingCredits.length
-      ? pendingCredits
-          .map(
-            (c, i) => `
-        <div class="credit-row" data-index="${i}">
-          <label>Role
-            <input data-credit-field="role" data-index="${i}" value="${escapeHtml(c.role)}" placeholder="e.g. Director of Photography" />
-          </label>
-          <label>Name
-            <input data-credit-field="name" data-index="${i}" value="${escapeHtml(c.name)}" placeholder="e.g. Danny Dwyer" />
-          </label>
-          <button type="button" class="btn-move" data-credit-up="${i}" ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
-          <button type="button" class="btn-move" data-credit-down="${i}" ${i === pendingCredits.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>
-          <button type="button" class="credit-remove" data-credit-remove="${i}" aria-label="Remove credit">×</button>
-        </div>`
-          )
-          .join('')
-      : '<p class="section-hint">No credits yet — add one below.</p>';
+      opts.listEl.querySelectorAll('[data-row-remove]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          items.splice(Number((btn as HTMLElement).dataset.rowRemove), 1);
+          markDirty('work-item-form');
+          render();
+        });
+      });
+      opts.listEl.querySelectorAll('[data-row-up]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = Number((btn as HTMLElement).dataset.rowUp);
+          [items[i - 1], items[i]] = [items[i], items[i - 1]];
+          markDirty('work-item-form');
+          render();
+        });
+      });
+      opts.listEl.querySelectorAll('[data-row-down]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = Number((btn as HTMLElement).dataset.rowDown);
+          [items[i], items[i + 1]] = [items[i + 1], items[i]];
+          markDirty('work-item-form');
+          render();
+        });
+      });
+    }
 
-    creditsListEl.querySelectorAll('[data-credit-remove]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        pendingCredits.splice(Number((btn as HTMLElement).dataset.creditRemove), 1);
-        markDirty('work-item-form');
-        renderCreditsList();
-      });
+    opts.listEl.addEventListener('input', (e) => {
+      const target = e.target as HTMLInputElement;
+      const field = target.dataset.rowField;
+      if (!field) return;
+      (opts.getItems()[Number(target.dataset.index)] as any)[field] = target.value;
     });
-    creditsListEl.querySelectorAll('[data-credit-up]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const i = Number((btn as HTMLElement).dataset.creditUp);
-        [pendingCredits[i - 1], pendingCredits[i]] = [pendingCredits[i], pendingCredits[i - 1]];
-        markDirty('work-item-form');
-        renderCreditsList();
-      });
+
+    document.getElementById(opts.addBtnId)?.addEventListener('click', () => {
+      const items = opts.getItems();
+      items.push({ [opts.fieldA]: '', [opts.fieldB]: '' } as Record<A, string>);
+      markDirty('work-item-form');
+      render();
+      (opts.listEl.querySelector(`[data-index="${items.length - 1}"][data-row-field="${opts.fieldA}"]`) as HTMLInputElement)?.focus();
     });
-    creditsListEl.querySelectorAll('[data-credit-down]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const i = Number((btn as HTMLElement).dataset.creditDown);
-        [pendingCredits[i], pendingCredits[i + 1]] = [pendingCredits[i + 1], pendingCredits[i]];
-        markDirty('work-item-form');
-        renderCreditsList();
-      });
-    });
+
+    return render;
   }
 
-  creditsListEl.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement;
-    const field = target.dataset.creditField as 'role' | 'name' | undefined;
-    if (!field) return;
-    pendingCredits[Number(target.dataset.index)][field] = target.value;
+  const creditsListEl = document.getElementById('credits-list') as HTMLElement;
+  const renderCreditsList = setupRepeatableRowList({
+    listEl: creditsListEl,
+    addBtnId: 'credit-add-btn',
+    getItems: () => pendingCredits,
+    fieldA: 'role',
+    labelA: 'Role',
+    placeholderA: 'e.g. Director of Photography',
+    fieldB: 'name',
+    labelB: 'Name',
+    placeholderB: 'e.g. Danny Dwyer',
+    emptyText: 'No credits yet — add one below.',
   });
 
-  document.getElementById('credit-add-btn')?.addEventListener('click', () => {
-    pendingCredits.push({ role: '', name: '' });
-    markDirty('work-item-form');
-    renderCreditsList();
-    (creditsListEl.querySelector(`[data-index="${pendingCredits.length - 1}"][data-credit-field="role"]`) as HTMLInputElement)?.focus();
+  const equipmentListEl = document.getElementById('equipment-list') as HTMLElement;
+  const renderEquipmentList = setupRepeatableRowList({
+    listEl: equipmentListEl,
+    addBtnId: 'equipment-add-btn',
+    getItems: () => pendingEquipment,
+    fieldA: 'category',
+    labelA: 'Category',
+    placeholderA: 'e.g. Camera',
+    fieldB: 'item',
+    labelB: 'Item',
+    placeholderB: 'e.g. Sony Venice 2',
+    emptyText: 'No equipment listed yet — add one below.',
   });
 
   function parseRawVideo(raw: string): Record<string, any> {
@@ -1069,6 +1127,8 @@ import Layout from '../../layouts/Layout.astro';
     // single-Role field used to — editable/removable like any other row.
     pendingCredits = [{ role: 'Director of Photography', name: 'Danny Dwyer' }];
     renderCreditsList();
+    pendingEquipment = [];
+    renderEquipmentList();
     workDeleteBtn.hidden = true;
     document.getElementById('work-item-status')!.textContent = '';
     clearDirty('work-item-form');
@@ -1098,6 +1158,10 @@ import Layout from '../../layouts/Layout.astro';
         ? fields.credits.map((c: any) => ({ role: c.role ?? '', name: c.name ?? '' }))
         : [{ role: 'Director of Photography', name: 'Danny Dwyer' }];
       renderCreditsList();
+      pendingEquipment = Array.isArray(fields.equipment)
+        ? fields.equipment.map((e: any) => ({ category: e.category ?? '', item: e.item ?? '' }))
+        : [];
+      renderEquipmentList();
       (workItemForm.elements.namedItem('client') as HTMLInputElement).value = fields.client ?? '';
       (workItemForm.elements.namedItem('projectName') as HTMLInputElement).value = fields.projectName ?? '';
       (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate ?? '';
@@ -1136,6 +1200,9 @@ import Layout from '../../layouts/Layout.astro';
     payload.credits = pendingCredits
       .map((c) => ({ role: c.role.trim(), name: c.name.trim() }))
       .filter((c) => c.role || c.name);
+    payload.equipment = pendingEquipment
+      .map((e) => ({ category: e.category.trim(), item: e.item.trim() }))
+      .filter((e) => e.category || e.item);
     payload.hidden = fd.get('hidden') === 'on';
     payload.order = Number(payload.order) || 0;
     payload.stills = String(payload.stills || '')

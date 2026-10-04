@@ -507,6 +507,11 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
           .filter((c: any) => c && (c.role || c.name))
           .map((c: any) => ({ role: String(c.role || ''), name: String(c.name || '') }))
       : [],
+    equipment: Array.isArray(body.equipment)
+      ? body.equipment
+          .filter((e: any) => e && (e.category || e.item))
+          .map((e: any) => ({ category: String(e.category || ''), item: String(e.item || '') }))
+      : [],
     client: body.client || undefined,
     projectName: body.projectName || undefined,
     uploadDate: body.uploadDate,
