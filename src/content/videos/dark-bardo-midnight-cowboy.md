@@ -1,16 +1,16 @@
 ---
-title: "Dark Bardo — \"Midnight Cowboy\""
+title: "Dark Bardo \"After Midnight Cowboy\""
 summary: "A runaway horse became a runaway trumpet. Filmmaker Danny Dwyer on the Dark Bardo music video he refused to let go of, filmed in Los Angeles."
 platform: "vimeo"
 videoId: "875659285"
-credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
+credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Cast","name":"Dark Bardo & Jackie"}]
 projectName: "Dark Bardo — \"Midnight Cowboy\" (Music Video)"
 uploadDate: "2023-02-01"
 tags: ["music video"]
-urlSlug: "dark-bardo-midnight-cowboy"
-order: 130
-featured: false
 stills: []
+urlSlug: "dark-bardo-midnight-cowboy"
+hidden: false
+order: 130
 ---
 
 Truth is, nobody approached me for this one. I forced my way in.
