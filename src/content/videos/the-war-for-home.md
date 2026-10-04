@@ -1,16 +1,19 @@
 ---
-title: "The War for Home"
+title: "Born x Raised — War for Home"
+pageTitle: "Born x Raised \"War for Home\" | Filmmaker Danny Dwyer"
 summary: "A tribute to Spanto and Born x Raised. Filmmaker Danny Dwyer on War for Home, Venice gentrification, and a satirical real estate office installation."
 platform: "vimeo"
 videoId: "279539335"
-credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
+credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Cast","name":"Spanto"}]
+equipment: [{"category":"Camera","item":"RED Raptor"}]
+client: "Born x Raised"
 projectName: "The War for Home"
 uploadDate: "2017-06-01"
 tags: ["documentary"]
-urlSlug: "the-war-for-home"
-order: 330
-featured: false
 stills: []
+urlSlug: "the-war-for-home"
+hidden: false
+order: 330
 ---
 
 This one lives close to my heart.
