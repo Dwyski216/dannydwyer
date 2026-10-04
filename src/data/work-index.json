@@ -519,6 +519,16 @@
     "order": 20
   },
   {
+    "slug": "dark-bardo-midnight-cowboy",
+    "title": "Dark Bardo \"After Midnight Cowboy\"",
+    "tags": [
+      "music video"
+    ],
+    "uploadDate": "2023-02-01",
+    "hidden": false,
+    "order": 130
+  },
+  {
     "slug": "beck-gustaf-close",
     "title": "Beck × Gustaf \"Close\"",
     "tags": [
@@ -528,15 +538,5 @@
     "uploadDate": "2023-05-01",
     "hidden": false,
     "order": 110
-  },
-  {
-    "slug": "dark-bardo-midnight-cowboy",
-    "title": "Dark Bardo \"After Midnight Cowboy\"",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2023-02-01",
-    "hidden": false,
-    "order": 130
   }
 ]
