@@ -320,17 +320,6 @@
     "hidden": false
   },
   {
-    "slug": "ryan-gosling-mens-health",
-    "title": "Ryan Gosling for Men's Health",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "behind-the-scenes"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false
-  },
-  {
     "slug": "sb1391-awareness",
     "title": "SB 1391 Awareness Video",
     "tags": [
@@ -538,5 +527,17 @@
     "uploadDate": "2023-05-01",
     "hidden": false,
     "order": 110
+  },
+  {
+    "slug": "ryan-gosling-mens-health",
+    "title": "Ryan Gosling x Men's Health | The Fall Guy",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "behind-the-scenes"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 50
   }
 ]
