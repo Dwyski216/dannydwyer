@@ -1,9 +1,11 @@
 ---
 title: "Beck × Gustaf \"Close\""
+pageTitle: "Beck × Gustaf \"Close\" | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer co-directed, shot, and cut Gustaf's black-and-white punk video \"Close\" with Beck, inspired by 1970s French photography."
 platform: "vimeo"
 videoId: "938288114"
 credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Cast","name":"Gustaf"},{"role":"Cast","name":"Lydia Gammill"}]
+equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Speed Panchros"}]
 client: "Beck"
 projectName: "Gustaf — \"Close\" (Music Video)"
 uploadDate: "2023-05-01"
