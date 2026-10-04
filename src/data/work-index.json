@@ -52,13 +52,6 @@
     "hidden": false
   },
   {
-    "slug": "bored-final-dwyer",
-    "title": "BORED_FINAL_DWYER",
-    "tags": [],
-    "uploadDate": "2018-08-01",
-    "hidden": false
-  },
-  {
     "slug": "bridge",
     "title": "Bridge",
     "tags": [
@@ -530,5 +523,16 @@
     ],
     "uploadDate": "2023-02-01",
     "hidden": false
+  },
+  {
+    "slug": "bored-final-dwyer",
+    "title": "BORED X DWYSKI",
+    "tags": [
+      "fashion",
+      "short film"
+    ],
+    "uploadDate": "2018-08-01",
+    "hidden": false,
+    "order": 250
   }
 ]
