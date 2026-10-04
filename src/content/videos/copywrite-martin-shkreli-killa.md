@@ -1,9 +1,11 @@
 ---
-title: "Copywrite — \"Martin Shkreli Killah\""
+title: "Copywrite \"Martin Shkreli Killah\""
+pageTitle: "Copywrite \"Martin Shkreli Killah\" | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer on rapper Copywrite's \"Martin Shkreli Killah,\" a Columbus hang turned music video with pure gonzo energy."
 platform: "vimeo"
 videoId: "177432830"
-credits: [{"role": "Co-Director & Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role": "Co-Director", "name": "Danny Dwyer"}, {"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Bee Gats"}, {"role": "Cast", "name": "Copywrite"}, {"role": "Cast", "name": "Napkin Killa"}]
+equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Angenieux Zooms"}]
 projectName: "Copywrite — \"Martin Shkreli Killah\" (Music Video)"
 uploadDate: "2017-02-01"
 tags: ["music video"]

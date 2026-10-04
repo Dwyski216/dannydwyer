@@ -1,9 +1,11 @@
 ---
-title: "Honduras — \"Hollywood\" (Official Music Video)"
+title: "Honduras — \"Hollywood\""
+pageTitle: "Honduras \"Hollywood\" Music Video | DP Danny Dwyer"
 summary: "Dolly, Elvis, and Sinatra look-alikes in a Brooklyn dive bar. Honduras' \"Hollywood,\" shot by director of photography Danny Dwyer."
 platform: "vimeo"
 videoId: "158380205"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Josh Wehle"}, {"role": "Cast", "name": "Patrick Phillips"}]
+equipment: [{"category": "Camera", "item": "RED"}, {"category": "Lens", "item": "Cooke Mini S4"}]
 projectName: "Honduras — \"Hollywood\" (Music Video)"
 uploadDate: "2013-06-01"
 tags: ["music video"]

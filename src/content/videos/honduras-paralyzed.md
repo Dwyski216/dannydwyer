@@ -1,9 +1,11 @@
 ---
-title: "Honduras — \"Paralyzed\" (Music Video)"
+title: "Honduras — \"Paralyzed\""
+pageTitle: "Honduras \"Paralyzed\" Music Video | DP Danny Dwyer"
 summary: "A love hotel, a pillow fight, a blown breaker, and one hour to shoot it. Honduras' \"Paralyzed,\" shot by director of photography Danny Dwyer."
 platform: "vimeo"
 videoId: "132994777"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Josh Wehle"}, {"role": "Cast", "name": "Patrick Phillips"}, {"role": "Cast", "name": "Josh Wehle"}]
+equipment: [{"category": "Camera", "item": "RED"}, {"category": "Lens", "item": "Cooke Mini S4"}]
 projectName: "Honduras — \"Paralyzed\" (Music Video)"
 uploadDate: "2012-11-01"
 tags: ["music video"]

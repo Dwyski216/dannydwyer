@@ -1,9 +1,11 @@
 ---
-title: "Jane Fonda's Guide to Love, Friendship, and Political Activism"
+title: "Jane Fonda × Harper's Bazaar"
+pageTitle: "Jane Fonda × Harper's Bazaar | Cinematographer Danny Dwyer"
 summary: "A one-on-one sit-down with Jane Fonda for Harper's Bazaar. Cinematographer Danny Dwyer on filming a living legend."
 platform: "vimeo"
 videoId: "744782971"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Kathryn Rice"}, {"role": "Cast", "name": "Jane Fonda"}]
+equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Canon Cine Zooms"}]
 client: "Harper's Bazaar"
 projectName: "Jane Fonda Feature"
 uploadDate: "2020-09-01"

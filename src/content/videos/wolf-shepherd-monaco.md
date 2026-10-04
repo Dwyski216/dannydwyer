@@ -1,9 +1,11 @@
 ---
 title: "Wolf & Shepherd — Monaco"
+pageTitle: "Wolf & Shepherd Monaco, Malibu Pier | Filmmaker Danny Dwyer"
 summary: "From a morning cast off the Malibu Pier to an afternoon meeting, same shoes. Filmmaker Danny Dwyer on the Wolf & Shepherd Monaco."
 platform: "vimeo"
 videoId: "478342393"
-credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
+credits: [{"role": "Director", "name": "Danny Dwyer"}, {"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Editor", "name": "Danny Dwyer"}]
+equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Cooke Mini S4"}]
 client: "Wolf & Shepherd"
 projectName: "Monaco"
 uploadDate: "2017-08-01"

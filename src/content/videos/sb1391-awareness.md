@@ -1,9 +1,11 @@
 ---
-title: "SB 1391 Awareness Video"
+title: "Human Rights Watch — SB 1391"
+pageTitle: "Human Rights Watch SB 1391 | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on filming Human Rights Watch's campaign for California SB 1391 and youth justice."
 platform: "vimeo"
 videoId: "287482631"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Chip Warren"}]
+equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Canon FD Prime"}]
 projectName: "SB 1391 Awareness"
 uploadDate: "2018-09-01"
 tags: ["advocacy", "documentary", "social issue"]

@@ -1,9 +1,11 @@
 ---
-title: "Bridge"
+title: "Bridge — Short Film"
+pageTitle: "Bridge Short Film, Cleveland IFF | Filmmaker Danny Dwyer"
 summary: "A studio apartment set rotated by hand in a mechanic's garage. Bridge, by filmmaker Danny Dwyer, premiered at the Cleveland International Film Festival."
 platform: "vimeo"
 videoId: "153922218"
-credits: [{"role": "Co-Director, DP & Editor", "name": "Danny Dwyer"}]
+credits: [{"role": "Co-Director", "name": "Danny Dwyer"}, {"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Editor", "name": "Danny Dwyer"}, {"role": "Director", "name": "Callie Peck"}, {"role": "Cast", "name": "Brian Mendes"}, {"role": "Cast", "name": "Danielle Slavick"}, {"role": "Cast", "name": "Nate Fish"}]
+equipment: [{"category": "Camera", "item": "RED"}, {"category": "Lens", "item": "Cooke Mini S4"}]
 projectName: "Bridge"
 uploadDate: "2013-05-01"
 tags: ["short film", "narrative"]

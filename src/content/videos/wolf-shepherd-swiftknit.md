@@ -1,9 +1,11 @@
 ---
-title: "Wolf & Shepherd — SwiftKnit"
+title: "Wolf & Shepherd — Swiftknit"
+pageTitle: "Wolf & Shepherd Swiftknit Boardwalk | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer takes the Wolf & Shepherd Swiftknit skating down the boardwalk: a dress shoe that rides light and never feels like bricks."
 platform: "vimeo"
 videoId: "478342464"
-credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
+credits: [{"role": "Director", "name": "Danny Dwyer"}, {"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Editor", "name": "Danny Dwyer"}]
+equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Cooke Mini S4"}]
 client: "Wolf & Shepherd"
 projectName: "SwiftKnit"
 uploadDate: "2017-08-01"

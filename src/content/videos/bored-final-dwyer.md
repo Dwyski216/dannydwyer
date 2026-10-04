@@ -1,9 +1,11 @@
 ---
-title: "BORED X DWYSKI"
+title: "Bored — \"Cash for Souls\""
+pageTitle: "Bored \"Cash for Souls\" | Filmmaker Danny Dwyer"
 summary: "A streetwear launch film built around one T-shirt, \"Cash 4 Souls,\" with full creative freedom. Filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "610269432"
-credits: []
+credits: [{"role": "Director", "name": "Danny Dwyer"}]
+equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "TLS Canon FD Primes"}]
 uploadDate: "2018-08-01"
 tags: ["fashion","short film"]
 stills: []
