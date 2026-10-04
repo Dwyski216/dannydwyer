@@ -1,15 +1,5 @@
 [
   {
-    "slug": "128-g",
-    "title": "128-G",
-    "tags": [
-      "documentary",
-      "social issue"
-    ],
-    "uploadDate": "2018-04-01",
-    "hidden": false
-  },
-  {
     "slug": "back-on-two-feet",
     "title": "Back on Two Feet",
     "tags": [
@@ -540,5 +530,16 @@
     "uploadDate": "2016-09-01",
     "hidden": false,
     "order": 400
+  },
+  {
+    "slug": "128-g",
+    "title": "128-G x Brick of Gold",
+    "tags": [
+      "documentary",
+      "social issue"
+    ],
+    "uploadDate": "2018-04-01",
+    "hidden": false,
+    "order": 260
   }
 ]
