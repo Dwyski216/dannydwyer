@@ -3,14 +3,14 @@ title: "The Pixies — \"On Graveyard Hill\""
 summary: "Crash zooms, in-camera effects, and an underwater slow-mo scene. Danny Dwyer, director of photography on the Pixies' \"On Graveyard Hill.\""
 platform: "vimeo"
 videoId: "397085201"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Kii Arens & Mama Hot Dog"},{"role":"Cast","name":"Pixies"}]
 projectName: "The Pixies — \"On Graveyard Hill\" (Music Video)"
 uploadDate: "2016-09-01"
 tags: ["music video"]
-urlSlug: "pixies-on-graveyard-hill"
-order: 400
-featured: false
 stills: []
+urlSlug: "pixies-on-graveyard-hill"
+hidden: false
+order: 400
 ---
 
 When Kii Arens and Mama Hot Dog asked me to shoot this, I said yes before I even knew who the band was. I'd follow Mama Hot Dog anywhere, and I'd wanted to work with Kii for a while. Two directors with bold, unmistakable styles, so I knew what I was walking into, a retro acid trip with an amazing band that was down. Say less.
