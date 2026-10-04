@@ -295,15 +295,6 @@
     "hidden": false
   },
   {
-    "slug": "tracee-ellis-ross",
-    "title": "Tracee Ellis Ross",
-    "tags": [
-      "celebrity"
-    ],
-    "uploadDate": "2019-11-01",
-    "hidden": false
-  },
-  {
     "slug": "wolf-shepherd-chukka",
     "title": "Wolf & Shepherd — Chukka",
     "tags": [
@@ -549,5 +540,16 @@
     "uploadDate": "2015-10-01",
     "hidden": false,
     "order": 450
+  },
+  {
+    "slug": "tracee-ellis-ross",
+    "title": "Tracee Ellis Ross × Harper's Bazaar",
+    "tags": [
+      "celebrity",
+      "editorial"
+    ],
+    "uploadDate": "2019-11-01",
+    "hidden": false,
+    "order": 190
   }
 ]
