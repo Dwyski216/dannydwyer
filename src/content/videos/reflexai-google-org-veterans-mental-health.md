@@ -1,17 +1,17 @@
 ---
-title: "Using AI to Help Veterans Train for Mental Health Conversations"
+title: "ReflexAI × Google for Veterans"
 summary: "Director of photography Danny Dwyer on ReflexAI, backed by Google, which helps veterans with PTSD connect with the people who understand them best."
 platform: "vimeo"
 videoId: "1074104148"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"}]
 client: "Google.org"
 projectName: "ReflexAI — Veteran Mental Health Training"
 uploadDate: "2025-02-01"
-tags: ["documentary", "branded content", "nonprofit", "technology"]
-urlSlug: "reflexai-google-org-veterans-mental-health"
-order: 20
-featured: false
+tags: ["documentary","branded content","nonprofit","technology"]
 stills: []
+urlSlug: "reflexai-google-org-veterans-mental-health"
+hidden: false
+order: 20
 ---
 
 I never served, but family, and people I love closely did. I can't think of anything heavier than putting your life on the line so others can live free.
