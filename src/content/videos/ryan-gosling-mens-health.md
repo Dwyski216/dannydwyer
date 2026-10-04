@@ -1,17 +1,17 @@
 ---
-title: "Ryan Gosling for Men's Health"
+title: "Ryan Gosling x Men's Health | The Fall Guy"
 summary: "Universal Studios stunt bikes, a burning script, and Ryan Gosling. Director of photography Danny Dwyer on the Men's Health video promo for The Fall Guy."
 platform: "vimeo"
 videoId: "1006770556"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}]
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Dorenna Newton"},{"role":"Cast","name":"Ryan Gosling"}]
 client: "Men's Health"
 projectName: "Ryan Gosling Cover Story"
 uploadDate: "2024-02-01"
-tags: ["editorial", "celebrity", "behind-the-scenes"]
-urlSlug: "ryan-gosling-mens-health"
-order: 50
-featured: false
+tags: ["editorial","celebrity","behind-the-scenes"]
 stills: []
+urlSlug: "ryan-gosling-mens-health"
+hidden: false
+order: 50
 ---
 
 Not much needs saying about Ryan Gosling, except this: he treats every single person on set with the same respect, from grips and PAs to the stunt team. That energy sets the temperature for the whole day. A true gentleman.
