@@ -113,15 +113,6 @@
     "hidden": false
   },
   {
-    "slug": "dark-bardo-midnight-cowboy",
-    "title": "Dark Bardo — \"Midnight Cowboy\"",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2023-02-01",
-    "hidden": false
-  },
-  {
     "slug": "diana-marks-lexus",
     "title": "Diana Marks for Lexus",
     "tags": [
@@ -537,5 +528,15 @@
     "uploadDate": "2023-05-01",
     "hidden": false,
     "order": 110
+  },
+  {
+    "slug": "dark-bardo-midnight-cowboy",
+    "title": "Dark Bardo \"After Midnight Cowboy\"",
+    "tags": [
+      "music video"
+    ],
+    "uploadDate": "2023-02-01",
+    "hidden": false,
+    "order": 130
   }
 ]
