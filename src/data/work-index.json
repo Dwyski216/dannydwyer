@@ -411,19 +411,6 @@
     "order": 250
   },
   {
-    "slug": "reflexai-google-org-veterans-mental-health",
-    "title": "ReflexAI × Google for Veterans",
-    "tags": [
-      "documentary",
-      "branded content",
-      "nonprofit",
-      "technology"
-    ],
-    "uploadDate": "2025-02-01",
-    "hidden": false,
-    "order": 20
-  },
-  {
     "slug": "beck-gustaf-close",
     "title": "Beck × Gustaf \"Close\"",
     "tags": [
@@ -547,5 +534,18 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "reflexai-google-org-veterans-mental-health",
+    "title": "ReflexAI × Google for Veterans",
+    "tags": [
+      "documentary",
+      "branded content",
+      "nonprofit",
+      "technology"
+    ],
+    "uploadDate": "2025-02-01",
+    "hidden": false,
+    "order": 20
   }
 ]
