@@ -20,17 +20,6 @@
     "hidden": false
   },
   {
-    "slug": "big-age-audible-trailer-alt-cut",
-    "title": "Big Age — Audible Trailer (Alt Cut)",
-    "tags": [
-      "trailer",
-      "audio drama",
-      "commercial"
-    ],
-    "uploadDate": "2024-06-01",
-    "hidden": false
-  },
-  {
     "slug": "bridge",
     "title": "Bridge",
     "tags": [
@@ -542,5 +531,17 @@
     "uploadDate": "2018-04-01",
     "hidden": false,
     "order": 260
+  },
+  {
+    "slug": "big-age-audible-trailer-alt-cut",
+    "title": "Big Age — Audible Trailer (Alt Cut)",
+    "tags": [
+      "trailer",
+      "audio drama",
+      "commercial"
+    ],
+    "uploadDate": "2024-06-01",
+    "hidden": true,
+    "order": 30
   }
 ]
