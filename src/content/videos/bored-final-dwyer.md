@@ -1,15 +1,15 @@
 ---
-title: "BORED_FINAL_DWYER"
-summary: "A streetwear launch film built around one T-shirt, \"Cash for Souls,\" with full creative freedom. Filmmaker Danny Dwyer."
+title: "BORED X DWYSKI"
+summary: "A streetwear launch film built around one T-shirt, \"Cash 4 Souls,\" with full creative freedom. Filmmaker Danny Dwyer."
 platform: "vimeo"
 videoId: "610269432"
-credits: [{"role": "Director, DP & Editor", "name": "Danny Dwyer"}]
+credits: []
 uploadDate: "2018-08-01"
-tags: []
-urlSlug: "bored-final-dwyer"
-order: 250
-featured: false
+tags: ["fashion","short film"]
 stills: []
+urlSlug: "bored-final-dwyer"
+hidden: false
+order: 250
 ---
 
 A friend was launching a streetwear brand and handed us full creative control. We built the whole piece around one of their shirts: "Cash for Souls."
