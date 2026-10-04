@@ -256,17 +256,6 @@
     "hidden": false
   },
   {
-    "slug": "shinola",
-    "title": "Shinola",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion"
-    ],
-    "uploadDate": "2015-10-01",
-    "hidden": false
-  },
-  {
     "slug": "temp-reel",
     "title": "Reel (Temporary)",
     "tags": [
@@ -548,5 +537,17 @@
     "uploadDate": "2018-08-24",
     "hidden": false,
     "order": 240
+  },
+  {
+    "slug": "shinola",
+    "title": "Shinola",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion"
+    ],
+    "uploadDate": "2015-10-01",
+    "hidden": false,
+    "order": 450
   }
 ]
