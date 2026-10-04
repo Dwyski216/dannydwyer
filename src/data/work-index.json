@@ -338,18 +338,6 @@
     "hidden": false
   },
   {
-    "slug": "reflexai-google-org-veterans-mental-health",
-    "title": "Using AI to Help Veterans Train for Mental Health Conversations",
-    "tags": [
-      "documentary",
-      "branded content",
-      "nonprofit",
-      "technology"
-    ],
-    "uploadDate": "2025-02-01",
-    "hidden": false
-  },
-  {
     "slug": "ryan-gosling-mens-health",
     "title": "Ryan Gosling for Men's Health",
     "tags": [
@@ -534,5 +522,18 @@
     "uploadDate": "2018-08-01",
     "hidden": false,
     "order": 250
+  },
+  {
+    "slug": "reflexai-google-org-veterans-mental-health",
+    "title": "ReflexAI × Google for Veterans",
+    "tags": [
+      "documentary",
+      "branded content",
+      "nonprofit",
+      "technology"
+    ],
+    "uploadDate": "2025-02-01",
+    "hidden": false,
+    "order": 20
   }
 ]
