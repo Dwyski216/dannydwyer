@@ -478,16 +478,6 @@
     "order": 20
   },
   {
-    "slug": "pixies-on-graveyard-hill",
-    "title": "The Pixies — \"On Graveyard Hill\"",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2016-09-01",
-    "hidden": false,
-    "order": 400
-  },
-  {
     "slug": "128-g",
     "title": "128-G x Brick of Gold",
     "tags": [
@@ -542,5 +532,15 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 50
+  },
+  {
+    "slug": "pixies-on-graveyard-hill",
+    "title": "The Pixies — \"On Graveyard Hill\"",
+    "tags": [
+      "music video"
+    ],
+    "uploadDate": "2016-09-01",
+    "hidden": false,
+    "order": 400
   }
 ]
