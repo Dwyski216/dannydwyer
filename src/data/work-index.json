@@ -379,17 +379,6 @@
     "hidden": false
   },
   {
-    "slug": "zoe-kravitz-harpers-bazaar",
-    "title": "Zoë Kravitz for Harper's Bazaar",
-    "tags": [
-      "editorial",
-      "behind-the-scenes",
-      "celebrity"
-    ],
-    "uploadDate": "2018-08-24",
-    "hidden": false
-  },
-  {
     "slug": "werdperfect-kickdrums-pretty-orange",
     "title": "\"Pretty Orange\" — Werdperfect x The Kickdrums",
     "tags": [
@@ -547,5 +536,17 @@
     "uploadDate": "2025-02-01",
     "hidden": false,
     "order": 20
+  },
+  {
+    "slug": "zoe-kravitz-harpers-bazaar",
+    "title": "Zoë Kravitz x Harper's Bazaar",
+    "tags": [
+      "editorial",
+      "behind-the-scenes",
+      "celebrity"
+    ],
+    "uploadDate": "2018-08-24",
+    "hidden": false,
+    "order": 240
   }
 ]
