@@ -38,18 +38,6 @@
     "hidden": false
   },
   {
-    "slug": "columbia-intuitive-machines-nasa-v1",
-    "title": "Columbia // Intuitive Machines // NASA",
-    "tags": [
-      "documentary",
-      "branded content",
-      "technology",
-      "space"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false
-  },
-  {
     "slug": "copywrite-martin-shkreli-killa",
     "title": "Copywrite — \"Martin Shkreli Killah\"",
     "tags": [
@@ -546,5 +534,18 @@
     "uploadDate": "2024-02-01",
     "hidden": true,
     "order": 60
+  },
+  {
+    "slug": "columbia-intuitive-machines-nasa-v1",
+    "title": "Columbia × Intuitive Machines × NASA",
+    "tags": [
+      "documentary",
+      "branded content",
+      "technology",
+      "space"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 70
   }
 ]
