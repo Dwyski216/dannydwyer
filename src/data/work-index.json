@@ -478,17 +478,6 @@
     "order": 20
   },
   {
-    "slug": "128-g",
-    "title": "128-G x Brick of Gold",
-    "tags": [
-      "documentary",
-      "social issue"
-    ],
-    "uploadDate": "2018-04-01",
-    "hidden": false,
-    "order": 260
-  },
-  {
     "slug": "big-age-audible-trailer",
     "title": "Big Age × Cedric the Entertainer",
     "tags": [
@@ -542,5 +531,16 @@
     "uploadDate": "2016-09-01",
     "hidden": false,
     "order": 400
+  },
+  {
+    "slug": "128-g",
+    "title": "128-G x Brick of Gold",
+    "tags": [
+      "documentary",
+      "social issue"
+    ],
+    "uploadDate": "2018-04-01",
+    "hidden": false,
+    "order": 260
   }
 ]
