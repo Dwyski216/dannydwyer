@@ -278,15 +278,6 @@
     "hidden": false
   },
   {
-    "slug": "pixies-on-graveyard-hill",
-    "title": "The Pixies — \"On Graveyard Hill\"",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2016-09-01",
-    "hidden": false
-  },
-  {
     "slug": "puma-beatbot",
     "title": "PUMA — Beatbot",
     "tags": [
@@ -539,5 +530,15 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 50
+  },
+  {
+    "slug": "pixies-on-graveyard-hill",
+    "title": "The Pixies — \"On Graveyard Hill\"",
+    "tags": [
+      "music video"
+    ],
+    "uploadDate": "2016-09-01",
+    "hidden": false,
+    "order": 400
   }
 ]
