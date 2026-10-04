@@ -467,18 +467,6 @@
     "order": 20
   },
   {
-    "slug": "big-age-audible-trailer",
-    "title": "Big Age × Cedric the Entertainer",
-    "tags": [
-      "trailer",
-      "audio drama",
-      "commercial"
-    ],
-    "uploadDate": "2024-06-01",
-    "hidden": false,
-    "order": 40
-  },
-  {
     "slug": "beck-gustaf-close",
     "title": "Beck × Gustaf \"Close\"",
     "tags": [
@@ -543,5 +531,17 @@
     "uploadDate": "2024-06-01",
     "hidden": true,
     "order": 30
+  },
+  {
+    "slug": "big-age-audible-trailer",
+    "title": "Audible — Big Age",
+    "tags": [
+      "trailer",
+      "audio drama",
+      "commercial"
+    ],
+    "uploadDate": "2024-06-01",
+    "hidden": false,
+    "order": 40
   }
 ]
