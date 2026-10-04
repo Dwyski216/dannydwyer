@@ -359,16 +359,6 @@
     "hidden": false
   },
   {
-    "slug": "werdperfect-kickdrums-pretty-orange",
-    "title": "\"Pretty Orange\" — Werdperfect x The Kickdrums",
-    "tags": [
-      "music video",
-      "comedy"
-    ],
-    "uploadDate": "2023-02-01",
-    "hidden": false
-  },
-  {
     "slug": "bored-final-dwyer",
     "title": "BORED X DWYSKI",
     "tags": [
@@ -551,5 +541,16 @@
     "uploadDate": "2019-11-01",
     "hidden": false,
     "order": 190
+  },
+  {
+    "slug": "werdperfect-kickdrums-pretty-orange",
+    "title": "\"Pretty Orange\" — Werdperfect x The Kickdrums",
+    "tags": [
+      "music video",
+      "comedy"
+    ],
+    "uploadDate": "2023-02-01",
+    "hidden": false,
+    "order": 120
   }
 ]
