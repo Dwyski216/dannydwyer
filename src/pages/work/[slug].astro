@@ -70,7 +70,14 @@ const jsonLd = [
 ];
 ---
 
-<Layout title={d.title} titleOverride={d.pageTitle} description={d.summary} jsonLd={jsonLd} ogImage={thumbnailUrl}>
+<Layout
+  title={d.title}
+  titleOverride={d.pageTitle}
+  description={d.summary}
+  jsonLd={jsonLd}
+  ogImage={thumbnailUrl}
+  noindex={d.hidden}
+>
   <SiteHeader />
   <main class="main container">
     <nav class="breadcrumb" aria-label="Breadcrumb">

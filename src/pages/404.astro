@@ -1,0 +1,39 @@
+---
+// A branded 404 — Cloudflare's static-assets binding serves this file
+// automatically for any unmatched path (astro build emits it as
+// dist/404.html), instead of falling through to a bare, unbranded default.
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Layout title="Page Not Found" description="The page you're looking for doesn't exist." noindex={true}>
+  <SiteHeader />
+  <main class="main container">
+    <h1 class="page-title">Page Not Found</h1>
+    <p class="copy">That page doesn't exist, or it's moved. Try the work archive instead.</p>
+    <a class="cta" href="/work">View the work &nbsp;→</a>
+  </main>
+  <SiteFooter />
+</Layout>
+
+<style>
+  .main {
+    padding: 3rem clamp(1.25rem, 4vw, 2rem) 5rem;
+  }
+
+  .copy {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+  }
+
+  .cta {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--accent);
+    color: var(--accent);
+    padding-bottom: 0.15rem;
+  }
+</style>
