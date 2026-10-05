@@ -16,7 +16,15 @@ const displayNames: Record<string, string> = {
     <div class="links">
       <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
       {socialLinks.map(([name, url]) => (
-        <a class="social" href={url} target="_blank" rel="noopener noreferrer">{displayNames[name] ?? name}</a>
+        <a
+          class="social"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${site.name} on ${displayNames[name] ?? name}`}
+        >
+          {displayNames[name] ?? name}
+        </a>
       ))}
     </div>
     <span class="copyright">

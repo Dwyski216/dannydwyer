@@ -19,7 +19,7 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   data-search={searchText}
 >
   <div class="thumb">
-    <img src={thumbnailUrl} alt="" loading="lazy" width="480" height="270" />
+    <img src={thumbnailUrl} alt={title} loading="lazy" width="480" height="270" />
   </div>
   <div class="meta">
     <h3>{title}</h3>
