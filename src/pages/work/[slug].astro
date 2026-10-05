@@ -16,12 +16,24 @@ export async function getStaticPaths() {
 
   return videos.map((video) => {
     const i = ordered.findIndex((v) => v.data.urlSlug === video.data.urlSlug);
+
+    // Same-client cross-links ("More for X") — internal link clustering so
+    // every project for a given brand/client forms a topical hub instead of
+    // sitting as an island only reachable via /work. Visible items only,
+    // same cap-insensitive client, capped at 4 so it never overwhelms the
+    // page on a client with a long history.
+    const client = video.data.client?.trim().toLowerCase();
+    const relatedByClient = client
+      ? ordered.filter((v) => v.data.urlSlug !== video.data.urlSlug && v.data.client?.trim().toLowerCase() === client).slice(0, 4)
+      : [];
+
     return {
       params: { slug: video.data.urlSlug },
       props: {
         video,
         prevVideo: i > 0 ? ordered[i - 1] : undefined,
         nextVideo: i >= 0 && i < ordered.length - 1 ? ordered[i + 1] : undefined,
+        relatedByClient,
       },
     };
   });
@@ -31,9 +43,10 @@ interface Props {
   video: CollectionEntry<'videos'>;
   prevVideo?: CollectionEntry<'videos'>;
   nextVideo?: CollectionEntry<'videos'>;
+  relatedByClient: CollectionEntry<'videos'>[];
 }
 
-const { video, prevVideo, nextVideo } = Astro.props;
+const { video, prevVideo, nextVideo, relatedByClient } = Astro.props;
 const { Content } = await video.render();
 const d = video.data;
 
@@ -166,6 +179,17 @@ const jsonLd = [
         <a class="back" href="/work">← Back to all work</a>
       </aside>
     </div>
+
+    {relatedByClient.length > 0 && (
+      <section class="related" aria-label={`More for ${d.client}`}>
+        <h2>More for {d.client}</h2>
+        <ul class="related-list">
+          {relatedByClient.map((v) => (
+            <li><a href={`/work/${v.data.urlSlug}`}>{v.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
 
     <nav class="project-nav" aria-label="Project navigation">
       {prevVideo ? (
@@ -329,6 +353,38 @@ const jsonLd = [
     margin-top: 2rem;
     font-size: 0.9rem;
     color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .related {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .related h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--tag-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .related-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .related-list a {
+    color: var(--olympic-gold);
+    font-size: 0.95rem;
+  }
+
+  .related-list a:hover {
     text-decoration: underline;
   }
 

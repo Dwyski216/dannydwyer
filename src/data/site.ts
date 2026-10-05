@@ -4,6 +4,7 @@ import raw from './site.json';
 
 export const site = raw as {
   name: string;
+  alternateName: string; // nickname/handle (e.g. "Dwyski") — feeds the Person schema's alternateName, a disambiguation signal distinguishing this entity from other people sharing the same name
   role: string;
   tagline: string;
   introCopy: string; // HTML, edited via the admin panel's rich text field
