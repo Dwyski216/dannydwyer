@@ -9,11 +9,11 @@ equipment: []
 client: "Men's Health"
 projectName: "Ryan Gosling Cover Story"
 uploadDate: "2024-02-01"
-tags: ["editorial","celebrity","behind-the-scenes"]
+tags: ["editorial","celebrity"]
 stills: []
 urlSlug: "ryan-gosling-mens-health"
 hidden: false
-order: 50
+order: "50"
 ---
 
 Not much needs saying about Ryan Gosling, except this: he treats every single person on set with the same respect, from grips and PAs to the stunt team. That energy sets the temperature for the whole day. A true gentleman.
