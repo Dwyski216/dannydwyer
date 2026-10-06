@@ -470,19 +470,6 @@
     "order": 70
   },
   {
-    "slug": "reflexai-google-org-veterans-mental-health",
-    "title": "ReflexAI × Google for Veterans",
-    "tags": [
-      "documentary",
-      "branded content",
-      "nonprofit",
-      "technology"
-    ],
-    "uploadDate": "2025-02-01",
-    "hidden": false,
-    "order": 20
-  },
-  {
     "slug": "zoe-kravitz-harpers-bazaar",
     "title": "Zoë Kravitz x Harper's Bazaar",
     "tags": [
@@ -527,5 +514,18 @@
     "uploadDate": "2023-02-01",
     "hidden": false,
     "order": 120
+  },
+  {
+    "slug": "reflexai-google-org-veterans-mental-health",
+    "title": "ReflexAI × Google for Veterans",
+    "tags": [
+      "documentary",
+      "branded content",
+      "nonprofit",
+      "technology"
+    ],
+    "uploadDate": "2025-02-01",
+    "hidden": false,
+    "order": 20
   }
 ]
