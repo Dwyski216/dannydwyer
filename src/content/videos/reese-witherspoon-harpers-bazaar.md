@@ -4,14 +4,14 @@ pageTitle: "Reese Witherspoon × Harper's Bazaar | DP Danny Dwyer"
 summary: "A snake, a cover story, and Reese Witherspoon, completely unbothered. Director of photography Danny Dwyer on her Harper's Bazaar video promo."
 platform: "vimeo"
 videoId: "368946293"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Kathryn Rice"}, {"role": "Cast", "name": "Reese Witherspoon"}]
-equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Canon Cine Zooms"}]
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Kathryn Rice"},{"role":"Cast","name":"Reese Witherspoon"}]
+equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon Cine Zooms"}]
 client: "Harper's Bazaar"
 projectName: "Reese Witherspoon Cover Story"
 uploadDate: "2018-09-01"
-tags: ["editorial", "celebrity", "behind-the-scenes"]
+tags: ["editorial","celebrity"]
 urlSlug: "reese-witherspoon-harpers-bazaar"
-order: 220
+order: "220"
 featured: false
 stills: []
 ---
