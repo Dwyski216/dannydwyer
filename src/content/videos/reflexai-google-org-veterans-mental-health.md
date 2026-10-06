@@ -4,7 +4,7 @@ pageTitle: "ReflexAI × Google for Veterans | DP Danny Dwyer"
 summary: "Director of photography Danny Dwyer on ReflexAI, backed by Google, which helps veterans with PTSD connect with the people who understand them best."
 platform: "vimeo"
 videoId: "1074104148"
-credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Nilou Safinya"}]
+credits: [{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angénieux Zooms and Primes"}]
 client: "Google.org"
 projectName: "ReflexAI — Veteran Mental Health Training"
