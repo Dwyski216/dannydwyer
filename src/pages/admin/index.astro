@@ -21,7 +21,6 @@ import Layout from '../../layouts/Layout.astro';
           <button type="button" class="nav-link" data-page="work">Work</button>
           <button type="button" class="nav-link" data-page="contact">Contact</button>
           <button type="button" class="nav-link" data-page="tags">Tags</button>
-          <button type="button" class="nav-link" data-page="layout">Layout</button>
           <button type="button" class="nav-link" data-page="seo">SEO</button>
           <button type="button" class="nav-link" data-page="settings">Settings</button>
         </nav>
@@ -254,20 +253,6 @@ import Layout from '../../layouts/Layout.astro';
           <p class="status" id="tag-manager-status"></p>
         </section>
 
-        <!-- ============ LAYOUT ============ -->
-        <section id="page-layout" class="page-panel" data-page="layout" hidden>
-          <h2>Page layout</h2>
-          <p class="section-hint">
-            Show, hide, and reorder each page's sections. This controls arrangement only — what a section shows still
-            comes from the Home, Work, and Contact tabs.
-          </p>
-          <div id="layout-pages"></div>
-          <div class="form-actions">
-            <button type="button" id="layout-save-btn" class="btn btn-solid">Save Layout</button>
-          </div>
-          <p class="status" id="layout-status"></p>
-        </section>
-
         <!-- ============ SEO ============ -->
         <section id="page-seo" class="page-panel" data-page="seo" hidden>
           <h2>SEO &amp; GEO metadata</h2>
@@ -307,8 +292,6 @@ import Layout from '../../layouts/Layout.astro';
 </Layout>
 
 <script>
-  import { PAGE_KEYS, SECTION_LABELS, normalizeSections, type PageKey, type SectionEntry } from '../../data/layout';
-
   // ---------------------------------------------------------------------
   // Shared state — loaded once, mutated in place, and re-POSTed whole on
   // every save so one panel's save can never clobber another panel's
@@ -387,7 +370,7 @@ import Layout from '../../layouts/Layout.astro';
   // events, so loading data never marks a form dirty). Cleared on a
   // successful save or a confirmed discard.
   // ---------------------------------------------------------------------
-  const dirtyFormIds = ['home-form', 'work-item-form', 'contact-form', 'settings-form', 'layout-pages', 'seo-pages'];
+  const dirtyFormIds = ['home-form', 'work-item-form', 'contact-form', 'settings-form', 'seo-pages'];
   dirtyFormIds.forEach((id) => {
     const form = document.getElementById(id);
     form?.addEventListener('input', () => (form.dataset.dirty = '1'));
@@ -431,7 +414,6 @@ import Layout from '../../layouts/Layout.astro';
     if (activePage === 'home') return 'home-form';
     if (activePage === 'contact') return 'contact-form';
     if (activePage === 'settings') return 'settings-form';
-    if (activePage === 'layout') return 'layout-pages';
     if (activePage === 'seo') return 'seo-pages';
     if (activePage === 'work') {
       const itemView = document.getElementById('work-item-view') as HTMLElement | null;
@@ -449,7 +431,6 @@ import Layout from '../../layouts/Layout.astro';
     if (page === 'work') await initWorkPanel();
     if (page === 'contact') await initContactPanel();
     if (page === 'tags') await initTagsPanel();
-    if (page === 'layout') await initLayoutPanel();
     if (page === 'seo') await initSeoPanel();
     if (page === 'settings') await initSettingsPanel();
   }
@@ -1318,108 +1299,6 @@ import Layout from '../../layouts/Layout.astro';
   }
 
   // ---------------------------------------------------------------------
-  // Layout panel — show/hide and reorder each page's sections. This is
-  // arrangement only: what a section contains is still edited on its own
-  // tab (Home/Work/Contact). The canonical section list, labels, and the
-  // normalize-stored-against-canonical rule all come from src/data/layout.ts
-  // — the same module the live site uses — so there's exactly one place
-  // that knows what sections exist and how to fall back when storage is
-  // stale, instead of a second hand-copied version here that could drift.
-  // ---------------------------------------------------------------------
-  const PAGE_LABELS: Record<PageKey, string> = { home: 'Home', work: 'Work', contact: 'Contact' };
-
-  let layoutData: Record<string, SectionEntry[]> = {};
-  let layoutInitialized = false;
-
-  function renderLayoutPanel() {
-    const container = document.getElementById('layout-pages')!;
-    container.innerHTML = PAGE_KEYS.map((pageKey) => {
-      const sections = normalizeSections(pageKey, layoutData[pageKey]);
-      const rows = sections
-        .map((s, i) => `
-          <li class="layout-row" data-page-key="${pageKey}" data-type="${s.type}">
-            <label class="checkbox">
-              <input type="checkbox" class="layout-enabled" ${s.enabled ? 'checked' : ''} /> ${SECTION_LABELS[s.type]}
-            </label>
-            <span class="layout-move">
-              <button type="button" class="btn-move" data-move-up ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
-              <button type="button" class="btn-move" data-move-down ${i === sections.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>
-            </span>
-          </li>`)
-        .join('');
-      return `
-        <fieldset class="layout-page-group">
-          <legend>${PAGE_LABELS[pageKey]}</legend>
-          <ul class="layout-list">${rows}</ul>
-        </fieldset>`;
-    }).join('');
-
-    container.querySelectorAll('.layout-enabled').forEach((cb) => {
-      cb.addEventListener('change', () => {
-        const row = (cb as HTMLElement).closest('.layout-row') as HTMLElement;
-        const pageKey = row.dataset.pageKey as PageKey;
-        const type = row.dataset.type!;
-        const sections = normalizeSections(pageKey, layoutData[pageKey]);
-        const entry = sections.find((s) => s.type === type)!;
-        entry.enabled = (cb as HTMLInputElement).checked;
-        layoutData[pageKey] = sections;
-      });
-    });
-
-    container.querySelectorAll('[data-move-up]').forEach((btn) => {
-      btn.addEventListener('click', () => moveSection(btn as HTMLElement, -1));
-    });
-    container.querySelectorAll('[data-move-down]').forEach((btn) => {
-      btn.addEventListener('click', () => moveSection(btn as HTMLElement, 1));
-    });
-  }
-
-  function moveSection(btn: HTMLElement, direction: -1 | 1) {
-    const row = btn.closest('.layout-row') as HTMLElement;
-    const pageKey = row.dataset.pageKey as PageKey;
-    const type = row.dataset.type!;
-    const sections = normalizeSections(pageKey, layoutData[pageKey]);
-    const i = sections.findIndex((s) => s.type === type);
-    const j = i + direction;
-    if (j < 0 || j >= sections.length) return;
-    [sections[i], sections[j]] = [sections[j], sections[i]];
-    layoutData[pageKey] = sections;
-    markDirty('layout-pages');
-    renderLayoutPanel();
-  }
-
-  document.getElementById('layout-save-btn')?.addEventListener('click', async () => {
-    const status = document.getElementById('layout-status')!;
-    status.textContent = 'Saving…';
-    // Make sure every page's current (possibly normalized-but-unedited)
-    // section list is what actually gets saved, not just the ones a
-    // checkbox/move touched this session.
-    PAGE_KEYS.forEach((pageKey) => {
-      layoutData[pageKey] = normalizeSections(pageKey, layoutData[pageKey]);
-    });
-    const res = await fetch('/api/layout', { method: 'POST', body: JSON.stringify({ layout: layoutData }) });
-    const data = await res.json();
-    status.textContent = res.ok ? 'Saved.' : `Error: ${data.error ?? 'failed'}`;
-    if (res.ok) clearDirty('layout-pages');
-  });
-
-  async function initLayoutPanel() {
-    const status = document.getElementById('layout-status')!;
-    if (!layoutInitialized) {
-      const res = await fetch('/api/layout');
-      const data = await res.json();
-      if (!res.ok || !data.layout) {
-        status.textContent = `Error: ${data.error ?? 'Could not load layout.'}`;
-        return;
-      }
-      layoutData = data.layout;
-      layoutInitialized = true;
-    }
-    status.textContent = '';
-    renderLayoutPanel();
-  }
-
-  // ---------------------------------------------------------------------
   // SEO panel — per-page title/description/OG image overrides. An empty
   // field means "use the page's own built-in default," never "blank it
   // out," so saving never has to know what that default currently is.
@@ -2101,14 +1980,12 @@ import Layout from '../../layouts/Layout.astro';
     }
   }
 
-  .layout-page-group,
   .seo-page-group {
     border: 1px solid var(--hairline);
     padding: 1rem 1.25rem 1.25rem;
     margin-bottom: 1.5rem;
   }
 
-  .layout-page-group legend,
   .seo-page-group legend {
     font-size: 0.85rem;
     font-weight: 700;
@@ -2124,31 +2001,6 @@ import Layout from '../../layouts/Layout.astro';
 
   .seo-page-group label:first-of-type {
     margin-top: 0.25rem;
-  }
-
-  .layout-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .layout-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  .layout-row:last-child {
-    border-bottom: none;
-  }
-
-  .layout-move {
-    display: flex;
-    gap: 0.4rem;
-    flex-shrink: 0;
   }
 
   .tag-manager-list {

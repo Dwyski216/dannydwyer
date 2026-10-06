@@ -144,6 +144,11 @@ function parseFrontmatter(raw: string): { data: Record<string, any>; body: strin
       }
     } else if (value === 'true' || value === 'false') {
       data[key] = value === 'true';
+    } else if (/^-?\d+(\.\d+)?$/.test(value)) {
+      // toFrontmatter writes numbers bare (e.g. `order: 220`); read them back
+      // as numbers, or a patch that only touches tags re-saves them quoted
+      // and the content schema (order: number) fails the whole site build.
+      data[key] = Number(value);
     } else if (value.startsWith('"') && value.endsWith('"')) {
       // toFrontmatter writes strings via JSON.stringify, so this is valid
       // JSON string syntax — parse it properly instead of just trimming the
@@ -669,8 +674,8 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
   return json({ ok: true });
 }
 
-// Reads and JSON-parses a small admin-managed data file (layout.json,
-// seo.json, ...), distinguishing "doesn't exist yet" (a legitimate blank
+// Reads and JSON-parses a small admin-managed data file (seo.json,
+// ...), distinguishing "doesn't exist yet" (a legitimate blank
 // starting state — same convention as readIndex for work-index.json) from
 // a real failure (bad credentials, wrong repo, invalid JSON), which must
 // surface as an error rather than silently looking like "nothing saved".
@@ -688,25 +693,6 @@ async function readJsonFile<T>(env: Env, path: string, fallback: T): Promise<{ v
   } catch {
     return { error: `${path} contains invalid JSON.` };
   }
-}
-
-const LAYOUT_PATH = 'src/data/layout.json';
-
-async function handleLayoutGet(_request: Request, env: Env): Promise<Response> {
-  const result = await readJsonFile(env, LAYOUT_PATH, {});
-  if ('error' in result) return json({ error: result.error }, 502);
-  return json({ layout: result.value });
-}
-
-async function handleLayoutPost(request: Request, env: Env): Promise<Response> {
-  const body = (await request.json().catch(() => ({}))) as { layout?: Record<string, { type: string; enabled: boolean }[]> };
-  if (!body.layout) return json({ error: 'Expects { layout }' }, 400);
-
-  const existing = await getFile(env, LAYOUT_PATH);
-  const res = await putFile(env, LAYOUT_PATH, JSON.stringify(body.layout, null, 2) + '\n', existing?.sha, 'Update page layout');
-  if (!res.ok) return json({ error: 'Failed to update layout' }, 502);
-
-  return json({ ok: true });
 }
 
 const SEO_PATH = 'src/data/seo.json';
@@ -746,7 +732,6 @@ async function router(request: Request, env: Env): Promise<Response> {
     pathname === '/api/settings' ||
     pathname === '/api/tags' ||
     pathname === '/api/tags/bulk' ||
-    pathname === '/api/layout' ||
     pathname === '/api/seo';
 
   if (isAdminPage || isProtectedApi) {
@@ -782,11 +767,6 @@ async function router(request: Request, env: Env): Promise<Response> {
 
   if (pathname === '/api/tags/bulk' && request.method === 'POST') {
     return handleTagsBulkPost(request, env);
-  }
-
-  if (pathname === '/api/layout') {
-    if (request.method === 'GET') return handleLayoutGet(request, env);
-    if (request.method === 'POST') return handleLayoutPost(request, env);
   }
 
   if (pathname === '/api/seo') {
