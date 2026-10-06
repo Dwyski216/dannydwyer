@@ -3,6 +3,6 @@ Allow: /
 Disallow: /admin
 Disallow: /api
 
-Sitemap: https://dannydwyer.sarujump.workers.dev/sitemap-index.xml
+Sitemap: https://dannydwyer.rough-water-4697.workers.dev/sitemap-index.xml
 
 # AI answer engines: see /llms.txt for a plain-text index of this site.

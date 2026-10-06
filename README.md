@@ -165,7 +165,7 @@ In your Worker's project → **Settings** → **Variables and Secrets**, add:
 | Variable | Value | Type |
 |---|---|---|
 | `GITHUB_TOKEN` | the token from step (a) | Secret |
-| `GITHUB_REPO` | `hamburgersandfries/dannydwyer` | Text |
+| `GITHUB_REPO` | `Dwyski216/dannydwyer` | Text |
 | `GITHUB_BRANCH` | `main` | Text |
 | `ADMIN_PASSWORD` | a password only you know | Secret |
 | `SESSION_SECRET` | a long random string (e.g. `openssl rand -hex 32`) — never reuse this anywhere else | Secret |

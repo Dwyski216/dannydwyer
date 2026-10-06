@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-const SITE_URL = 'https://dannydwyer.sarujump.workers.dev';
+const SITE_URL = 'https://dannydwyer.rough-water-4697.workers.dev';
 
 // The sitemap integration only sees final URLs, not content collection data,
 // so hidden work items (drafts, placeholders, old temp reels) and admin

@@ -16,7 +16,7 @@
 export interface Env {
   ASSETS: Fetcher;
   GITHUB_TOKEN: string;
-  GITHUB_REPO: string; // e.g. "hamburgersandfries/dannydwyer"
+  GITHUB_REPO: string; // e.g. "Dwyski216/dannydwyer"
   GITHUB_BRANCH: string; // e.g. "main"
   ADMIN_PASSWORD: string;
   SESSION_SECRET: string;
