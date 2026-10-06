@@ -9,11 +9,11 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "Harper's Bazaar"
 projectName: "Zoë Kravitz Cover Shoot"
 uploadDate: "2018-08-24"
-tags: ["editorial","behind-the-scenes","celebrity"]
+tags: ["editorial","celebrity"]
 stills: []
 urlSlug: "zoe-kravitz-harpers-bazaar"
 hidden: false
-order: 240
+order: "240"
 ---
 
 We were somewhere deep in the Mojave. The landscape was breathtaking, and so was the styling.
