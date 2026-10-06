@@ -352,17 +352,6 @@
     "hidden": false
   },
   {
-    "slug": "bored-final-dwyer",
-    "title": "BORED X DWYSKI",
-    "tags": [
-      "fashion",
-      "short film"
-    ],
-    "uploadDate": "2018-08-01",
-    "hidden": false,
-    "order": 250
-  },
-  {
     "slug": "beck-gustaf-close",
     "title": "Beck × Gustaf \"Close\"",
     "tags": [
@@ -520,5 +509,16 @@
     "uploadDate": "2025-02-01",
     "hidden": false,
     "order": 20
+  },
+  {
+    "slug": "bored-final-dwyer",
+    "title": "Bored \"Cash For Souls\"",
+    "tags": [
+      "fashion",
+      "short film"
+    ],
+    "uploadDate": "2018-08-01",
+    "hidden": false,
+    "order": 250
   }
 ]
