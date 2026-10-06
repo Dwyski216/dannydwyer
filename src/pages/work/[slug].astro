@@ -147,7 +147,7 @@ const jsonLd = [
                 <ul class="credits">
                   {d.credits.map((c) => (
                     <li>
-                      {c.role}{c.role && c.name && ' — '}{c.name}
+                      {c.role}{c.role && c.name && ': '}{c.name}
                     </li>
                   ))}
                 </ul>
@@ -162,7 +162,7 @@ const jsonLd = [
                 <ul class="credits">
                   {d.equipment.map((e) => (
                     <li>
-                      {e.category}{e.category && e.item && ' — '}{e.item}
+                      {e.category}{e.category && e.item && ': '}{e.item}
                     </li>
                   ))}
                 </ul>
