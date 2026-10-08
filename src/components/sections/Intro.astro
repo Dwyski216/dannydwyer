@@ -14,7 +14,7 @@ const { role, introCopy, email } = Astro.props;
   <div class="intro-copy" set:html={introCopy} />
   <div class="actions">
     <a class="button" href={`mailto:${email}`}>Give Me A Shout</a>
-    <a class="cta" href="/work">View the work &nbsp;→</a>
+    <a class="cta" href="/work">Peep the work &nbsp;→</a>
   </div>
 </section>
 
@@ -71,14 +71,41 @@ const { role, introCopy, email } = Astro.props;
     text-decoration: underline;
   }
 
-  /* Centered under the bio, matching the centered title above it. */
+  /* Button centered under the bio (matching the centered title); the
+     "Peep the work" link sits flush with the bio's right edge. The empty
+     first column mirrors the link's column so the button stays truly
+     centered. On narrow screens they stack: button centered, link below it
+     on the right. */
   .actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 1rem 2rem;
+    gap: 1rem;
     margin-top: 2rem;
+  }
+
+  .actions .button {
+    grid-column: 2;
+  }
+
+  .actions .cta {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  @media (max-width: 600px) {
+    .actions {
+      grid-template-columns: 1fr;
+    }
+
+    .actions .button {
+      grid-column: 1;
+      justify-self: center;
+    }
+
+    .actions .cta {
+      grid-column: 1;
+    }
   }
 
   /* Same button treatment as the Contact page's "Get in touch". */
