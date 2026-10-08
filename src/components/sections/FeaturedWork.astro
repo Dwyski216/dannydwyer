@@ -36,6 +36,17 @@ const { featured, thumbnails } = Astro.props;
     margin: 1.5rem 0 3rem;
   }
 
+  /* Card titles in Olympic Gold, matching the Work page grid. The card's
+     own hover rule turns titles Olympic Gold, which would be no change
+     here, so hover flips them to Headlight instead. */
+  .featured :global(.meta h3) {
+    color: var(--olympic-gold);
+  }
+
+  .featured :global(.card:hover h3) {
+    color: var(--headlight);
+  }
+
   .featured h2 {
     font-size: 1.35rem;
     text-transform: uppercase;
