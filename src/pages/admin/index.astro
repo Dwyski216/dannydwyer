@@ -282,6 +282,7 @@ import Layout from '../../layouts/Layout.astro';
             <label>LinkedIn URL <input name="linkedin" /></label>
             <label>IMDb URL <input name="imdb" /></label>
             <label>Vimeo URL <input name="vimeo" /></label>
+            <label>YouTube URL <input name="youtube" /></label>
             <button type="submit" class="btn btn-solid">Save Settings</button>
             <p class="status" id="settings-status"></p>
           </form>
@@ -1452,6 +1453,7 @@ import Layout from '../../layouts/Layout.astro';
     (form.elements.namedItem('linkedin') as HTMLInputElement).value = s.socials?.linkedin ?? '';
     (form.elements.namedItem('imdb') as HTMLInputElement).value = s.socials?.imdb ?? '';
     (form.elements.namedItem('vimeo') as HTMLInputElement).value = s.socials?.vimeo ?? '';
+    (form.elements.namedItem('youtube') as HTMLInputElement).value = s.socials?.youtube ?? '';
 
     if (settingsInitialized) return;
     settingsInitialized = true;
@@ -1471,6 +1473,7 @@ import Layout from '../../layouts/Layout.astro';
         linkedin: String(fd.get('linkedin') || ''),
         imdb: String(fd.get('imdb') || ''),
         vimeo: String(fd.get('vimeo') || ''),
+        youtube: String(fd.get('youtube') || ''),
       };
       await saveSettings(status, 'settings-form');
     });

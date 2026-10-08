@@ -3,7 +3,7 @@
 // home page under Featured Work. URLs come from site.socials (editable in
 // the admin's Settings tab); a platform with no URL is left out.
 //
-// Instagram and LinkedIn are stroke icons (Lucide, ISC license). Vimeo and
+// Instagram, LinkedIn and YouTube are stroke icons (Lucide, ISC license). Vimeo and
 // IMDb are the Simple Icons brand marks (CC0): Vimeo's filled "v" is drawn
 // as an outline only, and IMDb's mark is already an outlined badge.
 import { site } from '../data/site';
@@ -27,7 +27,12 @@ const icons: Record<string, { label: string; svg: string }> = {
   },
 };
 
-const ORDER = ['instagram', 'imdb', 'linkedin', 'vimeo'];
+icons.youtube = {
+  label: 'YouTube',
+  svg: '<path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>',
+};
+
+const ORDER = ['instagram', 'imdb', 'linkedin', 'vimeo', 'youtube'];
 const links = ORDER.filter((key) => site.socials[key]).map((key) => ({ key, url: site.socials[key], ...icons[key] }));
 ---
 
@@ -84,5 +89,17 @@ const links = ORDER.filter((key) => site.socials[key]).map((key) => ({ key, url:
 
   .social-icons svg {
     display: block;
+  }
+
+  /* Tighter on phones so all five fit on one row. */
+  @media (max-width: 600px) {
+    .social-icons {
+      gap: 1rem 1.1rem;
+    }
+
+    .social-icons a {
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+    }
   }
 </style>
