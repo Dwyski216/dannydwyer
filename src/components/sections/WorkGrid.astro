@@ -29,6 +29,17 @@ const { videos, thumbnails } = Astro.props;
 </div>
 
 <style>
+  /* Work page only (FeaturedWork on Home uses the same VideoCard and keeps
+     its default title color): card titles in Olympic Gold. The card's own
+     hover rule turns titles Olympic Gold, which would be no change here, so
+     hover flips them to Headlight instead. */
+  .video-area :global(.meta h3) {
+    color: var(--olympic-gold);
+  }
+
+  .video-area :global(.card:hover h3) {
+    color: var(--headlight);
+  }
   #empty-state {
     color: var(--text-muted);
     padding: 2rem 0;
