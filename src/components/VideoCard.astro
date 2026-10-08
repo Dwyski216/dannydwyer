@@ -75,6 +75,8 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
     letter-spacing: 0.01em;
     font-size: 1rem;
     line-height: 1.3;
+    color: var(--olympic-gold);
+    transition: color 0.15s ease;
     height: 2.6em;
     margin-bottom: 0.4rem;
     overflow: hidden;
@@ -85,7 +87,7 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   }
 
   .card:hover h3 {
-    color: var(--accent);
+    color: var(--barn-red);
   }
 
   .summary {
