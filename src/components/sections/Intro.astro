@@ -19,9 +19,11 @@ const { role, introCopy } = Astro.props;
   }
 
   .intro h1 {
-    /* +10pt over the base size; capped at 7.8vw so "CINEMATOGRAPHER" never
-       overflows a narrow phone screen. */
-    font-size: min(calc(clamp(1.15rem, 2.3vw, 1.6rem) + 10pt), 7.8vw);
+    /* Capped at 6vw so the longest word, "CINEMATOGRAPHER", always fits a
+       phone screen with room to spare; overflow-wrap is a last-resort guard
+       so the page can never scroll sideways. */
+    font-size: min(calc(clamp(1.15rem, 2.3vw, 1.6rem) + 5pt), 6vw);
+    overflow-wrap: anywhere;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     text-align: center;
