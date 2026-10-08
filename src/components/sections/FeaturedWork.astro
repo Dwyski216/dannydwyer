@@ -37,7 +37,9 @@ const { featured, thumbnails } = Astro.props;
   }
 
   .featured h2 {
-    font-size: 1.35rem;
+    /* Same size as the bio title above (Intro.astro), centered to match. */
+    font-size: min(calc(clamp(1.15rem, 2.3vw, 1.6rem) + 5pt), 6vw);
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--headlight);
