@@ -19,7 +19,9 @@ const { role, introCopy } = Astro.props;
   }
 
   .intro h1 {
-    font-size: clamp(1.15rem, 2.3vw, 1.6rem);
+    /* +10pt over the base size; capped at 7.8vw so "CINEMATOGRAPHER" never
+       overflows a narrow phone screen. */
+    font-size: min(calc(clamp(1.15rem, 2.3vw, 1.6rem) + 10pt), 7.8vw);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     text-align: center;
