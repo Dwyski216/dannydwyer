@@ -475,6 +475,16 @@ import Layout from '../../layouts/Layout.astro';
     introHtmlField.value = introEditor.innerHTML;
   });
 
+  // Paste as plain text. Copying from Notes, Pages, Word or a web page
+  // otherwise carries that app's fonts, sizes and colors along as inline
+  // styles, which override the site's own typography on the live page.
+  introEditor.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const text = e.clipboardData?.getData('text/plain') ?? '';
+    document.execCommand('insertText', false, text);
+    introHtmlField.value = introEditor.innerHTML;
+  });
+
   // Featured Work dual-list state — kept separate from the form itself since
   // it isn't backed by standard form controls (drag-and-drop reordering,
   // click-to-select rows). featuredOrder is the authoritative, ordered list
