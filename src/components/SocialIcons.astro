@@ -102,4 +102,22 @@ const links = ORDER.filter((key) => site.socials[key]).map((key) => ({ key, url:
       letter-spacing: 0.04em;
     }
   }
+
+  /* Small phones (iPhone SE and similar): shrink icons, labels and gaps a
+     little more so the row still never wraps. */
+  @media (max-width: 380px) {
+    .social-icons {
+      gap: 0.75rem 0.7rem;
+    }
+
+    .social-icons a {
+      font-size: 0.62rem;
+      letter-spacing: 0.02em;
+    }
+
+    .social-icons svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 </style>
