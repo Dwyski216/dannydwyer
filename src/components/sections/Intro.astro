@@ -34,16 +34,29 @@ const { role, introCopy } = Astro.props;
     hyphens: auto;
   }
 
+  /* The bio is rich text from the admin editor. Text pasted in from other
+     apps can carry inline fonts, sizes and colors; force every element
+     inside it back to the site's own typography so it always reads as one
+     block. Bold/italic/links still work (weight, style and the link rule
+     below aren't overridden). */
+  .intro-copy :global(*) {
+    color: inherit !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    background: none !important;
+  }
+
   .intro-copy :global(p) {
-    margin: 0 0 1rem;
+    margin: 0 0 1rem !important;
   }
 
   .intro-copy :global(p:last-child) {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
 
   .intro-copy :global(a) {
-    color: var(--accent);
+    color: var(--accent) !important;
     text-decoration: underline;
   }
 
