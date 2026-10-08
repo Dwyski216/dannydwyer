@@ -108,22 +108,25 @@ const { role, introCopy, email } = Astro.props;
     }
   }
 
-  /* Same button treatment as the Contact page's "Get in touch". */
+  /* Hollow Olympic Gold button: 2pt outline and gold text on the page
+     background. Fills gold on hover. */
   .button {
     display: inline-block;
-    background: var(--olympic-gold);
-    color: var(--on-accent);
+    background: transparent;
+    border: 2pt solid var(--olympic-gold);
+    color: var(--olympic-gold);
     font-family: var(--font-title);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     font-size: 1rem;
     padding: 0.9rem 1.75rem;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease;
   }
 
   .button:hover {
-    background: var(--accent-dim);
+    background: var(--olympic-gold);
+    color: var(--on-accent);
   }
 
   .cta {
