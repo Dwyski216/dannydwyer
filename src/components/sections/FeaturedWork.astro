@@ -2,6 +2,7 @@
 // Home page section: the Featured Work grid (picked in the admin panel by
 // slug). Renders nothing if there's nothing to feature.
 import VideoCard from '../VideoCard.astro';
+import SocialIcons from '../SocialIcons.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -28,6 +29,7 @@ const { featured, thumbnails } = Astro.props;
         </div>
       ))}
     </div>
+    <SocialIcons />
   </section>
 )}
 
