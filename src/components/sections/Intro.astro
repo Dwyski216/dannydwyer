@@ -135,5 +135,11 @@ const { role, introCopy, email } = Astro.props;
     border-bottom: 1px solid var(--accent);
     color: var(--accent);
     padding-bottom: 0.15rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .cta:hover {
+    color: var(--barn-red);
+    border-bottom-color: var(--barn-red);
   }
 </style>
