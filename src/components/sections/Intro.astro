@@ -1,16 +1,21 @@
 ---
-// Home page section: the bio heading + rich-text intro copy + CTA into Work.
+// Home page section: the bio heading + rich-text intro copy + CTAs (email
+// and into Work).
 interface Props {
   role: string;
   introCopy: string;
+  email: string;
 }
-const { role, introCopy } = Astro.props;
+const { role, introCopy, email } = Astro.props;
 ---
 
 <section class="intro col-12">
   <h1>{role}</h1>
   <div class="intro-copy" set:html={introCopy} />
-  <a class="cta" href="/work">View the work &nbsp;→</a>
+  <div class="actions">
+    <a class="button" href={`mailto:${email}`}>Give Me A Shout</a>
+    <a class="cta" href="/work">View the work &nbsp;→</a>
+  </div>
 </section>
 
 <style>
@@ -66,9 +71,36 @@ const { role, introCopy } = Astro.props;
     text-decoration: underline;
   }
 
+  /* Centered under the bio, matching the centered title above it. */
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 2rem;
+    margin-top: 2rem;
+  }
+
+  /* Same button treatment as the Contact page's "Get in touch". */
+  .button {
+    display: inline-block;
+    background: var(--olympic-gold);
+    color: var(--on-accent);
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    padding: 0.9rem 1.75rem;
+    transition: background 0.15s ease;
+  }
+
+  .button:hover {
+    background: var(--accent-dim);
+  }
+
   .cta {
     display: inline-block;
-    margin-top: 1rem;
     font-size: 0.95rem;
     border-bottom: 1px solid var(--accent);
     color: var(--accent);
