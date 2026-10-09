@@ -73,7 +73,9 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 
   .name img {
     display: block;
-    width: 400px;
+    /* 472px on desktop; on tablets it scales down just enough to keep the
+       nav on the same row. */
+    width: clamp(240px, 100vw - 340px, 472px);
     height: auto;
   }
 
