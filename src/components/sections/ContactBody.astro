@@ -59,10 +59,11 @@ const { email, location } = Astro.props;
     }
   }
 
+  /* Phones/tablets (stacked layout): 18% smaller than full width. */
   .photo-col {
     flex: 0 0 auto;
-    width: 100%;
-    max-width: 420px;
+    width: 82%;
+    max-width: 344px;
     margin-inline: auto;
     /* Phones: a little air between the page title and the photo. */
     margin-top: 1rem;
@@ -71,6 +72,7 @@ const { email, location } = Astro.props;
   @media (min-width: 801px) {
     .photo-col {
       flex-basis: 42%;
+      width: 100%;
       max-width: none;
       margin-inline: 0;
       margin-top: 0;
