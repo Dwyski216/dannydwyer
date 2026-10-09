@@ -17,9 +17,12 @@ const { description } = Astro.props;
     margin-bottom: 1.5rem;
   }
 
-  /* Overrides the shared .page-title Signature Treatment (Barn Red with a
-     Headlight drop shadow) for the Work page only: flat Headlight. */
+  /* Overrides the shared .page-title Signature Treatment (Barn Red Futura
+     with a Headlight drop shadow) for the Work page only: flat Headlight in
+     Edmondsans Regular. */
   .description-banner h1 {
+    font-family: 'Edmondsans', var(--font-display);
+    font-weight: 400;
     font-size: clamp(1.75rem, 3.5vw, 2.25rem);
     margin: 0 0 0.5rem;
     color: var(--headlight);
