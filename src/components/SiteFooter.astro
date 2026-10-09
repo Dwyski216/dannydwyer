@@ -14,6 +14,7 @@ const displayNames: Record<string, string> = {
 
 <footer class="footer">
   <div class="footer-inner container">
+    <div class="footer-text">
     <div class="links">
       <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
       {socialLinks.map(([name, url]) => (
@@ -32,6 +33,10 @@ const displayNames: Record<string, string> = {
       <img class="mark" src="/DWYER_MONOGRAM_VARIATIONS/FLAT/DD_FLAT_HEADLIGHT_MONO.png" alt="" width="18" height="18" />
       &copy; {year} {site.name}
     </span>
+    </div>
+    <a class="footer-logo" href="/" aria-label={`${site.name}: home`}>
+      <img src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_02_LIGHT.png" alt="" width="72" height="72" loading="lazy" />
+    </a>
   </div>
 </footer>
 
@@ -41,14 +46,42 @@ const displayNames: Record<string, string> = {
     margin-top: auto;
   }
 
+  /* Links + copyright on the left; the circle monogram pinned to the
+     lower right. */
   .footer-inner {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
     font-size: 0.85rem;
     color: var(--headlight);
+  }
+
+  .footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+
+  .footer-logo {
+    flex-shrink: 0;
+    line-height: 0;
+  }
+
+  .footer-logo img {
+    display: block;
+    width: 72px;
+    height: 72px;
+  }
+
+  @media (max-width: 600px) {
+    .footer-logo img {
+      width: 56px;
+      height: 56px;
+    }
   }
 
   .copyright {
