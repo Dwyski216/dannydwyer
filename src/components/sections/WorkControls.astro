@@ -84,7 +84,12 @@ const { allTags } = Astro.props;
   #search {
     font-family: var(--font-body);
     background: var(--surface);
-    border: 0.75pt solid var(--headlight);
+    /* A 0.5pt Headlight hairline. Browsers round real borders under 1px
+       up to a full pixel, so it's drawn as an outline instead, which
+       Retina/phone screens render at true half-point thickness. The clear
+       1px border keeps the box its original size. */
+    border: 1px solid transparent;
+    box-shadow: 0 0 0 0.5pt var(--headlight);
     color: var(--text);
     padding: 0.6rem 0.8rem;
     font-size: 0.95rem;
