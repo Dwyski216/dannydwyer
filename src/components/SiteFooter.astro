@@ -63,13 +63,16 @@ const year = new Date().getFullYear();
     height: 72px;
   }
 
-  /* Same type as the home page's "Peep The Work" button: Trade Gothic
-     Bold No. 2 at 1rem with the same letter spacing. */
+  /* Semi-bold Trade Gothic: the site only has the Regular and Bold No. 2
+     files (no true semi-bold cut), so this is Trade Gothic Regular with a
+     hairline stroke in the text colour to sit between the two weights.
+     Same 1.1rem size and letter spacing as before. */
   .email {
     grid-area: email;
     justify-self: end;
-    font-family: var(--font-title);
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-weight: 400;
+    -webkit-text-stroke: 0.035em currentColor;
     letter-spacing: 0.04em;
     font-size: var(--email-size);
     line-height: 1;
@@ -79,7 +82,7 @@ const year = new Date().getFullYear();
     transform: translateY(var(--email-nudge));
     transition: color 0.15s ease;
     --email-size: 1.1rem;
-    --email-nudge: -0.6em;
+    --email-nudge: -0.74em;
   }
 
   .email:hover {
