@@ -22,11 +22,11 @@ const { role, introCopy } = Astro.props;
   }
 
   .intro h1 {
-    /* Same size as the Work page's "WORK" title (WorkBanner.astro), capped
-       at 7.8vw so the longest word, "CINEMATOGRAPHER", still fits a phone
+    /* 50px on desktop, scaling down with the screen; capped at 7.02vw so
+       the longest word, "CINEMATOGRAPHER", still fits a phone
        screen; overflow-wrap is a last-resort guard so the page can never
        scroll sideways. */
-    font-size: min(clamp(2.5rem, 5.5vw, 3.5rem), 7.8vw);
+    font-size: min(calc(clamp(2.5rem, 5.5vw, 3.5rem) * 0.9), 7.02vw);
     overflow-wrap: anywhere;
     font-family: var(--font-title-light);
     font-weight: 300;
@@ -74,30 +74,32 @@ const { role, introCopy } = Astro.props;
   }
 
   /* Button centered under the bio, matching the centered title. */
+  /* The button sits centered in the space between the bio and the
+     Featured Work heading below (see FeaturedWork.astro's top margin). */
   .actions {
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 4.5rem;
   }
 
-  /* Hollow Olympic Gold button: 2pt outline and gold text on the page
-     background. Fills gold on hover. */
+  /* Hollow Headlight button: 2pt outline and text on the page background,
+     both turning Olympic Gold on hover. */
   .button {
     display: inline-block;
     background: transparent;
-    border: 2pt solid var(--olympic-gold);
-    color: var(--olympic-gold);
+    border: 2pt solid var(--headlight);
+    color: var(--headlight);
     font-family: var(--font-title);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     font-size: 1rem;
     padding: 0.9rem 1.75rem;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition: border-color 0.15s ease, color 0.15s ease;
   }
 
   .button:hover {
-    background: var(--olympic-gold);
-    color: var(--on-accent);
+    border-color: var(--olympic-gold);
+    color: var(--olympic-gold);
   }
 </style>

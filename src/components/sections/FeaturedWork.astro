@@ -33,8 +33,9 @@ const { featured, thumbnails } = Astro.props;
 
 <style>
   .featured {
-    /* Generous gap below the bio's Collection of Work button. */
-    margin: 4.5rem 0 3rem;
+    /* Paired with Intro.astro's .actions margin so the Collection of Work
+       button sits centered between the bio and this heading. */
+    margin: 1.9375rem 0 3rem;
   }
 
   .featured h2 {
@@ -48,6 +49,14 @@ const { featured, thumbnails } = Astro.props;
     letter-spacing: 0.04em;
     color: var(--olympic-gold);
     margin-bottom: 1.25rem;
+  }
+
+  /* Phones and tablets: the smaller heading line box needs a touch more
+     space above it to keep the button centered. */
+  @media (max-width: 900px) {
+    .featured {
+      margin-top: 2.625rem;
+    }
   }
 
   .featured-grid {
