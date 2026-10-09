@@ -39,12 +39,16 @@ const { role, introCopy } = Astro.props;
     margin-bottom: calc(1rem + 1.05rem * 1.5);
   }
 
+  /* Set like the Contact and Work pages' body copy. */
   .intro-copy {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    line-height: 1.5;
+    font-family: var(--font-body);
+    color: color-mix(in srgb, var(--headlight) 88%, transparent);
+    font-size: 1.1rem;
+    line-height: 1.75;
     text-align: justify;
+    text-justify: inter-word;
     hyphens: auto;
+    -webkit-hyphens: auto;
   }
 
   /* The bio is rich text from the admin editor. Text pasted in from other
@@ -61,7 +65,7 @@ const { role, introCopy } = Astro.props;
   }
 
   .intro-copy :global(p) {
-    margin: 0 0 1.2em !important;
+    margin: 0 0 1.1rem !important;
   }
 
   .intro-copy :global(p:last-child) {
@@ -79,7 +83,7 @@ const { role, introCopy } = Astro.props;
   .actions {
     display: flex;
     justify-content: center;
-    margin-top: 4.5rem;
+    margin-top: 4.375rem;
   }
 
   /* Hollow Headlight button: 2pt outline and text on the page background,
