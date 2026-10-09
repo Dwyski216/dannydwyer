@@ -1,6 +1,6 @@
 ---
-// Row of social links with hollow (outline) Olympic Gold icons, shown on the
-// home page under Featured Work. URLs come from site.socials (editable in
+// Row of social links with hollow (outline) Headlight icons, shown in the
+// site footer on every page (Ink on hover, against the Shit Kicker band). URLs come from site.socials (editable in
 // the admin's Settings tab); a platform with no URL is left out.
 //
 // Instagram, LinkedIn and YouTube are stroke icons (Lucide, ISC license). Vimeo and
@@ -63,61 +63,49 @@ const links = ORDER.filter((key) => site.socials[key]).map((key) => ({ key, url:
 <style>
   .social-icons {
     list-style: none;
-    margin: 2.5rem 0 0;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.25rem 2.5rem;
+    gap: 0.75rem 1.5rem;
   }
 
   .social-icons a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--olympic-gold);
-    font-size: 0.85rem;
+    gap: 0.35rem;
+    color: var(--headlight);
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     transition: color 0.15s ease;
   }
 
   .social-icons a:hover {
-    color: var(--headlight);
+    color: var(--ink);
   }
 
   .social-icons svg {
     display: block;
+    width: 26px;
+    height: 26px;
   }
 
-  /* Tighter on phones so all five fit on one row. */
-  @media (max-width: 600px) {
-    .social-icons {
-      gap: 1rem 1.1rem;
-    }
-
-    .social-icons a {
-      font-size: 0.7rem;
-      letter-spacing: 0.04em;
-    }
-  }
-
-  /* Small phones (iPhone SE and similar): shrink icons, labels and gaps a
-     little more so the row still never wraps. */
+  /* Small phones: tighter so all five stay on one row. */
   @media (max-width: 380px) {
     .social-icons {
-      gap: 0.75rem 0.7rem;
+      gap: 0.75rem 0.9rem;
     }
 
     .social-icons a {
-      font-size: 0.62rem;
-      letter-spacing: 0.02em;
+      font-size: 0.58rem;
+      letter-spacing: 0.03em;
     }
 
     .social-icons svg {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
     }
   }
 </style>

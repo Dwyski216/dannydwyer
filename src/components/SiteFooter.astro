@@ -1,31 +1,14 @@
 ---
 import { site } from '../data/site';
+import SocialIcons from './SocialIcons.astro';
 const year = new Date().getFullYear();
-const socialLinks = Object.entries(site.socials).filter(([, url]) => url);
 
-// A few platform names have a correct brand casing that plain CSS
-// text-transform: capitalize can't produce.
-const displayNames: Record<string, string> = {
-  imdb: 'IMDb',
-  linkedin: 'LinkedIn',
-  youtube: 'YouTube',
-};
 ---
 
 <footer class="footer">
   <div class="footer-inner container">
     <div class="links">
-      {socialLinks.map(([name, url]) => (
-        <a
-          class="social"
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${site.name} on ${displayNames[name] ?? name}`}
-        >
-          {displayNames[name] ?? name}
-        </a>
-      ))}
+      <SocialIcons />
     </div>
     <span class="copyright">
       <img class="mark" src="/DWYER_MONOGRAM_VARIATIONS/FLAT/DD_FLAT_HEADLIGHT_MONO.png" alt="" width="18" height="18" />
@@ -46,7 +29,7 @@ const displayNames: Record<string, string> = {
     margin-top: auto;
   }
 
-  /* Three columns on desktop: social links on the left, the small mark
+  /* Three columns on desktop: social icons on the left, the small mark
      and copyright centered, and the circle monogram with the email (at
      twice the footer text size) on the right. Stacks on narrow screens. */
   .footer-inner {
@@ -101,6 +84,10 @@ const displayNames: Record<string, string> = {
     color: var(--headlight);
   }
 
+  .links {
+    justify-self: start;
+  }
+
   /* Below ~1100px the three columns don't fit side by side, so stack. */
   @media (max-width: 1100px) {
     .footer-inner {
@@ -110,6 +97,10 @@ const displayNames: Record<string, string> = {
     }
 
     .links {
+      justify-self: center;
+    }
+
+    .links :global(.social-icons) {
       justify-content: center;
     }
 
@@ -122,7 +113,6 @@ const displayNames: Record<string, string> = {
       width: 56px;
       height: 56px;
     }
-
   }
 
   /* Phones: smaller email so it fits on one line. */
@@ -130,24 +120,5 @@ const displayNames: Record<string, string> = {
     .email {
       font-size: 1.3rem;
     }
-  }
-
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 0.5rem;
-    column-gap: 1.5rem;
-  }
-
-  .links a {
-    text-decoration: underline;
-  }
-
-  .links .social {
-    text-transform: capitalize;
-  }
-
-  .links a:hover {
-    color: var(--headlight);
   }
 </style>
