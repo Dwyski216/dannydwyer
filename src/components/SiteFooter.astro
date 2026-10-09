@@ -65,14 +65,15 @@ const year = new Date().getFullYear();
 
   /* Semi-bold Trade Gothic: the site only has the Regular and Bold No. 2
      files (no true semi-bold cut), so this is Trade Gothic Regular with a
-     hairline stroke in the text colour to sit between the two weights.
+     very fine stroke in the text colour for a touch more weight than
+     Regular.
      Same 1.1rem size and letter spacing as before. */
   .email {
     grid-area: email;
     justify-self: end;
     font-family: var(--font-body);
     font-weight: 400;
-    -webkit-text-stroke: 0.035em currentColor;
+    -webkit-text-stroke: 0.018em currentColor;
     letter-spacing: 0.04em;
     font-size: var(--email-size);
     line-height: 1;
