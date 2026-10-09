@@ -1,5 +1,5 @@
 ---
-// Row of social links with hollow (outline) Headlight icons, shown on the
+// Row of social links with hollow (outline) Olympic Gold icons, shown on the
 // home page under Featured Work. URLs come from site.socials (editable in
 // the admin's Settings tab); a platform with no URL is left out.
 //
@@ -76,7 +76,7 @@ const links = ORDER.filter((key) => site.socials[key]).map((key) => ({ key, url:
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    color: var(--headlight);
+    color: var(--olympic-gold);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -84,7 +84,7 @@ const links = ORDER.filter((key) => site.socials[key]).map((key) => ({ key, url:
   }
 
   .social-icons a:hover {
-    color: var(--barn-red);
+    color: var(--headlight);
   }
 
   .social-icons svg {
