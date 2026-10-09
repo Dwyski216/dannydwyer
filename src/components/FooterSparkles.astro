@@ -1,0 +1,88 @@
+---
+// Decorative Headlight sparkle clusters for the footer band's left and right
+// edges (stars + dots), redrawn as vector art from the footer mockup so they
+// stay crisp at any size. Coordinates are in the mockup's own pixel space
+// (each side is a 200 x 344 slice of the band); the SVG scales to the band's
+// height. Purely decorative, so hidden from assistive tech.
+interface Props {
+  side: 'left' | 'right';
+}
+const { side } = Astro.props;
+
+type Star = [cx: number, cy: number, halfWidth: number];
+type Dot = [cx: number, cy: number];
+
+const layouts: Record<'left' | 'right', { stars: Star[]; dots: Dot[] }> = {
+  left: {
+    stars: [
+      [104.5, 72, 24],
+      [54, 180, 24],
+      [135, 271, 24],
+    ],
+    dots: [
+      [46.5, 29], [27, 56], [49.5, 62.5],
+      [131, 163], [152, 191], [117, 198.5],
+      [59.5, 260], [25, 303], [59, 319],
+    ],
+  },
+  right: {
+    stars: [
+      [51, 61.5, 27],
+      [141.5, 152.5, 27],
+      [85, 260.5, 27],
+    ],
+    dots: [
+      [117, 40], [135.5, 72],
+      [85.5, 141.5], [57, 169], [91, 173],
+      [147, 270], [172, 277], [150, 304],
+    ],
+  },
+};
+
+const { stars, dots } = layouts[side];
+
+// One sparkle: a tall vertical ray, a shorter horizontal ray, and a short X
+// of diagonals through the same center.
+const starPath = ([cx, cy, hw]: Star) =>
+  [
+    `M${cx} ${cy - 44}V${cy + 44}`,
+    `M${cx - hw} ${cy}H${cx + hw}`,
+    `M${cx - 13} ${cy - 21}L${cx + 13} ${cy + 21}`,
+    `M${cx + 13} ${cy - 21}L${cx - 13} ${cy + 21}`,
+  ].join('');
+---
+
+<svg class={`sparkles sparkles-${side}`} viewBox="0 0 200 344" aria-hidden="true" focusable="false">
+  <path d={stars.map(starPath).join('')} />
+  {dots.map(([cx, cy]) => <circle cx={cx} cy={cy} r="2.5" />)}
+</svg>
+
+<style>
+  .sparkles {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 200 / 344;
+    pointer-events: none;
+  }
+
+  .sparkles path {
+    fill: none;
+    stroke: var(--headlight);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+  }
+
+  .sparkles circle {
+    fill: var(--headlight);
+  }
+
+  .sparkles-left {
+    left: 0;
+  }
+
+  .sparkles-right {
+    right: 0;
+  }
+</style>

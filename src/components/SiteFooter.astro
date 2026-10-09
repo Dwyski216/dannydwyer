@@ -1,47 +1,46 @@
 ---
 import { site } from '../data/site';
 import SocialIcons from './SocialIcons.astro';
-const year = new Date().getFullYear();
-
+import FooterSparkles from './FooterSparkles.astro';
 ---
 
 <footer class="footer">
+  <FooterSparkles side="left" />
+  <FooterSparkles side="right" />
   <div class="footer-inner container">
     <div class="links">
       <SocialIcons />
     </div>
     <a class="footer-logo" href="/" aria-label={`${site.name}: home`}>
-      <img src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_02_LIGHT.png" alt="" width="85" height="85" loading="lazy" />
+      <img src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_02_LIGHT.png" alt="" width="104" height="104" loading="lazy" />
     </a>
     <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
-    <span class="copyright">
-      &copy; {year} {site.name}
-    </span>
   </div>
 </footer>
 
 <style>
+  /* Shit Kicker band with Headlight sparkle clusters at both edges.
+     Desktop: social icons on the left, the circle monogram dead center, and
+     the email in Futura Bold caps on the right, all on one line. Stacks,
+     centered, on narrow screens (where the sparkles are dropped, since
+     there's no room for them beside the content). */
   .footer {
+    position: relative;
+    overflow: hidden;
     background: var(--shit-kicker);
     margin-top: auto;
   }
 
-  /* Desktop: social icons on the left, the circle monogram dead center
-     with the copyright centered under it, and the email on the right.
-     The email is sized so its letters run the same height as the icons
-     (top of the icons to the bottom of the icons), and nudged so both sit
-     on one line. Stacks, all centered, on narrow screens. */
   .footer-inner {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    position: relative;
+    min-height: 15rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    grid-template-areas:
-      'links logo email'
-      '.     copy .';
+    grid-template-areas: 'links logo email';
     align-items: center;
-    gap: 0.75rem 1.5rem;
-    font-size: 0.85rem;
+    gap: 1.5rem;
     color: var(--headlight);
   }
 
@@ -58,57 +57,44 @@ const year = new Date().getFullYear();
 
   .footer-logo img {
     display: block;
-    width: 85px;
-    height: 85px;
+    width: 104px;
+    height: 104px;
   }
 
-  /* Semi-bold Trade Gothic: the site only has the Regular and Bold No. 2
-     files (no true semi-bold cut), so this is Trade Gothic Regular with a
-     very fine stroke in the text colour for a touch more weight than
-     Regular.
-     Same 1.1rem size and letter spacing as before. */
   .email {
     grid-area: email;
     justify-self: end;
-    font-family: var(--font-body);
-    font-weight: 400;
-    -webkit-text-stroke: 0.018em currentColor;
-    letter-spacing: 0.04em;
-    font-size: var(--email-size);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.4rem;
     line-height: 1;
+    text-transform: uppercase;
     white-space: nowrap;
-    text-decoration: underline;
-    text-underline-offset: 0.12em;
-    transform: translateY(var(--email-nudge));
+    color: var(--headlight);
     transition: color 0.15s ease;
-    --email-size: 1.1rem;
-    --email-nudge: -0.74em;
   }
 
   .email:hover {
     color: var(--olympic-gold);
   }
 
-  /* Twice the original space between the icon row and the copyright
-     (30px -> 60px on desktop, 20px -> 40px stacked). */
-  .copyright {
-    grid-area: copy;
-    justify-self: center;
-    margin-top: 1.875rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+  /* The sparkle clusters sit in the side margins, so they only show where
+     the margins are wide enough to hold them clear of the content. */
+  @media (max-width: 1320px) {
+    .footer :global(.sparkles) {
+      display: none;
+    }
   }
 
-  /* Below ~1000px the row doesn't fit, so stack everything, centered. */
-  @media (max-width: 1000px) {
+  /* Below ~1100px the row doesn't fit, so stack everything, centered. */
+  @media (max-width: 1100px) {
     .footer-inner {
+      min-height: 0;
       grid-template-columns: 1fr;
       grid-template-areas:
         'logo'
         'email'
-        'links'
-        'copy';
+        'links';
       justify-items: center;
       text-align: center;
       gap: 1.25rem;
@@ -119,24 +105,24 @@ const year = new Date().getFullYear();
       justify-self: center;
     }
 
+    .email {
+      margin-bottom: 1rem;
+    }
+
     .links :global(.social-icons) {
       justify-content: center;
     }
 
-    /* Extra breathing room between the email and the icon row below. */
-    .email {
-      transform: none;
-      margin-bottom: 1rem;
-    }
-
-    .copyright {
-      margin-top: 1.25rem;
-    }
-
     .footer-logo img {
-      width: 66px;
-      height: 66px;
+      width: 72px;
+      height: 72px;
     }
   }
 
+  /* Phones: scale the email with the screen so it stays on one line. */
+  @media (max-width: 600px) {
+    .email {
+      font-size: min(1.25rem, 5.2vw);
+    }
+  }
 </style>
