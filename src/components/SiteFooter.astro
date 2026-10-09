@@ -15,7 +15,6 @@ const year = new Date().getFullYear();
     </a>
     <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
     <span class="copyright">
-      <img class="mark" src="/DWYER_MONOGRAM_VARIATIONS/FLAT/DD_FLAT_HEADLIGHT_MONO.png" alt="" width="18" height="18" />
       &copy; {year} {site.name}
     </span>
   </div>
@@ -99,11 +98,6 @@ const year = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  .mark {
-    display: block;
-    opacity: 0.9;
   }
 
   /* Below ~1000px the row doesn't fit, so stack everything, centered. */
