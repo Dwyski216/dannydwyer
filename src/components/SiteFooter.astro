@@ -76,8 +76,8 @@ const year = new Date().getFullYear();
     text-underline-offset: 0.12em;
     transform: translateY(var(--email-nudge));
     transition: color 0.15s ease;
-    --email-size: 1.82rem;
-    --email-nudge: -0.446em;
+    --email-size: 0.91rem;
+    --email-nudge: -0.79em;
   }
 
   .email:hover {
@@ -130,10 +130,4 @@ const year = new Date().getFullYear();
     }
   }
 
-  /* Phones: scale the email with the screen so it stays on one line. */
-  @media (max-width: 600px) {
-    .email {
-      --email-size: min(1.3rem, 5.6vw);
-    }
-  }
 </style>
