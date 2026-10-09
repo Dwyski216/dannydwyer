@@ -37,11 +37,14 @@ const { featured, thumbnails } = Astro.props;
   }
 
   .featured h2 {
-    /* Same size as the bio title above (Intro.astro), centered to match. */
+    /* Same type as the bio title above (Intro.astro): Edmondsans Regular,
+       all caps, same size and spacing, centered. */
+    font-family: 'Edmondsans', var(--font-display);
+    font-weight: 400;
     font-size: min(calc(clamp(1.15rem, 2.3vw, 1.6rem) + 5pt), 6vw);
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     color: var(--headlight);
     margin-bottom: 1.25rem;
   }
