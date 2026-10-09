@@ -13,8 +13,8 @@ const { role, introCopy, email } = Astro.props;
   <h1>{role}</h1>
   <div class="intro-copy" set:html={introCopy} />
   <div class="actions">
-    <a class="button" href={`mailto:${email}`}>Give Me A Shout</a>
-    <a class="cta" href="/work">Peep the work &nbsp;→</a>
+    <a class="button" href="/work">Peep The Work</a>
+    <a class="cta" href={`mailto:${email}`}>Give me a shout &nbsp;→</a>
   </div>
 </section>
 
@@ -72,7 +72,7 @@ const { role, introCopy, email } = Astro.props;
   }
 
   /* Button centered under the bio (matching the centered title); the
-     "Peep the work" link sits flush with the bio's right edge. The empty
+     "Give me a shout" email link sits flush with the bio's right edge. The empty
      first column mirrors the link's column so the button stays truly
      centered. On narrow screens they stack: button centered, link below it
      on the right. */
