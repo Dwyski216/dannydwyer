@@ -18,9 +18,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       <a class="logo-mark" href="/" aria-label={site.name}>
         <img class="bolt" src="/DWYER_MONOGRAM_VARIATIONS/FLAT/DD_FLAT_HEADLIGHT_RED.png" alt="" width="100" height="100" />
       </a>
-      <a class="name" href="/">
-        <img src="/images/DWYSKI_BANNER.webp" alt={site.name} width="2000" height="199" />
-      </a>
+      <a class="name" href="/">{site.name}</a>
     </>
   )}
   <nav class="nav">
@@ -61,34 +59,32 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     }
   }
 
-  /* The Signature Treatment wordmark (Barn Red letters with a hard-edge
-     Headlight drop shadow), supplied as artwork in DWYSKI_BANNER rather
-     than set in type. Centered across the full header on desktop
-     (independent of the logo mark, which stays pinned top-left); on
-     narrow screens there isn't room to center it without overlapping the
-     logo or nav, so it drops back into the normal flex flow next to them. */
+  /* The name set in Futura Bold, flat Barn Red with no drop shadow.
+     Centered across the full header on desktop (independent of the logo
+     mark, which stays pinned top-left); on narrow screens there isn't room
+     to center it without overlapping the logo or nav, so it drops back
+     into the normal flex flow next to them. */
   .name {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    line-height: 0;
-  }
-
-  .name img {
-    display: block;
-    width: 400px;
-    height: auto;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 2.875rem;
+    line-height: 1;
+    color: var(--barn-red);
+    text-shadow: none;
   }
 
   @media (max-width: 600px) {
     .name {
       position: static;
       transform: none;
-    }
-
-    .name img {
-      width: 200px;
+      font-size: 1.45rem;
     }
   }
 
