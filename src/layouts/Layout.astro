@@ -171,8 +171,10 @@ const personSchema = {
     --font-title: 'Trade Gothic Bold No 2', 'Arial Narrow', sans-serif;
     /* Trade Gothic Regular — descriptions, credits, captions, reading text. */
     --font-body: 'Trade Gothic Regular', -apple-system, sans-serif;
-    /* Edmondsans Regular — page titles and the home page's section titles. */
+    /* Edmondsans Regular — the home page's Featured Work heading. */
     --font-heading: 'Edmondsans', var(--font-display);
+    /* Hurme Geometric Sans 3 Light — page titles and the home bio title. */
+    --font-title-light: 'Hurme Geometric Sans 3', var(--font-heading);
 
     --content-width: 1100px;
     --side-padding: clamp(1.25rem, 4vw, 2rem);
@@ -222,13 +224,14 @@ const personSchema = {
     margin: 0;
   }
 
-  /* Top-level page titles (Work, Contact, 404): Edmondsans Regular in flat
-     Headlight, all caps. Pages set their own spacing. A video project's own
-     title (work/[slug]) intentionally does NOT use this — it keeps its
-     Trade Gothic Bold No. 2 identity instead. */
+  /* Top-level page titles (Work, Contact, 404): Hurme Geometric Sans 3
+     Light in flat Headlight, all caps — same face as the home page's bio
+     title. Pages set their own spacing. A video project's own title
+     (work/[slug]) intentionally does NOT use this — it keeps its Trade
+     Gothic Bold No. 2 identity instead. */
   .page-title {
-    font-family: var(--font-heading);
-    font-weight: 400;
+    font-family: var(--font-title-light);
+    font-weight: 300;
     font-size: clamp(2.5rem, 5.5vw, 3.5rem);
     text-transform: uppercase;
     letter-spacing: 0.02em;
