@@ -68,7 +68,7 @@ const { email, location } = Astro.props;
 
   @media (min-width: 801px) {
     .layout {
-      grid-template-columns: 42% 1fr;
+      grid-template-columns: 37.8% 1fr;
       grid-template-rows: auto 1fr;
       grid-template-areas:
         'photo title'
@@ -79,10 +79,10 @@ const { email, location } = Astro.props;
     }
   }
 
-  /* Phones/tablets (stacked layout): 18% smaller than full width. */
+  /* Phones/tablets (stacked layout): about three-quarters of full width. */
   .photo-col {
-    width: 82%;
-    max-width: 344px;
+    width: 73.8%;
+    max-width: 310px;
     margin-inline: auto;
   }
 
