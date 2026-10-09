@@ -29,34 +29,18 @@ const year = new Date().getFullYear();
     margin-top: auto;
   }
 
-  /* Desktop: social icons on the left and the circle monogram with the
-     email (twice the footer text size) on the right, with the small mark
-     and copyright centered on its own line underneath. Stacks, all
-     centered, on narrow screens. */
+  /* Three columns on desktop: social icons on the left, the small mark
+     and copyright centered, and the circle monogram with the email (at
+     twice the footer text size) on the right. Stacks on narrow screens. */
   .footer-inner {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      'links contact'
-      'copy copy';
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 1.25rem 1.5rem;
+    gap: 1.5rem;
     font-size: 0.85rem;
     color: var(--headlight);
-  }
-
-  .links {
-    grid-area: links;
-  }
-
-  .contact {
-    grid-area: contact;
-  }
-
-  .copyright {
-    grid-area: copy;
   }
 
   .copyright {
@@ -90,14 +74,13 @@ const year = new Date().getFullYear();
     height: 72px;
   }
 
-  /* The brand typeface (Futura Bold, per the style guide), kept lowercase
-     since it's an address people type. */
+  /* Trade Gothic Regular (the brand's reading typeface), at twice the
+     footer text size. */
   .email {
-    font-family: var(--font-display);
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-weight: 400;
     font-size: 1.7rem;
     text-decoration: underline;
-    text-underline-offset: 0.15em;
     white-space: nowrap;
     transition: color 0.15s ease;
   }
@@ -110,14 +93,10 @@ const year = new Date().getFullYear();
     justify-self: start;
   }
 
-  /* Below ~900px the icons and email don't fit side by side, so stack. */
-  @media (max-width: 900px) {
+  /* Below ~1100px the three columns don't fit side by side, so stack. */
+  @media (max-width: 1100px) {
     .footer-inner {
       grid-template-columns: 1fr;
-      grid-template-areas:
-        'contact'
-        'links'
-        'copy';
       justify-items: center;
       text-align: center;
     }
@@ -132,6 +111,7 @@ const year = new Date().getFullYear();
 
     .contact {
       justify-self: center;
+      order: -1;
     }
 
     .footer-logo img {
@@ -140,11 +120,10 @@ const year = new Date().getFullYear();
     }
   }
 
-  /* Phones: smaller email, scaled to the screen so it always fits on one
-     line next to the logo. */
+  /* Phones: smaller email so it fits on one line. */
   @media (max-width: 600px) {
     .email {
-      font-size: min(1.3rem, 4.6vw);
+      font-size: 1.3rem;
     }
   }
 </style>
