@@ -262,7 +262,7 @@ const jsonLd = [
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--tag-muted);
+    color: var(--olympic-gold);
     margin-bottom: 1rem;
   }
 
@@ -309,7 +309,7 @@ const jsonLd = [
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--tag-muted);
+    color: var(--olympic-gold);
     margin-top: 1rem;
   }
 
@@ -320,6 +320,7 @@ const jsonLd = [
   dd {
     margin: 0.25rem 0 0;
     font-size: 0.95rem;
+    color: var(--headlight);
   }
 
   .credits {
@@ -341,12 +342,13 @@ const jsonLd = [
     border: 1px solid var(--hairline);
     padding: 0.15rem 0.5rem;
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: var(--headlight);
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
 
   dd.tags a:hover {
-    color: var(--headlight);
-    border-color: var(--headlight);
+    color: var(--olympic-gold);
+    border-color: var(--olympic-gold);
   }
 
   .back {
@@ -367,7 +369,7 @@ const jsonLd = [
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--tag-muted);
+    color: var(--olympic-gold);
     margin-bottom: 0.75rem;
   }
 
@@ -380,13 +382,16 @@ const jsonLd = [
     gap: 0.5rem 1.5rem;
   }
 
+  /* Section pattern: Olympic Gold header, Headlight body, links turn
+     Olympic Gold on hover. */
   .related-list a {
-    color: var(--olympic-gold);
+    color: var(--headlight);
     font-size: 0.95rem;
+    transition: color 0.15s ease;
   }
 
   .related-list a:hover {
-    color: var(--headlight);
+    color: var(--olympic-gold);
   }
 
   .project-nav {
