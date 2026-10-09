@@ -24,7 +24,7 @@ const { Content } = await page.render();
     {sections.map((section) => {
       if (section === 'body') {
         return (
-          <ContactBody email={site.email} location={site.location}>
+          <ContactBody email={site.email}>
             <Content />
           </ContactBody>
         );

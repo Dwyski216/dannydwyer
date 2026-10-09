@@ -4,9 +4,8 @@
 // on desktop while still leading the page on phones.
 interface Props {
   email: string;
-  location: string;
 }
-const { email, location } = Astro.props;
+const { email } = Astro.props;
 ---
 
 <div class="layout">
@@ -33,7 +32,6 @@ const { email, location } = Astro.props;
     <div class="action">
       <a class="button" href={`mailto:${email}`}>Get in touch</a>
       <a class="email-plain" href={`mailto:${email}`}>{email}</a>
-      {location && <span class="location">{location}</span>}
     </div>
   </div>
 </div>
@@ -74,7 +72,7 @@ const { email, location } = Astro.props;
         'photo title'
         'photo copy';
       column-gap: clamp(2rem, 5vw, 4rem);
-      row-gap: 1.5rem;
+      row-gap: 0;
       align-items: start;
     }
   }
@@ -145,32 +143,45 @@ const { email, location } = Astro.props;
     gap: 0.6rem;
   }
 
+  /* Hollow Headlight button, matching the home page's "Collection of Work":
+     2pt outline and text turning Olympic Gold on hover. */
   .button {
     display: inline-block;
-    background: var(--olympic-gold);
-    color: var(--on-accent);
+    background: transparent;
+    border: 2pt solid var(--headlight);
+    color: var(--headlight);
     font-family: var(--font-title);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     font-size: 1rem;
     padding: 0.9rem 1.75rem;
-    transition: background 0.15s ease;
+    transition: border-color 0.15s ease, color 0.15s ease;
   }
 
   .button:hover {
-    background: var(--accent-dim);
+    border-color: var(--olympic-gold);
+    color: var(--olympic-gold);
   }
 
+  /* Email set like the body copy above it; Olympic Gold on hover. */
   .email-plain {
-    color: color-mix(in srgb, var(--headlight) 75%, transparent);
-    font-size: 0.9rem;
-    text-decoration: underline;
+    font-family: var(--font-body);
+    color: color-mix(in srgb, var(--headlight) 88%, transparent);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    transition: color 0.15s ease;
   }
 
-  .location {
-    color: color-mix(in srgb, var(--headlight) 60%, transparent);
-    font-size: 0.85rem;
+  .email-plain:hover {
+    color: var(--olympic-gold);
   }
 
+  /* Desktop: visible space from the title down to the copy matches the
+     space from the copy down to the Get in touch button. */
+  @media (min-width: 801px) {
+    .prose {
+      margin-top: 1.125rem;
+    }
+  }
 </style>
