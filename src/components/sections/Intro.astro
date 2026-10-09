@@ -83,7 +83,7 @@ const { role, introCopy } = Astro.props;
   }
 
   /* Hollow Headlight button: 2pt outline and text on the page background,
-     both turning Olympic Gold on hover. */
+     filling Olympic Gold with Ink text on hover. */
   .button {
     display: inline-block;
     background: transparent;
@@ -95,11 +95,12 @@ const { role, introCopy } = Astro.props;
     letter-spacing: 0.04em;
     font-size: 1rem;
     padding: 0.9rem 1.75rem;
-    transition: border-color 0.15s ease, color 0.15s ease;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
 
   .button:hover {
+    background: var(--olympic-gold);
     border-color: var(--olympic-gold);
-    color: var(--olympic-gold);
+    color: var(--ink);
   }
 </style>

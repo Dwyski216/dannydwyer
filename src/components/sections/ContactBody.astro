@@ -144,7 +144,7 @@ const { email } = Astro.props;
   }
 
   /* Hollow Headlight button, matching the home page's "Collection of Work":
-     2pt outline and text turning Olympic Gold on hover. */
+     2pt outline, filling Olympic Gold with Ink text on hover. */
   .button {
     display: inline-block;
     background: transparent;
@@ -156,12 +156,13 @@ const { email } = Astro.props;
     letter-spacing: 0.04em;
     font-size: 1rem;
     padding: 0.9rem 1.75rem;
-    transition: border-color 0.15s ease, color 0.15s ease;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
 
   .button:hover {
+    background: var(--olympic-gold);
     border-color: var(--olympic-gold);
-    color: var(--olympic-gold);
+    color: var(--ink);
   }
 
   /* Email set like the body copy above it; Olympic Gold on hover. */
