@@ -60,11 +60,11 @@ const jsonLd = [
 </Layout>
 
 <script>
-  // This script coordinates two independently-toggleable sections (Filters +
-  // search live in WorkControls, the cards live in WorkGrid), so either one
-  // can be disabled from the admin's Layout tab without breaking the other:
-  // no controls -> every video just shows, unfiltered; no grid -> the
-  // controls still render but there's nothing for them to filter.
+  // This script coordinates two separate sections (Filters + search live in
+  // WorkControls, the cards live in WorkGrid), so either one can be turned
+  // off in src/data/layout.json without breaking the other: no controls ->
+  // every video just shows, unfiltered; no grid -> the controls still render
+  // but there's nothing for them to filter.
   const searchInput = document.getElementById('search') as HTMLInputElement | null;
   const rows = Array.from(document.querySelectorAll('#video-list .card')) as HTMLElement[];
   const emptyState = document.getElementById('empty-state') as HTMLElement | null;
@@ -131,7 +131,13 @@ const jsonLd = [
         chip.type = 'button';
         chip.className = 'selected-chip';
         chip.dataset.tag = tag;
-        chip.innerHTML = `${tag} <span aria-hidden="true">&times;</span>`;
+        // Built with textContent, not innerHTML: tags can come straight from
+        // the ?tag= URL param, so they must never be parsed as HTML.
+        const x = document.createElement('span');
+        x.setAttribute('aria-hidden', 'true');
+        x.textContent = '×';
+        chip.textContent = `${tag} `;
+        chip.appendChild(x);
         chip.setAttribute('aria-label', `Remove ${tag} filter`);
         selectedChips!.appendChild(chip);
       });

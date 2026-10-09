@@ -180,7 +180,10 @@ const { allTags } = Astro.props;
     margin-bottom: 1.5rem;
   }
 
-  .selected-chip {
+  /* Chips are created by the filter script in work/index.astro, so they
+     don't carry this component's scoped-style attribute — hence :global,
+     kept inside .selected-chips so it can't leak anywhere else. */
+  .selected-chips :global(.selected-chip) {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -193,12 +196,12 @@ const { allTags } = Astro.props;
     cursor: pointer;
   }
 
-  .selected-chip:hover {
+  .selected-chips :global(.selected-chip:hover) {
     background: var(--accent-dim);
     border-color: var(--accent-dim);
   }
 
-  .selected-chip span {
+  .selected-chips :global(.selected-chip span) {
     font-size: 0.95rem;
     line-height: 1;
   }

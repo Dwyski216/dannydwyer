@@ -12,14 +12,19 @@ import SiteFooter from '../components/SiteFooter.astro';
   <main class="main container">
     <h1 class="page-title">Page Not Found</h1>
     <p class="copy">That page doesn't exist, or it's moved. Try the work archive instead.</p>
-    <a class="cta" href="/work">View the work &nbsp;→</a>
+    <a class="cta" href="/work">Collection of work &nbsp;→</a>
   </main>
   <SiteFooter />
 </Layout>
 
 <style>
   .main {
-    padding: 3rem clamp(1.25rem, 4vw, 2rem) 5rem;
+    padding-bottom: 5rem;
+  }
+
+  /* Same distance below the site header as the Work and Contact titles. */
+  .main .page-title {
+    margin-top: 5rem;
   }
 
   .copy {
@@ -35,5 +40,11 @@ import SiteFooter from '../components/SiteFooter.astro';
     border-bottom: 1px solid var(--accent);
     color: var(--accent);
     padding-bottom: 0.15rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .cta:hover {
+    color: var(--headlight);
+    border-bottom-color: var(--headlight);
   }
 </style>

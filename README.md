@@ -22,11 +22,12 @@ src/
   data/
     site.json           ← global settings (name, bio, socials, email)
   layouts/Layout.astro   ← SEO meta tags + JSON-LD structured data
-  components/            ← VideoPlayer (YouTube/Vimeo), VideoRow, header/footer
+  components/            ← VideoPlayer, VideoCard, SocialIcons, header/footer,
+                            and sections/ (the pieces each page is built from)
   pages/
-    index.astro          ← Home (main reel + intro)
-    videos/index.astro    ← Video grid with search + tag filtering
-    videos/[slug].astro   ← Individual video pages (embed, description, stills gallery)
+    index.astro          ← Home (main reel + intro + featured work)
+    work/index.astro      ← Video grid with search + tag filtering
+    work/[slug].astro     ← Individual video pages (embed, description, stills gallery)
     contact.astro         ← Contact page
     admin/index.astro     ← Content admin panel (see section 5)
     llms.txt.ts           ← Plain-text site index for AI answer engines (GEO)
@@ -165,10 +166,14 @@ In your Worker's project → **Settings** → **Variables and Secrets**, add:
 | Variable | Value | Type |
 |---|---|---|
 | `GITHUB_TOKEN` | the token from step (a) | Secret |
-| `GITHUB_REPO` | `Dwyski216/dannydwyer` | Text |
-| `GITHUB_BRANCH` | `main` | Text |
+| `GITHUB_REPO` | `Dwyski216/dannydwyer` | Secret |
+| `GITHUB_BRANCH` | `main` | Secret |
 | `ADMIN_PASSWORD` | a password only you know | Secret |
 | `SESSION_SECRET` | a long random string (e.g. `openssl rand -hex 32`) — never reuse this anywhere else | Secret |
+
+Add all five as **Secret**, even the two that aren't sensitive: every
+git-triggered deploy runs `wrangler deploy`, which wipes plain-text
+dashboard variables that aren't in `wrangler.jsonc`, while secrets survive.
 
 Redeploy after saving so `worker/index.ts` picks up the new variables. Once
 they're set, visiting `/admin` redirects to `/admin/login`; entering
@@ -201,16 +206,18 @@ Access is configured.
 
 ## 7. Using the admin panel day to day
 
-- **Add Video**: fill in the form (title, platform + video ID, summary,
-  description, tags, stills, date, etc.) and click Publish. This creates a
-  new markdown file in `src/content/videos/` and commits it — the site
-  rebuilds automatically. At 51+ videos, this is the fastest path to adding
-  new ones — no code changes required.
-- **Edit Video**: pick an existing video from the dropdown, edit the raw
-  markdown, save.
-- **Site Settings**: edit your name, bio, intro copy, email, and social
-  links — writes to `src/data/site.json`.
-- **Contact Page**: edit the Contact page's markdown body directly.
+- **Home**: the hero reel, the bio title and intro copy (pasting is plain
+  text only, so other apps' formatting never comes along), and which videos
+  appear under Featured Work.
+- **Work**: add, edit, reorder, hide or delete videos. Saving creates or
+  updates a markdown file in `src/content/videos/` and commits it — the site
+  rebuilds automatically, no code changes required.
+- **Contact**: edit the Contact page copy.
+- **Tags**: rename or delete a tag everywhere it's used.
+- **SEO**: per-page title, description and share-image overrides.
+- **Settings**: name, email, location, and social links (Instagram,
+  LinkedIn, IMDb, Vimeo, YouTube) — writes to `src/data/site.json`. The
+  footer icons update from these.
 
 Every save is a real Git commit, so your GitHub repo's history is a full
 changelog of every content edit — and if anything ever looks wrong, you can

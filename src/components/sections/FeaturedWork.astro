@@ -40,7 +40,7 @@ const { featured, thumbnails } = Astro.props;
   .featured h2 {
     /* Edmondsans Regular, all caps, centered, like the bio title above;
        sized 15% up from its original size. */
-    font-family: 'Edmondsans', var(--font-display);
+    font-family: var(--font-heading);
     font-weight: 400;
     font-size: min(calc((clamp(1.15rem, 2.3vw, 1.6rem) + 5pt) * 1.15), 6.9vw);
     text-align: center;

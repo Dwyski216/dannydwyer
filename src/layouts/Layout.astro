@@ -163,6 +163,8 @@ const personSchema = {
     --font-title: 'Trade Gothic Bold No 2', 'Arial Narrow', sans-serif;
     /* Trade Gothic Regular — descriptions, credits, captions, reading text. */
     --font-body: 'Trade Gothic Regular', -apple-system, sans-serif;
+    /* Edmondsans Regular — page titles and the home page's section titles. */
+    --font-heading: 'Edmondsans', var(--font-display);
 
     --content-width: 1100px;
     --side-padding: clamp(1.25rem, 4vw, 2rem);
@@ -212,19 +214,17 @@ const personSchema = {
     margin: 0;
   }
 
-  /* The Signature Treatment, reused for every top-level page heading (Home,
-     Work, Contact): Barn Red text on a hard-edge Headlight drop shadow, no
-     blur, offset down-and-right at roughly 37°. Sized in em so the shadow
-     stays proportional at any font-size a page sets locally. A video
-     project's own title (work/[slug]) intentionally does NOT use this — it
-     keeps its separate Trade Gothic Bold No. 2 identity instead. */
+  /* Top-level page titles (Work, Contact, 404): Edmondsans Regular in flat
+     Headlight, all caps. Pages set their own spacing. A video project's own
+     title (work/[slug]) intentionally does NOT use this — it keeps its
+     Trade Gothic Bold No. 2 identity instead. */
   .page-title {
-    font-family: var(--font-display);
-    font-weight: 700;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5.5vw, 3.5rem);
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    color: var(--barn-red);
-    text-shadow: 0.075em 0.056em 0 var(--headlight);
+    color: var(--headlight);
   }
 
   a {
