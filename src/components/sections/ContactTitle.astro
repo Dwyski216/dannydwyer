@@ -1,5 +1,18 @@
 ---
-// Contact page section: just the page heading, in the Signature Treatment.
+// Contact page section: just the page heading, styled to match the Work
+// page's title: Edmondsans Regular in flat Headlight, same size and the
+// same space below the site header.
 ---
 
-<h1 class="page-title">Contact</h1>
+<h1 class="page-title contact-title">Contact</h1>
+
+<style>
+  .contact-title {
+    font-family: 'Edmondsans', var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5.5vw, 3.5rem);
+    color: var(--headlight);
+    text-shadow: none;
+    margin-top: 4rem;
+  }
+</style>
