@@ -17,10 +17,10 @@ const { email, location } = Astro.props;
     <div class="photo-frame">
       <img
         class="photo"
-        src="/images/dwyer-on-set.webp"
-        alt="Danny Dwyer, cinematographer, on set"
-        width="1600"
-        height="2000"
+        src="/images/dwyer-sunglasses.webp"
+        alt="Danny Dwyer, cinematographer, in sunglasses behind a Sony cinema camera"
+        width="1200"
+        height="1600"
         loading="eager"
       />
     </div>
@@ -64,7 +64,8 @@ const { email, location } = Astro.props;
     width: 100%;
     max-width: 420px;
     margin-inline: auto;
-    margin-bottom: 1.5rem;
+    /* Phones: a little air between the page title and the photo. */
+    margin-top: 1rem;
   }
 
   @media (min-width: 801px) {
@@ -72,10 +73,11 @@ const { email, location } = Astro.props;
       flex-basis: 42%;
       max-width: none;
       margin-inline: 0;
+      margin-top: 0;
     }
   }
 
-  /* Plain photo, no offset shadow block behind it. */
+  /* Photo framed with a 2pt Headlight border, no shadow. */
   .photo-frame {
     position: relative;
   }
@@ -86,8 +88,10 @@ const { email, location } = Astro.props;
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
+    box-sizing: border-box;
+    border: 2pt solid var(--headlight);
   }
 
   .copy-col {
