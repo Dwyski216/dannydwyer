@@ -22,11 +22,11 @@ const { role, introCopy } = Astro.props;
   }
 
   .intro h1 {
-    /* 10% up from the original size; capped at 6.6vw so the longest word,
-       "CINEMATOGRAPHER", always fits a phone screen with room to spare;
-       overflow-wrap is a last-resort guard so the page can never scroll
-       sideways. */
-    font-size: min(calc((clamp(1.15rem, 2.3vw, 1.6rem) + 5pt) * 1.1), 6.6vw);
+    /* Same size as the Work page's "WORK" title (WorkBanner.astro), capped
+       at 7.8vw so the longest word, "CINEMATOGRAPHER", still fits a phone
+       screen; overflow-wrap is a last-resort guard so the page can never
+       scroll sideways. */
+    font-size: min(clamp(2.5rem, 5.5vw, 3.5rem), 7.8vw);
     overflow-wrap: anywhere;
     font-family: 'Edmondsans', var(--font-display);
     font-weight: 400;
