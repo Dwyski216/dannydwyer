@@ -13,16 +13,14 @@ const { title, email } = Astro.props;
   <h1 class="page-title contact-title">{title}</h1>
 
   <div class="photo-col">
-    <div class="photo-frame">
-      <img
-        class="photo"
-        src="/images/dwyer-sunglasses.webp"
-        alt="Danny Dwyer, cinematographer, in sunglasses behind a Sony cinema camera"
-        width="1200"
-        height="1600"
-        loading="eager"
-      />
-    </div>
+    <img
+      class="photo"
+      src="/images/dwyer-sunglasses.webp"
+      alt="Danny Dwyer, cinematographer, in sunglasses behind a Sony cinema camera"
+      width="1200"
+      height="1600"
+      loading="eager"
+    />
   </div>
 
   <div class="copy-col">
@@ -94,13 +92,7 @@ const { title, email } = Astro.props;
   }
 
   /* Photo framed with a 2pt Headlight border, no shadow. */
-  .photo-frame {
-    position: relative;
-  }
-
   .photo {
-    position: relative;
-    z-index: 1;
     display: block;
     width: 100%;
     height: auto;

@@ -34,8 +34,7 @@ const { role, introCopy } = Astro.props;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     text-align: center;
-    /* Original 1rem gap plus one blank bio line (1.05rem text x 1.5 line
-       height), so the title sits a clear line above the bio. */
+    /* About 41px: a clear blank line between the title and the bio. */
     margin-bottom: calc(1rem + 1.05rem * 1.5);
   }
 
@@ -77,7 +76,6 @@ const { role, introCopy } = Astro.props;
     text-decoration: underline;
   }
 
-  /* Button centered under the bio, matching the centered title. */
   /* The button sits centered in the space between the bio and the
      Featured Work heading below (see FeaturedWork.astro's top margin). */
   .actions {
