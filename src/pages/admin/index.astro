@@ -94,6 +94,18 @@ import Layout from '../../layouts/Layout.astro';
           <p class="section-hint">Add, edit, and delete work items, and manage the tags used to filter them.</p>
 
           <div id="work-list-view">
+            <h3>Work page</h3>
+            <p class="section-hint">Mirrors the work page: the heading, then the description under it.</p>
+            <form id="work-page-form">
+              <label>Work Heading <input name="workHeading" required /></label>
+              <label>Work Description
+                <textarea name="workDescription" rows="8"></textarea>
+              </label>
+              <button type="submit" class="btn btn-solid">Save Work Page</button>
+              <p class="status" id="work-page-status"></p>
+            </form>
+
+            <h3>Work items</h3>
             <div class="work-list-controls">
               <input id="work-search" type="search" placeholder="Search by title…" />
               <button type="button" id="work-add-btn" class="btn btn-solid">+ Add Work Item</button>
@@ -371,7 +383,7 @@ import Layout from '../../layouts/Layout.astro';
   // events, so loading data never marks a form dirty). Cleared on a
   // successful save or a confirmed discard.
   // ---------------------------------------------------------------------
-  const dirtyFormIds = ['home-form', 'work-item-form', 'contact-form', 'settings-form', 'seo-pages'];
+  const dirtyFormIds = ['home-form', 'work-page-form', 'work-item-form', 'contact-form', 'settings-form', 'seo-pages'];
   dirtyFormIds.forEach((id) => {
     const form = document.getElementById(id);
     form?.addEventListener('input', () => (form.dataset.dirty = '1'));
@@ -418,7 +430,7 @@ import Layout from '../../layouts/Layout.astro';
     if (activePage === 'seo') return 'seo-pages';
     if (activePage === 'work') {
       const itemView = document.getElementById('work-item-view') as HTMLElement | null;
-      return itemView && !itemView.hidden ? 'work-item-form' : null;
+      return itemView && !itemView.hidden ? 'work-item-form' : 'work-page-form';
     }
     return null;
   }
@@ -1271,6 +1283,7 @@ import Layout from '../../layouts/Layout.astro';
   });
 
   async function initWorkPanel() {
+    initWorkPageForm();
     try {
       await loadWorkItems();
     } catch (err) {
@@ -1387,6 +1400,47 @@ import Layout from '../../layouts/Layout.astro';
     }
     status.textContent = '';
     renderSeoPanel();
+  }
+
+  // ---------------------------------------------------------------------
+  // Work page copy (heading + description at the top of the Work tab)
+  // ---------------------------------------------------------------------
+  let workPageInitialized = false;
+  async function initWorkPageForm() {
+    const status = document.getElementById('work-page-status')!;
+    const form = document.getElementById('work-page-form') as HTMLFormElement;
+    const res = await fetch('/api/settings');
+    const data = await res.json();
+    if (!res.ok || !data.work) {
+      status.textContent =
+        data.error || 'The work page could not be read from GitHub. Check the Worker\'s GITHUB_TOKEN/GITHUB_REPO/GITHUB_BRANCH secrets.';
+      return;
+    }
+    status.textContent = '';
+    if (!isDirty('work-page-form')) {
+      (form.elements.namedItem('workHeading') as HTMLInputElement).value = data.work.title ?? '';
+      (form.elements.namedItem('workDescription') as HTMLTextAreaElement).value = data.work.body ?? '';
+    }
+
+    if (workPageInitialized) return;
+    workPageInitialized = true;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Saving…';
+      const fd = new FormData(form);
+      const res = await fetch('/api/settings', {
+        method: 'POST',
+        body: JSON.stringify({
+          work: {
+            title: fd.get('workHeading'),
+            body: fd.get('workDescription'),
+          },
+        }),
+      });
+      status.textContent = res.ok ? 'Saved.' : 'Error saving.';
+      if (res.ok) clearDirty('work-page-form');
+    });
   }
 
   // ---------------------------------------------------------------------
@@ -1511,6 +1565,15 @@ import Layout from '../../layouts/Layout.astro';
   h2 {
     font-size: 1.25rem;
     margin-bottom: 0.35rem;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    margin: 1.5rem 0 0.35rem;
+  }
+
+  #work-page-form {
+    margin-bottom: 1rem;
   }
 
   .hint {

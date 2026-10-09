@@ -1,15 +1,16 @@
 ---
-// Work page section: the "Work" title + description paragraph above the
-// filter controls and grid.
+// Work page section: the "Work" title + description above the filter
+// controls and grid. Both come from src/content/pages/work.md, edited in the
+// admin's Work tab.
 interface Props {
-  description: string;
+  title: string;
 }
-const { description } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <section class="description-banner">
-  <h1 class="page-title">Work</h1>
-  <p class="description">{description}</p>
+  <h1 class="page-title">{title}</h1>
+  <div class="description"><slot /></div>
 </section>
 
 <style>
@@ -29,5 +30,13 @@ const { description } = Astro.props;
     margin: 0;
     text-align: justify;
     hyphens: auto;
+  }
+
+  .description :global(p) {
+    margin: 0 0 0.75rem;
+  }
+
+  .description :global(p:last-child) {
+    margin-bottom: 0;
   }
 </style>

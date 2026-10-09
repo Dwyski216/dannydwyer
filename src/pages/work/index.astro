@@ -5,13 +5,15 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import WorkBanner from '../../components/sections/WorkBanner.astro';
 import WorkControls from '../../components/sections/WorkControls.astro';
 import WorkGrid from '../../components/sections/WorkGrid.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { getThumbnailUrl, byDisplayOrder } from '../../lib/video';
 import { getEnabledSections } from '../../data/layout';
 import { getSeoOverride } from '../../data/seo';
 
 const sections = getEnabledSections('work');
 const seo = getSeoOverride('work');
+const page = await getEntry('pages', 'work');
+const { Content } = await page.render();
 const videos = (await getCollection('videos', (v) => !v.data.hidden)).sort((a, b) => byDisplayOrder(a.data, b.data));
 
 const thumbnails = await Promise.all(videos.map((v) => getThumbnailUrl(v.data)));
@@ -48,7 +50,9 @@ const jsonLd = [
     {sections.map((section) => {
       if (section === 'banner') {
         return (
-          <WorkBanner description="Selected narrative, commercial, and documentary work from fifteen years behind the camera — campaigns for A-list celebrities and global brands, and the everyday heroes whose stories deserve just as much care." />
+          <WorkBanner title={page.data.title}>
+            <Content />
+          </WorkBanner>
         );
       }
       if (section === 'controls') return <WorkControls allTags={allTags} />;

@@ -3,13 +3,14 @@
 // The title lives here (not as its own section) so it can sit over the copy
 // on desktop while still leading the page on phones.
 interface Props {
+  title: string;
   email: string;
 }
-const { email } = Astro.props;
+const { title, email } = Astro.props;
 ---
 
 <div class="layout">
-  <h1 class="page-title contact-title">Contact</h1>
+  <h1 class="page-title contact-title">{title}</h1>
 
   <div class="photo-col">
     <div class="photo-frame">

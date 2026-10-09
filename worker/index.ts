@@ -612,18 +612,20 @@ async function handleVideosReindex(_request: Request, env: Env): Promise<Respons
 }
 
 async function handleSettingsGet(_request: Request, env: Env): Promise<Response> {
-  const [settingsRes, contactRes] = await Promise.all([
+  const [settingsRes, contactRes, workRes] = await Promise.all([
     githubRequest(env, `src/data/site.json?ref=${env.GITHUB_BRANCH}`),
     githubRequest(env, `src/content/pages/contact.md?ref=${env.GITHUB_BRANCH}`),
+    githubRequest(env, `src/content/pages/work.md?ref=${env.GITHUB_BRANCH}`),
   ]);
 
-  if (!settingsRes.ok || !contactRes.ok) {
-    const failed = !settingsRes.ok ? settingsRes : contactRes;
+  if (!settingsRes.ok || !contactRes.ok || !workRes.ok) {
+    const failed = !settingsRes.ok ? settingsRes : !contactRes.ok ? contactRes : workRes;
     const detail = await failed.text().catch(() => '');
     return json(
       {
         settings: null,
         contact: null,
+        work: null,
         error: `GitHub API returned ${failed.status} reading site settings${detail ? `: ${detail}` : ''}`,
       },
       502
@@ -635,10 +637,13 @@ async function handleSettingsGet(_request: Request, env: Env): Promise<Response>
   const settingsContent = decodeURIComponent(escape(atob(settingsData.content.replace(/\n/g, ''))));
   const contactContent = decodeURIComponent(escape(atob(contactData.content.replace(/\n/g, ''))));
   const contactParsed = parseFrontmatter(contactContent);
+  const workData = (await workRes.json()) as { content: string };
+  const workParsed = parseFrontmatter(decodeURIComponent(escape(atob(workData.content.replace(/\n/g, '')))));
 
   return json({
     settings: JSON.parse(settingsContent),
     contact: { title: contactParsed.data.title ?? '', summary: contactParsed.data.summary ?? '', body: contactParsed.body },
+    work: { title: workParsed.data.title ?? '', body: workParsed.body },
   });
 }
 
@@ -646,6 +651,7 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
   const body = (await request.json()) as {
     settings?: Record<string, any>;
     contact?: { title?: string; summary?: string; body?: string };
+    work?: { title?: string; body?: string };
   };
 
   if (body.settings) {
@@ -669,6 +675,14 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
     const existing = await getFile(env, 'src/content/pages/contact.md');
     const res = await putFile(env, 'src/content/pages/contact.md', fileContent, existing?.sha, 'Update contact page');
     if (!res.ok) return json({ error: 'Failed to update contact page' }, 502);
+  }
+
+  if (body.work) {
+    const frontmatter = toFrontmatter({ title: body.work.title || 'Work' });
+    const fileContent = `${frontmatter}\n\n${body.work.body || ''}\n`;
+    const existing = await getFile(env, 'src/content/pages/work.md');
+    const res = await putFile(env, 'src/content/pages/work.md', fileContent, existing?.sha, 'Update work page');
+    if (!res.ok) return json({ error: 'Failed to update work page' }, 502);
   }
 
   return json({ ok: true });
