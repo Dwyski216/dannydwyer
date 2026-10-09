@@ -9,7 +9,7 @@ export type PageKey = 'home' | 'work' | 'contact';
 export type SectionId = HomeSectionId | WorkSectionId | ContactSectionId;
 export type HomeSectionId = 'hero' | 'intro' | 'featured';
 export type WorkSectionId = 'banner' | 'controls' | 'grid';
-export type ContactSectionId = 'title' | 'body';
+export type ContactSectionId = 'body';
 
 interface SectionEntry {
   type: string;
@@ -24,7 +24,7 @@ const layoutData = raw as Record<string, SectionEntry[] | undefined>;
 const DEFAULTS: Record<PageKey, SectionId[]> = {
   home: ['hero', 'intro', 'featured'],
   work: ['banner', 'controls', 'grid'],
-  contact: ['title', 'body'],
+  contact: ['body'],
 };
 
 // Drop any stored entry whose type isn't real, and append any real section

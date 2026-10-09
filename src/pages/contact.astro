@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import ContactTitle from '../components/sections/ContactTitle.astro';
 import ContactBody from '../components/sections/ContactBody.astro';
 import { getEntry } from 'astro:content';
 import { site } from '../data/site';
@@ -23,7 +22,6 @@ const { Content } = await page.render();
   <SiteHeader />
   <main class="main container">
     {sections.map((section) => {
-      if (section === 'title') return <ContactTitle />;
       if (section === 'body') {
         return (
           <ContactBody email={site.email} location={site.location}>

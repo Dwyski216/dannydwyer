@@ -1,8 +1,7 @@
 ---
-// Contact page section: the two-column photo + copy + CTA composition.
-// Kept as one section (not split further) because the photo, the copy,
-// and the button are a deliberately choreographed unit — letting the admin
-// reorder its pieces independently risks nonsensical combinations.
+// Contact page section: the page title, photo, copy and CTA composition.
+// The title lives here (not as its own section) so it can sit over the copy
+// on desktop while still leading the page on phones.
 interface Props {
   email: string;
   location: string;
@@ -11,6 +10,8 @@ const { email, location } = Astro.props;
 ---
 
 <div class="layout">
+  <h1 class="page-title contact-title">Contact</h1>
+
   <div class="photo-col">
     <div class="photo-frame">
       <img
@@ -38,39 +39,58 @@ const { email, location } = Astro.props;
 </div>
 
 <style>
+  /* Phones: title, then photo, then copy, stacked. Desktop: photo on the
+     left; the title sits over the copy on the right, its top level with the
+     photo's. The 4rem top margin matches the Work page title's distance
+     from the site header. */
   .layout {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'title'
+      'photo'
+      'copy';
+    row-gap: 2.5rem;
+    margin-top: 4rem;
+  }
+
+  .contact-title {
+    grid-area: title;
+  }
+
+  .photo-col {
+    grid-area: photo;
+  }
+
+  .copy-col {
+    grid-area: copy;
   }
 
   @media (min-width: 801px) {
     .layout {
-      /* photo-col is first in the DOM, so it stacks on top on mobile and
-         sits on the left on desktop, with the copy to its right. */
-      flex-direction: row;
-      align-items: flex-start;
-      gap: clamp(2rem, 5vw, 4rem);
+      grid-template-columns: 42% 1fr;
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        'photo title'
+        'photo copy';
+      column-gap: clamp(2rem, 5vw, 4rem);
+      row-gap: 1.5rem;
+      align-items: start;
     }
   }
 
   /* Phones/tablets (stacked layout): 18% smaller than full width. */
   .photo-col {
-    flex: 0 0 auto;
     width: 82%;
     max-width: 344px;
     margin-inline: auto;
-    /* Phones: a little air between the page title and the photo. */
-    margin-top: 1rem;
   }
 
   @media (min-width: 801px) {
     .photo-col {
-      flex-basis: 42%;
       width: 100%;
       max-width: none;
       margin-inline: 0;
-      margin-top: 0;
     }
   }
 
@@ -92,7 +112,6 @@ const { email, location } = Astro.props;
   }
 
   .copy-col {
-    flex: 1 1 auto;
     min-width: 0;
   }
 

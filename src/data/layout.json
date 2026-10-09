@@ -10,7 +10,6 @@
     { "type": "grid", "enabled": true }
   ],
   "contact": [
-    { "type": "title", "enabled": true },
     { "type": "body", "enabled": true }
   ]
 }
