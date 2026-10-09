@@ -1,10 +1,8 @@
 ---
 // Contact page section: the two-column photo + copy + CTA composition.
 // Kept as one section (not split further) because the photo, the copy,
-// the button, and the sign-off mark below it are a deliberately
-// choreographed unit — letting the admin reorder its pieces independently
-// risks nonsensical combinations (e.g. the sign-off mark floating above the
-// button it's meant to sit under).
+// and the button are a deliberately choreographed unit — letting the admin
+// reorder its pieces independently risks nonsensical combinations.
 interface Props {
   email: string;
   location: string;
@@ -36,8 +34,6 @@ const { email, location } = Astro.props;
       <a class="email-plain" href={`mailto:${email}`}>{email}</a>
       {location && <span class="location">{location}</span>}
     </div>
-
-    <img class="sign-off" src="/DWYER_MONOGRAM_VARIATIONS/FLAT/DD_FLAT_HEADLIGHT_RED.png" alt="" width="56" height="56" />
   </div>
 </div>
 
@@ -159,10 +155,4 @@ const { email, location } = Astro.props;
     font-size: 0.85rem;
   }
 
-  .sign-off {
-    display: block;
-    margin: 3rem auto 0;
-    height: clamp(48px, 6vw, 64px);
-    width: clamp(48px, 6vw, 64px);
-  }
 </style>
