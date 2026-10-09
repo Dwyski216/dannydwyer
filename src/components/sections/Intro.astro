@@ -1,12 +1,11 @@
 ---
-// Home page section: the bio heading + rich-text intro copy + CTAs (email
-// and into Work).
+// Home page section: the bio heading + rich-text intro copy + a CTA button
+// into Work.
 interface Props {
   role: string;
   introCopy: string;
-  email: string;
 }
-const { role, introCopy, email } = Astro.props;
+const { role, introCopy } = Astro.props;
 ---
 
 <section class="intro col-12">
@@ -14,7 +13,6 @@ const { role, introCopy, email } = Astro.props;
   <div class="intro-copy" set:html={introCopy} />
   <div class="actions">
     <a class="button" href="/work">Peep The Work</a>
-    <a class="cta" href={`mailto:${email}`}>Give me a shout &nbsp;→</a>
   </div>
 </section>
 
@@ -71,41 +69,11 @@ const { role, introCopy, email } = Astro.props;
     text-decoration: underline;
   }
 
-  /* Button centered under the bio (matching the centered title); the
-     "Give me a shout" email link sits flush with the bio's right edge. The empty
-     first column mirrors the link's column so the button stays truly
-     centered. On narrow screens they stack: button centered, link below it
-     on the right. */
+  /* Button centered under the bio, matching the centered title. */
   .actions {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 1rem;
+    display: flex;
+    justify-content: center;
     margin-top: 2rem;
-  }
-
-  .actions .button {
-    grid-column: 2;
-  }
-
-  .actions .cta {
-    grid-column: 3;
-    justify-self: end;
-  }
-
-  @media (max-width: 600px) {
-    .actions {
-      grid-template-columns: 1fr;
-    }
-
-    .actions .button {
-      grid-column: 1;
-      justify-self: center;
-    }
-
-    .actions .cta {
-      grid-column: 1;
-    }
   }
 
   /* Hollow Olympic Gold button: 2pt outline and gold text on the page
@@ -127,19 +95,5 @@ const { role, introCopy, email } = Astro.props;
   .button:hover {
     background: var(--olympic-gold);
     color: var(--on-accent);
-  }
-
-  .cta {
-    display: inline-block;
-    font-size: 0.95rem;
-    border-bottom: 1px solid var(--accent);
-    color: var(--accent);
-    padding-bottom: 0.15rem;
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-
-  .cta:hover {
-    color: var(--headlight);
-    border-bottom-color: var(--headlight);
   }
 </style>

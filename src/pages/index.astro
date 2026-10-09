@@ -55,7 +55,7 @@ const jsonLd = heroVideo
     <div class="grid">
       {sections.map((section) => {
         if (section === 'hero') return <Hero heroVideo={heroVideo} title={matchedReel?.data.title ?? site.name} />;
-        if (section === 'intro') return <Intro role={site.role} introCopy={site.introCopy} email={site.email} />;
+        if (section === 'intro') return <Intro role={site.role} introCopy={site.introCopy} />;
         if (section === 'featured') return <FeaturedWork featured={featured} thumbnails={featuredThumbnails} />;
         return null;
       })}
