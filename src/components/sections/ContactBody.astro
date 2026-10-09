@@ -46,10 +46,9 @@ const { email, location } = Astro.props;
 
   @media (min-width: 801px) {
     .layout {
-      /* photo-col is first in the DOM (so it's the element that stacks on
-         top on mobile, per spec) but row-reverse puts it on the right on
-         desktop without needing a second markup order. */
-      flex-direction: row-reverse;
+      /* photo-col is first in the DOM, so it stacks on top on mobile and
+         sits on the left on desktop, with the copy to its right. */
+      flex-direction: row;
       align-items: flex-start;
       gap: clamp(2rem, 5vw, 4rem);
     }
