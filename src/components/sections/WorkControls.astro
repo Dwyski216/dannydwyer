@@ -104,9 +104,23 @@ const { allTags } = Astro.props;
     flex: 0 0 auto;
   }
 
-  @media (max-width: 480px) {
+  /* Phones: stack the row with Filters first and the search box last,
+     full width, at the bottom of the controls cluster. */
+  @media (max-width: 600px) {
     .filter-row {
-      flex-wrap: wrap;
+      flex: 1 1 100%;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .filters-toggle {
+      order: -1;
+    }
+
+    #search {
+      flex: 0 0 auto;
+      width: 100%;
+      box-sizing: border-box;
     }
   }
 
