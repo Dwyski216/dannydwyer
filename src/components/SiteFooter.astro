@@ -63,12 +63,14 @@ const year = new Date().getFullYear();
     height: 72px;
   }
 
-  /* Trade Gothic Regular (the brand's reading typeface). */
+  /* Same type as the home page's "Peep The Work" button: Trade Gothic
+     Bold No. 2 at 1rem with the same letter spacing. */
   .email {
     grid-area: email;
     justify-self: end;
-    font-family: var(--font-body);
-    font-weight: 400;
+    font-family: var(--font-title);
+    font-weight: 700;
+    letter-spacing: 0.04em;
     font-size: var(--email-size);
     line-height: 1;
     white-space: nowrap;
@@ -76,8 +78,8 @@ const year = new Date().getFullYear();
     text-underline-offset: 0.12em;
     transform: translateY(var(--email-nudge));
     transition: color 0.15s ease;
-    --email-size: 0.91rem;
-    --email-nudge: -0.79em;
+    --email-size: 1rem;
+    --email-nudge: -0.69em;
   }
 
   .email:hover {
