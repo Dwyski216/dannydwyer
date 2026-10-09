@@ -1,12 +1,9 @@
 ---
 import { site } from '../data/site';
 import SocialIcons from './SocialIcons.astro';
-import FooterSparkles from './FooterSparkles.astro';
 ---
 
 <footer class="footer">
-  <FooterSparkles side="left" />
-  <FooterSparkles side="right" />
   <div class="footer-inner container">
     <div class="links">
       <SocialIcons />
@@ -19,14 +16,10 @@ import FooterSparkles from './FooterSparkles.astro';
 </footer>
 
 <style>
-  /* Shit Kicker band with Headlight sparkle clusters at both edges.
-     Desktop: social icons on the left, the circle monogram dead center, and
-     the email in Futura Bold caps on the right, all on one line. Stacks,
-     centered, on narrow screens (where the sparkles are dropped, since
-     there's no room for them beside the content). */
+  /* Shit Kicker band. Desktop: social icons on the left, the circle
+     monogram dead center, and the email in Futura Bold caps on the right,
+     all on one line. Stacks, centered, on narrow screens. */
   .footer {
-    position: relative;
-    overflow: hidden;
     background: var(--shit-kicker);
     margin-top: auto;
   }
@@ -76,14 +69,6 @@ import FooterSparkles from './FooterSparkles.astro';
 
   .email:hover {
     color: var(--olympic-gold);
-  }
-
-  /* The sparkle clusters sit in the side margins, so they only show where
-     the margins are wide enough to hold them clear of the content. */
-  @media (max-width: 1320px) {
-    .footer :global(.sparkles) {
-      display: none;
-    }
   }
 
   /* Below ~1100px the row doesn't fit, so stack everything, centered. */
