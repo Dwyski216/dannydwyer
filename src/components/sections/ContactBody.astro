@@ -1,9 +1,8 @@
 ---
 // Contact page section: the two-column photo + copy + CTA composition.
-// Kept as one section (not split further) because the photo's offset
-// Signature Treatment shadow, the copy, the button, and the sign-off mark
-// below it are a deliberately choreographed unit — letting the admin
-// reorder its pieces independently risks nonsensical combinations (e.g. the
+// Kept as one section (not split further) because the photo, the copy,
+// the button, and the sign-off mark below it are a deliberately
+// choreographed unit — letting the admin reorder its pieces independently risks nonsensical combinations (e.g. the
 // sign-off mark floating above the button it's meant to sit under).
 interface Props {
   email: string;
@@ -64,12 +63,7 @@ const { email, location } = Astro.props;
     width: 100%;
     max-width: 420px;
     margin-inline: auto;
-    /* The offset shadow block behind the photo overflows past the
-       column's own flowed height (it's an absolutely-positioned
-       ::before, translated down-right) — without this, that overflow
-       eats straight into the page's bottom padding and the shadow ends
-       up nearly touching the footer. */
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
   }
 
   @media (min-width: 801px) {
@@ -80,20 +74,9 @@ const { email, location } = Astro.props;
     }
   }
 
-  /* Signature Treatment, photo variant: a solid hard-edge Headlight block
-     offset down-and-right behind the photo (same family as the wordmark's
-     drop shadow, just scaled to a photo instead of text) — no blur. */
+  /* Plain photo, no offset shadow block behind it. */
   .photo-frame {
     position: relative;
-  }
-
-  .photo-frame::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--headlight);
-    transform: translate(12%, 9%);
-    z-index: 0;
   }
 
   .photo {
