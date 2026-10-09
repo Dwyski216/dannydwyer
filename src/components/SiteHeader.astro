@@ -59,16 +59,11 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     }
   }
 
-  /* The name set in Futura Bold, flat Barn Red with no drop shadow.
-     Centered across the full header on desktop (independent of the logo
-     mark, which stays pinned top-left); on narrow screens there isn't room
-     to center it without overlapping the logo or nav, so it drops back
-     into the normal flex flow next to them. */
+  /* The name set in Futura Bold, flat Barn Red with no drop shadow. On
+     desktop the D/D mark is dropped and the name sits at the far left of
+     the header, opposite the nav; on phones the mark stays, with the name
+     next to it at a smaller size. */
   .name {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     white-space: nowrap;
     font-family: var(--font-display);
     font-weight: 700;
@@ -80,10 +75,18 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     text-shadow: none;
   }
 
+  @media (min-width: 601px) {
+    .logo-mark {
+      display: none;
+    }
+
+    .name {
+      margin-right: auto;
+    }
+  }
+
   @media (max-width: 600px) {
     .name {
-      position: static;
-      transform: none;
       font-size: 1.45rem;
     }
   }
