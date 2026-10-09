@@ -1,6 +1,7 @@
 ---
 import { site } from '../data/site';
 import SocialIcons from './SocialIcons.astro';
+const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
@@ -9,16 +10,19 @@ import SocialIcons from './SocialIcons.astro';
       <SocialIcons />
     </div>
     <a class="footer-logo" href="/" aria-label={`${site.name}: home`}>
-      <img src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_02_LIGHT.png" alt="" width="104" height="104" loading="lazy" />
+      <img src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_02_LIGHT.png" alt="" width="114" height="114" loading="lazy" />
     </a>
     <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+    <p class="copyright">&copy; {year} {site.name}</p>
   </div>
 </footer>
 
 <style>
-  /* Shit Kicker band. Desktop: social icons on the left, the circle
-     monogram dead center, and the email in Futura Bold caps on the right,
-     all on one line. Stacks, centered, on narrow screens. */
+  /* Shit Kicker band. Desktop: social icons, the circle monogram and the
+     email in Futura Bold caps on one line, with equal space between the
+     three (the two empty 1fr columns share the free width evenly), and the
+     copyright centered under the monogram. Stacks, centered, on narrow
+     screens. */
   .footer {
     background: var(--shit-kicker);
     margin-top: auto;
@@ -30,10 +34,14 @@ import SocialIcons from './SocialIcons.astro';
     padding-top: 2rem;
     padding-bottom: 2rem;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-areas: 'links logo email';
+    grid-template-columns: auto 1fr auto 1fr auto;
+    grid-template-areas:
+      'links . logo . email'
+      '.     . copy . .';
     align-items: center;
-    gap: 1.5rem;
+    align-content: center;
+    column-gap: 1.5rem;
+    row-gap: 0.75rem;
     color: var(--headlight);
   }
 
@@ -50,8 +58,16 @@ import SocialIcons from './SocialIcons.astro';
 
   .footer-logo img {
     display: block;
-    width: 104px;
-    height: 104px;
+    width: 114px;
+    height: 114px;
+  }
+
+  .copyright {
+    grid-area: copy;
+    justify-self: center;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--headlight);
   }
 
   .email {
@@ -79,7 +95,8 @@ import SocialIcons from './SocialIcons.astro';
       grid-template-areas:
         'logo'
         'email'
-        'links';
+        'links'
+        'copy';
       justify-items: center;
       text-align: center;
       gap: 1.25rem;
@@ -96,6 +113,10 @@ import SocialIcons from './SocialIcons.astro';
 
     .links :global(.social-icons) {
       justify-content: center;
+    }
+
+    .copyright {
+      margin-top: 1rem;
     }
 
     .footer-logo img {
