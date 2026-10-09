@@ -89,9 +89,12 @@ const year = new Date().getFullYear();
     color: var(--olympic-gold);
   }
 
+  /* Twice the original space between the icon row and the copyright
+     (30px -> 60px on desktop, 20px -> 40px stacked). */
   .copyright {
     grid-area: copy;
     justify-self: center;
+    margin-top: 1.875rem;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -129,6 +132,10 @@ const year = new Date().getFullYear();
     .email {
       transform: none;
       margin-bottom: 1rem;
+    }
+
+    .copyright {
+      margin-top: 1.25rem;
     }
 
     .footer-logo img {
