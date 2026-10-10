@@ -99,7 +99,7 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     display: flex;
     gap: 1.75rem;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
@@ -112,11 +112,20 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   }
 
   .nav a:hover {
-    color: var(--text);
+    color: var(--olympic-gold);
   }
 
+  /* Current page: Headlight, semi-bold. Trade Gothic has no semi-bold
+     cut, so a hairline stroke in the text colour thickens the regular
+     (same trick as the footer email). */
   .nav a.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
+    color: var(--headlight);
+    border-bottom-color: var(--headlight);
+    -webkit-text-stroke: 0.035em currentColor;
+  }
+
+  .nav a.active:hover {
+    color: var(--olympic-gold);
+    border-bottom-color: var(--olympic-gold);
   }
 </style>
