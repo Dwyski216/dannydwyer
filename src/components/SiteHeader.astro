@@ -1,28 +1,14 @@
 ---
 import { site } from '../data/site';
 
-interface Props {
-  hideLogo?: boolean;
-}
-const { hideLogo = false } = Astro.props;
-
 const path = Astro.url.pathname;
 const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
 ---
 
 <header class="header container">
-  {hideLogo ? (
-    <span aria-hidden="true"></span>
-  ) : (
-    <>
-      <a class="logo-mark" href="/" aria-label={site.name}>
-        <img class="bolt" src="/DWYER_MONOGRAM_VARIATIONS/CIRCLE/DD_CIRCLE_07_ONE_COLOR_DARK.png" alt="" width="100" height="100" />
-      </a>
-      <a class="name" href="/">
-        <img src="/images/DANNY_DWYER_BOLT_BANNER.webp" alt={site.name} width="2000" height="367" />
-      </a>
-    </>
-  )}
+  <a class="name" href="/">
+    <img src="/images/DANNY_DWYER_BOLT_BANNER.webp" alt={site.name} width="2000" height="367" />
+  </a>
   <nav class="nav">
     <a href="/" class:list={{ active: isActive('/') && path === '/' }}>Home</a>
     <a href="/work" class:list={{ active: isActive('/work') }}>Work</a>
@@ -42,30 +28,10 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     flex-wrap: wrap;
   }
 
-  .logo-mark {
-    display: block;
-    line-height: 0;
-    flex-shrink: 0;
-  }
-
-  .bolt {
-    height: 100px;
-    width: 100px;
-    display: block;
-  }
-
-  @media (max-width: 600px) {
-    .bolt {
-      height: 48px;
-      width: 48px;
-    }
-  }
-
   /* The name as artwork: Headlight DANNY DWYER split by the Barn Red bolt
-     (DANNY_DWYER_BOLT_BANNER). On desktop the D/D mark is dropped and the
-     banner sits at the far left, opposite the nav, with its letters the
-     same height the typeset name had; on phones the mark stays and the
-     banner sits beside it, sized to fill the space without crowding. */
+     (DANNY_DWYER_BOLT_BANNER). On desktop the banner sits at the far left,
+     opposite the nav; on phones the banner and the nav below it are both
+     centered. */
   .name {
     display: block;
     line-height: 0;
@@ -80,18 +46,23 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   }
 
   @media (min-width: 601px) {
-    .logo-mark {
-      display: none;
-    }
-
     .name {
       margin-right: auto;
     }
   }
 
   @media (max-width: 600px) {
+    .header {
+      justify-content: center;
+    }
+
     .name img {
       width: min(240px, 60vw);
+    }
+
+    .nav {
+      width: 100%;
+      justify-content: center;
     }
   }
 
