@@ -488,17 +488,6 @@
     "order": 160
   },
   {
-    "slug": "dannydwyer-2026-reel",
-    "title": "Danny Dwyer Showreel",
-    "tags": [
-      "reel",
-      "showreel"
-    ],
-    "uploadDate": "2020-01-01",
-    "hidden": false,
-    "order": 180
-  },
-  {
     "slug": "jane-fonda-harpers-bazaar",
     "title": "Jane Fonda × Harper's Bazaar",
     "tags": [
@@ -587,5 +576,19 @@
     "uploadDate": "2018-08-24",
     "hidden": false,
     "order": 240
+  },
+  {
+    "slug": "dannydwyer-2026-reel",
+    "title": "Danny Dwyer Showreel",
+    "tags": [
+      "reel",
+      "showreel",
+      "fashion",
+      "celebrity",
+      "editing"
+    ],
+    "uploadDate": "2020-01-01",
+    "hidden": false,
+    "order": 180
   }
 ]
