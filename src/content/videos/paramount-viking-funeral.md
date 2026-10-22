@@ -1,14 +1,14 @@
 ---
-title: "Paramount Network — Farewell, Spike TV"
+title: "Paramount Network Says Farewell to Spike TV"
 pageTitle: "Paramount Network: Farewell Spike TV | DP Danny Dwyer"
 summary: "Flaming arrows, dynamite, and an 1800s cannon. Director of photography Danny Dwyer on Spike TV's farewell and Paramount Network's launch."
 platform: "vimeo"
 videoId: "252745798"
 customThumbnail: "/images/thumbnails/paramount-viking-funeral-1792699280109.webp"
-credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Nathan Mallon"}]
+credits: [{"role":"Director","name":"Nathan Mallon"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon FD Prime"}]
 client: "Paramount / History Channel"
-projectName: "Vikings — Viking Funeral Event"
+projectName: "Paramount Viking Funeral Event"
 uploadDate: "2020-11-01"
 tags: ["branded content","event","entertainment","pyro"]
 stills: []
