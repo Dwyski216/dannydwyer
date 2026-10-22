@@ -4,16 +4,16 @@ pageTitle: "Jane Fonda × Harper's Bazaar | Cinematographer Danny Dwyer"
 summary: "A one-on-one sit-down with Jane Fonda for Harper's Bazaar. Cinematographer Danny Dwyer on filming a living legend."
 platform: "vimeo"
 videoId: "744782971"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Kathryn Rice"}, {"role": "Cast", "name": "Jane Fonda"}]
-equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Canon Cine Zooms"}]
+credits: [{"role":"Cast","name":"Jane Fonda"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Kathryn Rice"}]
+equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon Cine Zooms"}]
 client: "Harper's Bazaar"
 projectName: "Jane Fonda Feature"
 uploadDate: "2020-09-01"
-tags: ["editorial", "celebrity", "interview"]
-urlSlug: "jane-fonda-harpers-bazaar"
-order: 170
-featured: false
+tags: ["editorial","celebrity","interview"]
 stills: []
+urlSlug: "jane-fonda-harpers-bazaar"
+hidden: false
+order: 170
 ---
 
 Some people need an introduction. Jane Fonda is not one of them.
