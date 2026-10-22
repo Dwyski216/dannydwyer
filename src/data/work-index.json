@@ -557,17 +557,6 @@
     "order": 200
   },
   {
-    "slug": "women-in-hollywood",
-    "title": "ELLE Women in Hollywood",
-    "tags": [
-      "editorial",
-      "documentary"
-    ],
-    "uploadDate": "2018-09-01",
-    "hidden": false,
-    "order": 210
-  },
-  {
     "slug": "reese-witherspoon-harpers-bazaar",
     "title": "Reese Witherspoon × Harper's Bazaar",
     "tags": [
@@ -578,5 +567,19 @@
     "uploadDate": "2018-09-01",
     "hidden": false,
     "order": 220
+  },
+  {
+    "slug": "women-in-hollywood",
+    "title": "ELLE Women in Hollywood",
+    "tags": [
+      "editorial",
+      "documentary",
+      "interview",
+      "Black and White",
+      "Elle"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 210
   }
 ]
