@@ -140,17 +140,6 @@
     "hidden": false
   },
   {
-    "slug": "sb1391-awareness",
-    "title": "SB 1391 Awareness Video",
-    "tags": [
-      "advocacy",
-      "documentary",
-      "social issue"
-    ],
-    "uploadDate": "2018-09-01",
-    "hidden": false
-  },
-  {
     "slug": "the-escape-artist",
     "title": "The Escape Artist",
     "tags": [
@@ -581,5 +570,18 @@
     "uploadDate": "2018-09-01",
     "hidden": false,
     "order": 210
+  },
+  {
+    "slug": "sb1391-awareness",
+    "title": "Human Rights Watch  SB 1391",
+    "tags": [
+      "advocacy",
+      "social issue",
+      "PSA",
+      "Non-profit"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 230
   }
 ]
