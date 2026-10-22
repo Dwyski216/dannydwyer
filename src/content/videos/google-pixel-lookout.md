@@ -4,11 +4,11 @@ summary: "A Google Pixel campaign spot spotlighting the Lookout accessibility fe
 platform: "vimeo"
 videoId: "970932116"
 credits: [{"role":"Agency","name":"WTBR"},{"role":"Cast","name":"Lachi"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]
-equipment: []
+equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angenieux EZ Series & TLS Canon FD Primes"}]
 client: "Google"
 projectName: "Pixel \"Lookout\""
 uploadDate: "2023-09-01"
-tags: ["commercial","technology","accessibility"]
+tags: ["commercial","technology","accessibility","branded documentary","documentary"]
 stills: []
 urlSlug: "google-pixel-lookout"
 hidden: false
