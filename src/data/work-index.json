@@ -523,23 +523,6 @@
     "order": 70
   },
   {
-    "slug": "google-pixel-lookout",
-    "title": "Google Pixel \"Lookout\"",
-    "tags": [
-      "commercial",
-      "technology",
-      "accessibility",
-      "branded documentary",
-      "documentary",
-      "Sony",
-      "Angenieux EZ",
-      "low vision"
-    ],
-    "uploadDate": "2023-09-01",
-    "hidden": false,
-    "order": 80
-  },
-  {
     "slug": "google-pixel-magnifier",
     "title": "Google Pixel \"Magnifier\"",
     "tags": [
@@ -568,5 +551,22 @@
     "uploadDate": "2023-09-01",
     "hidden": false,
     "order": 90
+  },
+  {
+    "slug": "google-pixel-lookout",
+    "title": "Google Pixel \"Lookout\"",
+    "tags": [
+      "commercial",
+      "technology",
+      "accessibility",
+      "branded documentary",
+      "documentary",
+      "Sony",
+      "Angenieux EZ",
+      "low vision"
+    ],
+    "uploadDate": "2023-09-01",
+    "hidden": false,
+    "order": 80
   }
 ]
