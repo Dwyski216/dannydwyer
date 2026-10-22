@@ -7,7 +7,7 @@ videoId: "701361560"
 credits: [{"role":"Cast","name":"Dave Foley"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angenieux Zooms"}]
 client: "Mint Mobile"
-projectName: "Dave Foley Spot"
+projectName: "Dave Foley For Mint Mobile"
 uploadDate: "2021-06-01"
 tags: ["commercial","comedy","celebrity"]
 stills: []
