@@ -534,6 +534,20 @@
     "order": 70
   },
   {
+    "slug": "google-pixel-lookout",
+    "title": "Google Pixel \"Lookout\"",
+    "tags": [
+      "commercial",
+      "technology",
+      "accessibility",
+      "branded documentary",
+      "documentary"
+    ],
+    "uploadDate": "2023-09-01",
+    "hidden": false,
+    "order": 80
+  },
+  {
     "slug": "google-pixel-guided-frame",
     "title": "Google Pixel \"Guided Frame\"",
     "tags": [
@@ -550,19 +564,5 @@
     "uploadDate": "2023-09-01",
     "hidden": false,
     "order": 90
-  },
-  {
-    "slug": "google-pixel-lookout",
-    "title": "Google Pixel \"Lookout\"",
-    "tags": [
-      "commercial",
-      "technology",
-      "accessibility",
-      "branded documentary",
-      "documentary"
-    ],
-    "uploadDate": "2023-09-01",
-    "hidden": false,
-    "order": 80
   }
 ]
