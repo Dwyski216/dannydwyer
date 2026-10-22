@@ -9,7 +9,7 @@ equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"A
 client: "Google"
 projectName: "Pixel Series Pt 2 \"Lookout\""
 uploadDate: "2023-09-01"
-tags: ["commercial","technology","accessibility","branded documentary","documentary"]
+tags: ["commercial","technology","accessibility","branded documentary","documentary","Sony","Angenieux EZ","low vision"]
 stills: []
 urlSlug: "google-pixel-lookout"
 hidden: false
