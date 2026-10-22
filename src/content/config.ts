@@ -19,7 +19,8 @@ const videos = defineCollection({
     // Video embed — hosted on YouTube or Vimeo, never uploaded to this site
     platform: z.enum(['youtube', 'vimeo']).default('youtube'),
     videoId: z.string(), // YouTube video ID (e.g. "dQw4w9WgXcQ") or Vimeo numeric ID (e.g. "76979871")
-    thumbnailUrl: z.string().optional(), // required for Vimeo (no public thumbnail URL pattern); optional override for YouTube
+    thumbnailUrl: z.string().optional(), // optional; YouTube and Vimeo thumbnails are otherwise looked up automatically
+    customThumbnail: z.string().optional(), // uploaded in the admin (e.g. "/images/thumbnails/big-age-1729....webp"); overrides the above
 
     // Still images from the shoot, shown as a gallery on the video's page.
     stills: z

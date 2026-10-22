@@ -508,6 +508,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     platform: body.platform === 'vimeo' ? 'vimeo' : 'youtube',
     videoId: body.videoId,
     thumbnailUrl: body.thumbnailUrl || undefined,
+    customThumbnail: body.customThumbnail || undefined,
     credits: Array.isArray(body.credits)
       ? body.credits
           .filter((c: any) => c && (c.role || c.name))
@@ -730,6 +731,38 @@ async function handleSeoPost(request: Request, env: Env): Promise<Response> {
   return json({ ok: true });
 }
 
+// Uploaded Work thumbnails. The admin resizes and converts each image to
+// WebP in the browser first, so only small WebP files are accepted here.
+// Every upload gets a new, timestamped name, so a replaced thumbnail never
+// lingers in anyone's browser cache.
+const THUMBNAILS_DIR = 'public/images/thumbnails';
+const MAX_THUMBNAIL_BYTES = 3 * 1024 * 1024;
+
+async function handleThumbnailPost(request: Request, env: Env): Promise<Response> {
+  const body = (await request.json().catch(() => ({}))) as { name?: string; data?: string };
+  if (typeof body.data !== 'string' || !body.data) return json({ error: 'Expects { name, data } (base64 WebP)' }, 400);
+
+  let bytes: Uint8Array;
+  try {
+    bytes = Uint8Array.from(atob(body.data), (c) => c.charCodeAt(0));
+  } catch {
+    return json({ error: 'Image data is not valid base64' }, 400);
+  }
+  if (bytes.length > MAX_THUMBNAIL_BYTES) return json({ error: 'Image is too large (3 MB max after resizing)' }, 413);
+  const ascii = (from: number, to: number) => String.fromCharCode(...bytes.subarray(from, to));
+  if (ascii(0, 4) !== 'RIFF' || ascii(8, 12) !== 'WEBP') return json({ error: 'Only WebP images are accepted' }, 400);
+
+  const base = slugify(body.name || '') || 'thumbnail';
+  const fileName = `${base}-${Date.now()}.webp`;
+  const res = await githubRequest(env, `${THUMBNAILS_DIR}/${fileName}`, {
+    method: 'PUT',
+    body: JSON.stringify({ message: `Upload thumbnail ${fileName}`, content: body.data, branch: env.GITHUB_BRANCH }),
+  });
+  if (!res.ok) return json({ error: `GitHub API returned ${res.status} saving the thumbnail` }, 502);
+
+  return json({ ok: true, path: `/images/thumbnails/${fileName}` });
+}
+
 async function router(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const { pathname } = url;
@@ -746,7 +779,8 @@ async function router(request: Request, env: Env): Promise<Response> {
     pathname === '/api/settings' ||
     pathname === '/api/tags' ||
     pathname === '/api/tags/bulk' ||
-    pathname === '/api/seo';
+    pathname === '/api/seo' ||
+    pathname === '/api/thumbnail';
 
   if (isAdminPage || isProtectedApi) {
     const authed = await isAuthenticated(request, env);
@@ -781,6 +815,10 @@ async function router(request: Request, env: Env): Promise<Response> {
 
   if (pathname === '/api/tags/bulk' && request.method === 'POST') {
     return handleTagsBulkPost(request, env);
+  }
+
+  if (pathname === '/api/thumbnail' && request.method === 'POST') {
+    return handleThumbnailPost(request, env);
   }
 
   if (pathname === '/api/seo') {

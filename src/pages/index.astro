@@ -7,7 +7,7 @@ import Intro from '../components/sections/Intro.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import { getCollection } from 'astro:content';
 import { site } from '../data/site';
-import { getEmbedUrl, getThumbnailUrl } from '../lib/video';
+import { getEmbedUrl, getThumbnails, getThumbnailUrl } from '../lib/video';
 import { getEnabledSections } from '../data/layout';
 import { getSeoOverride } from '../data/seo';
 
@@ -25,7 +25,7 @@ const heroVideo = matchedReel ? { platform: matchedReel.data.platform, videoId: 
 const featured = site.featuredSlugs
   .map((slug) => videos.find((v) => v.data.urlSlug === slug))
   .filter((v): v is NonNullable<typeof v> => Boolean(v));
-const featuredThumbnails = await Promise.all(featured.map((v) => getThumbnailUrl(v.data)));
+const featuredThumbnails = await Promise.all(featured.map((v) => getThumbnails(v.data)));
 
 const jsonLd = heroVideo
   ? [
@@ -34,7 +34,7 @@ const jsonLd = heroVideo
         '@type': 'VideoObject',
         name: matchedReel?.data.title ?? site.name,
         description: matchedReel?.data.summary ?? site.tagline,
-        ...(matchedReel ? { thumbnailUrl: await getThumbnailUrl(matchedReel.data) } : {}),
+        ...(matchedReel ? { thumbnailUrl: new URL(await getThumbnailUrl(matchedReel.data), Astro.site).toString() } : {}),
         ...(matchedReel?.data.uploadDate ? { uploadDate: matchedReel.data.uploadDate } : {}),
         ...(matchedReel?.data.durationISO ? { duration: matchedReel.data.durationISO } : {}),
         embedUrl: getEmbedUrl(heroVideo),

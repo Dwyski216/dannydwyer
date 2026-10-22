@@ -16,6 +16,15 @@ export interface VideoSource {
   platform: VideoPlatform;
   videoId: string;
   thumbnailUrl?: string;
+  // An image uploaded in the admin (public/images/thumbnails/...). Wins
+  // over everything else; the platform thumbnail is kept as its fallback.
+  customThumbnail?: string;
+}
+
+export interface Thumbnail {
+  src: string;
+  // Shown instead if `src` fails to load in the visitor's browser.
+  fallback?: string;
 }
 
 export function getEmbedUrl({ platform, videoId }: VideoSource): string {
@@ -42,7 +51,18 @@ const PLACEHOLDER_THUMBNAIL = '/images/video-placeholder.png';
  * reason (private video, bad ID, network hiccup) so one bad entry never
  * breaks the whole build.
  */
+export async function getThumbnails(source: VideoSource): Promise<Thumbnail> {
+  const platformThumbnail = await getPlatformThumbnailUrl(source);
+  if (source.customThumbnail) return { src: source.customThumbnail, fallback: platformThumbnail };
+  return { src: platformThumbnail };
+}
+
+/** The thumbnail to show (uploaded one first), as a single URL. */
 export async function getThumbnailUrl(source: VideoSource): Promise<string> {
+  return (await getThumbnails(source)).src;
+}
+
+async function getPlatformThumbnailUrl(source: VideoSource): Promise<string> {
   if (source.thumbnailUrl) return source.thumbnailUrl;
 
   if (source.platform === 'youtube') {

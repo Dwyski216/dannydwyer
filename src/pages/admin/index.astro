@@ -177,9 +177,22 @@ import Layout from '../../layouts/Layout.astro';
                     <input name="videoId" required placeholder="YouTube: dQw4w9WgXcQ · Vimeo: 76979871" />
                   </label>
                 </div>
-                <label>Thumbnail URL (required for Vimeo; optional override for YouTube)
+                <label>Thumbnail URL (optional; YouTube and Vimeo thumbnails are picked up automatically)
                   <input name="thumbnailUrl" placeholder="https://…" />
                 </label>
+
+                <div class="thumb-upload">
+                  <span class="thumb-upload-label">Custom Thumbnail</span>
+                  <p class="section-hint">Upload your own image (JPG, PNG or WebP) to use instead of the Vimeo/YouTube thumbnail everywhere. If it ever fails to load for a visitor, the Vimeo/YouTube thumbnail shows instead. Resized to 1280px wide automatically. Click Save Work Item to apply it.</p>
+                  <input type="hidden" name="customThumbnail" />
+                  <img id="thumb-preview" class="thumb-preview" alt="Custom thumbnail preview" hidden />
+                  <div class="thumb-upload-actions">
+                    <button type="button" id="thumb-upload-btn" class="btn btn-ghost">Upload Thumbnail</button>
+                    <button type="button" id="thumb-remove-btn" class="btn btn-ghost" hidden>Remove</button>
+                    <input type="file" id="thumb-file" accept="image/jpeg,image/png,image/webp" hidden />
+                  </div>
+                  <p class="status" id="thumb-status"></p>
+                </div>
               </fieldset>
 
               <label>Header <input name="title" required /></label>
@@ -1144,9 +1157,81 @@ import Layout from '../../layouts/Layout.astro';
     pendingEquipment = [];
     renderEquipmentList();
     workDeleteBtn.hidden = true;
+    setCustomThumbnail('');
+    document.getElementById('thumb-status')!.textContent = '';
     document.getElementById('work-item-status')!.textContent = '';
     clearDirty('work-item-form');
   }
+
+  // ---------------------------------------------------------------------
+  // Custom thumbnail upload. The image is resized (max 1280px wide) and
+  // converted to WebP in the browser, then committed by the Worker to
+  // public/images/thumbnails/. Its path goes in the hidden customThumbnail
+  // field and is saved with the rest of the item.
+  // ---------------------------------------------------------------------
+  const thumbInput = workItemForm.elements.namedItem('customThumbnail') as HTMLInputElement;
+  const thumbPreview = document.getElementById('thumb-preview') as HTMLImageElement;
+  const thumbRemoveBtn = document.getElementById('thumb-remove-btn') as HTMLButtonElement;
+  const thumbFile = document.getElementById('thumb-file') as HTMLInputElement;
+  const thumbStatus = document.getElementById('thumb-status')!;
+
+  function setCustomThumbnail(path: string) {
+    thumbInput.value = path;
+    thumbPreview.hidden = !path;
+    thumbRemoveBtn.hidden = !path;
+    if (path) thumbPreview.src = path;
+    else thumbPreview.removeAttribute('src');
+  }
+
+  // A freshly uploaded image isn't on the live site until the next deploy,
+  // so the preview shows the local file until then.
+  thumbPreview.addEventListener('error', () => {
+    if (thumbInput.value) thumbStatus.textContent = 'Preview not available yet; it appears once the site redeploys.';
+  });
+
+  async function toWebpBase64(file: File): Promise<string> {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, 1280 / bitmap.width);
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas.getContext('2d')!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/webp', 0.85));
+    if (!blob || blob.type !== 'image/webp') throw new Error('This browser could not convert the image to WebP.');
+    const bytes = new Uint8Array(await blob.arrayBuffer());
+    let binary = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    return btoa(binary);
+  }
+
+  document.getElementById('thumb-upload-btn')!.addEventListener('click', () => thumbFile.click());
+
+  thumbFile.addEventListener('change', async () => {
+    const file = thumbFile.files?.[0];
+    thumbFile.value = '';
+    if (!file) return;
+    thumbStatus.textContent = 'Uploading…';
+    try {
+      const data = await toWebpBase64(file);
+      const fd = new FormData(workItemForm);
+      const name = String(fd.get('slug') || '') || slugify(String(fd.get('title') || ''));
+      const res = await fetch('/api/thumbnail', { method: 'POST', body: JSON.stringify({ name, data }) });
+      const out = await res.json();
+      if (!res.ok) throw new Error(out.error || 'Upload failed.');
+      setCustomThumbnail(out.path);
+      thumbPreview.src = URL.createObjectURL(file);
+      markDirty('work-item-form');
+      thumbStatus.textContent = 'Uploaded. Click Save Work Item to apply it.';
+    } catch (err) {
+      thumbStatus.textContent = `Error: ${(err as Error).message}`;
+    }
+  });
+
+  thumbRemoveBtn.addEventListener('click', () => {
+    setCustomThumbnail('');
+    markDirty('work-item-form');
+    thumbStatus.textContent = 'Removed. Click Save Work Item to go back to the Vimeo/YouTube thumbnail.';
+  });
 
   async function openWorkItem(slug: string | null) {
     resetWorkItemForm();
@@ -1167,6 +1252,7 @@ import Layout from '../../layouts/Layout.astro';
       (workItemForm.elements.namedItem('platform') as HTMLSelectElement).value = fields.platform ?? 'youtube';
       (workItemForm.elements.namedItem('videoId') as HTMLInputElement).value = fields.videoId ?? '';
       (workItemForm.elements.namedItem('thumbnailUrl') as HTMLInputElement).value = fields.thumbnailUrl ?? '';
+      setCustomThumbnail(fields.customThumbnail ?? '');
       (workItemForm.elements.namedItem('summary') as HTMLTextAreaElement).value = fields.summary ?? '';
       (workItemForm.elements.namedItem('description') as HTMLTextAreaElement).value = fields.description ?? '';
       pendingCredits = Array.isArray(fields.credits) && fields.credits.length
@@ -2178,6 +2264,36 @@ import Layout from '../../layouts/Layout.astro';
 
   .btn-solid:hover {
     background: var(--accent-dim);
+  }
+
+  .thumb-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .thumb-upload-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .thumb-upload .section-hint {
+    margin: 0;
+  }
+
+  .thumb-preview {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border: 1px solid var(--hairline);
+  }
+
+  .thumb-upload-actions {
+    display: flex;
+    gap: 0.75rem;
   }
 
   .btn-ghost {

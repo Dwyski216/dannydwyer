@@ -6,7 +6,7 @@ import WorkBanner from '../../components/sections/WorkBanner.astro';
 import WorkControls from '../../components/sections/WorkControls.astro';
 import WorkGrid from '../../components/sections/WorkGrid.astro';
 import { getCollection, getEntry } from 'astro:content';
-import { getThumbnailUrl, byDisplayOrder } from '../../lib/video';
+import { getThumbnails, byDisplayOrder } from '../../lib/video';
 import { getEnabledSections } from '../../data/layout';
 import { getSeoOverride } from '../../data/seo';
 
@@ -16,7 +16,7 @@ const page = await getEntry('pages', 'work');
 const { Content } = await page.render();
 const videos = (await getCollection('videos', (v) => !v.data.hidden)).sort((a, b) => byDisplayOrder(a.data, b.data));
 
-const thumbnails = await Promise.all(videos.map((v) => getThumbnailUrl(v.data)));
+const thumbnails = await Promise.all(videos.map((v) => getThumbnails(v.data)));
 
 const allTags = [...new Set(videos.flatMap((v) => v.data.tags))].sort();
 

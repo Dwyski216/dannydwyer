@@ -48,7 +48,8 @@ title: "Midnight Harbor"
 summary: "150-160 character summary used for meta description and AI snippets."
 platform: "youtube"       # or "vimeo"
 videoId: "dQw4w9WgXcQ"    # YouTube's video ID, or Vimeo's numeric ID
-thumbnailUrl: ""           # required for Vimeo; optional override for YouTube
+thumbnailUrl: ""           # optional; YouTube/Vimeo thumbnails are looked up automatically
+customThumbnail: ""        # set by "Upload Thumbnail" in the admin; falls back to the platform thumbnail
 role: "Director of Photography"
 client: "Independent"
 projectName: "Midnight Harbor (short film)"

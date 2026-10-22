@@ -3,10 +3,11 @@
 // empty state the controls-section script toggles.
 import VideoCard from '../VideoCard.astro';
 import type { CollectionEntry } from 'astro:content';
+import type { Thumbnail } from '../../lib/video';
 
 interface Props {
   videos: CollectionEntry<'videos'>[];
-  thumbnails: string[];
+  thumbnails: Thumbnail[];
 }
 const { videos, thumbnails } = Astro.props;
 ---
@@ -19,7 +20,8 @@ const { videos, thumbnails } = Astro.props;
         title={v.data.title}
         summary={v.data.summary}
         tags={v.data.tags}
-        thumbnailUrl={thumbnails[i]}
+        thumbnailUrl={thumbnails[i].src}
+        fallbackUrl={thumbnails[i].fallback}
         uploadDate={v.data.uploadDate}
       />
     ))}

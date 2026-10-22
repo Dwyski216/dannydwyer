@@ -3,10 +3,11 @@
 // slug). Renders nothing if there's nothing to feature.
 import VideoCard from '../VideoCard.astro';
 import type { CollectionEntry } from 'astro:content';
+import type { Thumbnail } from '../../lib/video';
 
 interface Props {
   featured: CollectionEntry<'videos'>[];
-  thumbnails: string[];
+  thumbnails: Thumbnail[];
 }
 const { featured, thumbnails } = Astro.props;
 ---
@@ -22,7 +23,8 @@ const { featured, thumbnails } = Astro.props;
             title={v.data.title}
             summary={v.data.summary}
             tags={v.data.tags}
-            thumbnailUrl={thumbnails[i]}
+            thumbnailUrl={thumbnails[i].src}
+        fallbackUrl={thumbnails[i].fallback}
             uploadDate={v.data.uploadDate}
           />
         </div>

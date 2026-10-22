@@ -51,7 +51,7 @@ const { Content } = await video.render();
 const d = video.data;
 
 const embedUrl = getEmbedUrl(d);
-const thumbnailUrl = await getThumbnailUrl(d);
+const thumbnailUrl = new URL(await getThumbnailUrl(d), Astro.site).toString();
 
 const pageUrl = new URL(`/work/${d.urlSlug}`, Astro.site).toString();
 

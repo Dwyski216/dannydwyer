@@ -5,9 +5,12 @@ interface Props {
   summary: string;
   tags: string[];
   thumbnailUrl: string;
+  // Swapped in if thumbnailUrl fails to load (an uploaded thumbnail falls
+  // back to the video platform's own).
+  fallbackUrl?: string;
   uploadDate: string;
 }
-const { slug, title, summary, tags, thumbnailUrl, uploadDate } = Astro.props;
+const { slug, title, summary, tags, thumbnailUrl, fallbackUrl, uploadDate } = Astro.props;
 const year = new Date(uploadDate).getFullYear();
 const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
 ---
@@ -19,7 +22,15 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   data-search={searchText}
 >
   <div class="thumb">
-    <img src={thumbnailUrl} alt={title} loading="lazy" width="480" height="270" />
+    <img
+      src={thumbnailUrl}
+      alt={title}
+      loading="lazy"
+      width="480"
+      height="270"
+      data-fallback={fallbackUrl}
+      onerror={fallbackUrl ? 'this.onerror=null;this.src=this.dataset.fallback' : undefined}
+    />
   </div>
   <div class="meta">
     <h3>{title}</h3>
