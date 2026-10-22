@@ -224,17 +224,6 @@
     "order": 400
   },
   {
-    "slug": "zoe-kravitz-harpers-bazaar",
-    "title": "Zoë Kravitz x Harper's Bazaar",
-    "tags": [
-      "editorial",
-      "celebrity"
-    ],
-    "uploadDate": "2018-08-24",
-    "hidden": false,
-    "order": 240
-  },
-  {
     "slug": "shinola",
     "title": "Shinola",
     "tags": [
@@ -583,5 +572,20 @@
     "uploadDate": "2018-09-01",
     "hidden": false,
     "order": 230
+  },
+  {
+    "slug": "zoe-kravitz-harpers-bazaar",
+    "title": "Zoë Kravitz x Harper's Bazaar",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "interview",
+      "animals",
+      "wolves",
+      "fashion"
+    ],
+    "uploadDate": "2018-08-24",
+    "hidden": false,
+    "order": 240
   }
 ]
