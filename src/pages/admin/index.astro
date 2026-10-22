@@ -670,7 +670,7 @@ import Layout from '../../layouts/Layout.astro';
   let pendingEquipment: { category: string; item: string }[] = [];
   let selectedSlugs = new Set<string>();
 
-  type SortKey = 'order' | 'title' | 'uploadDate' | 'hidden';
+  type SortKey = 'order' | 'title' | 'hidden';
   // Defaults to the site's actual display order (see byDisplayOrder in
   // src/lib/video.ts) — reorder controls only make sense, and only show up,
   // when sorted this way.
@@ -684,7 +684,6 @@ import Layout from '../../layouts/Layout.astro';
   const SORT_COLUMNS: { key: SortKey; label: string }[] = [
     { key: 'order', label: 'Order' },
     { key: 'title', label: 'Title' },
-    { key: 'uploadDate', label: 'Date' },
     { key: 'hidden', label: 'Status' },
   ];
 
@@ -832,7 +831,6 @@ import Layout from '../../layouts/Layout.astro';
             }
           </td>
           <td>${escapeHtml(item.title)}</td>
-          <td>${escapeHtml(item.uploadDate) || '<span class="work-cell-empty">—</span>'}</td>
           <td>${item.hidden ? '<span class="status-badge status-hidden">Hidden</span>' : '<span class="status-badge status-visible">Visible</span>'}</td>
           <td><button type="button" class="btn btn-ghost" data-edit="${item.slug}">Edit</button></td>
         </tr>`
