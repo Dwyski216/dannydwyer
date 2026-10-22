@@ -5,12 +5,12 @@ summary: "Danny Dwyer's cinematography reel a cross-section of narrative, commer
 platform: "vimeo"
 videoId: "391333279"
 customThumbnail: "/images/thumbnails/dannydwyer-2026-reel-1792699823175.webp"
-credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Soundtrack","name":"Werdperfect"}]
 equipment: []
 client: "👀"
 projectName: "Danny Dwyer Reel"
 uploadDate: "2020-01-01"
-tags: ["reel","showreel"]
+tags: ["reel","showreel","fashion","celebrity","editing"]
 stills: []
 urlSlug: "dannydwyer-2026-reel"
 hidden: false
