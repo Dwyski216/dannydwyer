@@ -5,7 +5,7 @@ summary: "Universal Studios stunt bikes, a burning script, and Ryan Gosling. Dir
 platform: "vimeo"
 videoId: "1006770556"
 credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Dorenna Newton"},{"role":"Cast","name":"Ryan Gosling"}]
-equipment: []
+equipment: [{"category":"Camera","item":"FX6"},{"category":"Lens","item":"Canon FD Lenses"}]
 client: "Men's Health"
 projectName: "Ryan Gosling Cover Story"
 uploadDate: "2024-02-01"
