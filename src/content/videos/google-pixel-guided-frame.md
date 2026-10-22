@@ -20,6 +20,4 @@ Framing is my whole job. Where the edges go, what’s in, what’s out. I’ve s
 
 So this one flipped my world. Guided Frame is a Pixel feature that helps people who are blind or have low vision frame their own photos. The phone talks them through it, telling them which way to move, then takes the picture the moment everything lines up.
 
-Google Pixel and the agency Where The Buffalo Roam brought us in to film it in action. I spent the shoot framing people who were framing themselves without seeing the frame at all. It was one of the most humbling subjects I’ve ever pointed a camera at.
-
-I’ve shot a lot of beautiful things. This was one of the few that mattered more than how it looked.
+Google Pixel and the agency Where The Buffalo Roam brought us in to film it in action. I spent the shoot framing people who were framing themselves without seeing the frame at all. It was one of the most humbling subjects, I’ve ever pointed a camera at.
