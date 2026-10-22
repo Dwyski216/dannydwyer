@@ -1,18 +1,18 @@
 ---
-title: "Human Rights Watch — SB 1391"
+title: "Human Rights Watch  SB 1391"
 pageTitle: "Human Rights Watch SB 1391 | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on filming Human Rights Watch's campaign for California SB 1391 and youth justice."
 platform: "vimeo"
 videoId: "287482631"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Chip Warren"}]
-equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Canon FD Prime"}]
+credits: [{"role":"Director","name":"Chip Warren"},{"role":"Director of Photography","name":"Danny Dwyer"}]
+equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon FD Prime"}]
 projectName: "SB 1391 Awareness"
 uploadDate: "2018-09-01"
-tags: ["advocacy", "documentary", "social issue"]
-urlSlug: "sb1391-awareness"
-order: 230
-featured: false
+tags: ["advocacy","social issue","PSA","Non-profit"]
 stills: []
+urlSlug: "sb1391-awareness"
+hidden: false
+order: 230
 ---
 
 Kids make mistakes. That's what being a kid is.
