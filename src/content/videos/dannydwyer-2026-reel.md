@@ -4,6 +4,7 @@ pageTitle: "Danny Dwyer 2026 Reel"
 summary: "Danny Dwyer's cinematography reel a cross-section of narrative, commercial, and documentary work."
 platform: "vimeo"
 videoId: "391333279"
+customThumbnail: "/images/thumbnails/dannydwyer-2026-reel-1792699823175.webp"
 credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: []
 client: "👀"
