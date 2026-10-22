@@ -192,16 +192,6 @@
     "hidden": true
   },
   {
-    "slug": "the-brave-butler-reel",
-    "title": "The Brave Butler Reel",
-    "tags": [
-      "reel",
-      "showreel"
-    ],
-    "uploadDate": "2020-01-01",
-    "hidden": false
-  },
-  {
     "slug": "the-escape-artist",
     "title": "The Escape Artist",
     "tags": [
@@ -580,5 +570,16 @@
     "uploadDate": "2020-11-01",
     "hidden": false,
     "order": 160
+  },
+  {
+    "slug": "dannydwyer-2026-reel",
+    "title": "Danny Dwyer Showreel",
+    "tags": [
+      "reel",
+      "showreel"
+    ],
+    "uploadDate": "2020-01-01",
+    "hidden": false,
+    "order": 180
   }
 ]
