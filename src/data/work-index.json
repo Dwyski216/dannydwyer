@@ -225,16 +225,6 @@
     "hidden": false
   },
   {
-    "slug": "women-in-hollywood",
-    "title": "Women in Hollywood",
-    "tags": [
-      "editorial",
-      "documentary"
-    ],
-    "uploadDate": "2018-09-01",
-    "hidden": false
-  },
-  {
     "slug": "young-women-in-hollywood",
     "title": "Young Women in Hollywood",
     "tags": [
@@ -575,5 +565,16 @@
     "uploadDate": "2019-05-01",
     "hidden": false,
     "order": 200
+  },
+  {
+    "slug": "women-in-hollywood",
+    "title": "ELLE Women in Hollywood",
+    "tags": [
+      "editorial",
+      "documentary"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 210
   }
 ]
