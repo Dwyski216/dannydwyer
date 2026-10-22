@@ -4,16 +4,16 @@ pageTitle: "Dave Foley × Mint Mobile | Cinematographer Danny Dwyer"
 summary: "A Dave Foley tweet became a Mint Mobile commercial in under 24 hours. Cinematographer Danny Dwyer on a spot produced, shot, and cut in under 12."
 platform: "vimeo"
 videoId: "701361560"
-credits: [{"role": "Director", "name": "Danny Dwyer"}, {"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Editor", "name": "Danny Dwyer"}, {"role": "Cast", "name": "Dave Foley"}]
-equipment: [{"category": "Camera", "item": "Sony FX6"}, {"category": "Lens", "item": "Angenieux Zooms"}]
+credits: [{"role":"Cast","name":"Dave Foley"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
+equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angenieux Zooms"}]
 client: "Mint Mobile"
 projectName: "Dave Foley Spot"
 uploadDate: "2021-06-01"
-tags: ["commercial", "comedy", "celebrity"]
-urlSlug: "mint-mobile-dave-foley"
-order: 140
-featured: false
+tags: ["commercial","comedy","celebrity"]
 stills: []
+urlSlug: "mint-mobile-dave-foley"
+hidden: false
+order: 140
 ---
 
 This might be the most demanding shoot I've ever done, which is exactly why you'll laugh when you watch it.
