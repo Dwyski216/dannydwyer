@@ -4,8 +4,8 @@ pageTitle: "Google Pixel Guided Frame | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on Google Pixel’s Guided Frame, the feature that helps people who are blind or have low vision frame their own photos. Part 1 of 3."
 platform: "vimeo"
 videoId: "970931647"
-credits: [{"role":"Agency","name":"WTBR"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Cast","name":"Lachi"}]
-equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angenieux EZ Zooms & Canon FD Primes"}]
+credits: [{"role":"Cast","name":"Lachi"},{"role":"Agency","name":"WTBR"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]
+equipment: [{"category":"Camera","item":"Sony FX6, FX3 & GoPro"},{"category":"Lens","item":"Angenieux EZ Zooms & TLS Canon FD Primes"}]
 client: "Google"
 projectName: "Pixel Series Pt.1 \"Guided Frame\""
 uploadDate: "2023-09-01"
