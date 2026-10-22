@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "Beck"
 projectName: "Beck × Gustaf — \"Close\""
 uploadDate: "2023-05-01"
-tags: ["music video","celebrity","Beck","Gustaf","Los Angeles","Punk"]
+tags: ["music video","celebrity","Beck","Gustaf","Los Angeles","Punk","Black and White"]
 stills: []
 urlSlug: "beck-gustaf-close"
 hidden: false
