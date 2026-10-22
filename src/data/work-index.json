@@ -523,24 +523,6 @@
     "order": 70
   },
   {
-    "slug": "google-pixel-guided-frame",
-    "title": "Google Pixel \"Guided Frame\"",
-    "tags": [
-      "commercial",
-      "technology",
-      "accessibility",
-      "Sony",
-      "Angenieux EZ",
-      "Docu Series",
-      "branded doc",
-      "documentary",
-      "low vision"
-    ],
-    "uploadDate": "2023-09-01",
-    "hidden": false,
-    "order": 90
-  },
-  {
     "slug": "google-pixel-lookout",
     "title": "Google Pixel \"Lookout\"",
     "tags": [
@@ -568,5 +550,23 @@
     "uploadDate": "2023-09-01",
     "hidden": false,
     "order": 100
+  },
+  {
+    "slug": "google-pixel-guided-frame",
+    "title": "Google Pixel \"Guided Frame\"",
+    "tags": [
+      "commercial",
+      "technology",
+      "accessibility",
+      "Sony",
+      "Angenieux EZ",
+      "Docu Series",
+      "branded doc",
+      "documentary",
+      "low vision"
+    ],
+    "uploadDate": "2023-09-01",
+    "hidden": false,
+    "order": 90
   }
 ]
