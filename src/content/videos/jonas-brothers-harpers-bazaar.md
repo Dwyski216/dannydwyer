@@ -4,7 +4,7 @@ pageTitle: "Jonas Brothers × Game of Thrones | DP Danny Dwyer"
 summary: "Imaginary dragons and the Jonas Brothers. Director of photography Danny Dwyer on the Game of Thrones final season spot."
 platform: "vimeo"
 videoId: "347821791"
-credits: [{"role":"Cast","name":"Jonas Brothers"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Robert Dumé"}]
+credits: [{"role":"Cast","name":"Jonas Brothers"},{"role":"Director","name":"Robert Dumé"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon Cine Zooms"}]
 client: "Harper's Bazaar"
 projectName: "Jonas Brothers Feature"
