@@ -429,19 +429,6 @@
     "order": 190
   },
   {
-    "slug": "reflexai-google-org-veterans-mental-health",
-    "title": "ReflexAI × Google for Veterans",
-    "tags": [
-      "documentary",
-      "branded content",
-      "nonprofit",
-      "technology"
-    ],
-    "uploadDate": "2025-02-01",
-    "hidden": false,
-    "order": 20
-  },
-  {
     "slug": "bored-cash-for-souls",
     "title": "Bored \"Cash For Souls\"",
     "tags": [
@@ -544,5 +531,20 @@
     "uploadDate": "2024-06-01",
     "hidden": false,
     "order": 40
+  },
+  {
+    "slug": "reflexai-google-org-veterans-mental-health",
+    "title": "Reflex AI × Google for Veterans",
+    "tags": [
+      "documentary",
+      "branded content",
+      "nonprofit",
+      "technology",
+      "Google",
+      "Google.org"
+    ],
+    "uploadDate": "2025-02-01",
+    "hidden": false,
+    "order": 20
   }
 ]
