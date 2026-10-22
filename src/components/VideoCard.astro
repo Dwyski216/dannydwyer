@@ -8,10 +8,8 @@ interface Props {
   // Swapped in if thumbnailUrl fails to load (an uploaded thumbnail falls
   // back to the video platform's own).
   fallbackUrl?: string;
-  uploadDate: string;
 }
-const { slug, title, summary, tags, thumbnailUrl, fallbackUrl, uploadDate } = Astro.props;
-const year = new Date(uploadDate).getFullYear();
+const { slug, title, summary, tags, thumbnailUrl, fallbackUrl } = Astro.props;
 const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
 ---
 
@@ -37,7 +35,6 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
     <p class="summary">{summary}</p>
     <div class="tags">
       {tags.map((t) => <span class="tag">{t}</span>)}
-      <span class="year">{year}</span>
     </div>
   </div>
 </a>

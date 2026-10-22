@@ -521,7 +521,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
       : [],
     client: body.client || undefined,
     projectName: body.projectName || undefined,
-    uploadDate: body.uploadDate,
+    uploadDate: body.uploadDate || new Date().toISOString().slice(0, 10),
     durationISO: body.durationISO || undefined,
     tags: body.tags || [],
     stills: body.stills || [],

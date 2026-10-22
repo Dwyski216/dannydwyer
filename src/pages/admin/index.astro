@@ -221,12 +221,12 @@ import Layout from '../../layouts/Layout.astro';
                 <button type="button" id="equipment-add-btn" class="btn btn-ghost">+ Add Equipment</button>
               </fieldset>
 
-              <div class="row">
-                <label>Date <input name="uploadDate" type="date" required /></label>
-                <label>URL slug (leave blank to auto-generate from title)
-                  <input name="slug" placeholder="midnight-harbor" />
-                </label>
-              </div>
+              <!-- Not shown or edited: kept for Google's video listing and as the
+                   Work grid's sort tiebreaker. New items get today's date. -->
+              <input type="hidden" name="uploadDate" />
+              <label>URL slug (leave blank to auto-generate from title)
+                <input name="slug" placeholder="midnight-harbor" />
+              </label>
 
               <fieldset>
                 <legend>Tags</legend>
@@ -1144,6 +1144,10 @@ import Layout from '../../layouts/Layout.astro';
     return fields;
   }
 
+  function todayISO(): string {
+    return new Date().toISOString().slice(0, 10);
+  }
+
   function resetWorkItemForm() {
     workItemForm.reset();
     (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = '';
@@ -1157,6 +1161,7 @@ import Layout from '../../layouts/Layout.astro';
     pendingEquipment = [];
     renderEquipmentList();
     workDeleteBtn.hidden = true;
+    (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = todayISO();
     setCustomThumbnail('');
     document.getElementById('thumb-status')!.textContent = '';
     document.getElementById('work-item-status')!.textContent = '';
@@ -1265,7 +1270,7 @@ import Layout from '../../layouts/Layout.astro';
       renderEquipmentList();
       (workItemForm.elements.namedItem('client') as HTMLInputElement).value = fields.client ?? '';
       (workItemForm.elements.namedItem('projectName') as HTMLInputElement).value = fields.projectName ?? '';
-      (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate ?? '';
+      (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate || todayISO();
       (workItemForm.elements.namedItem('slug') as HTMLInputElement).value = fields.urlSlug ?? slug;
       (workItemForm.elements.namedItem('hidden') as HTMLInputElement).checked = !!fields.hidden;
       pendingTags = new Set(Array.isArray(fields.tags) ? fields.tags : []);

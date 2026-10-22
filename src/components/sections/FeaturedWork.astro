@@ -25,7 +25,6 @@ const { featured, thumbnails } = Astro.props;
             tags={v.data.tags}
             thumbnailUrl={thumbnails[i].src}
         fallbackUrl={thumbnails[i].fallback}
-            uploadDate={v.data.uploadDate}
           />
         </div>
       ))}
