@@ -110,16 +110,6 @@
     "hidden": false
   },
   {
-    "slug": "mint-mobile-customer-awards",
-    "title": "Mint Mobile's Customer Awards",
-    "tags": [
-      "commercial",
-      "comedy"
-    ],
-    "uploadDate": "2021-06-01",
-    "hidden": false
-  },
-  {
     "slug": "mint-mobile-dave-foley",
     "title": "Dave Foley's Unwritten Mint Commercial",
     "tags": [
@@ -576,5 +566,16 @@
     "uploadDate": "2023-09-01",
     "hidden": false,
     "order": 90
+  },
+  {
+    "slug": "mint-mobile-customer-awards",
+    "title": "Mint Mobile × Maximum Effort",
+    "tags": [
+      "commercial",
+      "comedy"
+    ],
+    "uploadDate": "2021-06-01",
+    "hidden": false,
+    "order": 150
   }
 ]
