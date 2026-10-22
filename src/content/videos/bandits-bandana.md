@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"Bolex"},{"category":"Camera","item":"16
 client: "Bandits"
 projectName: "Bandana"
 uploadDate: "2017-05-01"
-tags: ["commercial","product","16mm","fashion","film","car","western"]
+tags: ["commercial","product","16mm","fashion","film","car","western","Kodak"]
 stills: []
 urlSlug: "bandits-bandana"
 hidden: false
