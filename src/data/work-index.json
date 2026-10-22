@@ -371,19 +371,6 @@
     "order": 400
   },
   {
-    "slug": "columbia-intuitive-machines-nasa-v1",
-    "title": "Columbia × Intuitive Machines × NASA",
-    "tags": [
-      "documentary",
-      "branded content",
-      "technology",
-      "space"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false,
-    "order": 70
-  },
-  {
     "slug": "zoe-kravitz-harpers-bazaar",
     "title": "Zoë Kravitz x Harper's Bazaar",
     "tags": [
@@ -548,5 +535,18 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 50
+  },
+  {
+    "slug": "columbia-intuitive-machines-nasa-v1",
+    "title": "Columbia × Intuitive Machines × NASA",
+    "tags": [
+      "documentary",
+      "branded content",
+      "technology",
+      "space"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 70
   }
 ]
