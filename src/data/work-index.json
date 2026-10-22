@@ -61,17 +61,6 @@
     "hidden": false
   },
   {
-    "slug": "google-pixel-lookout",
-    "title": "Google Pixel \"Lookout\"",
-    "tags": [
-      "commercial",
-      "technology",
-      "accessibility"
-    ],
-    "uploadDate": "2023-09-01",
-    "hidden": false
-  },
-  {
     "slug": "google-pixel-magnifier",
     "title": "Google Pixel \"Magnifier\"",
     "tags": [
@@ -554,5 +543,17 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "google-pixel-lookout",
+    "title": "Google Pixel \"Lookout\"",
+    "tags": [
+      "commercial",
+      "technology",
+      "accessibility"
+    ],
+    "uploadDate": "2023-09-01",
+    "hidden": false,
+    "order": 80
   }
 ]
