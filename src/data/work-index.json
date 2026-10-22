@@ -140,16 +140,6 @@
     "hidden": false
   },
   {
-    "slug": "reese-witherspoon-harpers-bazaar",
-    "title": "Reese Witherspoon for Harper's Bazaar",
-    "tags": [
-      "editorial",
-      "celebrity"
-    ],
-    "uploadDate": "2018-09-01",
-    "hidden": false
-  },
-  {
     "slug": "sb1391-awareness",
     "title": "SB 1391 Awareness Video",
     "tags": [
@@ -576,5 +566,17 @@
     "uploadDate": "2018-09-01",
     "hidden": false,
     "order": 210
+  },
+  {
+    "slug": "reese-witherspoon-harpers-bazaar",
+    "title": "Reese Witherspoon × Harper's Bazaar",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "interview"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 220
   }
 ]
