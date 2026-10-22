@@ -78,17 +78,6 @@
     "hidden": false
   },
   {
-    "slug": "jonas-brothers-harpers-bazaar",
-    "title": "The Jonas Brothers Really, Really Miss Game of Thrones",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "interview"
-    ],
-    "uploadDate": "2019-05-01",
-    "hidden": false
-  },
-  {
     "slug": "made-on-earth-trailer",
     "title": "Made on Earth — Trailer",
     "tags": [
@@ -574,5 +563,17 @@
     "uploadDate": "2019-11-01",
     "hidden": false,
     "order": 190
+  },
+  {
+    "slug": "jonas-brothers-harpers-bazaar",
+    "title": "Jonas Brothers × Game of Thrones",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "interview"
+    ],
+    "uploadDate": "2019-05-01",
+    "hidden": false,
+    "order": 200
   }
 ]
