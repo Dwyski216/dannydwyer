@@ -7,7 +7,7 @@ videoId: "970931647"
 credits: [{"role":"Agency","name":"WTBR"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Cast","name":"Lachi"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angenieux EZ Zooms & Canon FD Primes"}]
 client: "Google"
-projectName: "Pixel \"Guided Frame\""
+projectName: "Pixel Series Pt.1 \"Guided Frame\""
 uploadDate: "2023-09-01"
 tags: ["commercial","technology","accessibility","Sony","Angenieux EZ","Docu Series","branded doc","documentary","low vision"]
 stills: []
