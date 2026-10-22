@@ -130,17 +130,6 @@
     "hidden": false
   },
   {
-    "slug": "paramount-viking-funeral",
-    "title": "Paramount — Viking Funeral",
-    "tags": [
-      "branded content",
-      "event",
-      "entertainment"
-    ],
-    "uploadDate": "2020-11-01",
-    "hidden": false
-  },
-  {
     "slug": "peter-dinklage-esquire",
     "title": "Peter Dinklage — Esquire Magazine Cover (March)",
     "tags": [
@@ -578,5 +567,17 @@
     "uploadDate": "2023-02-01",
     "hidden": false,
     "order": 120
+  },
+  {
+    "slug": "paramount-viking-funeral",
+    "title": "Paramount Network — Farewell, Spike TV",
+    "tags": [
+      "branded content",
+      "event",
+      "entertainment"
+    ],
+    "uploadDate": "2020-11-01",
+    "hidden": false,
+    "order": 160
   }
 ]
