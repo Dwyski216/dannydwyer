@@ -4,12 +4,13 @@ pageTitle: "Zoë Kravitz × Harper's Bazaar | Cinematographer Danny Dwyer"
 summary: "White gowns, blue sky, and wolves on the Mojave dunes. Cinematographer Danny Dwyer on shooting Zoë Kravitz for Harper's Bazaar."
 platform: "vimeo"
 videoId: "289597669"
-credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Robert Dunne"},{"role":"Cast","name":"Zoë Kravitz"}]
+customThumbnail: "/images/thumbnails/zoe-kravitz-harpers-bazaar-1792701119487.webp"
+credits: [{"role":"Cast","name":"Zoë Kravitz"},{"role":"Director","name":"Robert Dumé"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon Cine Zooms"}]
 client: "Harper's Bazaar"
 projectName: "Zoë Kravitz Cover Shoot"
 uploadDate: "2018-08-24"
-tags: ["editorial","celebrity"]
+tags: ["editorial","celebrity","interview","animals","wolves","fashion"]
 stills: []
 urlSlug: "zoe-kravitz-harpers-bazaar"
 hidden: false
