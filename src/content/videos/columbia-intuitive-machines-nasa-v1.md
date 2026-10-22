@@ -4,12 +4,12 @@ pageTitle: "Columbia × Intuitive Machines Moon Landing | DP Danny Dwyer"
 summary: "Filming the first American Moon landing since 1972. Danny Dwyer on Columbia, Intuitive Machines, and NASA in Houston, featuring astronaut Jack Fischer."
 platform: "vimeo"
 videoId: "914552796"
-credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Jesse Canright"},{"role":"Cast","name":"Jack Fischer"}]
-equipment: [{"category":"Camera","item":"Sont FX6"},{"category":"Lens","item":"Cooke S8i Primes 💥🧨🚬"}]
+credits: [{"role":"Cast","name":"Jack Fischer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Jesse Canright"}]
+equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Cooke S8i Primes 💥🧨🚬"}]
 client: "Columbia Sportswear"
 projectName: "Intuitive Machines Lunar Lander (NASA CLPS mission)"
 uploadDate: "2024-02-01"
-tags: ["documentary","branded content","technology","space"]
+tags: ["documentary","branded content","technology","space","NASA","Columbia","moon landing","universe","outer space","the moon"]
 stills: []
 urlSlug: "columbia-intuitive-machines-nasa-v1"
 hidden: false
