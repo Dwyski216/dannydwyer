@@ -4,16 +4,17 @@ pageTitle: "Paramount Network: Farewell Spike TV | DP Danny Dwyer"
 summary: "Flaming arrows, dynamite, and an 1800s cannon. Director of photography Danny Dwyer on Spike TV's farewell and Paramount Network's launch."
 platform: "vimeo"
 videoId: "252745798"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Nathan Mallon"}]
-equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Canon FD Prime"}]
+customThumbnail: "/images/thumbnails/paramount-viking-funeral-1792699280109.webp"
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Nathan Mallon"}]
+equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon FD Prime"}]
 client: "Paramount / History Channel"
 projectName: "Vikings — Viking Funeral Event"
 uploadDate: "2020-11-01"
-tags: ["branded content", "event", "entertainment"]
-urlSlug: "paramount-viking-funeral"
-order: 160
-featured: false
+tags: ["branded content","event","entertainment"]
 stills: []
+urlSlug: "paramount-viking-funeral"
+hidden: false
+order: 160
 ---
 
 The brief, more or less: blow shit up in the desert.
