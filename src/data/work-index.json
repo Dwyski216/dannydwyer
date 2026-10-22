@@ -351,17 +351,6 @@
     "hidden": false
   },
   {
-    "slug": "beck-gustaf-close",
-    "title": "Beck × Gustaf \"Close\"",
-    "tags": [
-      "music video",
-      "celebrity"
-    ],
-    "uploadDate": "2023-05-01",
-    "hidden": false,
-    "order": 110
-  },
-  {
     "slug": "dark-bardo-midnight-cowboy",
     "title": "Dark Bardo \"After Midnight Cowboy\"",
     "tags": [
@@ -517,5 +506,20 @@
     "uploadDate": "2024-06-01",
     "hidden": false,
     "order": 40
+  },
+  {
+    "slug": "beck-gustaf-close",
+    "title": "Beck × Gustaf \"Close\"",
+    "tags": [
+      "music video",
+      "celebrity",
+      "Beck",
+      "Gustaf",
+      "Los Angeles",
+      "Punk"
+    ],
+    "uploadDate": "2023-05-01",
+    "hidden": false,
+    "order": 110
   }
 ]
