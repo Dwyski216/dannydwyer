@@ -393,16 +393,6 @@
     "order": 260
   },
   {
-    "slug": "the-war-for-home",
-    "title": "Born x Raised — War for Home",
-    "tags": [
-      "documentary"
-    ],
-    "uploadDate": "2017-06-01",
-    "hidden": false,
-    "order": 330
-  },
-  {
     "slug": "columbia-intuitive-machines-nasa-v1",
     "title": "Columbia × Intuitive Machines × NASA",
     "tags": [
@@ -531,5 +521,21 @@
     "uploadDate": "2017-05-01",
     "hidden": false,
     "order": 340
+  },
+  {
+    "slug": "the-war-for-home",
+    "title": "Born x Raised — War for Home",
+    "tags": [
+      "documentary",
+      "Los Angeles",
+      "Spanto",
+      "Venice",
+      "human rights",
+      "history",
+      "film"
+    ],
+    "uploadDate": "2017-06-01",
+    "hidden": false,
+    "order": 330
   }
 ]
