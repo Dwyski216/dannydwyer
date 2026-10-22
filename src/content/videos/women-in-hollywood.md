@@ -4,6 +4,7 @@ pageTitle: "ELLE Women in Hollywood | Director of Photography Danny Dwyer"
 summary: "Twelve months filming ELLE's Women in Hollywood alongside photographer Zoey Grossman. Director of photography Danny Dwyer."
 platform: "vimeo"
 videoId: "368942744"
+customThumbnail: "/images/thumbnails/women-in-hollywood-1792700200673.webp"
 credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Lauren Hampton"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"TLS Canon FD Primes"}]
 client: "Harper's Bazaar"
