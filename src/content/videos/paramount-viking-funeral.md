@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "Paramount / History Channel"
 projectName: "Vikings — Viking Funeral Event"
 uploadDate: "2020-11-01"
-tags: ["branded content","event","entertainment"]
+tags: ["branded content","event","entertainment","pyro"]
 stills: []
 urlSlug: "paramount-viking-funeral"
 hidden: false
