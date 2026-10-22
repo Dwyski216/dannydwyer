@@ -403,17 +403,6 @@
     "order": 330
   },
   {
-    "slug": "bandits-bandana",
-    "title": "Bandits Bandana",
-    "tags": [
-      "commercial",
-      "product"
-    ],
-    "uploadDate": "2017-05-01",
-    "hidden": false,
-    "order": 340
-  },
-  {
     "slug": "columbia-intuitive-machines-nasa-v1",
     "title": "Columbia × Intuitive Machines × NASA",
     "tags": [
@@ -525,5 +514,21 @@
     "uploadDate": "2023-02-01",
     "hidden": false,
     "order": 120
+  },
+  {
+    "slug": "bandits-bandana",
+    "title": "Bandits Bandana",
+    "tags": [
+      "commercial",
+      "product",
+      "16mm",
+      "fashion",
+      "film",
+      "car",
+      "western"
+    ],
+    "uploadDate": "2017-05-01",
+    "hidden": false,
+    "order": 340
   }
 ]
