@@ -1,5 +1,5 @@
 ---
-title: "Ryan Gosling x Men's Health | The Fall Guy"
+title: "Ryan Gosling x Men's Health"
 pageTitle: "Ryan Gosling × Men's Health | The Fall Guy | DP Danny Dwyer"
 summary: "Universal Studios stunt bikes, a burning script, and Ryan Gosling. Director of photography Danny Dwyer on the Men's Health video promo for The Fall Guy."
 platform: "vimeo"
@@ -9,7 +9,7 @@ equipment: []
 client: "Men's Health"
 projectName: "Ryan Gosling Cover Story"
 uploadDate: "2024-02-01"
-tags: ["editorial","celebrity"]
+tags: ["editorial","celebrity","Ryan Gosling","Mens Health"]
 stills: []
 urlSlug: "ryan-gosling-mens-health"
 hidden: false
