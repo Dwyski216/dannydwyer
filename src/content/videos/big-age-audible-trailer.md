@@ -1,5 +1,5 @@
 ---
-title: "Audible — Big Age"
+title: "Audible \"Big Age\""
 pageTitle: "Big Age × Cedric the Entertainer | Director Danny Dwyer"
 summary: "Director Danny Dwyer on working with Cedric the Entertainer, Jennifer Lewis, and Niecy Nash-Betts for Audible's Big Age."
 platform: "vimeo"
@@ -8,9 +8,9 @@ customThumbnail: "/images/thumbnails/big-age-audible-trailer-1792691205407.webp"
 credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Nick Mahar"},{"role":"Gaffer","name":"Adam Hutsell"},{"role":"Cast","name":"Cedric the Entertainer"},{"role":"Cast","name":"Jennifer Lewis"},{"role":"Cast","name":"Niecy Nash-Betts"}]
 equipment: [{"category":"Camera","item":"Arri Alexa 35"},{"category":"Lens","item":"Leica Summicron-C"}]
 client: "Audible"
-projectName: "Big Age (trailer)"
+projectName: "Big Age Trailer"
 uploadDate: "2024-06-01"
-tags: ["trailer","audio drama","commercial"]
+tags: ["trailer","audio drama","commercial","Audible","celebrity","Cedric"]
 stills: []
 urlSlug: "big-age-audible-trailer"
 hidden: false
