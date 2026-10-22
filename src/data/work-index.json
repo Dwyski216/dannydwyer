@@ -78,17 +78,6 @@
     "hidden": false
   },
   {
-    "slug": "jonas-brothers-harpers-bazaar",
-    "title": "The Jonas Brothers Really, Really Miss Game of Thrones",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "interview"
-    ],
-    "uploadDate": "2019-05-01",
-    "hidden": false
-  },
-  {
     "slug": "made-on-earth-trailer",
     "title": "Made on Earth — Trailer",
     "tags": [
@@ -233,16 +222,6 @@
       "fashion"
     ],
     "uploadDate": "2017-08-01",
-    "hidden": false
-  },
-  {
-    "slug": "women-in-hollywood",
-    "title": "Women in Hollywood",
-    "tags": [
-      "editorial",
-      "documentary"
-    ],
-    "uploadDate": "2018-09-01",
     "hidden": false
   },
   {
@@ -574,5 +553,28 @@
     "uploadDate": "2019-11-01",
     "hidden": false,
     "order": 190
+  },
+  {
+    "slug": "jonas-brothers-harpers-bazaar",
+    "title": "Jonas Brothers × Game of Thrones",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "interview"
+    ],
+    "uploadDate": "2019-05-01",
+    "hidden": false,
+    "order": 200
+  },
+  {
+    "slug": "women-in-hollywood",
+    "title": "ELLE Women in Hollywood",
+    "tags": [
+      "editorial",
+      "documentary"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 210
   }
 ]
