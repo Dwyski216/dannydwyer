@@ -110,17 +110,6 @@
     "hidden": false
   },
   {
-    "slug": "mint-mobile-dave-foley",
-    "title": "Dave Foley's Unwritten Mint Commercial",
-    "tags": [
-      "commercial",
-      "comedy",
-      "celebrity"
-    ],
-    "uploadDate": "2021-06-01",
-    "hidden": false
-  },
-  {
     "slug": "mr-cartoon-cazadores-saucey",
     "title": "Mr. Cartoon // Cazadores Collab for Saucey",
     "tags": [
@@ -577,5 +566,17 @@
     "uploadDate": "2021-06-01",
     "hidden": false,
     "order": 150
+  },
+  {
+    "slug": "mint-mobile-dave-foley",
+    "title": "Dave Foley × Mint Mobile",
+    "tags": [
+      "commercial",
+      "comedy",
+      "celebrity"
+    ],
+    "uploadDate": "2021-06-01",
+    "hidden": false,
+    "order": 140
   }
 ]
