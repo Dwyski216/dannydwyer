@@ -4,12 +4,12 @@ pageTitle: "Dark Bardo \"After Midnight Cowboy\" | Filmmaker Danny Dwyer"
 summary: "A runaway horse became a runaway trumpet. Filmmaker Danny Dwyer on the Dark Bardo music video he refused to let go of, filmed in Los Angeles."
 platform: "vimeo"
 videoId: "875659285"
-credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Cast","name":"Dark Bardo & Jackie"}]
+credits: [{"role":"Cast","name":"Harrison Roberts"},{"role":"Cast","name":"Jackie Spillane"},{"role":"Cast","name":"Hunter Holcombe"},{"role":"Cast","name":"Dean Holcombe"},{"role":"Cast","name":"Zack Birthday"},{"role":"Cast","name":"Jonah Feingold"},{"role":"Cast","name":"Dark Bardo"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony Burano"},{"category":"Lens","item":"TLS Canon FD Primes"}]
 client: "Dark Bardo"
-projectName: "Dark Bardo — \"Midnight Cowboy\" (Music Video)"
+projectName: "Dark Bardo \"Midnight Cowboy\" "
 uploadDate: "2023-02-01"
-tags: ["music video"]
+tags: ["music video","short film","comedy","psychedelic"]
 stills: []
 urlSlug: "dark-bardo-midnight-cowboy"
 hidden: false
