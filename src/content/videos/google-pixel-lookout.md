@@ -3,7 +3,7 @@ title: "Google Pixel \"Lookout\""
 summary: "A Google Pixel campaign spot spotlighting the Lookout accessibility feature."
 platform: "vimeo"
 videoId: "970932116"
-credits: [{"role":"Cast","name":"Lachi"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]
+credits: [{"role":"Agency","name":"WTBR"},{"role":"Cast","name":"Lachi"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: []
 client: "Google"
 projectName: "Pixel \"Lookout\""
