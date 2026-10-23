@@ -119,8 +119,9 @@ const { title, email } = Astro.props;
     -webkit-hyphens: auto;
   }
 
+  /* Same 1rem paragraph gap as the other description text on the site. */
   .prose :global(p) {
-    margin: 0 0 1.1rem;
+    margin: 0 0 1rem;
   }
 
   .prose :global(a) {
@@ -128,8 +129,10 @@ const { title, email } = Astro.props;
     text-decoration: underline;
   }
 
+  /* 2.1rem + the last paragraph's 1rem keeps the copy-to-button gap equal
+     to the title-to-copy gap. */
   .action {
-    margin-top: 2rem;
+    margin-top: 2.1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
