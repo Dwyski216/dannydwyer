@@ -1,5 +1,5 @@
 ---
-title: "Bandits Bandana"
+title: "Bandits Bandanas"
 pageTitle: "Bandits Bandanas 16mm | Director of Photography Danny Dwyer"
 summary: "Porsche donuts, desert dust, and 16mm reversal on a vintage Bolex. Danny Dwyer, director of photography on the Bandits Bandanas campaign."
 platform: "vimeo"
@@ -8,7 +8,7 @@ customThumbnail: "/images/thumbnails/bandits-bandana-1792692420539.webp"
 credits: [{"role":"Director","name":"David McMurray (DMC)"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Producer","name":"PJ Koll"}]
 equipment: [{"category":"Camera","item":"Bolex"},{"category":"Camera","item":"16mm Kodak color reversal"}]
 client: "Bandits"
-projectName: "Bandana"
+projectName: "Bandana Brand Film"
 uploadDate: "2017-05-01"
 tags: ["commercial","product","16mm","fashion","film","car","western","Kodak"]
 stills: []
