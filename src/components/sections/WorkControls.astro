@@ -12,10 +12,9 @@ const { allTags } = Astro.props;
 
 <div class="controls">
   <div class="preset-filters">
-    <a class="preset-btn" href="/work/?tag=branded%20content">Branded Content</a>
-    <a class="preset-btn" href="/work/?tag=celebrity">Celebrity</a>
-    <a class="preset-btn" href="/work/?tag=fashion">Fashion</a>
     <a class="preset-btn" href="/work/?tag=documentary">Documentary</a>
+    <a class="preset-btn" href="/work/?tag=branded%20content">Branded Content</a>
+    <a class="preset-btn" href="/work/?tag=music%20video">Music Videos</a>
   </div>
 
   <div class="filter-row">
@@ -48,6 +47,7 @@ const { allTags } = Astro.props;
   .preset-filters {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.5rem;
     min-width: 0;
   }
@@ -61,8 +61,22 @@ const { allTags } = Astro.props;
     background: var(--surface);
     border: 1px solid var(--hairline);
     padding: 0.6rem 1rem;
-    text-align: left;
+    text-align: center;
     transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  /* Phones: tighter so all three presets fit on one row. */
+  @media (max-width: 600px) {
+    .preset-filters {
+      flex-wrap: nowrap;
+      gap: 0.4rem;
+    }
+
+    .preset-btn {
+      padding: 0.6rem 0.65rem;
+      font-size: min(0.85rem, 3.6vw);
+      white-space: nowrap;
+    }
   }
 
   .preset-btn:hover {
@@ -70,11 +84,12 @@ const { allTags } = Astro.props;
     border-color: var(--accent);
   }
 
+  /* Everything centered: the preset buttons on one row, search and
+     Filters on the row below. */
   .controls {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
@@ -93,7 +108,7 @@ const { allTags } = Astro.props;
     color: var(--text);
     padding: 0.6rem 0.8rem;
     font-size: 0.95rem;
-    flex: 1 1 220px;
+    width: 320px;
   }
 
   #search:focus {
@@ -104,18 +119,17 @@ const { allTags } = Astro.props;
   .filter-row {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: nowrap;
     gap: 0.75rem;
-    flex: 0 0 auto;
   }
 
-  /* Phones: stack the row with Filters first and the search box last,
-     full width, at the bottom of the controls cluster. */
+  /* Phones: Filters centered under the presets, then the search box full
+     width at the bottom of the controls cluster. */
   @media (max-width: 600px) {
     .filter-row {
-      flex: 1 1 100%;
+      align-self: stretch;
       flex-direction: column;
-      align-items: flex-start;
     }
 
     .filters-toggle {
@@ -123,7 +137,6 @@ const { allTags } = Astro.props;
     }
 
     #search {
-      flex: 0 0 auto;
       width: 100%;
       box-sizing: border-box;
     }
