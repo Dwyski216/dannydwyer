@@ -1,5 +1,5 @@
 ---
-title: "The Pixies — \"On Graveyard Hill\""
+title: "The Pixies \"On Graveyard Hill\""
 pageTitle: "Pixies \"On Graveyard Hill\" | Cinematographer Danny Dwyer"
 summary: "Crash zooms, in-camera effects, and an underwater slow-mo scene. Danny Dwyer, director of photography on the Pixies' \"On Graveyard Hill.\""
 platform: "vimeo"
