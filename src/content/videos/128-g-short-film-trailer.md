@@ -11,7 +11,7 @@ series: []
 client: "Brick of Gold"
 projectName: "128-G Short Film"
 uploadDate: "2026-10-23"
-tags: ["short film","documentary","prison","social awarness"]
+tags: ["short film","documentary","prison","social awarness","editor"]
 stills: []
 urlSlug: "128-g-short-film-trailer"
 hidden: false
