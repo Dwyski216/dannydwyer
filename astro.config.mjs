@@ -33,8 +33,24 @@ const uploadDateBySlug = new Map(
 
 const excludedPaths = new Set(['/admin/', '/admin/login/', ...[...hiddenSlugs].map((s) => `/work/${s}/`)]);
 
+// Links in post text that go to other websites open in a new tab (with
+// rel="noopener noreferrer"), so visitors don't lose their place here.
+function externalLinksInNewTab() {
+  const visit = (node) => {
+    if (node.type === 'element' && node.tagName === 'a' && /^https?:\/\//.test(String(node.properties?.href ?? ''))) {
+      node.properties.target = '_blank';
+      node.properties.rel = ['noopener', 'noreferrer'];
+    }
+    node.children?.forEach(visit);
+  };
+  return (tree) => visit(tree);
+}
+
 export default defineConfig({
   site: SITE_URL,
+  markdown: {
+    rehypePlugins: [externalLinksInNewTab],
+  },
   integrations: [
     sitemap({
       filter: (page) => !excludedPaths.has(new URL(page).pathname),
