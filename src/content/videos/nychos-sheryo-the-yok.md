@@ -4,6 +4,7 @@ pageTitle: "Nychos × Sheryo × The Yok | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer films graffiti artists Nychos, Sheryo, and The Yok freestyling a mural on a corrugated garage door for King Brown Magazine."
 platform: "vimeo"
 videoId: "72496004"
+customThumbnail: "/images/thumbnails/nychos-sheryo-the-yok-1792774717420.webp"
 credits: [{"role":"Cast","name":"Nychos"},{"role":"Cast","name":"The Yok"},{"role":"Cast","name":"Sheryo"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Blackmagic Pocket Cinema Camera"},{"category":"Lens","item":"Canon L Series"}]
 projectName: "King Brown Magazine Issue 9 Release"
