@@ -30,6 +30,7 @@ const videos = defineCollection({
           title: z.string().default(''),
           platform: z.enum(['youtube', 'vimeo']).default('vimeo'),
           videoId: z.string(),
+          thumbnail: z.string().optional(), // uploaded in the admin; falls back to the platform's
         })
       )
       .default([]),

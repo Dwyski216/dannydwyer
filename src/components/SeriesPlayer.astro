@@ -9,7 +9,8 @@ interface SeriesVideo {
   platform: VideoPlatform;
   videoId: string;
   title: string;
-  thumbnail: string;
+  src: string; // thumbnail
+  fallback?: string; // shown if an uploaded thumbnail fails to load
 }
 
 interface Props {
@@ -20,6 +21,12 @@ const [main, ...rest] = videos;
 
 // One allow list covering both platforms, since a series can mix them and
 // any video can end up in the big player.
+// Swaps in the platform thumbnail if an uploaded one fails to load. Not a
+// one-shot (the strip's images change as videos swap): a flag stops it
+// retrying, and the swap script clears the flag with each new image.
+const FALLBACK_ONERROR =
+  "if(this.dataset.fallback&&!this.dataset.fellBack){this.dataset.fellBack='1';this.src=this.dataset.fallback}";
+
 const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture';
 ---
 
@@ -31,7 +38,8 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
       allow={allow}
       allowfullscreen
       data-embed={getEmbedUrl(main)}
-      data-thumb={main.thumbnail}
+      data-thumb={main.src}
+      data-fallback={main.fallback ?? ''}
     ></iframe>
   </div>
 
@@ -41,11 +49,19 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
         type="button"
         class="series-thumb"
         data-embed={getEmbedUrl(v)}
-        data-thumb={v.thumbnail}
         data-title={v.title}
         aria-label={`Play ${v.title}`}
       >
-        <img src={v.thumbnail} alt="" loading="lazy" width="320" height="180" />
+        <img
+          src={v.src}
+          alt=""
+          loading="lazy"
+          width="320"
+          height="180"
+          data-thumb={v.src}
+          data-fallback={v.fallback ?? ''}
+          onerror={FALLBACK_ONERROR}
+        />
         <span class="play" aria-hidden="true"></span>
       </button>
     ))}
@@ -64,18 +80,24 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
 
     player.querySelectorAll<HTMLButtonElement>('.series-thumb').forEach((thumb) => {
       thumb.addEventListener('click', () => {
-        const playing = { embed: frame.dataset.embed!, thumb: frame.dataset.thumb!, title: frame.title };
+        const img = thumb.querySelector('img')!;
+        const playing = { embed: frame.dataset.embed!, thumb: frame.dataset.thumb!, fallback: frame.dataset.fallback!, title: frame.title };
 
         frame.src = withAutoplay(thumb.dataset.embed!);
         frame.dataset.embed = thumb.dataset.embed;
-        frame.dataset.thumb = thumb.dataset.thumb;
+        // The big player keeps the thumbnail as it was uploaded (not a
+        // fallback it may have swapped to), so it can be tried again later.
+        frame.dataset.thumb = img.dataset.thumb;
+        frame.dataset.fallback = img.dataset.fallback;
         frame.title = thumb.dataset.title!;
 
         thumb.dataset.embed = playing.embed;
-        thumb.dataset.thumb = playing.thumb;
         thumb.dataset.title = playing.title;
         thumb.setAttribute('aria-label', `Play ${playing.title}`);
-        thumb.querySelector('img')!.src = playing.thumb;
+        img.dataset.fallback = playing.fallback;
+        img.dataset.thumb = playing.thumb;
+        delete img.dataset.fellBack;
+        img.src = playing.thumb;
 
         // On phones the big player may be scrolled partly off screen.
         if (frame.getBoundingClientRect().top < 0) frame.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -100,25 +122,29 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
     border: 0;
   }
 
-  /* Four across on desktop, three on phones, left-aligned under the player. */
+  /* Up to four per row (three on phones), each row centered under the
+     player: a fifth video starts a new row, and a short row stays centered. */
   .series-strip {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
+    --per-row: 4;
+    --gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap);
+    margin-top: var(--gap);
   }
 
   @media (max-width: 600px) {
     .series-strip {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.6rem;
-      margin-top: 0.6rem;
+      --per-row: 3;
+      --gap: 0.6rem;
     }
   }
 
   .series-thumb {
     position: relative;
     display: block;
+    flex: 0 0 calc((100% - (var(--per-row) - 1) * var(--gap)) / var(--per-row));
     aspect-ratio: 16 / 9;
     padding: 0;
     border: 1px solid var(--hairline);

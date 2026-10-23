@@ -5,7 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import VideoPlayer from '../../components/VideoPlayer.astro';
 import SeriesPlayer from '../../components/SeriesPlayer.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { getEmbedUrl, getThumbnailUrl, byDisplayOrder } from '../../lib/video';
+import { getEmbedUrl, getThumbnails, getThumbnailUrl, byDisplayOrder } from '../../lib/video';
 
 export async function getStaticPaths() {
   const videos = await getCollection('videos');
@@ -58,13 +58,13 @@ const thumbnailUrl = new URL(await getThumbnailUrl(d), Astro.site).toString();
 // the strip under the player.
 const seriesVideos = d.series.length
   ? [
-      { platform: d.platform, videoId: d.videoId, title: d.title, thumbnail: thumbnailUrl },
+      { platform: d.platform, videoId: d.videoId, title: d.title, ...(await getThumbnails(d)) },
       ...(await Promise.all(
         d.series.map(async (s, i) => ({
           platform: s.platform,
           videoId: s.videoId,
           title: s.title || `${d.title}, part ${i + 2}`,
-          thumbnail: await getThumbnailUrl(s),
+          ...(await getThumbnails({ ...s, customThumbnail: s.thumbnail })),
         }))
       )),
     ]

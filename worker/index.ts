@@ -535,6 +535,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
             title: String(v.title || ''),
             platform: v.platform === 'youtube' ? 'youtube' : 'vimeo',
             videoId: String(v.videoId),
+            ...(typeof v.thumbnail === 'string' && v.thumbnail ? { thumbnail: v.thumbnail } : {}),
           }))
       : [],
     client: body.client || undefined,

@@ -197,7 +197,7 @@ import Layout from '../../layouts/Layout.astro';
 
               <fieldset>
                 <legend>Series</legend>
-                <p class="section-hint">Turn this into a series: add more videos and they appear under the main one on this item's page, in this order. The gallery still shows a single card. Paste each video's Vimeo or YouTube link (or just its number).</p>
+                <p class="section-hint">Turn this into a series: add more videos and they appear under the main one on this item's page, in this order. The gallery still shows a single card. Paste each video's Vimeo or YouTube link (or just its number), and optionally upload a thumbnail for it; without one, the Vimeo/YouTube thumbnail is used.</p>
                 <div id="series-list" class="credits-list"></div>
                 <button type="button" id="series-add-btn" class="btn btn-ghost">+ Add Video to Series</button>
               </fieldset>
@@ -678,7 +678,8 @@ import Layout from '../../layouts/Layout.astro';
   let editingSlug: string | null = null;
   let pendingTags = new Set<string>();
   let pendingCredits: { role: string; name: string }[] = [];
-  let pendingSeries: { title: string; link: string }[] = [];
+  // status is a transient upload message for the row; it's never saved.
+  let pendingSeries: { title: string; link: string; thumbnail?: string; status?: string }[] = [];
   let pendingEquipment: { category: string; item: string }[] = [];
   let selectedSlugs = new Set<string>();
 
@@ -1036,6 +1037,9 @@ import Layout from '../../layouts/Layout.astro';
     labelB: string;
     placeholderB: string;
     emptyText: string;
+    // Optional extra controls shown under each row, wired up by afterRender.
+    extraRow?: (row: Record<A, string>, i: number) => string;
+    afterRender?: () => void;
   }) {
     function render() {
       const items = opts.getItems();
@@ -1053,7 +1057,7 @@ import Layout from '../../layouts/Layout.astro';
             <button type="button" class="btn-move" data-row-up="${i}" ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
             <button type="button" class="btn-move" data-row-down="${i}" ${i === items.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>
             <button type="button" class="credit-remove" data-row-remove="${i}" aria-label="Remove">×</button>
-          </div>`
+          </div>${opts.extraRow ? opts.extraRow(row, i) : ''}`
             )
             .join('')
         : `<p class="section-hint">${escapeHtml(opts.emptyText)}</p>`;
@@ -1081,6 +1085,7 @@ import Layout from '../../layouts/Layout.astro';
           render();
         });
       });
+      opts.afterRender?.();
     }
 
     opts.listEl.addEventListener('input', (e) => {
@@ -1141,6 +1146,66 @@ import Layout from '../../layouts/Layout.astro';
     labelB: 'Vimeo or YouTube link',
     placeholderB: 'e.g. https://vimeo.com/311786362',
     emptyText: 'Just the one video for now.',
+    extraRow: (row, i) => {
+      const { thumbnail: thumb = '', status = '' } = row as { thumbnail?: string; status?: string };
+      const preview = thumb ? seriesPreviewUrls.get(thumb) || thumb : '';
+      return `
+        <div class="series-thumb-row">
+          ${preview ? `<img class="series-thumb-preview" src="${escapeHtml(preview)}" alt="" />` : ''}
+          <button type="button" class="btn btn-ghost" data-series-thumb-upload="${i}">${thumb ? 'Replace Thumbnail' : 'Upload Thumbnail'}</button>
+          ${thumb ? `<button type="button" class="btn btn-ghost" data-series-thumb-remove="${i}">Remove</button>` : ''}
+          <span class="series-thumb-status">${escapeHtml(status)}</span>
+        </div>`;
+    },
+    afterRender: () => {
+      seriesListEl.querySelectorAll('[data-series-thumb-upload]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          seriesThumbIndex = Number((btn as HTMLElement).dataset.seriesThumbUpload);
+          seriesThumbFile.click();
+        });
+      });
+      seriesListEl.querySelectorAll('[data-series-thumb-remove]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const i = Number((btn as HTMLElement).dataset.seriesThumbRemove);
+          delete pendingSeries[i].thumbnail;
+          pendingSeries[i].status = 'Removed. Click Save Work Item to apply.';
+          markDirty('work-item-form');
+          renderSeriesList();
+        });
+      });
+    },
+  });
+
+  // Series thumbnails upload the same way as the item's own custom
+  // thumbnail (resized to WebP in the browser, committed by the Worker).
+  const seriesPreviewUrls = new Map<string, string>(); // uploaded path -> local preview
+  let seriesThumbIndex = -1;
+  const seriesThumbFile = document.createElement('input');
+  seriesThumbFile.type = 'file';
+  seriesThumbFile.accept = 'image/jpeg,image/png,image/webp';
+  seriesThumbFile.addEventListener('change', async () => {
+    const file = seriesThumbFile.files?.[0];
+    seriesThumbFile.value = '';
+    const row = pendingSeries[seriesThumbIndex];
+    if (!file || !row) return;
+    const i = seriesThumbIndex;
+    row.status = 'Uploading…';
+    renderSeriesList();
+    try {
+      const data = await toWebpBase64(file);
+      const fd = new FormData(workItemForm);
+      const base = String(fd.get('slug') || '') || slugify(String(fd.get('title') || ''));
+      const res = await fetch('/api/thumbnail', { method: 'POST', body: JSON.stringify({ name: `${base}-series-${i + 2}`, data }) });
+      const out = await res.json();
+      if (!res.ok) throw new Error(out.error || 'Upload failed.');
+      row.thumbnail = out.path;
+      seriesPreviewUrls.set(out.path, URL.createObjectURL(file));
+      row.status = 'Uploaded. Click Save Work Item to apply.';
+      markDirty('work-item-form');
+    } catch (err) {
+      row.status = `Error: ${(err as Error).message}`;
+    }
+    renderSeriesList();
   });
 
   // Accepts a Vimeo/YouTube link or a bare ID and works out which platform
@@ -1356,7 +1421,11 @@ import Layout from '../../layouts/Layout.astro';
         : [];
       renderEquipmentList();
       pendingSeries = Array.isArray(fields.series)
-        ? fields.series.map((v: any) => ({ title: v.title ?? '', link: videoLink(v.platform, String(v.videoId ?? '')) }))
+        ? fields.series.map((v: any) => ({
+            title: v.title ?? '',
+            link: videoLink(v.platform, String(v.videoId ?? '')),
+            ...(v.thumbnail ? { thumbnail: String(v.thumbnail) } : {}),
+          }))
         : [];
       renderSeriesList();
       (workItemForm.elements.namedItem('client') as HTMLInputElement).value = fields.client ?? '';
@@ -1407,7 +1476,11 @@ import Layout from '../../layouts/Layout.astro';
       status.textContent = `Error: couldn't read the Series link "${badSeries.link || '(empty)'}". Paste the Vimeo or YouTube link, e.g. https://vimeo.com/311786362`;
       return;
     }
-    payload.series = seriesRows.map((v) => ({ title: v.title.trim(), ...parseVideoRef(v.link)! }));
+    payload.series = seriesRows.map((v) => ({
+      title: v.title.trim(),
+      ...parseVideoRef(v.link)!,
+      ...(v.thumbnail ? { thumbnail: v.thumbnail } : {}),
+    }));
     payload.hidden = fd.get('hidden') === 'on';
     payload.order = Number(payload.order) || 0;
     payload.stills = String(payload.stills || '')
@@ -2391,6 +2464,26 @@ import Layout from '../../layouts/Layout.astro';
 
   .work-actions-cell .btn + .btn {
     margin-left: 0.5rem;
+  }
+
+  .series-thumb-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin: -0.25rem 0 0.5rem;
+  }
+
+  .series-thumb-preview {
+    width: 96px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border: 1px solid var(--hairline);
+  }
+
+  .series-thumb-status {
+    font-size: 0.8rem;
+    color: var(--text-muted);
   }
 
   .thumb-upload {
