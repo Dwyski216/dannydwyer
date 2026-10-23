@@ -4,6 +4,7 @@ pageTitle: "Back on Two Feet Documentary | Cinematographer Danny Dwyer"
 summary: "Following Marine veteran Kirstie Ennis through surgery and recovery. Back on 2 Feet, presented by Channing Tatum in NYC. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "174059585"
+customThumbnail: "/images/thumbnails/back-on-two-feet-1792729259156.webp"
 credits: [{"role":"Cast","name":"Kirstie Ennis"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Lauren Lumsden"}]
 equipment: [{"category":"Camera","item":"RED"},{"category":"Lens","item":"Cooke Mini S4"},{"category":"Lens","item":"Canon FD Primes"}]
 client: "Cosmopolitan"
