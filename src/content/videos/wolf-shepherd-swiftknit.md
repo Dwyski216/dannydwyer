@@ -4,6 +4,7 @@ pageTitle: "Wolf & Shepherd Swiftknit Boardwalk | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer takes the Wolf & Shepherd Swiftknit skating down the boardwalk: a dress shoe that rides light and never feels like bricks."
 platform: "vimeo"
 videoId: "478342464"
+customThumbnail: "/images/thumbnails/wolf-shepherd-swiftknit-1792719637496.webp"
 credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Composer","name":"Werdperfect"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Mini S4"}]
 client: "Wolf & Shepherd"
