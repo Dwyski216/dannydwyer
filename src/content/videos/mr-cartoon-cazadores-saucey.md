@@ -19,6 +19,6 @@ order: 380
 
 A day at Mr. Cartoon's studio, watching him freestyle a Día de los Muertos design. Which in turn ended up on a commerative Día de los Muertos Cazadores bottle. No sketch, no hesitation, just a master working.
 
-His good friend Estevan Oriol was there too, and then we piled into the backseat his 62' lowrider Impala Wagon and cruised the streets of the San Fernando Valley, tequila may or may not have been in hand.
+His good friend Estevan Oriol was there too, and then we piled into the backseat his 62' lowrider Impala Wagon and cruised the streets of the San Fernando Valley.
 
 Art, culture, and a low-and-slow ride through the Valley. Hard to top that.
