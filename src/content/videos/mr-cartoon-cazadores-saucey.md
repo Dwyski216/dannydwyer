@@ -1,5 +1,5 @@
 ---
-title: "Mr. Cartoon × Cazadores "
+title: "Mr. Cartoon × Cazadores"
 pageTitle: "Mr. Cartoon × Cazadores | Filmmaker Danny Dwyer"
 summary: "Mr. Cartoon freestyles a Día de los Muertos Cazadores bottle, then a lowrider ride through the Valley with Estevan Oriol. By filmmaker Danny Dwyer."
 platform: "vimeo"

@@ -1,5 +1,5 @@
 ---
-title: "Werdperfect x The Kickdrums \"Pretty Orange\" "
+title: "Werdperfect x The Kickdrums \"Pretty Orange\""
 pageTitle: "Werdperfect \"Pretty Orange\" | Filmmaker Danny Dwyer"
 summary: "An LA orange grove, 105° heat, bees, and turtles. Filmmaker Danny Dwyer on Werdperfect's \"Pretty Orange,\" all in camera."
 platform: "vimeo"
