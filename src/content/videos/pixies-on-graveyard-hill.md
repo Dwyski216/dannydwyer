@@ -5,12 +5,12 @@ summary: "Crash zooms, in-camera effects, and an underwater slow-mo scene. Danny
 platform: "vimeo"
 videoId: "397085201"
 customThumbnail: "/images/thumbnails/pixies-on-graveyard-hill-1792729738371.webp"
-credits: [{"role":"Cast","name":"Black Francis"},{"role":"Cast","name":"Paz Lenchantin"},{"role":"Cast","name":"Joey Santiago"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Kii Arens & Mama Hot Dog"}]
+credits: [{"role":"Cast","name":"Black Francis"},{"role":"Cast","name":"Paz Lenchantin"},{"role":"Cast","name":"Joey Santiago"},{"role":"Director","name":"Kii Arens & Mama Hot Dog"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"16mm Kodak Reversal"},{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Varotal zoom"}]
 client: "Pixies"
 projectName: "Pixies — \"On Graveyard Hill\" (Music Video)"
 uploadDate: "2016-09-01"
-tags: ["music video"]
+tags: ["music video","psychedelic"]
 stills: []
 urlSlug: "pixies-on-graveyard-hill"
 hidden: false
