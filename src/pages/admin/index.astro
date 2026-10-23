@@ -245,7 +245,11 @@ import Layout from '../../layouts/Layout.astro';
                 <textarea name="stills" rows="3" placeholder="/images/videos/midnight-harbor/01.jpg | Dock lamps lighting the wide shot | Night one, camera A"></textarea>
               </label>
 
-              <label class="checkbox"><input type="checkbox" name="hidden" /> Hidden — has its own page, but excluded from the Work grid (e.g. a temporary home-page reel)</label>
+              <label class="checkbox"><input type="checkbox" name="hidden" /> Unlisted — private link only. Kept off the Work page, Google and AI search; anyone you send the link to can still watch it.</label>
+              <div id="client-link-row" class="client-link-row" hidden>
+                <code id="client-link-url"></code>
+                <button type="button" id="client-link-copy" class="btn btn-ghost">Copy Client Link</button>
+              </div>
 
               <div class="form-actions">
                 <button type="submit" class="btn btn-solid">Save Work Item</button>
@@ -831,19 +835,22 @@ import Layout from '../../layouts/Layout.astro';
             }
           </td>
           <td>${escapeHtml(item.title)}</td>
-          <td>${item.hidden ? '<span class="status-badge status-hidden">Hidden</span>' : '<span class="status-badge status-visible">Visible</span>'}</td>
-          <td><button type="button" class="btn btn-ghost" data-edit="${item.slug}">Edit</button></td>
+          <td>${item.hidden ? '<span class="status-badge status-hidden">Unlisted</span>' : '<span class="status-badge status-visible">Visible</span>'}</td>
+          <td class="work-actions-cell">
+            ${item.hidden ? `<button type="button" class="btn btn-ghost" data-copy-link="${item.slug}">Copy Link</button>` : ''}
+            <button type="button" class="btn btn-ghost" data-edit="${item.slug}">Edit</button>
+          </td>
         </tr>`
           )
           .join('')
-      : `<tr><td colspan="6" class="section-hint">No items match.</td></tr>`;
+      : `<tr><td colspan="5" class="section-hint">No items match.</td></tr>`;
 
     workListEl.innerHTML = `
-      <table class="work-table">
-        <thead><tr><th><input type="checkbox" id="work-select-all" aria-label="Select all" /></th><th class="work-move-header">Move</th>${headerHtml}<th></th></tr></thead>
+      <div class="work-table-scroll"><table class="work-table">
+        <thead><tr><th><input type="checkbox" id="work-select-all" aria-label="Select all" /></th>${headerHtml}<th></th></tr></thead>
         <tbody>${rowsHtml}</tbody>
-      </table>
-      <p class="work-count section-hint">${sorted.length} of ${workItems.length} item${workItems.length === 1 ? '' : 's'}${sortKey === 'order' ? ' — sorted by Order; switch sort to search by Title/Date/Status' : ''}</p>
+      </table></div>
+      <p class="work-count section-hint">${sorted.length} of ${workItems.length} item${workItems.length === 1 ? '' : 's'}${sortKey === 'order' ? ' — sorted by Order; switch sort to search by Title/Status' : ''}</p>
     `;
 
     workListEl.querySelectorAll('th[data-sort-key]').forEach((th) => {
@@ -856,6 +863,10 @@ import Layout from '../../layouts/Layout.astro';
         }
         renderWorkList();
       });
+    });
+
+    workListEl.querySelectorAll('[data-copy-link]').forEach((btn) => {
+      btn.addEventListener('click', () => copyClientLink((btn as HTMLElement).dataset.copyLink!, btn as HTMLButtonElement));
     });
 
     workListEl.querySelectorAll('[data-edit]').forEach((btn) => {
@@ -1161,6 +1172,7 @@ import Layout from '../../layouts/Layout.astro';
     workDeleteBtn.hidden = true;
     (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = todayISO();
     setCustomThumbnail('');
+    clientLinkRow.hidden = true;
     document.getElementById('thumb-status')!.textContent = '';
     document.getElementById('work-item-status')!.textContent = '';
     clearDirty('work-item-form');
@@ -1236,6 +1248,42 @@ import Layout from '../../layouts/Layout.astro';
     thumbStatus.textContent = 'Removed. Click Save Work Item to go back to the Vimeo/YouTube thumbnail.';
   });
 
+  // ---------------------------------------------------------------------
+  // Client links for unlisted items: the item's own page, which still
+  // works but is kept off the Work grid, Google and AI search.
+  // ---------------------------------------------------------------------
+  function clientLink(slug: string): string {
+    return `${location.origin}/work/${slug}`;
+  }
+
+  async function copyClientLink(slug: string, btn: HTMLButtonElement) {
+    const url = clientLink(slug);
+    const label = btn.textContent;
+    try {
+      await navigator.clipboard.writeText(url);
+      btn.textContent = 'Copied!';
+    } catch {
+      prompt('Copy this link:', url);
+    }
+    setTimeout(() => (btn.textContent = label), 1500);
+  }
+
+  const hiddenBox = workItemForm.elements.namedItem('hidden') as HTMLInputElement;
+  const clientLinkRow = document.getElementById('client-link-row') as HTMLElement;
+
+  // Shown for a saved, unlisted item (a new or just-unlisted one has no live
+  // page at that address until it's saved).
+  function updateClientLinkRow() {
+    const show = !!editingSlug && hiddenBox.checked;
+    clientLinkRow.hidden = !show;
+    if (show) document.getElementById('client-link-url')!.textContent = clientLink(editingSlug!);
+  }
+
+  hiddenBox.addEventListener('change', updateClientLinkRow);
+  document.getElementById('client-link-copy')!.addEventListener('click', (e) => {
+    if (editingSlug) copyClientLink(editingSlug, e.currentTarget as HTMLButtonElement);
+  });
+
   async function openWorkItem(slug: string | null) {
     resetWorkItemForm();
     workListView.hidden = true;
@@ -1271,6 +1319,7 @@ import Layout from '../../layouts/Layout.astro';
       (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate || todayISO();
       (workItemForm.elements.namedItem('slug') as HTMLInputElement).value = fields.urlSlug ?? slug;
       (workItemForm.elements.namedItem('hidden') as HTMLInputElement).checked = !!fields.hidden;
+      updateClientLinkRow();
       pendingTags = new Set(Array.isArray(fields.tags) ? fields.tags : []);
       if (Array.isArray(fields.stills)) {
         (workItemForm.elements.namedItem('stills') as HTMLTextAreaElement).value = fields.stills
@@ -1347,6 +1396,7 @@ import Layout from '../../layouts/Layout.astro';
     (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = data.slug;
     (workItemForm.elements.namedItem('slug') as HTMLInputElement).value = data.slug;
     workDeleteBtn.hidden = false;
+    updateClientLinkRow();
     clearDirty('work-item-form');
     await loadWorkItems(true);
     renderWorkList();
@@ -1679,14 +1729,16 @@ import Layout from '../../layouts/Layout.astro';
 
   .admin-layout {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 220px minmax(0, 1fr);
     gap: var(--gutter);
     align-items: start;
   }
 
+  /* minmax(0, ...) lets the columns shrink below their widest content (the
+     Work table), so a wide table scrolls in its own box on phones. */
   @media (max-width: 800px) {
     .admin-layout {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
@@ -1963,6 +2015,12 @@ import Layout from '../../layouts/Layout.astro';
     overflow-x: auto;
   }
 
+  /* On phones the table scrolls sideways inside this box instead of
+     widening the whole page. */
+  .work-table-scroll {
+    overflow-x: auto;
+  }
+
   .work-table {
     width: 100%;
     border-collapse: collapse;
@@ -2028,14 +2086,6 @@ import Layout from '../../layouts/Layout.astro';
     margin: 0.5rem 0 1.5rem;
   }
 
-  .work-move-header {
-    cursor: default !important;
-  }
-
-  .work-move-header:hover {
-    color: var(--tag-muted) !important;
-  }
-
   .work-order-cell {
     white-space: nowrap;
   }
@@ -2061,18 +2111,17 @@ import Layout from '../../layouts/Layout.astro';
     cursor: default;
   }
 
+  /* Anything toggled with the hidden attribute stays hidden even when its
+     own rule sets a display (flex, block, ...), which would otherwise win
+     over the browser's default [hidden] { display: none }. */
+  [hidden] {
+    display: none !important;
+  }
+
   /* One shared grid (not two independent per-row grids) so the Add and
      Remove rows' select/input/button columns genuinely line up — a column
      track is only guaranteed to match width across rows when it's the same
      grid, not visually-similar-but-independent ones. */
-  /* [hidden] and a class-based `display` rule are equal CSS specificity, so
-     without this the later-in-cascade author rule below would always win
-     and the browser's default `[hidden] { display: none }` would never
-     actually hide this element. */
-  .work-bulk-bar[hidden] {
-    display: none;
-  }
-
   .work-bulk-bar {
     display: grid;
     grid-template-columns: minmax(160px, 240px) 1fr auto;
@@ -2267,6 +2316,29 @@ import Layout from '../../layouts/Layout.astro';
 
   .btn-solid:hover {
     background: var(--accent-dim);
+  }
+
+  .client-link-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin: -0.25rem 0 0.5rem 1.6rem;
+  }
+
+  .client-link-row code {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .work-table td.work-actions-cell {
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .work-actions-cell .btn + .btn {
+    margin-left: 0.5rem;
   }
 
   .thumb-upload {
