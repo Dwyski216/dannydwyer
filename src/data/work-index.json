@@ -79,25 +79,6 @@
     "order": 50
   },
   {
-    "slug": "columbia-intuitive-machines-nasa-v1",
-    "title": "Columbia × Intuitive Machines × NASA",
-    "tags": [
-      "documentary",
-      "branded content",
-      "technology",
-      "space",
-      "NASA",
-      "Columbia",
-      "moon landing",
-      "universe",
-      "outer space",
-      "the moon"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false,
-    "order": 70
-  },
-  {
     "slug": "google-pixel-lookout",
     "title": "Google Pixel \"Lookout\"",
     "tags": [
@@ -660,5 +641,24 @@
     "uploadDate": "2018-04-01",
     "hidden": false,
     "order": 260
+  },
+  {
+    "slug": "columbia-intuitive-machines-nasa-v1",
+    "title": "Columbia × Intuitive Machines × NASA",
+    "tags": [
+      "documentary",
+      "branded content",
+      "technology",
+      "space",
+      "NASA",
+      "Columbia",
+      "moon landing",
+      "universe",
+      "outer space",
+      "the moon"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 70
   }
 ]
