@@ -10,17 +10,6 @@
     "hidden": false
   },
   {
-    "slug": "chesterland-teaser",
-    "title": "Chesterland — Teaser",
-    "tags": [
-      "pilot",
-      "dramedy",
-      "teaser"
-    ],
-    "uploadDate": "2016-04-01",
-    "hidden": false
-  },
-  {
     "slug": "honduras-hollywood",
     "title": "Honduras — \"Hollywood\" (Official Music Video)",
     "tags": [
@@ -617,5 +606,17 @@
     "uploadDate": "2016-08-01",
     "hidden": false,
     "order": 410
+  },
+  {
+    "slug": "chesterland-teaser",
+    "title": "Chesterland Teaser",
+    "tags": [
+      "pilot",
+      "dramedy",
+      "teaser"
+    ],
+    "uploadDate": "2016-04-01",
+    "hidden": true,
+    "order": 430
   }
 ]
