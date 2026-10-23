@@ -1,19 +1,19 @@
 ---
-title: "Back on Two Feet — Documentary"
+title: "Back on Two Feet Documentary"
 pageTitle: "Back on Two Feet Documentary | Cinematographer Danny Dwyer"
 summary: "Following Marine veteran Kirstie Ennis through surgery and recovery. Back on 2 Feet, presented by Channing Tatum in NYC. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "174059585"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Lauren Lumsden"}, {"role": "Cast", "name": "Kirstie Ennis"}]
-equipment: [{"category": "Camera", "item": "RED"}, {"category": "Lens", "item": "Cooke Mini S4"}, {"category": "Lens", "item": "Canon FD Primes"}]
+credits: [{"role":"Cast","name":"Kirstie Ennis"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Lauren Lumsden"}]
+equipment: [{"category":"Camera","item":"RED"},{"category":"Lens","item":"Cooke Mini S4"},{"category":"Lens","item":"Canon FD Primes"}]
 client: "Cosmopolitan"
 projectName: "Back on Two Feet"
 uploadDate: "2016-11-01"
-tags: ["documentary", "veterans"]
-urlSlug: "back-on-two-feet"
-order: 390
-featured: false
+tags: ["documentary","veterans","mini doc"]
 stills: []
+urlSlug: "back-on-two-feet"
+hidden: false
+order: 390
 ---
 
 I was on set the night before when the phone rang: "Can you fly to San Diego and film a Marine veteran going into surgery?"
