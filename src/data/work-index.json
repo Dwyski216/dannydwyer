@@ -711,20 +711,6 @@
     "order": 70
   },
   {
-    "slug": "dextro-cardia-short-film",
-    "title": "Dextro Cardia Short Film",
-    "tags": [
-      "16mm",
-      "film",
-      "first film",
-      "short film",
-      "black and white"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 70
-  },
-  {
     "slug": "bridge",
     "title": "Bridge — Short Film",
     "tags": [
@@ -734,5 +720,20 @@
     "uploadDate": "2013-05-01",
     "hidden": false,
     "order": 480
+  },
+  {
+    "slug": "dextro-cardia-short-film",
+    "title": "Dextro Cardia Short Film",
+    "tags": [
+      "16mm",
+      "film",
+      "first film",
+      "short film",
+      "black and white",
+      "narrative"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 70
   }
 ]
