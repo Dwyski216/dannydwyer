@@ -11,7 +11,7 @@ series: [{"title":"Lady Gaga X Haus Labs","platform":"vimeo","videoId":"39707762
 client: "Haus Labs"
 projectName: "Company Launch Series"
 uploadDate: "2026-10-23"
-tags: ["fashion","celebrity","commercial","series"]
+tags: ["fashion","celebrity","commercial","series","make up","beauty"]
 stills: []
 urlSlug: "lady-gaga-x-haus-labs"
 hidden: false
