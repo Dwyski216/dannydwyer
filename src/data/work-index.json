@@ -28,16 +28,6 @@
     "hidden": false
   },
   {
-    "slug": "joe-and-the-whale-trailer",
-    "title": "Joe and the Whale — Official Trailer",
-    "tags": [
-      "short film",
-      "trailer"
-    ],
-    "uploadDate": "2016-03-01",
-    "hidden": false
-  },
-  {
     "slug": "nychos-sheryo-the-yok",
     "title": "Nychos x Sheryo x The Yok",
     "tags": [
@@ -618,5 +608,16 @@
     "uploadDate": "2016-04-01",
     "hidden": true,
     "order": 430
+  },
+  {
+    "slug": "joe-and-the-whale-trailer",
+    "title": "Joe and the Whale — Short Film",
+    "tags": [
+      "short film",
+      "trailer"
+    ],
+    "uploadDate": "2016-03-01",
+    "hidden": false,
+    "order": 440
   }
 ]
