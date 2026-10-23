@@ -413,21 +413,6 @@
     "order": 140
   },
   {
-    "slug": "128-g",
-    "title": "128-G x Brick of Gold",
-    "tags": [
-      "documentary",
-      "social issue",
-      "prison",
-      "handheld",
-      "book",
-      "MoMa"
-    ],
-    "uploadDate": "2018-04-01",
-    "hidden": false,
-    "order": 260
-  },
-  {
     "slug": "wolf-shepherd-monaco",
     "title": "Wolf & Shepherd Monaco",
     "tags": [
@@ -644,5 +629,21 @@
     "uploadDate": "2026-10-23",
     "hidden": false,
     "order": 490
+  },
+  {
+    "slug": "128-g",
+    "title": "128-G x Brick of Gold",
+    "tags": [
+      "documentary",
+      "social issue",
+      "prison",
+      "handheld",
+      "book",
+      "MoMa",
+      "editor"
+    ],
+    "uploadDate": "2018-04-01",
+    "hidden": false,
+    "order": 260
   }
 ]
