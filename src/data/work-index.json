@@ -760,5 +760,16 @@
     "uploadDate": "2026-10-23",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "bloomingdales-minimal-nature",
+    "title": "Bloomingdales Minimal Nature",
+    "tags": [
+      "fashion",
+      "commercial"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 70
   }
 ]
