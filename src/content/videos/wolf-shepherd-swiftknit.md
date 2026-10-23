@@ -1,5 +1,5 @@
 ---
-title: "Wolf & Shepherd — Swiftknit"
+title: "Wolf & Shepherd Swiftknit"
 pageTitle: "Wolf & Shepherd Swiftknit Boardwalk | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer takes the Wolf & Shepherd Swiftknit skating down the boardwalk: a dress shoe that rides light and never feels like bricks."
 platform: "vimeo"
