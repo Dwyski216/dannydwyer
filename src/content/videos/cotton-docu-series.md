@@ -7,7 +7,7 @@ videoId: "115109226"
 customThumbnail: "/images/thumbnails/thumbnail-1792786519022.webp"
 credits: [{"role":"Director","name":"Laura Gherardi"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony Fs7"},{"category":"Lens","item":"Canon Cinema Primes"}]
-series: []
+series: [{"title":"Cotton Makers Trailer","platform":"vimeo","videoId":"1238939317","thumbnail":"/images/thumbnails/cotton-docu-series-series-2-1792786786989.webp"}]
 client: "BBDO"
 projectName: "Cotton Makers Docu Series"
 uploadDate: "2026-10-23"
