@@ -621,6 +621,17 @@
     "order": 490
   },
   {
+    "slug": "pixies-on-graveyard-hill",
+    "title": "The Pixies \"On Graveyard Hill\"",
+    "tags": [
+      "music video",
+      "psychedelic"
+    ],
+    "uploadDate": "2016-09-01",
+    "hidden": false,
+    "order": 400
+  },
+  {
     "slug": "128-g-short-film-trailer",
     "title": "128-G Short Film Trailer",
     "tags": [
@@ -632,16 +643,5 @@
     "uploadDate": "2026-10-23",
     "hidden": false,
     "order": 490
-  },
-  {
-    "slug": "pixies-on-graveyard-hill",
-    "title": "The Pixies \"On Graveyard Hill\"",
-    "tags": [
-      "music video",
-      "psychedelic"
-    ],
-    "uploadDate": "2016-09-01",
-    "hidden": false,
-    "order": 400
   }
 ]
