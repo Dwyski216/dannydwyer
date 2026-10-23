@@ -10,7 +10,7 @@ series: [{"title":"Teaser","platform":"vimeo","videoId":"1238945381","thumbnail"
 client: "Men's Health Magazine"
 projectName: "Jelly Roll \"A Year For Life\" Documentary"
 uploadDate: "2026-10-23"
-tags: ["documentary","film"]
+tags: ["documentary","film","narrative"]
 stills: []
 urlSlug: "jelly-roll-x-men-s-health-documentary"
 hidden: false
