@@ -567,19 +567,6 @@
     "order": 310
   },
   {
-    "slug": "wolf-shepherd-swiftknit",
-    "title": "Wolf & Shepherd Swiftknit",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion",
-      "shoes"
-    ],
-    "uploadDate": "2017-08-01",
-    "hidden": false,
-    "order": 300
-  },
-  {
     "slug": "wolf-shepherd-crossover",
     "title": "Wolf & Shepherd Crossover",
     "tags": [
@@ -604,5 +591,18 @@
     "uploadDate": "2017-08-01",
     "hidden": false,
     "order": 290
+  },
+  {
+    "slug": "wolf-shepherd-swiftknit",
+    "title": "Wolf & Shepherd Swiftknit",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion",
+      "shoes"
+    ],
+    "uploadDate": "2017-08-01",
+    "hidden": false,
+    "order": 300
   }
 ]
