@@ -49,16 +49,6 @@
     "hidden": false
   },
   {
-    "slug": "made-on-earth-trailer",
-    "title": "Made on Earth — Trailer",
-    "tags": [
-      "documentary",
-      "trailer"
-    ],
-    "uploadDate": "2016-08-01",
-    "hidden": false
-  },
-  {
     "slug": "nychos-sheryo-the-yok",
     "title": "Nychos x Sheryo x The Yok",
     "tags": [
@@ -613,5 +603,18 @@
     "uploadDate": "2016-09-01",
     "hidden": false,
     "order": 400
+  },
+  {
+    "slug": "made-on-earth-trailer",
+    "title": "Made on Earth",
+    "tags": [
+      "documentary",
+      "trailer",
+      "pilot",
+      "docu series"
+    ],
+    "uploadDate": "2016-08-01",
+    "hidden": false,
+    "order": 410
   }
 ]
