@@ -119,17 +119,6 @@
     "hidden": false
   },
   {
-    "slug": "puma-performance-commercial",
-    "title": "PUMA Performance Commercial",
-    "tags": [
-      "commercial",
-      "sports",
-      "fashion"
-    ],
-    "uploadDate": "2017-03-01",
-    "hidden": false
-  },
-  {
     "slug": "the-escape-artist",
     "title": "The Escape Artist",
     "tags": [
@@ -605,5 +594,18 @@
     "uploadDate": "2017-05-01",
     "hidden": false,
     "order": 340
+  },
+  {
+    "slug": "puma-performance-commercial",
+    "title": "PUMA 24/7",
+    "tags": [
+      "commercial",
+      "sports",
+      "fashion",
+      "celebrity"
+    ],
+    "uploadDate": "2017-03-01",
+    "hidden": false,
+    "order": 360
   }
 ]
