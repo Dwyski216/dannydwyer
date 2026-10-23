@@ -31,15 +31,6 @@
     "hidden": false
   },
   {
-    "slug": "copywrite-martin-shkreli-killa",
-    "title": "Copywrite — \"Martin Shkreli Killah\"",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2017-02-01",
-    "hidden": false
-  },
-  {
     "slug": "honduras-hollywood",
     "title": "Honduras — \"Hollywood\" (Official Music Video)",
     "tags": [
@@ -607,5 +598,15 @@
     "uploadDate": "2017-03-01",
     "hidden": false,
     "order": 360
+  },
+  {
+    "slug": "copywrite-martin-shkreli-killa",
+    "title": "Copywrite \"Martin Shkreli Killah\"",
+    "tags": [
+      "music video"
+    ],
+    "uploadDate": "2017-02-01",
+    "hidden": false,
+    "order": 370
   }
 ]
