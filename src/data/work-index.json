@@ -79,18 +79,6 @@
     "hidden": false
   },
   {
-    "slug": "shinola",
-    "title": "Shinola",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion"
-    ],
-    "uploadDate": "2015-10-01",
-    "hidden": false,
-    "order": 450
-  },
-  {
     "slug": "beck-gustaf-close",
     "title": "Beck × Gustaf \"Close\"",
     "tags": [
@@ -619,5 +607,17 @@
     "uploadDate": "2016-03-01",
     "hidden": false,
     "order": 440
+  },
+  {
+    "slug": "shinola",
+    "title": "Shinola",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion"
+    ],
+    "uploadDate": "2015-10-01",
+    "hidden": false,
+    "order": 450
   }
 ]
