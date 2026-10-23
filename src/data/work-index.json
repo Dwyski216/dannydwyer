@@ -645,5 +645,17 @@
     "uploadDate": "2018-04-01",
     "hidden": false,
     "order": 260
+  },
+  {
+    "slug": "lady-gaga-x-haus-labs",
+    "title": "Lady Gaga X Haus Labs ",
+    "tags": [
+      "fashion",
+      "celebrity",
+      "commercial"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 0
   }
 ]
