@@ -9,7 +9,7 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "Wolf & Shepherd"
 projectName: "Monaco"
 uploadDate: "2017-08-01"
-tags: ["commercial","product","fashion"]
+tags: ["commercial","product","fashion","shoes"]
 stills: []
 urlSlug: "wolf-shepherd-monaco"
 hidden: false
