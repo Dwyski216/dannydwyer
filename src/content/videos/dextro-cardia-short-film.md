@@ -9,7 +9,7 @@ equipment: [{"category":"Camera","item":"16mm Bolex"}]
 series: []
 projectName: "Dextro Cardia "
 uploadDate: "2026-10-23"
-tags: ["16mm","film","first film","short film","black and white"]
+tags: ["16mm","film","first film","short film","black and white","narrative"]
 stills: []
 urlSlug: "dextro-cardia-short-film"
 hidden: false
