@@ -50,6 +50,7 @@ platform: "youtube"       # or "vimeo"
 videoId: "dQw4w9WgXcQ"    # YouTube's video ID, or Vimeo's numeric ID
 thumbnailUrl: ""           # optional; YouTube/Vimeo thumbnails are looked up automatically
 customThumbnail: ""        # set by "Upload Thumbnail" in the admin; falls back to the platform thumbnail
+series: []                 # extra videos on this page, e.g. [{"title":"Part 2","platform":"vimeo","videoId":"311786362"}]
 role: "Director of Photography"
 client: "Independent"
 projectName: "Midnight Harbor (short film)"

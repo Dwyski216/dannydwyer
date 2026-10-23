@@ -195,6 +195,13 @@ import Layout from '../../layouts/Layout.astro';
                 </div>
               </fieldset>
 
+              <fieldset>
+                <legend>Series</legend>
+                <p class="section-hint">Turn this into a series: add more videos and they appear under the main one on this item's page, in this order. The gallery still shows a single card. Paste each video's Vimeo or YouTube link (or just its number).</p>
+                <div id="series-list" class="credits-list"></div>
+                <button type="button" id="series-add-btn" class="btn btn-ghost">+ Add Video to Series</button>
+              </fieldset>
+
               <label>Header <input name="title" required /></label>
               <p class="section-hint">The on-page heading above the description. Separate from the SEO Page Title above.</p>
 
@@ -671,6 +678,7 @@ import Layout from '../../layouts/Layout.astro';
   let editingSlug: string | null = null;
   let pendingTags = new Set<string>();
   let pendingCredits: { role: string; name: string }[] = [];
+  let pendingSeries: { title: string; link: string }[] = [];
   let pendingEquipment: { category: string; item: string }[] = [];
   let selectedSlugs = new Set<string>();
 
@@ -1121,6 +1129,37 @@ import Layout from '../../layouts/Layout.astro';
     emptyText: 'No equipment listed yet — add one below.',
   });
 
+  const seriesListEl = document.getElementById('series-list') as HTMLElement;
+  const renderSeriesList = setupRepeatableRowList({
+    listEl: seriesListEl,
+    addBtnId: 'series-add-btn',
+    getItems: () => pendingSeries,
+    fieldA: 'title',
+    labelA: 'Title',
+    placeholderA: 'e.g. Episode 2',
+    fieldB: 'link',
+    labelB: 'Vimeo or YouTube link',
+    placeholderB: 'e.g. https://vimeo.com/311786362',
+    emptyText: 'Just the one video for now.',
+  });
+
+  // Accepts a Vimeo/YouTube link or a bare ID and works out which platform
+  // it is. Vimeo IDs are all digits; YouTube IDs are 11 letters/digits/-/_.
+  function parseVideoRef(input: string): { platform: 'vimeo' | 'youtube'; videoId: string } | null {
+    const v = input.trim();
+    if (!v) return null;
+    const yt = v.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/)([\w-]{11})/);
+    if (yt) return { platform: 'youtube', videoId: yt[1] };
+    const vimeo = v.match(/vimeo\.com\/(?:.*\/)?(\d{6,})/) || v.match(/^(\d{6,})$/);
+    if (vimeo) return { platform: 'vimeo', videoId: vimeo[1] };
+    if (/^[\w-]{11}$/.test(v)) return { platform: 'youtube', videoId: v };
+    return null;
+  }
+
+  function videoLink(platform: string, videoId: string): string {
+    return platform === 'youtube' ? `https://youtu.be/${videoId}` : `https://vimeo.com/${videoId}`;
+  }
+
   function parseRawVideo(raw: string): Record<string, any> {
     const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
     if (!match) return { description: raw };
@@ -1169,6 +1208,8 @@ import Layout from '../../layouts/Layout.astro';
     renderCreditsList();
     pendingEquipment = [];
     renderEquipmentList();
+    pendingSeries = [];
+    renderSeriesList();
     workDeleteBtn.hidden = true;
     (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = todayISO();
     setCustomThumbnail('');
@@ -1314,6 +1355,10 @@ import Layout from '../../layouts/Layout.astro';
         ? fields.equipment.map((e: any) => ({ category: e.category ?? '', item: e.item ?? '' }))
         : [];
       renderEquipmentList();
+      pendingSeries = Array.isArray(fields.series)
+        ? fields.series.map((v: any) => ({ title: v.title ?? '', link: videoLink(v.platform, String(v.videoId ?? '')) }))
+        : [];
+      renderSeriesList();
       (workItemForm.elements.namedItem('client') as HTMLInputElement).value = fields.client ?? '';
       (workItemForm.elements.namedItem('projectName') as HTMLInputElement).value = fields.projectName ?? '';
       (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate || todayISO();
@@ -1356,6 +1401,13 @@ import Layout from '../../layouts/Layout.astro';
     payload.equipment = pendingEquipment
       .map((e) => ({ category: e.category.trim(), item: e.item.trim() }))
       .filter((e) => e.category || e.item);
+    const seriesRows = pendingSeries.filter((v) => v.title.trim() || v.link.trim());
+    const badSeries = seriesRows.find((v) => !parseVideoRef(v.link));
+    if (badSeries) {
+      status.textContent = `Error: couldn't read the Series link "${badSeries.link || '(empty)'}". Paste the Vimeo or YouTube link, e.g. https://vimeo.com/311786362`;
+      return;
+    }
+    payload.series = seriesRows.map((v) => ({ title: v.title.trim(), ...parseVideoRef(v.link)! }));
     payload.hidden = fd.get('hidden') === 'on';
     payload.order = Number(payload.order) || 0;
     payload.stills = String(payload.stills || '')

@@ -71,6 +71,16 @@ const jsonLd = [
       : {}),
     ...(d.client ? { productionCompany: d.client } : {}),
   },
+  ...d.series.map((s, i) => ({
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: s.title ? `${d.title}: ${s.title}` : `${d.title} (part ${i + 2})`,
+    description: d.summary,
+    ...(thumbnailUrl ? { thumbnailUrl } : {}),
+    uploadDate: d.uploadDate,
+    embedUrl: getEmbedUrl(s),
+    url: pageUrl,
+  })),
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -177,6 +187,20 @@ const jsonLd = [
       </aside>
     </div>
 
+    {d.series.length > 0 && (
+      <section class="series" aria-label="The series">
+        <h2>The Series</h2>
+        <div class="series-grid">
+          {d.series.map((s, i) => (
+            <div class="series-item">
+              <VideoPlayer platform={s.platform} videoId={s.videoId} title={s.title || `${d.title}, part ${i + 2}`} />
+              {s.title && <h3>{s.title}</h3>}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
     {relatedByClient.length > 0 && (
       <section class="related" aria-label={`More for ${d.client}`}>
         <h2>More for {d.client}</h2>
@@ -248,6 +272,43 @@ const jsonLd = [
   .prose :global(a) {
     color: var(--olympic-gold);
     text-decoration: underline;
+  }
+
+  /* Extra videos in a series: two across on desktop, stacked on phones. */
+  .series {
+    margin-top: 3.5rem;
+  }
+
+  .series h2 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    color: var(--olympic-gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .series-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 801px) {
+    .series-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .series-item h3 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    color: var(--olympic-gold);
+    margin: 0.75rem 0 0;
   }
 
   .stills {

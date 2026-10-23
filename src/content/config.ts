@@ -22,6 +22,18 @@ const videos = defineCollection({
     thumbnailUrl: z.string().optional(), // optional; YouTube and Vimeo thumbnails are otherwise looked up automatically
     customThumbnail: z.string().optional(), // uploaded in the admin (e.g. "/images/thumbnails/big-age-1729....webp"); overrides the above
 
+    // Extra videos shown on this item's page as a series (the main video
+    // above is the first). One gallery card covers the whole series.
+    series: z
+      .array(
+        z.object({
+          title: z.string().default(''),
+          platform: z.enum(['youtube', 'vimeo']).default('vimeo'),
+          videoId: z.string(),
+        })
+      )
+      .default([]),
+
     // Still images from the shoot, shown as a gallery on the video's page.
     stills: z
       .array(

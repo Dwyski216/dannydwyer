@@ -519,6 +519,15 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
           .filter((e: any) => e && (e.category || e.item))
           .map((e: any) => ({ category: String(e.category || ''), item: String(e.item || '') }))
       : [],
+    series: Array.isArray(body.series)
+      ? body.series
+          .filter((v: any) => v && v.videoId)
+          .map((v: any) => ({
+            title: String(v.title || ''),
+            platform: v.platform === 'youtube' ? 'youtube' : 'vimeo',
+            videoId: String(v.videoId),
+          }))
+      : [],
     client: body.client || undefined,
     projectName: body.projectName || undefined,
     uploadDate: body.uploadDate || new Date().toISOString().slice(0, 10),
