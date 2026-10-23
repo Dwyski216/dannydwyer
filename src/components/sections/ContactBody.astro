@@ -139,6 +139,13 @@ const { title, email } = Astro.props;
     gap: 0.6rem;
   }
 
+  /* Phones: button and email centered, like the title above. */
+  @media (max-width: 600px) {
+    .action {
+      align-items: center;
+    }
+  }
+
   /* Hollow Headlight button, matching the home page's "Collection of Work":
      2pt outline, filling Olympic Gold with Ink text on hover. */
   .button {
