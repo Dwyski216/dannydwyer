@@ -10,15 +10,6 @@
     "hidden": false
   },
   {
-    "slug": "honduras-hollywood",
-    "title": "Honduras — \"Hollywood\" (Official Music Video)",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2013-06-01",
-    "hidden": false
-  },
-  {
     "slug": "peter-dinklage-esquire",
     "title": "Peter Dinklage — Esquire Magazine Cover (March)",
     "tags": [
@@ -625,5 +616,16 @@
     "uploadDate": "2012-11-01",
     "hidden": false,
     "order": 500
+  },
+  {
+    "slug": "honduras-hollywood",
+    "title": "Honduras \"Hollywood\"",
+    "tags": [
+      "music video",
+      "punk"
+    ],
+    "uploadDate": "2013-06-01",
+    "hidden": false,
+    "order": 470
   }
 ]
