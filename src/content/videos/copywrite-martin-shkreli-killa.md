@@ -4,15 +4,15 @@ pageTitle: "Copywrite \"Martin Shkreli Killah\" | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer on rapper Copywrite's \"Martin Shkreli Killah,\" a Columbus hang turned music video with pure gonzo energy."
 platform: "vimeo"
 videoId: "177432830"
-credits: [{"role": "Co-Director", "name": "Danny Dwyer"}, {"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Bee Gats"}, {"role": "Cast", "name": "Copywrite"}, {"role": "Cast", "name": "Napkin Killa"}]
-equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Angenieux Zooms"}]
-projectName: "Copywrite — \"Martin Shkreli Killah\" (Music Video)"
+credits: [{"role":"Cast","name":"Copywrite"},{"role":"Director","name":"Bee Gats & Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"}]
+equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Angenieux Zooms"}]
+projectName: "Copywrite \"Martin Shkreli Killah\""
 uploadDate: "2017-02-01"
 tags: ["music video"]
-urlSlug: "copywrite-martin-shkreli-killa"
-order: 370
-featured: false
 stills: []
+urlSlug: "copywrite-martin-shkreli-killa"
+hidden: false
+order: 370
 ---
 
 If Columbus had a mayor of mischief, it'd be Copywrite.
