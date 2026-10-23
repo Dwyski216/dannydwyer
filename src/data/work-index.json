@@ -161,17 +161,6 @@
     "hidden": false
   },
   {
-    "slug": "wolf-shepherd-swiftknit",
-    "title": "Wolf & Shepherd — SwiftKnit",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion"
-    ],
-    "uploadDate": "2017-08-01",
-    "hidden": false
-  },
-  {
     "slug": "pixies-on-graveyard-hill",
     "title": "The Pixies — \"On Graveyard Hill\"",
     "tags": [
@@ -598,5 +587,18 @@
     "uploadDate": "2017-08-01",
     "hidden": false,
     "order": 290
+  },
+  {
+    "slug": "wolf-shepherd-swiftknit",
+    "title": "Wolf & Shepherd — Swiftknit",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion",
+      "shoes"
+    ],
+    "uploadDate": "2017-08-01",
+    "hidden": false,
+    "order": 300
   }
 ]
