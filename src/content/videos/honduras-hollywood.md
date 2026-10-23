@@ -1,18 +1,20 @@
 ---
-title: "Honduras — \"Hollywood\""
+title: "Honduras \"Hollywood\""
 pageTitle: "Honduras \"Hollywood\" Music Video | DP Danny Dwyer"
 summary: "Dolly, Elvis, and Sinatra look-alikes in a Brooklyn dive bar. Honduras' \"Hollywood,\" shot by director of photography Danny Dwyer."
 platform: "vimeo"
 videoId: "158380205"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Josh Wehle"}, {"role": "Cast", "name": "Patrick Phillips"}]
-equipment: [{"category": "Camera", "item": "RED"}, {"category": "Lens", "item": "Cooke Mini S4"}]
-projectName: "Honduras — \"Hollywood\" (Music Video)"
+customThumbnail: "/images/thumbnails/honduras-hollywood-1792775674045.webp"
+credits: [{"role":"Cast","name":"Patrick Phillips"},{"role":"Director","name":"Josh Wehle"},{"role":"Director of Photography","name":"Danny Dwyer"}]
+equipment: [{"category":"Camera","item":"RED"},{"category":"Lens","item":"Cooke Mini S4"}]
+client: "Honduras"
+projectName: "Honduras \"Hollywood\""
 uploadDate: "2013-06-01"
-tags: ["music video"]
-urlSlug: "honduras-hollywood"
-order: 470
-featured: false
+tags: ["music video","punk"]
 stills: []
+urlSlug: "honduras-hollywood"
+hidden: false
+order: 470
 ---
 
 A Brooklyn dive bar. A Dolly Parton look-alike, an Elvis look-alike, and a Frank Sinatra look-alike. By the end of the night, one of the guys in the band had turned into Elvis too.
