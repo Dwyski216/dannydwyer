@@ -28,16 +28,6 @@
     "hidden": false
   },
   {
-    "slug": "nychos-sheryo-the-yok",
-    "title": "Nychos x Sheryo x The Yok",
-    "tags": [
-      "documentary",
-      "street art"
-    ],
-    "uploadDate": "2013-08-01",
-    "hidden": false
-  },
-  {
     "slug": "peter-dinklage-esquire",
     "title": "Peter Dinklage — Esquire Magazine Cover (March)",
     "tags": [
@@ -619,5 +609,17 @@
     "uploadDate": "2015-10-01",
     "hidden": false,
     "order": 450
+  },
+  {
+    "slug": "nychos-sheryo-the-yok",
+    "title": "Nychos × Sheryo × The Yok",
+    "tags": [
+      "documentary",
+      "street art",
+      "graffiti"
+    ],
+    "uploadDate": "2013-08-01",
+    "hidden": false,
+    "order": 460
   }
 ]
