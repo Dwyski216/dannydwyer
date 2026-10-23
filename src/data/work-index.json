@@ -188,23 +188,6 @@
     "order": 110
   },
   {
-    "slug": "bandits-bandana",
-    "title": "Bandits Bandana",
-    "tags": [
-      "commercial",
-      "product",
-      "16mm",
-      "fashion",
-      "film",
-      "car",
-      "western",
-      "Kodak"
-    ],
-    "uploadDate": "2017-05-01",
-    "hidden": false,
-    "order": 340
-  },
-  {
     "slug": "128-g",
     "title": "128-G x Brick of Gold",
     "tags": [
@@ -605,5 +588,22 @@
     "uploadDate": "2017-06-01",
     "hidden": false,
     "order": 330
+  },
+  {
+    "slug": "bandits-bandana",
+    "title": "Bandits Bandanas",
+    "tags": [
+      "commercial",
+      "product",
+      "16mm",
+      "fashion",
+      "film",
+      "car",
+      "western",
+      "Kodak"
+    ],
+    "uploadDate": "2017-05-01",
+    "hidden": false,
+    "order": 340
   }
 ]
