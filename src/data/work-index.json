@@ -686,5 +686,16 @@
     "uploadDate": "2026-10-23",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "pacific-shaving-company",
+    "title": "Pacific Shaving Company",
+    "tags": [
+      "commercial",
+      "shaving"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 70
   }
 ]
