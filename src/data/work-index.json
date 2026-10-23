@@ -260,20 +260,6 @@
     "order": 220
   },
   {
-    "slug": "women-in-hollywood",
-    "title": "ELLE Women in Hollywood",
-    "tags": [
-      "editorial",
-      "documentary",
-      "interview",
-      "Black and White",
-      "Elle"
-    ],
-    "uploadDate": "2018-09-01",
-    "hidden": false,
-    "order": 210
-  },
-  {
     "slug": "sb1391-awareness",
     "title": "Human Rights Watch  SB 1391",
     "tags": [
@@ -643,5 +629,18 @@
     "uploadDate": "2026-10-23",
     "hidden": false,
     "order": 490
+  },
+  {
+    "slug": "women-in-hollywood",
+    "title": "ELLE Women in Hollywood",
+    "tags": [
+      "editorial",
+      "interview",
+      "Black and White",
+      "Elle"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 210
   }
 ]
