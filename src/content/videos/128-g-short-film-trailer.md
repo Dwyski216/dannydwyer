@@ -5,8 +5,9 @@ summary: "Extended interviews with the incarcerated men behind the book 128-G, f
 platform: "vimeo"
 videoId: "311786362"
 customThumbnail: "/images/thumbnails/128-g-short-film-trailer-1792776923244.webp"
-credits: [{"role":"Producer","name":"Ray Adornetto"},{"role":"Producer","name":"Nate Fish"},{"role":"Director of Photography","name":"Danny Dwyer"}]
+credits: [{"role":"Producer","name":"Ray Adornetto"},{"role":"Producer","name":"Nate Fish"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Mysterium-X"},{"category":"Lens","item":"TLS Canon FD Primes"}]
+series: []
 client: "Brick of Gold"
 projectName: "128-G Short Film"
 uploadDate: "2026-10-23"
