@@ -1,15 +1,5 @@
 [
   {
-    "slug": "back-on-two-feet",
-    "title": "Back on Two Feet",
-    "tags": [
-      "documentary",
-      "veterans"
-    ],
-    "uploadDate": "2016-11-01",
-    "hidden": false
-  },
-  {
     "slug": "bridge",
     "title": "Bridge",
     "tags": [
@@ -610,5 +600,17 @@
     "uploadDate": "2017-01-01",
     "hidden": false,
     "order": 380
+  },
+  {
+    "slug": "back-on-two-feet",
+    "title": "Back on Two Feet Documentary",
+    "tags": [
+      "documentary",
+      "veterans",
+      "mini doc"
+    ],
+    "uploadDate": "2016-11-01",
+    "hidden": false,
+    "order": 390
   }
 ]
