@@ -631,6 +631,21 @@
     "order": 490
   },
   {
+    "slug": "lady-gaga-x-haus-labs",
+    "title": "Lady Gaga X Haus Labs",
+    "tags": [
+      "fashion",
+      "celebrity",
+      "commercial",
+      "series",
+      "make up",
+      "beauty"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 0
+  },
+  {
     "slug": "128-g",
     "title": "128-G x Brick of Gold",
     "tags": [
@@ -645,20 +660,5 @@
     "uploadDate": "2018-04-01",
     "hidden": false,
     "order": 260
-  },
-  {
-    "slug": "lady-gaga-x-haus-labs",
-    "title": "Lady Gaga X Haus Labs",
-    "tags": [
-      "fashion",
-      "celebrity",
-      "commercial",
-      "series",
-      "make up",
-      "beauty"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 0
   }
 ]
