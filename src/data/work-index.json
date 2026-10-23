@@ -525,17 +525,6 @@
     "order": 430
   },
   {
-    "slug": "joe-and-the-whale-trailer",
-    "title": "Joe and the Whale — Short Film",
-    "tags": [
-      "short film",
-      "trailer"
-    ],
-    "uploadDate": "2016-03-01",
-    "hidden": false,
-    "order": 440
-  },
-  {
     "slug": "shinola",
     "title": "Shinola",
     "tags": [
@@ -642,5 +631,16 @@
     "uploadDate": "2018-09-01",
     "hidden": false,
     "order": 210
+  },
+  {
+    "slug": "joe-and-the-whale-trailer",
+    "title": "Joe and the Whale Short Film",
+    "tags": [
+      "short film",
+      "trailer"
+    ],
+    "uploadDate": "2016-03-01",
+    "hidden": false,
+    "order": 440
   }
 ]
