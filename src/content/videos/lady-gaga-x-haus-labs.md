@@ -11,14 +11,14 @@ series: [{"title":"Lady Gaga X Haus Labs","platform":"vimeo","videoId":"39707762
 client: "Haus Labs"
 projectName: "Company Launch Series"
 uploadDate: "2026-10-23"
-tags: ["fashion","celebrity","commercial"]
+tags: ["fashion","celebrity","commercial","series"]
 stills: []
 urlSlug: "lady-gaga-x-haus-labs"
 hidden: false
 order: 0
 ---
 
-I just wrapped a 16-hour day when a close friend asked if I was free tomorrow, “A little last minute.”
+I just wrapped a 16-hour day when a close friend asked if I was free tomorrow, “For a little last minute shoot.” I seriously low key love those. 
 
 On the call she kept saying "LG wants it this way.” Confused I asked “LG, the phone company? Launching... makeup?” I was running on fumes and was completely lost, “No dude. Lady Gaga!”
 
