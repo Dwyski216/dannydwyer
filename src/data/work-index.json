@@ -194,16 +194,6 @@
     "hidden": false
   },
   {
-    "slug": "young-women-in-hollywood",
-    "title": "Young Women in Hollywood",
-    "tags": [
-      "editorial",
-      "celebrity"
-    ],
-    "uploadDate": "2017-10-01",
-    "hidden": false
-  },
-  {
     "slug": "pixies-on-graveyard-hill",
     "title": "The Pixies — \"On Graveyard Hill\"",
     "tags": [
@@ -593,5 +583,18 @@
     "uploadDate": "2018-01-01",
     "hidden": false,
     "order": 270
+  },
+  {
+    "slug": "young-women-in-hollywood",
+    "title": "Young Women in Hollywood",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "interview",
+      "fashion"
+    ],
+    "uploadDate": "2017-10-01",
+    "hidden": false,
+    "order": 280
   }
 ]
