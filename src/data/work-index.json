@@ -554,18 +554,6 @@
     "order": 280
   },
   {
-    "slug": "wolf-shepherd-monaco",
-    "title": "Wolf & Shepherd Monaco",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion"
-    ],
-    "uploadDate": "2017-08-01",
-    "hidden": false,
-    "order": 290
-  },
-  {
     "slug": "wolf-shepherd-chukka",
     "title": "Wolf & Shepherd Chukka",
     "tags": [
@@ -603,5 +591,18 @@
     "uploadDate": "2017-08-01",
     "hidden": false,
     "order": 320
+  },
+  {
+    "slug": "wolf-shepherd-monaco",
+    "title": "Wolf & Shepherd Monaco",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion",
+      "shoes"
+    ],
+    "uploadDate": "2017-08-01",
+    "hidden": false,
+    "order": 290
   }
 ]
