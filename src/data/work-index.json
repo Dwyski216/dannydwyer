@@ -401,17 +401,6 @@
     "order": 360
   },
   {
-    "slug": "copywrite-martin-shkreli-killa",
-    "title": "Copywrite \"Martin Shkreli Killah\"",
-    "tags": [
-      "music video",
-      "Black and White"
-    ],
-    "uploadDate": "2017-02-01",
-    "hidden": false,
-    "order": 370
-  },
-  {
     "slug": "mint-mobile-dave-foley",
     "title": "Dave Foley × Mint Mobile",
     "tags": [
@@ -643,5 +632,16 @@
     "uploadDate": "2016-06-01",
     "hidden": false,
     "order": 420
+  },
+  {
+    "slug": "copywrite-martin-shkreli-killa",
+    "title": "Copywrite \"Martin Shkreli Killah\"",
+    "tags": [
+      "music video",
+      "Black and White"
+    ],
+    "uploadDate": "2017-02-01",
+    "hidden": false,
+    "order": 370
   }
 ]
