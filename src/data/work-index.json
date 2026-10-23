@@ -321,18 +321,6 @@
     "order": 150
   },
   {
-    "slug": "mint-mobile-dave-foley",
-    "title": "Dave Foley × Mint Mobile",
-    "tags": [
-      "commercial",
-      "comedy",
-      "celebrity"
-    ],
-    "uploadDate": "2021-06-01",
-    "hidden": false,
-    "order": 140
-  },
-  {
     "slug": "werdperfect-kickdrums-pretty-orange",
     "title": "Werdperfect x The Kickdrums \"Pretty Orange\" ",
     "tags": [
@@ -609,5 +597,17 @@
     "uploadDate": "2017-02-01",
     "hidden": false,
     "order": 370
+  },
+  {
+    "slug": "mint-mobile-dave-foley",
+    "title": "Dave Foley × Mint Mobile",
+    "tags": [
+      "commercial",
+      "comedy",
+      "celebrity"
+    ],
+    "uploadDate": "2021-06-01",
+    "hidden": false,
+    "order": 140
   }
 ]
