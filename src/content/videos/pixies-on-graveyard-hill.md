@@ -4,7 +4,8 @@ pageTitle: "Pixies \"On Graveyard Hill\" | Cinematographer Danny Dwyer"
 summary: "Crash zooms, in-camera effects, and an underwater slow-mo scene. Danny Dwyer, director of photography on the Pixies' \"On Graveyard Hill.\""
 platform: "vimeo"
 videoId: "397085201"
-credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Kii Arens & Mama Hot Dog"},{"role":"Cast","name":"Pixies"}]
+customThumbnail: "/images/thumbnails/pixies-on-graveyard-hill-1792729738371.webp"
+credits: [{"role":"Cast","name":"Black Francis"},{"role":"Cast","name":"Paz Lenchantin"},{"role":"Cast","name":"Joey Santiago"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Kii Arens & Mama Hot Dog"}]
 equipment: [{"category":"Camera","item":"16mm Kodak Reversal"},{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Varotal zoom"}]
 client: "Pixies"
 projectName: "Pixies — \"On Graveyard Hill\" (Music Video)"
