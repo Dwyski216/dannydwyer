@@ -8,7 +8,7 @@ credits: [{"role":"Cast","name":"Copywrite"},{"role":"Director","name":"Bee Gats
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Angenieux Zooms"}]
 projectName: "Copywrite \"Martin Shkreli Killah\""
 uploadDate: "2017-02-01"
-tags: ["music video"]
+tags: ["music video","Black and White"]
 stills: []
 urlSlug: "copywrite-martin-shkreli-killa"
 hidden: false
