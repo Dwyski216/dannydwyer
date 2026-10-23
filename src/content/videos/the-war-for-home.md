@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "Born x Raised"
 projectName: "The War for Home"
 uploadDate: "2017-06-01"
-tags: ["documentary","Los Angeles","Spanto","Venice","human rights","history","film"]
+tags: ["documentary","Los Angeles","Spanto","Venice","history","film","Mini Doc","Branded Doc"]
 stills: []
 urlSlug: "the-war-for-home"
 hidden: false
