@@ -10,17 +10,6 @@
     "hidden": false
   },
   {
-    "slug": "puma-beatbot",
-    "title": "PUMA — Beatbot",
-    "tags": [
-      "commercial",
-      "sports",
-      "fashion"
-    ],
-    "uploadDate": "2016-06-01",
-    "hidden": false
-  },
-  {
     "slug": "the-king-of-jewish-baseball",
     "title": "The King of Jewish Baseball",
     "tags": [
@@ -642,5 +631,17 @@
     "uploadDate": "2016-03-01",
     "hidden": false,
     "order": 440
+  },
+  {
+    "slug": "puma-beatbot",
+    "title": "PUMA BeatBot",
+    "tags": [
+      "commercial",
+      "sports",
+      "fashion"
+    ],
+    "uploadDate": "2016-06-01",
+    "hidden": false,
+    "order": 420
   }
 ]
