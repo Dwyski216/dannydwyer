@@ -49,16 +49,6 @@
     "hidden": false
   },
   {
-    "slug": "the-escape-artist",
-    "title": "The Escape Artist",
-    "tags": [
-      "short film",
-      "narrative"
-    ],
-    "uploadDate": "2013-02-01",
-    "hidden": false
-  },
-  {
     "slug": "the-king-of-jewish-baseball",
     "title": "The King of Jewish Baseball",
     "tags": [
@@ -621,5 +611,17 @@
     "uploadDate": "2013-08-01",
     "hidden": false,
     "order": 460
+  },
+  {
+    "slug": "the-escape-artist",
+    "title": "Escape Artist  Art Film",
+    "tags": [
+      "short film",
+      "art",
+      "fashion"
+    ],
+    "uploadDate": "2013-02-01",
+    "hidden": false,
+    "order": 490
   }
 ]
