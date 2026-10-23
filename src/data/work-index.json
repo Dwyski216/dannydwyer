@@ -10,16 +10,6 @@
     "hidden": false
   },
   {
-    "slug": "peter-dinklage-esquire",
-    "title": "Peter Dinklage — Esquire Magazine Cover (March)",
-    "tags": [
-      "editorial",
-      "celebrity"
-    ],
-    "uploadDate": "2012-02-01",
-    "hidden": false
-  },
-  {
     "slug": "puma-beatbot",
     "title": "PUMA — Beatbot",
     "tags": [
@@ -627,5 +617,18 @@
     "uploadDate": "2013-06-01",
     "hidden": false,
     "order": 470
+  },
+  {
+    "slug": "peter-dinklage-esquire",
+    "title": "Peter Dinklage × Esquire × Giorgio Armani",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "digital cover",
+      "fashion"
+    ],
+    "uploadDate": "2012-02-01",
+    "hidden": false,
+    "order": 510
   }
 ]
