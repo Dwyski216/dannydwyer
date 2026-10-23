@@ -660,5 +660,18 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "cotton-docu-series",
+    "title": "Cotton Docu-Series",
+    "tags": [
+      "documentary",
+      "docu series",
+      "branded content",
+      "commercial"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 70
   }
 ]
