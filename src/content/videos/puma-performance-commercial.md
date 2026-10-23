@@ -4,6 +4,7 @@ pageTitle: "PUMA 24/7 × Lewis Hamilton | Cinematographer Danny Dwyer"
 summary: "Run-and-gun campaign shoot for PUMA 24/7 with Lewis Hamilton, Skylar Diggins-Smith, and Jade Chynoweth. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "252966771"
+customThumbnail: "/images/thumbnails/puma-performance-commercial-1792720718010.webp"
 credits: [{"role":"Cast","name":"Lewis Hamilton"},{"role":"Cast","name":"Skylar Diggins-Smith"},{"role":"Cast","name":"Jade Chynoweth"},{"role":"Director","name":"Nathan Mallon"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon FD Prime"}]
 client: "PUMA"
