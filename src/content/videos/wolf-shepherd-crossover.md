@@ -4,6 +4,7 @@ pageTitle: "Wolf & Shepherd Crossover | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer on the Wolf & Shepherd Crossover: a dress shoe on top, a sneaker underneath, and a film that shows off both."
 platform: "vimeo"
 videoId: "478342177"
+customThumbnail: "/images/thumbnails/wolf-shepherd-crossover-1792728106785.webp"
 credits: [{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Dragon"},{"category":"Lens","item":"Cooke Mini S4/i"}]
 client: "Wolf & Shepherd"
