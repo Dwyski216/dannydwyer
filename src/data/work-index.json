@@ -150,17 +150,6 @@
     "hidden": false
   },
   {
-    "slug": "wolf-shepherd-chukka",
-    "title": "Wolf & Shepherd — Chukka",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion"
-    ],
-    "uploadDate": "2017-08-01",
-    "hidden": false
-  },
-  {
     "slug": "wolf-shepherd-crossover",
     "title": "Wolf & Shepherd — Crossover",
     "tags": [
@@ -596,5 +585,17 @@
     "uploadDate": "2017-10-01",
     "hidden": false,
     "order": 280
+  },
+  {
+    "slug": "wolf-shepherd-chukka",
+    "title": "Wolf & Shepherd  Chukka",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion"
+    ],
+    "uploadDate": "2017-08-01",
+    "hidden": false,
+    "order": 310
   }
 ]
