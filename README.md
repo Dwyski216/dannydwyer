@@ -95,9 +95,10 @@ Visit `http://localhost:4321`.
 1. Open `astro.config.mjs` and replace `SITE_URL` with your real domain
    (e.g. `https://www.yourname.com`). This is used for the sitemap and
    canonical URLs.
-2. Add a real Open Graph preview image at `public/images/og-default.jpg`
-   (1200×630px works well) — this is what shows up when your site link is
-   shared on social media or texted.
+2. The default link-preview image (shown when the site is shared on social
+   media or texted) is `public/images/og-monogram.jpg`, 1200×630px. Video
+   pages use their own thumbnail instead; any page can override it in the
+   admin's SEO tab.
 3. Edit `src/data/site.json` with your real name, bio, email, and social
    links.
 4. Replace the two sample entries in `src/content/videos/` with your own, or
