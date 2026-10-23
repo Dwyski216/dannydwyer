@@ -37,7 +37,8 @@ const jsonLd = [
 ---
 
 <Layout
-  title={seo.title || 'Work'}
+  title="Work"
+  titleOverride={seo.title || undefined}
   description={
     seo.description ||
     `Selected narrative, commercial, and documentary cinematography — ${videos.length} projects, searchable by tag, role, and format.`

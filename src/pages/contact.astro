@@ -15,7 +15,8 @@ const { Content } = await page.render();
 ---
 
 <Layout
-  title={seo.title || 'Contact'}
+  title="Contact"
+  titleOverride={seo.title || undefined}
   description={seo.description || page.data.summary || site.tagline}
   ogImage={seo.ogImage || undefined}
 >

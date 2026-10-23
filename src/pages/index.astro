@@ -44,7 +44,8 @@ const jsonLd = heroVideo
 ---
 
 <Layout
-  title={seo.title || 'Home'}
+  title="Home"
+  titleOverride={seo.title || undefined}
   description={seo.description || site.tagline}
   ogImage={seo.ogImage || undefined}
   jsonLd={jsonLd}

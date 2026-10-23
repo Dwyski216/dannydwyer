@@ -293,8 +293,9 @@ import Layout from '../../layouts/Layout.astro';
         <section id="page-seo" class="page-panel" data-page="seo" hidden>
           <h2>SEO &amp; GEO metadata</h2>
           <p class="section-hint">
-            Overrides for each page's browser-tab title, meta/AI description, and social share image. Leave a field
-            blank to keep the page's own built-in default (shown as its placeholder). The AI-crawler file at
+            Overrides for each page's browser-tab title, meta/AI description, and social share image. Titles are used
+            exactly as typed (nothing is appended). Leave a field blank to keep the page's own built-in default (shown
+            as its placeholder). The AI-crawler file at
             <code>/llms.txt</code> and each video's own SEO fields are managed elsewhere (Home bio, Work items).
           </p>
           <div id="seo-pages"></div>
@@ -1595,17 +1596,17 @@ import Layout from '../../layouts/Layout.astro';
   type SeoData = Record<string, SeoOverride>;
 
   const SEO_PAGES: { key: string; label: string; titlePlaceholder: string; descriptionPlaceholder: string }[] = [
-    { key: 'home', label: 'Home', titlePlaceholder: 'Home', descriptionPlaceholder: "Defaults to the site tagline (Settings tab)." },
+    { key: 'home', label: 'Home', titlePlaceholder: 'Home · Danny Dwyer', descriptionPlaceholder: "Defaults to the site tagline (Settings tab)." },
     {
       key: 'work',
       label: 'Work',
-      titlePlaceholder: 'Work',
+      titlePlaceholder: 'Work · Danny Dwyer',
       descriptionPlaceholder: 'Defaults to an auto-generated summary with the live project count.',
     },
     {
       key: 'contact',
       label: 'Contact',
-      titlePlaceholder: 'Contact',
+      titlePlaceholder: 'Contact · Danny Dwyer',
       descriptionPlaceholder: "Defaults to the Contact page's own summary (Contact tab), or the site tagline.",
     },
   ];
