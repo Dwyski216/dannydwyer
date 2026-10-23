@@ -1,7 +1,7 @@
 ---
 title: "Lady Gaga X Haus Labs"
 pageTitle: "Lady Gaga Haus Labs | NYC Filmmaker Danny Dwyer"
-summary: "Filmmaker Danny Dwyer shot three Lady Gaga Haus Labs campaign videos in one hour, on one dress, anywhere on the grounds."
+summary: "Three Haus Labs videos in one hour, with Lady Gaga in a one-of-one custom Versace dress. Filmmaker Danny Dwyer on shooting anywhere on the grounds."
 platform: "vimeo"
 videoId: "397077775"
 customThumbnail: "/images/thumbnails/lady-gaga-x-haus-labs-1792783705416.webp"
