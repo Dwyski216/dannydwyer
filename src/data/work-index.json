@@ -69,16 +69,6 @@
     "hidden": false
   },
   {
-    "slug": "mr-cartoon-cazadores-saucey",
-    "title": "Mr. Cartoon // Cazadores Collab for Saucey",
-    "tags": [
-      "branded content",
-      "collaboration"
-    ],
-    "uploadDate": "2017-01-01",
-    "hidden": false
-  },
-  {
     "slug": "nychos-sheryo-the-yok",
     "title": "Nychos x Sheryo x The Yok",
     "tags": [
@@ -609,5 +599,16 @@
     "uploadDate": "2017-08-01",
     "hidden": false,
     "order": 320
+  },
+  {
+    "slug": "mr-cartoon-cazadores-saucey",
+    "title": "Mr. Cartoon × Cazadores Limited Día de Los Muertos Bottle",
+    "tags": [
+      "branded content",
+      "collaboration"
+    ],
+    "uploadDate": "2017-01-01",
+    "hidden": false,
+    "order": 380
   }
 ]
