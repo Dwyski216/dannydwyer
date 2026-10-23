@@ -5,7 +5,7 @@ summary: "Motion, light, and precision. Director of photography Danny Dwyer on s
 platform: "vimeo"
 videoId: "196646985"
 customThumbnail: "/images/thumbnails/shinola-1792774503669.webp"
-credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Sarah Carey"}]
+credits: [{"role":"Director","name":"Sarah Carey"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Leica Summicron-C"}]
 client: "Shinola"
 projectName: "Shinola watches"
