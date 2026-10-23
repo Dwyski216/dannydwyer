@@ -19,7 +19,11 @@ order: 490
 ---
 
 This is the longer cut. It's where the men of 128-G get the room to tell their own stories.
+
 We shot close, face to face, and we listened. Some of what they shared was hard to hear. All of it was important to tell.
+
 I made this hoping it reaches young people before life does. Anyone can make a mistake. Choices carry consequences, and nobody here pretends otherwise, but every person still deserves a voice and a chance to be heard.
+
 Watch it, then read the book. Profits go to Words Uncaged and its workshops inside California's prisons.
+
 Start from the yard. Watch the book promo

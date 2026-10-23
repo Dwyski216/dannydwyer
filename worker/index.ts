@@ -494,8 +494,17 @@ async function handleTagsBulkPost(request: Request, env: Env): Promise<Response>
   return json({ ok: true, updated, failed, ...(indexWarning ? { indexWarning } : {}) });
 }
 
+// The admin's text boxes are plain text: each line typed is meant as its own
+// paragraph, but Markdown only starts a new paragraph after a blank line and
+// would run single-spaced lines together. Turn every single line break into
+// a paragraph break.
+function linesToParagraphs(text: string): string {
+  return text.replace(/\r\n?/g, '\n').trim().replace(/([^\n])\n(?=[^\n])/g, '$1\n\n');
+}
+
 async function handleVideosPost(request: Request, env: Env): Promise<Response> {
   const body = (await request.json()) as Record<string, any>;
+  if (typeof body.title === 'string') body.title = body.title.trim();
   if (!body.slug && !body.title) return json({ error: 'A title or slug is required' }, 400);
   const slug = slugify(body.slug || body.title);
   if (!slug) return json({ error: 'Could not derive a valid slug from the title/slug given' }, 400);
@@ -539,7 +548,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     order: typeof body.order === 'number' ? body.order : 0,
   });
 
-  const fileContent = `${frontmatter}\n\n${body.description || ''}\n`;
+  const fileContent = `${frontmatter}\n\n${linesToParagraphs(body.description || '')}\n`;
   const existing = await githubRequest(env, `${filePath}?ref=${env.GITHUB_BRANCH}`);
   const sha = existing.ok ? ((await existing.json()) as { sha: string }).sha : undefined;
 
@@ -681,7 +690,7 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
       title: body.contact.title || 'Contact',
       summary: body.contact.summary || undefined,
     });
-    const fileContent = `${frontmatter}\n\n${body.contact.body || ''}\n`;
+    const fileContent = `${frontmatter}\n\n${linesToParagraphs(body.contact.body || '')}\n`;
     const existing = await getFile(env, 'src/content/pages/contact.md');
     const res = await putFile(env, 'src/content/pages/contact.md', fileContent, existing?.sha, 'Update contact page');
     if (!res.ok) return json({ error: 'Failed to update contact page' }, 502);
@@ -689,7 +698,7 @@ async function handleSettingsPost(request: Request, env: Env): Promise<Response>
 
   if (body.work) {
     const frontmatter = toFrontmatter({ title: body.work.title || 'Work' });
-    const fileContent = `${frontmatter}\n\n${body.work.body || ''}\n`;
+    const fileContent = `${frontmatter}\n\n${linesToParagraphs(body.work.body || '')}\n`;
     const existing = await getFile(env, 'src/content/pages/work.md');
     const res = await putFile(env, 'src/content/pages/work.md', fileContent, existing?.sha, 'Update work page');
     if (!res.ok) return json({ error: 'Failed to update work page' }, 502);
