@@ -7,10 +7,11 @@ videoId: "368942744"
 customThumbnail: "/images/thumbnails/women-in-hollywood-1792700200673.webp"
 credits: [{"role":"Cast","name":"Natalie Portman"},{"role":"Cast","name":"Scarlett Johansson"},{"role":"Cast","name":"Zendaya"},{"role":"Cast","name":"Lena Waithe"},{"role":"Cast","name":"Nicole Kidman"},{"role":"Cast","name":"Gwyneth Paltrow"},{"role":"Cast","name":"Jodie Turner-Smith"},{"role":"Cast","name":"Mindy Kaling"},{"role":"Cast","name":"Melina Matsoukas"},{"role":"Director","name":"Lauren Hampton"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"TLS Canon FD Primes"}]
+series: []
 client: "Harper's Bazaar"
 projectName: "Women in Hollywood"
 uploadDate: "2018-09-01"
-tags: ["editorial","documentary","interview","Black and White","Elle"]
+tags: ["editorial","interview","Black and White","Elle"]
 stills: []
 urlSlug: "women-in-hollywood"
 hidden: false
