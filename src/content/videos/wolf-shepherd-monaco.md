@@ -4,16 +4,16 @@ pageTitle: "Wolf & Shepherd Monaco, Malibu Pier | Filmmaker Danny Dwyer"
 summary: "From a morning cast off the Malibu Pier to an afternoon meeting, same shoes. Filmmaker Danny Dwyer on the Wolf & Shepherd Monaco."
 platform: "vimeo"
 videoId: "478342393"
-credits: [{"role": "Director", "name": "Danny Dwyer"}, {"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Editor", "name": "Danny Dwyer"}]
-equipment: [{"category": "Camera", "item": "RED Raptor"}, {"category": "Lens", "item": "Cooke Mini S4"}]
+credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Composer","name":"Werdperfect"}]
+equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Mini S4"}]
 client: "Wolf & Shepherd"
 projectName: "Monaco"
 uploadDate: "2017-08-01"
-tags: ["commercial", "product", "fashion"]
-urlSlug: "wolf-shepherd-monaco"
-order: 290
-featured: false
+tags: ["commercial","product","fashion"]
 stills: []
+urlSlug: "wolf-shepherd-monaco"
+hidden: false
+order: 290
 ---
 
 Cast a line off the Malibu Pier in the morning. Walk into the meeting that afternoon like you own the building. Same shoes.
