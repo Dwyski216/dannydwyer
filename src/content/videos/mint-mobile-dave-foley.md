@@ -4,6 +4,7 @@ pageTitle: "Dave Foley × Mint Mobile | Cinematographer Danny Dwyer"
 summary: "A Dave Foley tweet became a Mint Mobile commercial in under 24 hours. Cinematographer Danny Dwyer on a spot produced, shot, and cut in under 12."
 platform: "vimeo"
 videoId: "701361560"
+customThumbnail: "/images/thumbnails/mint-mobile-dave-foley-1792721079782.webp"
 credits: [{"role":"Cast","name":"Dave Foley"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angenieux Zooms"}]
 client: "Mint Mobile"
