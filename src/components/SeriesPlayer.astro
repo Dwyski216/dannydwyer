@@ -1,0 +1,188 @@
+---
+// A work item that's a series: the first video plays in the big player,
+// the rest sit in a thumbnail strip right under it. Clicking a thumbnail
+// loads that video into the big player (and starts it), and the video that
+// was playing takes the thumbnail's place in the strip.
+import { getEmbedUrl, type VideoPlatform } from '../lib/video';
+
+interface SeriesVideo {
+  platform: VideoPlatform;
+  videoId: string;
+  title: string;
+  thumbnail: string;
+}
+
+interface Props {
+  videos: SeriesVideo[];
+}
+const { videos } = Astro.props;
+const [main, ...rest] = videos;
+
+// One allow list covering both platforms, since a series can mix them and
+// any video can end up in the big player.
+const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture';
+---
+
+<div class="series-player" data-series-player>
+  <div class="embed-wrap">
+    <iframe
+      src={getEmbedUrl(main)}
+      title={main.title}
+      allow={allow}
+      allowfullscreen
+      data-embed={getEmbedUrl(main)}
+      data-thumb={main.thumbnail}
+    ></iframe>
+  </div>
+
+  <div class="series-strip">
+    {rest.map((v) => (
+      <button
+        type="button"
+        class="series-thumb"
+        data-embed={getEmbedUrl(v)}
+        data-thumb={v.thumbnail}
+        data-title={v.title}
+        aria-label={`Play ${v.title}`}
+      >
+        <img src={v.thumbnail} alt="" loading="lazy" width="320" height="180" />
+        <span class="play" aria-hidden="true"></span>
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  function withAutoplay(embedUrl: string): string {
+    const url = new URL(embedUrl);
+    url.searchParams.set('autoplay', '1');
+    return url.toString();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-series-player]').forEach((player) => {
+    const frame = player.querySelector('iframe')!;
+
+    player.querySelectorAll<HTMLButtonElement>('.series-thumb').forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const playing = { embed: frame.dataset.embed!, thumb: frame.dataset.thumb!, title: frame.title };
+
+        frame.src = withAutoplay(thumb.dataset.embed!);
+        frame.dataset.embed = thumb.dataset.embed;
+        frame.dataset.thumb = thumb.dataset.thumb;
+        frame.title = thumb.dataset.title!;
+
+        thumb.dataset.embed = playing.embed;
+        thumb.dataset.thumb = playing.thumb;
+        thumb.dataset.title = playing.title;
+        thumb.setAttribute('aria-label', `Play ${playing.title}`);
+        thumb.querySelector('img')!.src = playing.thumb;
+
+        // On phones the big player may be scrolled partly off screen.
+        if (frame.getBoundingClientRect().top < 0) frame.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  });
+</script>
+
+<style>
+  .embed-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+
+  .embed-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* Four across on desktop, three on phones, left-aligned under the player. */
+  .series-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .series-strip {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+  }
+
+  .series-thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    border: 1px solid var(--hairline);
+    background: #000;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+
+  .series-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .series-thumb:hover,
+  .series-thumb:focus-visible {
+    border-color: var(--olympic-gold);
+    outline: 1px solid var(--olympic-gold);
+  }
+
+  /* Small play button so the thumbnails read as playable. */
+  .play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2.25rem;
+    height: 2.25rem;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ink) 65%, transparent);
+    border: 1.5px solid var(--headlight);
+    transition: border-color 0.15s ease;
+  }
+
+  .play::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 0.4rem 0 0.4rem 0.65rem;
+    border-color: transparent transparent transparent var(--headlight);
+    transition: border-color 0.15s ease;
+  }
+
+  .series-thumb:hover .play {
+    border-color: var(--olympic-gold);
+  }
+
+  .series-thumb:hover .play::after {
+    border-left-color: var(--olympic-gold);
+  }
+
+  @media (max-width: 600px) {
+    .play {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .play::after {
+      border-width: 0.32rem 0 0.32rem 0.5rem;
+    }
+  }
+</style>
