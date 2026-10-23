@@ -4,16 +4,17 @@ pageTitle: "PUMA BeatBot Documentary | Cinematographer Danny Dwyer"
 summary: "A brand doc on PUMA's BeatBot, a robot built with NASA and MIT engineers to run at Usain Bolt's pace. Cinematographer Danny Dwyer."
 platform: "vimeo"
 videoId: "166239962"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Florent Imbert"}, {"role": "Cast", "name": "Usain Bolt"}]
-equipment: [{"category": "Camera", "item": "RED"}, {"category": "Lens", "item": "Canon FD Primes"}]
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Florent Imbert"},{"role":"Cast","name":"Usain Bolt"}]
+equipment: [{"category":"Camera","item":"RED"},{"category":"Lens","item":"Canon FD Primes"}]
+series: []
 client: "PUMA"
 projectName: "Beatbot"
 uploadDate: "2016-06-01"
-tags: ["commercial", "sports", "fashion"]
-urlSlug: "puma-beatbot"
-order: 420
-featured: false
+tags: ["commercial","sports","fashion"]
 stills: []
+urlSlug: "puma-beatbot"
+hidden: false
+order: 420
 ---
 
 PUMA built a robot that runs at Usain Bolt's world-record pace. Then they put it on the track for you to chase.
