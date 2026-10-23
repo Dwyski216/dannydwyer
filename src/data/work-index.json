@@ -40,16 +40,6 @@
     "hidden": false
   },
   {
-    "slug": "diana-marks-lexus",
-    "title": "Diana Marks for Lexus",
-    "tags": [
-      "commercial",
-      "automotive"
-    ],
-    "uploadDate": "2018-01-01",
-    "hidden": false
-  },
-  {
     "slug": "honduras-hollywood",
     "title": "Honduras — \"Hollywood\" (Official Music Video)",
     "tags": [
@@ -590,5 +580,18 @@
     "uploadDate": "2018-08-01",
     "hidden": false,
     "order": 250
+  },
+  {
+    "slug": "diana-marks-lexus",
+    "title": "Diana Marks × Lexus",
+    "tags": [
+      "commercial",
+      "automotive",
+      "Car",
+      "influencer"
+    ],
+    "uploadDate": "2018-01-01",
+    "hidden": false,
+    "order": 270
   }
 ]
