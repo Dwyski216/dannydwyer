@@ -4,15 +4,15 @@ pageTitle: "Made on Earth Travel Show Pilot | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on Made on Earth, a travel show pilot following designer Heather Ross to the origins of the designs we use today."
 platform: "vimeo"
 videoId: "230197221"
-credits: [{"role": "Director of Photography", "name": "Danny Dwyer"}, {"role": "Director", "name": "Kelly Wilkinson"}, {"role": "Cast", "name": "Heather Ross"}]
-equipment: [{"category": "Camera", "item": "Canon C300"}, {"category": "Lens", "item": "Angenieux Zooms"}]
+credits: [{"role":"Cast","name":"Heather Ross"},{"role":"Director","name":"Kelly Wilkinson"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Fer Santa Cruz"}]
+equipment: [{"category":"Camera","item":"Canon C300"},{"category":"Lens","item":"Angenieux Zooms"}]
 projectName: "Made on Earth"
 uploadDate: "2016-08-01"
-tags: ["documentary", "trailer"]
-urlSlug: "made-on-earth-trailer"
-order: 410
-featured: false
+tags: ["documentary","trailer","pilot","docu series"]
 stills: []
+urlSlug: "made-on-earth-trailer"
+hidden: false
+order: 410
 ---
 
 Every pattern starts somewhere.
