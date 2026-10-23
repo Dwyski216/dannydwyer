@@ -835,8 +835,17 @@ async function router(request: Request, env: Env): Promise<Response> {
     if (request.method === 'POST') return handleSeoPost(request, env);
   }
 
-  // Everything else — every static page, image, and the login page
-  // itself — is served straight from the build.
+  // The admin pages are never kept in the browser's cache, so a deploy's
+  // new admin features show up on the next visit instead of an old copy.
+  if (isAdminPage || isLoginPage) {
+    const res = await env.ASSETS.fetch(request);
+    const headers = new Headers(res.headers);
+    headers.set('Cache-Control', 'no-store');
+    return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
+  }
+
+  // Everything else — every static page and image — is served straight
+  // from the build.
   return env.ASSETS.fetch(request);
 }
 
