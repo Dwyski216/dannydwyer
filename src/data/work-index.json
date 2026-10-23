@@ -736,5 +736,18 @@
     "uploadDate": "2026-10-23",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "what-it-s-like-to-be-a-basejumper",
+    "title": "What It's Like To Be A Basejumper",
+    "tags": [
+      "documentary",
+      "athlete",
+      "athletics",
+      "docu series"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 70
   }
 ]
