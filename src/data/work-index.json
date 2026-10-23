@@ -168,21 +168,6 @@
     "order": 110
   },
   {
-    "slug": "128-g",
-    "title": "128-G x Brick of Gold",
-    "tags": [
-      "documentary",
-      "social issue",
-      "prison",
-      "handheld",
-      "book",
-      "MoMa"
-    ],
-    "uploadDate": "2018-04-01",
-    "hidden": false,
-    "order": 260
-  },
-  {
     "slug": "big-age-audible-trailer",
     "title": "Audible \"Big Age\"",
     "tags": [
@@ -609,5 +594,20 @@
     "uploadDate": "2021-06-01",
     "hidden": false,
     "order": 140
+  },
+  {
+    "slug": "128-g",
+    "title": "128-G x Brick of Gold",
+    "tags": [
+      "documentary",
+      "social issue",
+      "prison",
+      "handheld",
+      "book",
+      "MoMa"
+    ],
+    "uploadDate": "2018-04-01",
+    "hidden": false,
+    "order": 260
   }
 ]
