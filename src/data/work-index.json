@@ -110,16 +110,6 @@
     "hidden": false
   },
   {
-    "slug": "pixies-on-graveyard-hill",
-    "title": "The Pixies — \"On Graveyard Hill\"",
-    "tags": [
-      "music video"
-    ],
-    "uploadDate": "2016-09-01",
-    "hidden": false,
-    "order": 400
-  },
-  {
     "slug": "shinola",
     "title": "Shinola",
     "tags": [
@@ -612,5 +602,15 @@
     "uploadDate": "2016-11-01",
     "hidden": false,
     "order": 390
+  },
+  {
+    "slug": "pixies-on-graveyard-hill",
+    "title": "The Pixies — \"On Graveyard Hill\"",
+    "tags": [
+      "music video"
+    ],
+    "uploadDate": "2016-09-01",
+    "hidden": false,
+    "order": 400
   }
 ]
