@@ -161,17 +161,6 @@
     "hidden": false
   },
   {
-    "slug": "wolf-shepherd-monaco",
-    "title": "Wolf & Shepherd — Monaco",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion"
-    ],
-    "uploadDate": "2017-08-01",
-    "hidden": false
-  },
-  {
     "slug": "wolf-shepherd-swiftknit",
     "title": "Wolf & Shepherd — SwiftKnit",
     "tags": [
@@ -597,5 +586,17 @@
     "uploadDate": "2017-08-01",
     "hidden": false,
     "order": 310
+  },
+  {
+    "slug": "wolf-shepherd-monaco",
+    "title": "Wolf & Shepherd — Monaco",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion"
+    ],
+    "uploadDate": "2017-08-01",
+    "hidden": false,
+    "order": 290
   }
 ]
