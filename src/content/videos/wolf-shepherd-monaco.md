@@ -1,5 +1,5 @@
 ---
-title: "Wolf & Shepherd — Monaco"
+title: "Wolf & Shepherd Monaco"
 pageTitle: "Wolf & Shepherd Monaco, Malibu Pier | Filmmaker Danny Dwyer"
 summary: "From a morning cast off the Malibu Pier to an afternoon meeting, same shoes. Filmmaker Danny Dwyer on the Wolf & Shepherd Monaco."
 platform: "vimeo"
