@@ -1,0 +1,17 @@
+---
+// /documentary, /commercial, /music-videos: the Work page pre-filtered to
+// one category (see src/data/categories.ts).
+import WorkPage from '../components/WorkPage.astro';
+import { CATEGORIES, type Category } from '../data/categories';
+
+export function getStaticPaths() {
+  return CATEGORIES.map((category) => ({ params: { category: category.slug }, props: { category } }));
+}
+
+interface Props {
+  category: Category;
+}
+const { category } = Astro.props;
+---
+
+<WorkPage category={category} />

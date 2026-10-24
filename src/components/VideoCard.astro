@@ -8,8 +8,11 @@ interface Props {
   // Swapped in if thumbnailUrl fails to load (an uploaded thumbnail falls
   // back to the video platform's own).
   fallbackUrl?: string;
+  // Rendered hidden (a category page shows only its own videos before the
+  // filter script runs, so there's no flash of the full catalog).
+  initiallyHidden?: boolean;
 }
-const { slug, title, summary, tags, thumbnailUrl, fallbackUrl } = Astro.props;
+const { slug, title, summary, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false } = Astro.props;
 const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
 ---
 
@@ -18,6 +21,7 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   href={`/work/${slug}`}
   data-tags={tags.join('|').toLowerCase()}
   data-search={searchText}
+  style={initiallyHidden ? 'display: none' : undefined}
 >
   <div class="thumb">
     <img

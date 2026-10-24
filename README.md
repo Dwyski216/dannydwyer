@@ -255,3 +255,12 @@ visitors.
   [Google Search Console](https://search.google.com/search-console) and
   [Bing Webmaster Tools](https://www.bing.com/webmasters) (Bing's index feeds
   ChatGPT's web results).
+
+## Work categories
+
+The Work page's category buttons (Documentary, Commercial, Music Videos) are
+defined in `src/data/categories.ts`. Each is also its own page
+(`/documentary`, `/commercial`, `/music-videos`): the Work gallery
+pre-filtered to that tag, with its own title and description. A video shows
+up in a category when it has the category's tag (`documentary`,
+`commercial`, `music video`) in the admin.

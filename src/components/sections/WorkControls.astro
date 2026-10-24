@@ -1,20 +1,30 @@
 ---
-// Work page section: preset filter buttons, search, and the tag filter
-// panel. The client-side filtering script lives in work/index.astro itself
-// (not here) since it coordinates this section with WorkGrid's #video-list
-// — see the comment there for why, and how it degrades if either section
-// is disabled.
+// Work page section: the category buttons, search, and the tag filter
+// panel. The client-side filtering script lives in WorkPage.astro (not
+// here) since it coordinates this section with WorkGrid's #video-list.
+// Each category button links to its own page (/documentary, ...); the one
+// you're on is highlighted (the script keeps that in sync as filters change).
+import { CATEGORIES } from '../../data/categories';
+
 interface Props {
   allTags: string[];
+  activeTag?: string;
 }
-const { allTags } = Astro.props;
+const { allTags, activeTag } = Astro.props;
 ---
 
 <div class="controls">
   <div class="preset-filters">
-    <a class="preset-btn" href="/work/?tag=documentary">Documentary</a>
-    <a class="preset-btn" href="/work/?tag=commercial">Commercial</a>
-    <a class="preset-btn" href="/work/?tag=music%20video">Music Videos</a>
+    {CATEGORIES.map((c) => (
+      <a
+        class:list={['preset-btn', { 'is-active': c.tag === activeTag }]}
+        href={`/${c.slug}`}
+        data-tag={c.tag}
+        aria-current={c.tag === activeTag ? 'page' : undefined}
+      >
+        {c.label}
+      </a>
+    ))}
   </div>
 
   <div class="filter-row">
@@ -82,6 +92,8 @@ const { allTags } = Astro.props;
     transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
   }
 
+  /* The category you're on: filled like the hover state. */
+  .preset-btn.is-active,
   .preset-btn:hover {
     background: var(--olympic-gold);
     box-shadow: inset 0 0 0 1.2px var(--olympic-gold);

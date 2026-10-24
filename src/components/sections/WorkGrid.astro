@@ -8,8 +8,9 @@ import type { Thumbnail } from '../../lib/video';
 interface Props {
   videos: CollectionEntry<'videos'>[];
   thumbnails: Thumbnail[];
+  initialTag?: string; // category pages: show only this tag's videos at first
 }
-const { videos, thumbnails } = Astro.props;
+const { videos, thumbnails, initialTag } = Astro.props;
 ---
 
 <div class="video-area">
@@ -22,6 +23,7 @@ const { videos, thumbnails } = Astro.props;
         tags={v.data.tags}
         thumbnailUrl={thumbnails[i].src}
         fallbackUrl={thumbnails[i].fallback}
+        initiallyHidden={!!initialTag && !v.data.tags.some((t) => t.toLowerCase() === initialTag)}
       />
     ))}
   </div>
