@@ -100,24 +100,38 @@ const { allTags } = Astro.props;
     border-bottom: 1px solid var(--hairline);
   }
 
+  /* Matches the preset buttons above: transparent on the page, a 1.2px
+     Olympic Gold outline (inset shadow, so it isn't rounded), Headlight
+     text. */
   #search {
     font-family: var(--font-body);
-    background: var(--surface);
-    /* A 0.5pt Headlight hairline. Browsers round real borders under 1px
-       up to a full pixel, so it's drawn as an outline instead, which
-       Retina/phone screens render at true half-point thickness. The clear
-       1px border keeps the box its original size. */
-    border: 1px solid transparent;
-    box-shadow: 0 0 0 0.5pt var(--headlight);
-    color: var(--text);
-    padding: 0.6rem 0.8rem;
+    background: transparent;
+    border: 0;
+    box-shadow: inset 0 0 0 1.2px var(--olympic-gold);
+    color: var(--headlight);
+    padding: calc(0.6rem + 1px) calc(0.8rem + 1px);
     font-size: 0.95rem;
     width: 320px;
   }
 
+  /* The browser's clear (x) button, redrawn in Olympic Gold. */
+  #search::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.8em;
+    height: 0.8em;
+    cursor: pointer;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='%23E09F3E' stroke-width='1.6'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+
+  #search::placeholder {
+    color: color-mix(in srgb, var(--headlight) 55%, transparent);
+  }
+
+  /* While typing, the gold outline thickens instead of a second ring. */
   #search:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
+    outline: none;
+    box-shadow: inset 0 0 0 2.4px var(--olympic-gold);
   }
 
   .filter-row {
