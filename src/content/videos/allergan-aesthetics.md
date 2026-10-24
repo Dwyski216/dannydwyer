@@ -16,7 +16,7 @@ hidden: false
 order: 70
 ---
 
-What does it really mean to feel at home in your own skin? That was the question we carried into the studio for Allergan Aesthetics. Professional models and everyday people stepped in front of the lens side by side, and every one of them let their guard down, fully aware of how exposed that feels, and chose to show up fearlessly.
+What does it really mean to feel at confident in your own skin? That was the question we carried into the studio for Allergan Aesthetics. Professional models and everyday people stepped in front of the lens side by side, and every one of them let their guard down, fully aware of how exposed that feels, and chose to show up fearlessly.
 
 Our job was to meet that honesty with care, and to give people enough quiet and patience to simply be themselves. The images are beautiful because the people in them are telling the truth.
 
