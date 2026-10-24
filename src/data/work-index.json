@@ -795,5 +795,17 @@
     "uploadDate": "2026-10-24",
     "hidden": true,
     "order": 70
+  },
+  {
+    "slug": "romer-hell-s-kitchen-hero-film",
+    "title": "Romer Hell's Kitchen Hero Film",
+    "tags": [
+      "commercial",
+      "hotels",
+      "hospitality"
+    ],
+    "uploadDate": "2026-10-24",
+    "hidden": false,
+    "order": 70
   }
 ]
