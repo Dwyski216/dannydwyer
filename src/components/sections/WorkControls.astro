@@ -117,13 +117,10 @@ const { allTags, activeTag } = Astro.props;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    /* The buttons + search block sits centered in its band: the space
-       below the search box (to the divider line) matches the space above
-       the buttons (from the description, set in WorkBanner.astro: 3rem,
-       2.5rem on phones). Search box to first row of videos is about 97px. */
+    /* Search box to the first row of videos: about 97px (no divider line;
+       1px is added back where the line used to be). */
     padding-bottom: 3rem;
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--hairline);
+    margin-bottom: calc(3rem + 1px);
   }
 
   /* Matches the preset buttons above: transparent on the page, a 1.2px
@@ -174,7 +171,7 @@ const { allTags, activeTag } = Astro.props;
     .controls {
       gap: 1.5rem;
       padding-bottom: 2.5rem;
-      margin-bottom: 3.5rem;
+      margin-bottom: calc(3.5rem + 1px);
     }
 
     .filter-row {
