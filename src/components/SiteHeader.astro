@@ -24,15 +24,14 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     padding-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 1.5rem;
     flex-wrap: wrap;
   }
 
   /* The name as artwork: Headlight DANNY DWYER split by the Barn Red bolt
-     (DANNY_DWYER_BOLT_BANNER). On desktop the banner sits at the far left,
-     opposite the nav; on phones the banner and the nav below it are both
-     centered. */
+     (DANNY_DWYER_BOLT_BANNER), centered at the top with the nav centered
+     below it, on every screen. */
   .name {
     display: block;
     line-height: 0;
@@ -40,31 +39,15 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 
   .name img {
     display: block;
-    /* --banner-width (Layout.astro): 472px on desktop, scaling down on
-       tablets to keep the nav on the same row, min(360px, 88vw) on phones.
-       Page titles are sized from it. */
+    /* --banner-width (Layout.astro): 472px on desktop and tablets,
+       min(360px, 88vw) on phones. Page titles are sized from it. */
     width: var(--banner-width);
     height: auto;
   }
 
-  @media (min-width: 601px) {
-    .name {
-      margin-right: auto;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .header {
-      justify-content: center;
-    }
-
-    .nav {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
   .nav {
+    width: 100%;
+    justify-content: center;
     display: flex;
     gap: 1.75rem;
     font-size: 0.9rem;
