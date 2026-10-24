@@ -771,5 +771,18 @@
     "uploadDate": "2026-10-23",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "brittany-howard-what-now-film-promo",
+    "title": "Brittany Howard \"What Now\" Film Promo",
+    "tags": [
+      "music video",
+      "film",
+      "psychedelic",
+      "celebrity"
+    ],
+    "uploadDate": "2026-10-24",
+    "hidden": false,
+    "order": 70
   }
 ]
