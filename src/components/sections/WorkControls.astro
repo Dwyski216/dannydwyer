@@ -44,12 +44,20 @@ const { allTags } = Astro.props;
 </div>
 
 <style>
+  /* The category buttons are the page's main navigation, so they get
+     room: 16px apart (10px on phones). */
   .preset-filters {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
     min-width: 0;
+  }
+
+  @media (max-width: 600px) {
+    .preset-filters {
+      gap: 0.625rem;
+    }
   }
 
   /* Hollow buttons, like Get in Touch on the Contact page (Olympic Gold
@@ -90,11 +98,13 @@ const { allTags } = Astro.props;
 
   /* Everything centered: the preset buttons on one row, search and
      Filters on the row below. */
+  /* 32px between the category buttons and the search row (24px on
+     phones), so the buttons read as their own band. */
   .controls {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--hairline);
@@ -145,6 +155,10 @@ const { allTags } = Astro.props;
   /* Phones: Filters centered under the presets, then the search box full
      width at the bottom of the controls cluster. */
   @media (max-width: 600px) {
+    .controls {
+      gap: 1.5rem;
+    }
+
     .filter-row {
       align-self: stretch;
       flex-direction: column;
