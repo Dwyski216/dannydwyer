@@ -832,5 +832,17 @@
     "uploadDate": "2026-10-24",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "the-atlas-hotel-in-cambridge",
+    "title": "The Atlas Hotel in Cambridge",
+    "tags": [
+      "commercial",
+      "hotel",
+      "hospitality"
+    ],
+    "uploadDate": "2026-10-24",
+    "hidden": false,
+    "order": 70
   }
 ]
