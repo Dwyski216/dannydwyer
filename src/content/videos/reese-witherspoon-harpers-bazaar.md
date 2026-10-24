@@ -13,7 +13,7 @@ tags: ["editorial","celebrity","interview"]
 stills: []
 urlSlug: "reese-witherspoon-harpers-bazaar"
 hidden: false
-order: 220
+order: 350
 ---
 
 We shot the video promo for Reese Witherspoon's Harper's Bazaar cover, and at one point a live snake was draped over her shoulders. She didn't flinch. I'm still not over it.

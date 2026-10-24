@@ -14,7 +14,7 @@ tags: ["commercial","product","fashion","shoes"]
 stills: []
 urlSlug: "wolf-shepherd-crossover"
 hidden: false
-order: 320
+order: 450
 ---
 
 Half dress shoe, half sneaker, and it refuses to pick a side.

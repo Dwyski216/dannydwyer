@@ -14,7 +14,7 @@ tags: ["commercial","product","fashion","shoes"]
 stills: []
 urlSlug: "wolf-shepherd-swiftknit"
 hidden: false
-order: 300
+order: 430
 ---
 
 A dress shoe on a skateboard sounds like a bad idea. That was the point.

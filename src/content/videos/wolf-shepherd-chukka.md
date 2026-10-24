@@ -14,7 +14,7 @@ tags: ["commercial","product","fashion","shoes"]
 stills: []
 urlSlug: "wolf-shepherd-chukka"
 hidden: false
-order: 310
+order: 440
 ---
 
 Trail dust in the morning, client lunch by afternoon.
