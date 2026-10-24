@@ -316,4 +316,33 @@ const personSchema = {
       grid-column: span 12;
     }
   }
+
+  /* Card galleries (Work grid, Featured Work, "More for ..."): three across
+     on desktop, two on tablets, one on phones, and a short last row is
+     always centered rather than left-aligned. */
+  .card-gallery {
+    --cols: 3;
+    --col-gap: var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem var(--col-gap);
+  }
+
+  .card-gallery > * {
+    flex: 0 0 calc((100% - (var(--cols) - 1) * var(--col-gap)) / var(--cols));
+    min-width: 0;
+  }
+
+  @media (max-width: 900px) {
+    .card-gallery {
+      --cols: 2;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .card-gallery {
+      --cols: 1;
+    }
+  }
 </style>

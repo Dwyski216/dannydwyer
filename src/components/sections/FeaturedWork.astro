@@ -15,9 +15,9 @@ const { featured, thumbnails } = Astro.props;
 {featured.length > 0 && (
   <section class="featured col-12" aria-label="Featured work">
     <h2>Featured Work</h2>
-    <div class="grid featured-grid">
+    <div class="card-gallery">
       {featured.map((v, i) => (
-        <div class="col-4">
+        <div>
           <VideoCard
             slug={v.data.urlSlug}
             title={v.data.title}
@@ -58,9 +58,5 @@ const { featured, thumbnails } = Astro.props;
     .featured {
       margin-top: 2.625rem;
     }
-  }
-
-  .featured-grid {
-    row-gap: 2rem;
   }
 </style>

@@ -214,7 +214,7 @@ const jsonLd = [
     {relatedByClient.length > 0 && (
       <section class="related" aria-label={`More for ${d.client}`}>
         <h2>More for {d.client}</h2>
-        <div class="related-grid">
+        <div class="card-gallery">
           {relatedByClient.map((v, i) => (
             <VideoCard
               slug={v.data.urlSlug}
@@ -414,25 +414,6 @@ const jsonLd = [
     letter-spacing: 0.06em;
     color: var(--olympic-gold);
     margin-bottom: 0.75rem;
-  }
-
-  /* Same cards and columns as the Work grid (up to three related videos). */
-  .related-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem var(--gutter);
-  }
-
-  @media (max-width: 900px) {
-    .related-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 560px) {
-    .related-grid {
-      grid-template-columns: 1fr;
-    }
   }
 
   .project-nav {

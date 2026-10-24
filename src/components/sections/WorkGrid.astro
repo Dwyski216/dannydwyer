@@ -13,7 +13,7 @@ const { videos, thumbnails } = Astro.props;
 ---
 
 <div class="video-area">
-  <div id="video-list">
+  <div id="video-list" class="card-gallery">
     {videos.map((v, i) => (
       <VideoCard
         slug={v.data.urlSlug}
@@ -34,23 +34,5 @@ const { videos, thumbnails } = Astro.props;
     color: var(--text-muted);
     padding: 2rem 0;
     text-align: center;
-  }
-
-  #video-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem var(--gutter);
-  }
-
-  @media (max-width: 900px) {
-    #video-list {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 560px) {
-    #video-list {
-      grid-template-columns: 1fr;
-    }
   }
 </style>
