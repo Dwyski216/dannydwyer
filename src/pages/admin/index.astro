@@ -2224,7 +2224,12 @@ import Layout from '../../layouts/Layout.astro';
 
   /* On phones the table scrolls sideways inside this box instead of
      widening the whole page. */
+  /* Pinned to the top of the screen while it's showing, so Save Order is
+     always in reach when reordering far down a long list. */
   .work-order-bar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -2232,6 +2237,7 @@ import Layout from '../../layouts/Layout.astro';
     margin: 0 0 0.75rem;
     padding: 0.6rem 0.8rem;
     border: 1px solid var(--accent);
+    background: var(--bg);
     color: var(--text);
     font-size: 0.9rem;
   }
