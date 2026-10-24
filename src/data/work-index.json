@@ -784,5 +784,16 @@
     "uploadDate": "2026-10-24",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "hoko-in-the-summer",
+    "title": "Hoko \"In The Summer\"",
+    "tags": [
+      "music video",
+      "film"
+    ],
+    "uploadDate": "2026-10-24",
+    "hidden": true,
+    "order": 70
   }
 ]
