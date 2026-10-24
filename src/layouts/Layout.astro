@@ -323,10 +323,19 @@ const personSchema = {
   .card-gallery {
     --cols: 3;
     --col-gap: var(--gutter);
+    --row-gap: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem var(--col-gap);
+    gap: var(--row-gap) var(--col-gap);
+  }
+
+  /* Desktop: cards 30% closer together. */
+  @media (min-width: 901px) {
+    .card-gallery {
+      --col-gap: calc(var(--gutter) * 0.7);
+      --row-gap: 1.4rem;
+    }
   }
 
   .card-gallery > * {
