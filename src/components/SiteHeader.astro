@@ -39,9 +39,10 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 
   .name img {
     display: block;
-    /* 472px on desktop; on tablets it scales down just enough to keep the
-       nav on the same row. */
-    width: clamp(240px, 100vw - 340px, 472px);
+    /* --banner-width (Layout.astro): 472px on desktop, scaling down on
+       tablets to keep the nav on the same row, min(360px, 88vw) on phones.
+       Page titles are sized from it. */
+    width: var(--banner-width);
     height: auto;
   }
 
@@ -54,11 +55,6 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   @media (max-width: 600px) {
     .header {
       justify-content: center;
-    }
-
-    /* Clearly bigger than the page titles (WORK, CONTACT) below it. */
-    .name img {
-      width: min(360px, 88vw);
     }
 
     .nav {

@@ -137,6 +137,23 @@ const personSchema = {
     font-display: swap;
   }
 
+  /* The DANNY DWYER banner sets the scale: every page title (the home
+     page's FILMMAKER, DIRECTOR & CINEMATOGRAPHER, WORK, CONTACT, 404) is
+     sized from the banner's width so its capital letters are always 10%
+     shorter than the banner's letters, on every screen: a title font size
+     of 10.54% of the banner's width (measured on screen, capital letters
+     against the banner's letters). */
+  :root {
+    --banner-width: clamp(240px, 100vw - 340px, 472px);
+    --title-size: calc(var(--banner-width) * 0.1054);
+  }
+
+  @media (max-width: 600px) {
+    :root {
+      --banner-width: min(360px, 88vw);
+    }
+  }
+
   :root {
     /* Color tokens — from the DWYER_STYLE_GUIDE brand system: "five colors,
        three do the work, two back 'em up." Ink is the dark stage everything
@@ -235,7 +252,7 @@ const personSchema = {
   .page-title {
     font-family: var(--font-title-light);
     font-weight: 300;
-    font-size: clamp(1.925rem, 4.62vw, 3.025rem);
+    font-size: var(--title-size);
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--olympic-gold);
