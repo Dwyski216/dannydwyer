@@ -1,11 +1,12 @@
 ---
 title: "Google Pixel \"Lookout\""
 pageTitle: "Google Pixel Lookout | Cinematographer Danny Dwyer"
-summary: "A Google Pixel campaign spot spotlighting the Lookout accessibility feature."
+summary: "One aisle, a hundred choices, and a phone that reads them out loud. Lachi shops on her own with Google Pixel’s Lookout. Shot by Danny Dwyer."
 platform: "vimeo"
 videoId: "970932116"
 credits: [{"role":"Agency","name":"WTBR"},{"role":"Cast","name":"Lachi"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony FX6, FX3 & GoPro"},{"category":"Lens","item":"Angenieux EZ Series & TLS Canon FD Primes"}]
+series: []
 client: "Google"
 projectName: "Pixel Series Pt 2 \"Lookout\""
 uploadDate: "2023-09-01"
