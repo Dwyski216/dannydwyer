@@ -15,7 +15,7 @@ tags: ["short film","documentary","prison","social awarness","editor"]
 stills: []
 urlSlug: "128-g-short-film-trailer"
 hidden: false
-order: 480
+order: 600
 ---
 
 This is the longer cut. It's where the men of 128-G get the room to tell their own stories.

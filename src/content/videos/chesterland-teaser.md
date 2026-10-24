@@ -13,7 +13,7 @@ tags: ["pilot","dramedy","teaser"]
 stills: []
 urlSlug: "chesterland-teaser"
 hidden: true
-order: 430
+order: 550
 ---
 
 Some stories never make it past the teaser. This one still deserves to be seen.

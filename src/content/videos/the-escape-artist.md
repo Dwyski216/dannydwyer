@@ -13,7 +13,7 @@ tags: ["short film","art","fashion"]
 stills: []
 urlSlug: "the-escape-artist"
 hidden: false
-order: 490
+order: 620
 ---
 
 An afternoon with Kimbra Audrey Lo at her favorite secret spot in New York City, filming her doing what she does best: self-portraits.
