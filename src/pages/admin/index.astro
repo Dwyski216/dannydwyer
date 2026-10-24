@@ -746,22 +746,31 @@ import Layout from '../../layouts/Layout.astro';
       renderWorkList();
       return;
     }
-    workOrderStatus.textContent = 'Saving…';
-    const res = await fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ moves }) });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) {
-      workOrderStatus.textContent = `Error: ${data.error ?? 'could not save the order'}`;
-      return;
+    // Sent in batches: Cloudflare caps how many GitHub requests one save can
+    // make (one per video), so a big renumber goes as a few commits of up to
+    // ORDER_BATCH videos each. Each batch is all-or-nothing; if one fails,
+    // the batches before it are kept and Save Order picks up the rest.
+    const ORDER_BATCH = 25;
+    const batches = Math.ceil(moves.length / ORDER_BATCH);
+    for (let b = 0; b < batches; b++) {
+      const batch = moves.slice(b * ORDER_BATCH, (b + 1) * ORDER_BATCH);
+      workOrderStatus.textContent = batches > 1 ? `Saving… (${b + 1} of ${batches})` : 'Saving…';
+      const res = await fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ moves: batch }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        workOrderStatus.textContent = `Error: ${data.error ?? 'could not save the order'}${b > 0 ? ' (part of the order was saved; click Save Order again to finish)' : ''}`;
+        return;
+      }
+      batch.forEach((m) => {
+        const item = workItems.find((it) => it.slug === m.slug);
+        if (item) item.order = m.order;
+      });
+      if (data.indexWarning) alert(data.indexWarning);
     }
-    moves.forEach((m) => {
-      const item = workItems.find((it) => it.slug === m.slug);
-      if (item) item.order = m.order;
-    });
     pendingOrder = null;
     clearDirty('work-order-bar');
     renderWorkList();
     workOrderStatus.textContent = '';
-    if (data.indexWarning) alert(data.indexWarning);
   });
 
   document.getElementById('work-order-discard')!.addEventListener('click', () => {

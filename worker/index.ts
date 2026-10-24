@@ -417,6 +417,9 @@ async function handleVideosReorder(request: Request, env: Env): Promise<Response
     if (!m.slug || typeof m.order !== 'number') return json({ error: 'Each move needs a slug and a numeric order' }, 400);
     if (!isValidSlug(m.slug)) return json({ error: `Invalid slug: ${m.slug}` }, 400);
   }
+  // Cloudflare allows 50 subrequests per call: one read per video, plus the
+  // index and the commit's handful. The admin sends batches of 25.
+  if (moves.length > 30) return json({ error: 'Too many videos in one save; send at most 30 at a time.' }, 400);
   const validMoves = moves as { slug: string; order: number }[];
 
   const files = await Promise.all(validMoves.map((m) => getFile(env, `${VIDEOS_DIR}/${m.slug}.md`)));
