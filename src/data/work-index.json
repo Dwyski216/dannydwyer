@@ -820,5 +820,17 @@
     "uploadDate": "2026-10-24",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "the-huntington-hotel-sf",
+    "title": "The Huntington Hotel SF",
+    "tags": [
+      "commercial",
+      "hotel",
+      "hospitality"
+    ],
+    "uploadDate": "2026-10-24",
+    "hidden": false,
+    "order": 70
   }
 ]
