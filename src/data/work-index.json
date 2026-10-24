@@ -807,5 +807,18 @@
     "uploadDate": "2026-10-24",
     "hidden": false,
     "order": 70
+  },
+  {
+    "slug": "kimpton-hotel-hero-spot",
+    "title": "Kimpton Hotel Hero Spot",
+    "tags": [
+      "commercial",
+      "hotel",
+      "hospitality",
+      "lifestyle"
+    ],
+    "uploadDate": "2026-10-24",
+    "hidden": false,
+    "order": 70
   }
 ]
