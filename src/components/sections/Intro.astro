@@ -84,25 +84,28 @@ const { role, introCopy } = Astro.props;
     margin-top: 4.375rem;
   }
 
-  /* Hollow button: 2pt Olympic Gold outline with Headlight text on the
-     page background, filling Olympic Gold with Ink text on hover. */
+  /* Hollow button: Olympic Gold outline (10% thinner than 2pt) with
+     Headlight text on the page background, filling Olympic Gold with Ink
+     text on hover. The outline is an inset shadow so browsers draw its
+     exact width instead of rounding a border to whole pixels; padding
+     includes the 2pt a border used to take, so the size is unchanged. */
   .button {
     display: inline-block;
     background: transparent;
-    border: 2pt solid var(--olympic-gold);
+    border: 0;
+    box-shadow: inset 0 0 0 calc(2pt * 0.9) var(--olympic-gold);
     color: var(--headlight);
     font-family: var(--font-title);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     font-size: 1rem;
-    padding: 0.9rem 1.75rem;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    padding: calc(0.9rem + 2pt) calc(1.75rem + 2pt);
+    transition: background 0.15s ease, color 0.15s ease;
   }
 
   .button:hover {
     background: var(--olympic-gold);
-    border-color: var(--olympic-gold);
     color: var(--ink);
   }
 </style>

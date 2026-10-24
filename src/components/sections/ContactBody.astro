@@ -129,43 +129,38 @@ const { title, email } = Astro.props;
     text-decoration: underline;
   }
 
-  /* 2.1rem + the last paragraph's 1rem keeps the copy-to-button gap equal
+  /* This + the last paragraph's 1rem keeps the copy-to-button gap equal
      to the title-to-copy gap. */
   .action {
-    margin-top: 2.1rem;
+    margin-top: calc(2.1rem + 1px);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.6rem;
   }
 
-  /* Phones: button and email centered, like the title above. */
-  @media (max-width: 600px) {
-    .action {
-      align-items: center;
-    }
-  }
 
-  /* Hollow button, matching the home page's "Collection of Work": 2pt
-     Olympic Gold outline, Headlight text, filling Olympic Gold with Ink
-     text on hover. */
+
+  /* Hollow button, matching the home page's "Collection of Work": Olympic
+     Gold outline (10% thinner than 2pt, drawn as an inset shadow), Headlight
+     text, filling Olympic Gold with Ink text on hover. */
   .button {
     display: inline-block;
     background: transparent;
-    border: 2pt solid var(--olympic-gold);
+    border: 0;
+    box-shadow: inset 0 0 0 calc(2pt * 0.9) var(--olympic-gold);
     color: var(--headlight);
     font-family: var(--font-title);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     font-size: 1rem;
-    padding: 0.9rem 1.75rem;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    padding: calc(0.9rem + 2pt) calc(1.75rem + 2pt);
+    transition: background 0.15s ease, color 0.15s ease;
   }
 
   .button:hover {
     background: var(--olympic-gold);
-    border-color: var(--olympic-gold);
     color: var(--ink);
   }
 
