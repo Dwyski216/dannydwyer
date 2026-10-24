@@ -22,4 +22,4 @@ Poppy season in the San Jacinto Mountains, just outside Palm Springs, and Britta
 
 This was a promo for her album What Now, and she wanted it to feel retro. So we shot 16mm Kodak reversal alongside the RED, through a vintage Cooke Varotal zoom, and kept the magic Mama Hot Dog style: crystals and prisms in front of the lens to bend and scatter the light, and choreographed zooms that hit exactly when they should. Every effect you see happened live, on the day.
 
-Brittany is a blast to work with and funny as all hell. It was great to team up again with director Mama Hot Dog, a longtime friend. Thanks for bringing me on, and for letting me dance with those zooms.
+Brittany is a blast to work with and funny as all hell. She even took a rip around the property on my little pitbike, she rips! It was great to team up again with director Mama Hot Dog, a longtime friend. Thanks for bringing me on, and for letting me dance with those zooms.
