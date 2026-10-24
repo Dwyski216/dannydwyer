@@ -18,10 +18,8 @@ hidden: false
 order: 70
 ---
 
-One block from Times Square, on the corner of 52nd and Eighth, there’s a hotel that somehow feels like a neighborhood living room. The job was to film that calm in the middle of the loudest part of Manhattan.
+Everybody’s got the same advice about Times Square a short walk a block over and the whole thing flips. The neon fades, Hell’s Kitchen kicks in, and suddenly you’re somewhere you actually want to be. Dive bars. Late-night kitchens. Theater kids off the clock. Corner stores that never close.
 
-Easier said than done. Eighth Avenue never stops: sirens, delivery bikes, tourists, horns. The city doesn’t pause for anyone, least of all a film crew.
+Romer sits right on that line, at 52nd and Eighth, and it plays like the neighborhood’s front door. Grab a coffee downstairs, get loose at So & So’s when the piano starts, crash upstairs, and do it all again.
 
-Inside, it’s another world: a sun-soaked lobby built for lingering, midcentury rooms in mint and gold, and So & So’s, the piano bar where Broadway talent drops in and the night tends to turn into a show.
-
-Shooting it felt like capturing a party and a library at the same time. Chaos outside, calm inside, and a little of both in every frame. That’s Hell’s Kitchen.
+That’s what I wanted on camera: fast, loud, and real, a side of Midtown most people walk right past. Not a place to avoid. A place to hang.
