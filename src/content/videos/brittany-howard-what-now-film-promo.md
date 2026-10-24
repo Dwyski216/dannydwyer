@@ -18,7 +18,7 @@ hidden: false
 order: 70
 ---
 
-Poppy season in the San Jacinto Mountains, just outside Palm Springs, and Brittany Howard standing in the middle of an open field. Yes please.
+Poppy season in the San Jacinto Mountains, just outside Palm Springs, and Brittany Howard standing in the middle of an open field. Uh...Yes please.
 
 This was a promo for her album What Now, and she wanted it to feel retro. So we shot 16mm Kodak reversal alongside the RED, through a vintage Cooke Varotal zoom, and kept the magic Mama Hot Dog style: crystals and prisms in front of the lens to bend and scatter the light, and choreographed zooms that hit exactly when they should. Every effect you see happened live, on the day.
 
