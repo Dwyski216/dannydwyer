@@ -17,16 +17,14 @@ const { featured, thumbnails } = Astro.props;
     <h2>Featured Work</h2>
     <div class="card-gallery">
       {featured.map((v, i) => (
-        <div>
-          <VideoCard
-            slug={v.data.urlSlug}
-            title={v.data.title}
-            summary={v.data.summary}
-            tags={v.data.tags}
-            thumbnailUrl={thumbnails[i].src}
-        fallbackUrl={thumbnails[i].fallback}
-          />
-        </div>
+        <VideoCard
+          slug={v.data.urlSlug}
+          title={v.data.title}
+          summary={v.data.summary}
+          tags={v.data.tags}
+          thumbnailUrl={thumbnails[i].src}
+          fallbackUrl={thumbnails[i].fallback}
+        />
       ))}
     </div>
   </section>
