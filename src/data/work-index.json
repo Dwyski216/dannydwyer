@@ -689,17 +689,6 @@
     "order": 70
   },
   {
-    "slug": "allergan-aesthetics",
-    "title": "Allergan Aesthetics",
-    "tags": [
-      "branded content",
-      "medical"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 70
-  },
-  {
     "slug": "bridge",
     "title": "Bridge — Short Film",
     "tags": [
@@ -767,6 +756,17 @@
       "documentary",
       "film",
       "narrative"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 70
+  },
+  {
+    "slug": "allergan-aesthetics",
+    "title": "Allergan Aesthetics",
+    "tags": [
+      "branded content",
+      "medical"
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
