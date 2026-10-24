@@ -797,18 +797,6 @@
     "order": 70
   },
   {
-    "slug": "romer-hell-s-kitchen-hero-film",
-    "title": "Romer Hell's Kitchen Hero Film",
-    "tags": [
-      "commercial",
-      "hotels",
-      "hospitality"
-    ],
-    "uploadDate": "2026-10-24",
-    "hidden": false,
-    "order": 70
-  },
-  {
     "slug": "kimpton-hotel-hero-spot",
     "title": "Kimpton Hotel Hero Spot",
     "tags": [
@@ -816,6 +804,18 @@
       "hotel",
       "hospitality",
       "lifestyle"
+    ],
+    "uploadDate": "2026-10-24",
+    "hidden": false,
+    "order": 70
+  },
+  {
+    "slug": "romer-hell-s-kitchen-hero-film",
+    "title": "Romer Hell's Kitchen Hero Film",
+    "tags": [
+      "commercial",
+      "hotels",
+      "hospitality"
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
