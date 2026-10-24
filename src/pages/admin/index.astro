@@ -132,6 +132,13 @@ import Layout from '../../layouts/Layout.astro';
               <p class="status wb-status" id="work-bulk-status"></p>
             </div>
 
+            <div id="work-order-bar" class="work-order-bar" hidden>
+              <span>Order changed, not saved yet.</span>
+              <button type="button" id="work-order-save" class="btn btn-solid">Save Order</button>
+              <button type="button" id="work-order-discard" class="btn btn-ghost">Discard</button>
+              <p class="status" id="work-order-status"></p>
+            </div>
+
             <div id="work-list" class="work-list">
               <p class="section-hint">Loading…</p>
             </div>
@@ -408,7 +415,7 @@ import Layout from '../../layouts/Layout.astro';
   // events, so loading data never marks a form dirty). Cleared on a
   // successful save or a confirmed discard.
   // ---------------------------------------------------------------------
-  const dirtyFormIds = ['home-form', 'work-page-form', 'work-item-form', 'contact-form', 'settings-form', 'seo-pages'];
+  const dirtyFormIds = ['home-form', 'work-page-form', 'work-order-bar', 'work-item-form', 'contact-form', 'settings-form', 'seo-pages'];
   dirtyFormIds.forEach((id) => {
     const form = document.getElementById(id);
     form?.addEventListener('input', () => (form.dataset.dirty = '1'));
@@ -688,6 +695,9 @@ import Layout from '../../layouts/Layout.astro';
   // Defaults to the site's actual display order (see byDisplayOrder in
   // src/lib/video.ts) — reorder controls only make sense, and only show up,
   // when sorted this way.
+  // An unsaved Work order (slugs, first to last) from dragging rows or the
+  // arrows; null when the list matches what's saved. Save Order commits it.
+  let pendingOrder: string[] | null = null;
   let sortKey: SortKey = 'order';
   let sortAsc = true;
 
@@ -701,40 +711,65 @@ import Layout from '../../layouts/Layout.astro';
     { key: 'hidden', label: 'Status' },
   ];
 
-  async function moveWorkItem(sortedSlugsInView: string[], slug: string, direction: -1 | 1) {
-    const i = sortedSlugsInView.indexOf(slug);
-    const j = i + direction;
-    if (i === -1 || j < 0 || j >= sortedSlugsInView.length) return;
-    const a = workItems.find((it) => it.slug === sortedSlugsInView[i])!;
-    const b = workItems.find((it) => it.slug === sortedSlugsInView[j])!;
-    // Swapping the two neighbors' order values keeps every value's spacing
-    // intact forever — no fractional/midpoint math needed. Both moves go in
-    // one request with one work-index.json read/write (not two independent
-    // ones): the index write uses an optimistic-concurrency sha, and two
-    // concurrent requests racing to update it could lose that race and fail.
-    const [aOrder, bOrder] = [b.order, a.order];
-    const res = await fetch('/api/videos/reorder', {
-      method: 'POST',
-      body: JSON.stringify({
-        moves: [
-          { slug: a.slug, order: aOrder },
-          { slug: b.slug, order: bOrder },
-        ],
-      }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      alert(`Error reordering: ${data.error ?? 'failed'}`);
-      return;
-    }
-    const failed: string[] = data.failed ?? [];
-    if (failed.includes(a.slug)) alert(`Could not move "${a.title}" — try again.`);
-    else a.order = aOrder;
-    if (failed.includes(b.slug)) alert(`Could not move "${b.title}" — try again.`);
-    else b.order = bOrder;
-    if (data.indexWarning) alert(data.indexWarning);
+  // Arrows and drag-and-drop both rearrange the list locally (nothing is
+  // saved yet); Save Order then commits the whole new order at once.
+  function moveWorkItemTo(sortedSlugsInView: string[], from: number, to: number) {
+    if (from === to || from < 0 || to < 0 || from >= sortedSlugsInView.length || to >= sortedSlugsInView.length) return;
+    const next = [...sortedSlugsInView];
+    const [moved] = next.splice(from, 1);
+    next.splice(to, 0, moved);
+    pendingOrder = next;
+    markDirty('work-order-bar');
     renderWorkList();
   }
+
+  function moveWorkItem(sortedSlugsInView: string[], slug: string, direction: -1 | 1) {
+    const i = sortedSlugsInView.indexOf(slug);
+    moveWorkItemTo(sortedSlugsInView, i, i + direction);
+  }
+
+  const workOrderBar = document.getElementById('work-order-bar') as HTMLElement;
+  const workOrderStatus = document.getElementById('work-order-status')!;
+
+  // Saved orders are renumbered 10, 20, 30, ... in list order, and only the
+  // items whose number actually changes are sent (so videos that shared the
+  // same number get untangled the first time, and later saves only touch
+  // what moved). Everything lands in one commit.
+  document.getElementById('work-order-save')!.addEventListener('click', async () => {
+    if (!pendingOrder) return;
+    const moves = pendingOrder
+      .map((slug, i) => ({ slug, order: (i + 1) * 10 }))
+      .filter((m) => workItems.find((it) => it.slug === m.slug)?.order !== m.order);
+    if (moves.length === 0) {
+      pendingOrder = null;
+      clearDirty('work-order-bar');
+      renderWorkList();
+      return;
+    }
+    workOrderStatus.textContent = 'Saving…';
+    const res = await fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ moves }) });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      workOrderStatus.textContent = `Error: ${data.error ?? 'could not save the order'}`;
+      return;
+    }
+    moves.forEach((m) => {
+      const item = workItems.find((it) => it.slug === m.slug);
+      if (item) item.order = m.order;
+    });
+    pendingOrder = null;
+    clearDirty('work-order-bar');
+    renderWorkList();
+    workOrderStatus.textContent = '';
+    if (data.indexWarning) alert(data.indexWarning);
+  });
+
+  document.getElementById('work-order-discard')!.addEventListener('click', () => {
+    pendingOrder = null;
+    clearDirty('work-order-bar');
+    workOrderStatus.textContent = '';
+    renderWorkList();
+  });
 
   function populateBulkTagSelects() {
     const tags = allTags();
@@ -811,6 +846,7 @@ import Layout from '../../layouts/Layout.astro';
     const dir = sortAsc ? 1 : -1;
     const sorted = [...filtered].sort((a, b) => {
       if (sortKey === 'hidden') return (Number(a.hidden) - Number(b.hidden)) * dir;
+      if (sortKey === 'order' && pendingOrder) return (pendingOrder.indexOf(a.slug) - pendingOrder.indexOf(b.slug)) * dir;
       if (sortKey === 'order') {
         if (a.order !== b.order) return (a.order - b.order) * dir;
         return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
@@ -834,12 +870,13 @@ import Layout from '../../layouts/Layout.astro';
       ? sorted
           .map(
             (item, i) => `
-        <tr data-slug="${item.slug}">
+        <tr data-slug="${item.slug}" data-index="${i}">
           <td><input type="checkbox" class="work-row-select" data-slug="${item.slug}" ${selectedSlugs.has(item.slug) ? 'checked' : ''} /></td>
           <td class="work-order-cell">
             ${
               canReorder
-                ? `<button type="button" class="btn-move" data-move-up="${item.slug}" ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
+                ? `<span class="drag-handle" title="Drag to reorder" aria-hidden="true">⠿</span>
+                   <button type="button" class="btn-move" data-move-up="${item.slug}" ${i === 0 ? 'disabled' : ''} aria-label="Move up">↑</button>
                    <button type="button" class="btn-move" data-move-down="${item.slug}" ${i === sorted.length - 1 ? 'disabled' : ''} aria-label="Move down">↓</button>`
                 : '<span class="work-cell-empty">—</span>'
             }
@@ -889,6 +926,50 @@ import Layout from '../../layouts/Layout.astro';
     workListEl.querySelectorAll('[data-move-down]').forEach((btn) => {
       btn.addEventListener('click', () => moveWorkItem(sortedSlugs, (btn as HTMLElement).dataset.moveDown!, 1));
     });
+
+    workOrderBar.hidden = !pendingOrder;
+
+    // Drag and drop: grab a row by its handle and drop it above or below
+    // another row (a gold line shows where it will land).
+    if (canReorder) {
+      let dragFrom = -1;
+      const rows = Array.from(workListEl.querySelectorAll('tbody tr[data-index]')) as HTMLTableRowElement[];
+      const clearMarks = () => rows.forEach((r) => r.classList.remove('drop-before', 'drop-after'));
+      rows.forEach((row) => {
+        const handle = row.querySelector('.drag-handle') as HTMLElement | null;
+        handle?.addEventListener('mousedown', () => (row.draggable = true));
+        row.addEventListener('dragstart', (e) => {
+          dragFrom = Number(row.dataset.index);
+          row.classList.add('dragging');
+          e.dataTransfer?.setData('text/plain', row.dataset.slug ?? '');
+          if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
+        });
+        row.addEventListener('dragend', () => {
+          row.draggable = false;
+          row.classList.remove('dragging');
+          clearMarks();
+        });
+        row.addEventListener('dragover', (e) => {
+          if (dragFrom < 0) return;
+          e.preventDefault();
+          const box = row.getBoundingClientRect();
+          const after = e.clientY > box.top + box.height / 2;
+          clearMarks();
+          row.classList.add(after ? 'drop-after' : 'drop-before');
+        });
+        row.addEventListener('drop', (e) => {
+          if (dragFrom < 0) return;
+          e.preventDefault();
+          const target = Number(row.dataset.index);
+          const after = row.classList.contains('drop-after');
+          let to = target + (after ? 1 : 0);
+          if (dragFrom < to) to -= 1;
+          clearMarks();
+          moveWorkItemTo(sortedSlugs, dragFrom, to);
+          dragFrom = -1;
+        });
+      });
+    }
 
     workListEl.querySelectorAll('.work-row-select').forEach((cb) => {
       cb.addEventListener('change', () => {
@@ -2143,6 +2224,49 @@ import Layout from '../../layouts/Layout.astro';
 
   /* On phones the table scrolls sideways inside this box instead of
      widening the whole page. */
+  .work-order-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 0.75rem;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--accent);
+    color: var(--text);
+    font-size: 0.9rem;
+  }
+
+  .work-order-bar .status {
+    margin: 0;
+  }
+
+  .drag-handle {
+    display: inline-block;
+    cursor: grab;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0 0.35rem 0 0;
+    vertical-align: middle;
+    user-select: none;
+  }
+
+  .drag-handle:hover {
+    color: var(--accent);
+  }
+
+  .work-table tr.dragging {
+    opacity: 0.4;
+  }
+
+  .work-table tr.drop-before td {
+    box-shadow: inset 0 2px 0 var(--accent);
+  }
+
+  .work-table tr.drop-after td {
+    box-shadow: inset 0 -2px 0 var(--accent);
+  }
+
   .work-table-scroll {
     overflow-x: auto;
   }

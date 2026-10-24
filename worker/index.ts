@@ -359,6 +359,56 @@ async function handleVideosDelete(request: Request, env: Env): Promise<Response>
 // nothing surfaced it) — see the per-move loop below, which patches every
 // video file first (safe to do concurrently; each touches a different file
 // with its own sha) and only then does the index's one read-then-write.
+// Commits several files to the branch as ONE commit (Git Data API), so a
+// change touching many videos lands as a single commit and a single
+// Cloudflare deploy, instead of a burst of parallel commits that can race
+// each other. Retries once if the branch moved underneath it (e.g. another
+// admin save landed at the same moment).
+async function commitFiles(env: Env, files: { path: string; content: string }[], message: string): Promise<boolean> {
+  const api = (path: string, init: RequestInit = {}) =>
+    fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/${path}`, {
+      ...init,
+      headers: {
+        Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+        Accept: 'application/vnd.github+json',
+        'User-Agent': 'dannydwyer-admin',
+        ...(init.headers ?? {}),
+      },
+    });
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const refRes = await api(`git/ref/heads/${env.GITHUB_BRANCH}`);
+    if (!refRes.ok) return false;
+    const headSha = ((await refRes.json()) as { object: { sha: string } }).object.sha;
+    const commitRes = await api(`git/commits/${headSha}`);
+    if (!commitRes.ok) return false;
+    const baseTree = ((await commitRes.json()) as { tree: { sha: string } }).tree.sha;
+    const treeRes = await api('git/trees', {
+      method: 'POST',
+      body: JSON.stringify({
+        base_tree: baseTree,
+        tree: files.map((f) => ({ path: f.path, mode: '100644', type: 'blob', content: f.content })),
+      }),
+    });
+    if (!treeRes.ok) return false;
+    const treeSha = ((await treeRes.json()) as { sha: string }).sha;
+    const newCommitRes = await api('git/commits', {
+      method: 'POST',
+      body: JSON.stringify({ message, tree: treeSha, parents: [headSha] }),
+    });
+    if (!newCommitRes.ok) return false;
+    const newSha = ((await newCommitRes.json()) as { sha: string }).sha;
+    const updateRes = await api(`git/refs/heads/${env.GITHUB_BRANCH}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ sha: newSha, force: false }),
+    });
+    if (updateRes.ok) return true;
+    if (updateRes.status !== 422) return false; // 422 = branch moved; rebuild on the new head
+  }
+  return false;
+}
+
+// Saves a new Work order: every moved video's `order` plus the Work index,
+// all in one commit (see commitFiles). All or nothing.
 async function handleVideosReorder(request: Request, env: Env): Promise<Response> {
   const body = (await request.json().catch(() => ({}))) as { moves?: { slug?: string; order?: number }[] };
   const moves = Array.isArray(body.moves) ? body.moves : [];
@@ -369,27 +419,28 @@ async function handleVideosReorder(request: Request, env: Env): Promise<Response
   }
   const validMoves = moves as { slug: string; order: number }[];
 
-  const results = await Promise.all(
-    validMoves.map((m) => patchVideoFrontmatter(env, m.slug, (data) => ({ ...data, order: m.order }), `Reorder ${m.slug}`))
-  );
-  const failed = validMoves.filter((_, i) => !results[i]).map((m) => m.slug);
-  if (failed.length === validMoves.length) {
-    return json({ error: 'GitHub commit failed for all moved videos', failed }, 502);
-  }
+  const files = await Promise.all(validMoves.map((m) => getFile(env, `${VIDEOS_DIR}/${m.slug}.md`)));
+  const missing = validMoves.filter((_, i) => !files[i]).map((m) => m.slug);
+  if (missing.length) return json({ error: `Could not read: ${missing.join(', ')}` }, 502);
 
-  const succeeded = new Set(validMoves.filter((_, i) => results[i]).map((m) => m.slug));
+  const changes = validMoves.map((m, i) => {
+    const { data, body: mdBody } = parseFrontmatter(files[i]!.content);
+    return { path: `${VIDEOS_DIR}/${m.slug}.md`, content: `${toFrontmatter({ ...data, order: m.order })}\n\n${mdBody}\n` };
+  });
+
   const orderBySlug = new Map(validMoves.map((m) => [m.slug, m.order]));
   const index = await readIndex(env);
   let indexWarning: string | undefined;
   if ('error' in index) {
     indexWarning = index.error;
   } else {
-    const items = index.items.map((it) => (succeeded.has(it.slug) ? { ...it, order: orderBySlug.get(it.slug)! } : it));
-    const updateRes = await writeIndex(env, items, index.sha, `Reorder ${[...succeeded].join(', ')} in work index`);
-    if (!updateRes.ok) indexWarning = 'Reordered, but the Work index could not be updated — use "Rebuild Index".';
+    const items = index.items.map((it) => (orderBySlug.has(it.slug) ? { ...it, order: orderBySlug.get(it.slug)! } : it));
+    changes.push({ path: INDEX_PATH, content: JSON.stringify(items, null, 2) + '\n' });
   }
 
-  return json({ ok: true, ...(failed.length ? { failed } : {}), ...(indexWarning ? { indexWarning } : {}) });
+  const ok = await commitFiles(env, changes, `Reorder Work (${validMoves.length} item${validMoves.length === 1 ? '' : 's'})`);
+  if (!ok) return json({ error: 'GitHub commit failed; nothing was changed. Try again.' }, 502);
+  return json({ ok: true, ...(indexWarning ? { indexWarning } : {}) });
 }
 
 async function handleTagsPost(request: Request, env: Env): Promise<Response> {
