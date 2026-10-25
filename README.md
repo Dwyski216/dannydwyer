@@ -19,22 +19,27 @@ src/
   content/
     videos/*.md        ← one file per video (title, platform, video ID, tags, stills, etc.)
     pages/contact.md    ← Contact page copy
+    pages/work.md       ← Work page heading + description
   data/
     site.json           ← global settings (name, bio, socials, email)
+    categories.ts       ← Work category buttons/pages (Documentary, Commercial, Music Videos)
   layouts/Layout.astro   ← SEO meta tags + JSON-LD structured data
-  components/            ← VideoPlayer, VideoCard, SocialIcons, header/footer,
-                            and sections/ (the pieces each page is built from)
+  components/            ← VideoPlayer, SeriesPlayer, VideoCard, SocialIcons,
+                            header/footer, WorkPage (shared by /work and the
+                            category pages), and sections/ (page pieces)
   pages/
     index.astro          ← Home (main reel + intro + featured work)
-    work/index.astro      ← Video grid with search + tag filtering
+    work/index.astro      ← Video grid with search + tag filtering (WorkPage)
+    [category].astro      ← /documentary, /commercial, /music-videos (WorkPage, pre-filtered)
     work/[slug].astro     ← Individual video pages (embed, description, stills gallery)
     contact.astro         ← Contact page
     admin/index.astro     ← Content admin panel (see section 5)
     llms.txt.ts           ← Plain-text site index for AI answer engines (GEO)
 worker/
-  index.ts               ← Cloudflare Worker: handles /api/videos and /api/settings
-                            (the admin panel's write endpoints); everything else is
-                            served as a static file from dist/ automatically
+  index.ts               ← Cloudflare Worker: guards /admin and handles the admin's
+                            /api/* endpoints (videos, reorder, settings, SEO, tags,
+                            thumbnail uploads); everything else is served as a
+                            static file from dist/
 wrangler.jsonc            ← Cloudflare Worker + static-assets config
 ```
 
