@@ -15,7 +15,7 @@ stills: []
 urlSlug: "google-pixel-lookout"
 hidden: false
 order: 250
-categoryOrder: {"commercial": 60, "documentary": 70}
+categoryOrder: {"commercial":60,"documentary":90}
 ---
 
 Think about how many decisions you make in a single aisle without noticing: brand, size, flavor, and price, all read at a glance.
