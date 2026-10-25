@@ -15,7 +15,7 @@ tags: ["fashion","celebrity","commercial","series","make up","beauty"]
 stills: []
 urlSlug: "lady-gaga-x-haus-labs"
 hidden: false
-order: 20
+order: 30
 categoryOrder: {"commercial":10}
 ---
 
