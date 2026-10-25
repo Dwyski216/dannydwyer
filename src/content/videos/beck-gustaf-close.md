@@ -7,8 +7,9 @@ videoId: "938288114"
 customThumbnail: "/images/thumbnails/beck-gustaf-close-1792691554035.webp"
 credits: [{"role":"Director","name":"Beck & Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Cast","name":"Gustaf"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Speed Panchros"}]
+series: []
 client: "Beck"
-projectName: "Beck × Gustaf — \"Close\""
+projectName: "Beck × Gustaf \"Close\""
 uploadDate: "2023-05-01"
 tags: ["music video","celebrity","Beck","Gustaf","Los Angeles","Punk","Black and White"]
 stills: []
