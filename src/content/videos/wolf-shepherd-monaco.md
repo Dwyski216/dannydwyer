@@ -1,14 +1,15 @@
 ---
-title: "Wolf & Shepherd Monaco"
-pageTitle: "Wolf & Shepherd Monaco, Malibu Pier | Filmmaker Danny Dwyer"
-summary: "From a morning cast off the Malibu Pier to an afternoon meeting, same shoes. Filmmaker Danny Dwyer on the Wolf & Shepherd Monaco."
+title: "Wolf & Shepherd Collection"
+pageTitle: "Wolf & Shepherd Shoe Campaign | Filmmaker Danny Dwyer"
+summary: "Filmmaker Danny Dwyer’s five-film Wolf & Shepherd series, with the Monaco, Swiftknit, Chukka, Slip-On, and Crossover, shot from the Malibu Pier to the Santa Monica Mountains."
 platform: "vimeo"
 videoId: "478342393"
 customThumbnail: "/images/thumbnails/wolf-shepherd-monaco-1792727681930.webp"
 credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Composer","name":"Werdperfect"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Mini S4"}]
+series: []
 client: "Wolf & Shepherd"
-projectName: "Monaco"
+projectName: "Summer Collection"
 uploadDate: "2017-08-01"
 tags: ["commercial","product","fashion","shoes"]
 stills: []
@@ -17,8 +18,6 @@ hidden: false
 order: 420
 ---
 
-Cast a line off the Malibu Pier in the morning. Walk into the meeting that afternoon like you own the building. Same shoes.
+Wolf & Shepherd makes dress shoes that don’t act like dress shoes. Across five films, the Monaco, the Swiftknit, the Chukka, the Slip-On, and the Crossover, I directed, shot, and cut a series that put that idea to the test, from the Malibu Pier to the Santa Monica Mountains.
 
-That's the whole pitch for the Monaco, and I wanted every frame to sell it without a word. Our production design gave us a world of cool blues, weathered wood, and sea air, and I shot it slick enough to carry straight from the pier into the office.
-
-Easy on the eyes. Easy on the feet. That's a shoe that knows how to live.
+Five shoes, five locations, one idea: you shouldn’t have to choose between dressing up and getting after it.
