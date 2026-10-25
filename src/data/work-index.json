@@ -521,22 +521,6 @@
     "order": 10
   },
   {
-    "slug": "128-g",
-    "title": "128-G x Brick of Gold",
-    "tags": [
-      "documentary",
-      "social issue",
-      "prison",
-      "handheld",
-      "book",
-      "MoMa",
-      "editor"
-    ],
-    "uploadDate": "2018-04-01",
-    "hidden": false,
-    "order": 400
-  },
-  {
     "slug": "columbia-intuitive-machines-nasa-v1",
     "title": "Columbia × Intuitive Machines × NASA",
     "tags": [
@@ -805,5 +789,21 @@
     "uploadDate": "2013-08-01",
     "hidden": false,
     "order": 550
+  },
+  {
+    "slug": "128-g",
+    "title": "128-G x Brick of Gold",
+    "tags": [
+      "social issue",
+      "prison",
+      "handheld",
+      "book",
+      "MoMa",
+      "editor",
+      "trailer"
+    ],
+    "uploadDate": "2018-04-01",
+    "hidden": false,
+    "order": 400
   }
 ]
