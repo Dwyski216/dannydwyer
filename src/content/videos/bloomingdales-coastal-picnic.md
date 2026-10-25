@@ -15,7 +15,7 @@ tags: ["fashion","commercial"]
 stills: []
 urlSlug: "bloomingdales-coastal-picnic"
 hidden: false
-order: 120
+order: 130
 ---
 
 Summer, dressed up and set loose on Catalina Island.
