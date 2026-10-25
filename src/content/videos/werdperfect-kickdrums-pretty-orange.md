@@ -1,12 +1,13 @@
 ---
 title: "Werdperfect x The Kickdrums \"Pretty Orange\""
 pageTitle: "Werdperfect \"Pretty Orange\" | Filmmaker Danny Dwyer"
-summary: "An LA orange grove, 105° heat, bees, and turtles. Filmmaker Danny Dwyer on Werdperfect's \"Pretty Orange,\" all in camera."
+summary: "A childhood friend, a hidden LA orange grove, and 105° heat. Filmmaker Danny Dwyer on Werdperfect’s “Pretty Orange” music video, all in camera zooms. Nobody got stung."
 platform: "vimeo"
 videoId: "875654186"
 customThumbnail: "/images/thumbnails/werdperfect-kickdrums-pretty-orange-1792691784392.webp"
 credits: [{"role":"Cast","name":"Werdperfect"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Production Designer","name":"Robert Muller"},{"role":"Executive Producer","name":"Porter Muller"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Vintage Cooke Varotal 25-250"},{"category":"Drone","item":"DJI Mavic"}]
+series: []
 client: "Werdperfect"
 projectName: "\"Pretty Orange\""
 uploadDate: "2023-02-01"
