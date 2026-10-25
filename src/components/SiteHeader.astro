@@ -43,17 +43,33 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
        min(360px, 88vw) on phones. Page titles are sized from it. */
     width: var(--banner-width);
     height: auto;
+    /* The bolt sits a hair left of the artwork's middle (its center is at
+       990.5 of 2000px), so nudge the image right by that 0.475% to put the
+       bolt on the page's center line, which everything below centers on. */
+    transform: translateX(0.475%);
   }
 
+  /* Three columns with the middle one centered: WORK sits exactly on the
+     center line under the bolt, HOME and CONTACT balanced either side
+     (a plain centered row would center the group, pulling WORK left
+     because CONTACT is longer than HOME). */
   .nav {
     width: 100%;
-    justify-content: center;
-    display: flex;
-    gap: 1.75rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    column-gap: 1.75rem;
     font-size: 0.9rem;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+  }
+
+  .nav a:first-child {
+    justify-self: end;
+  }
+
+  .nav a:last-child {
+    justify-self: start;
   }
 
   .nav a {
