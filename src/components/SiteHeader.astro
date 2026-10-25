@@ -60,8 +60,9 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
     column-gap: 1.75rem;
     /* WORK centers on the middle of the gap between the Y and the D (1021
        of the artwork's 2000px), 1.525% of the banner's width right of the
-       page center; padding on one side moves the center by half of it. */
-    padding-left: calc(var(--banner-width) * 0.0305);
+       page center, less 2px by eye; padding on one side moves the center
+       by half of it. */
+    padding-left: calc(var(--banner-width) * 0.0305 - 4px);
     font-size: 0.9rem;
     font-weight: 400;
     text-transform: uppercase;
