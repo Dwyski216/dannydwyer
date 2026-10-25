@@ -11,22 +11,6 @@
     "order": 620
   },
   {
-    "slug": "beck-gustaf-close",
-    "title": "Beck × Gustaf \"Close\"",
-    "tags": [
-      "music video",
-      "celebrity",
-      "Beck",
-      "Gustaf",
-      "Los Angeles",
-      "Punk",
-      "Black and White"
-    ],
-    "uploadDate": "2023-05-01",
-    "hidden": false,
-    "order": 240
-  },
-  {
     "slug": "big-age-audible-trailer",
     "title": "Audible \"Big Age\"",
     "tags": [
@@ -806,5 +790,21 @@
     "uploadDate": "2017-08-01",
     "hidden": false,
     "order": 430
+  },
+  {
+    "slug": "beck-gustaf-close",
+    "title": "Beck × Gustaf \"Close\"",
+    "tags": [
+      "music video",
+      "celebrity",
+      "Beck",
+      "Gustaf",
+      "Los Angeles",
+      "Punk",
+      "Black and White"
+    ],
+    "uploadDate": "2023-05-01",
+    "hidden": false,
+    "order": 240
   }
 ]
