@@ -43,10 +43,11 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
        min(360px, 88vw) on phones. Page titles are sized from it. */
     width: var(--banner-width);
     height: auto;
-    /* The bolt sits a hair left of the artwork's middle (its center is at
-       990.5 of 2000px), so nudge the image right by that 0.475% to put the
-       bolt on the page's center line, which everything below centers on. */
-    transform: translateX(0.475%);
+    /* The bolt sits centered in the gap between the Y and the D, at 1021
+       of the artwork's 2000px, so shift the image left by that 1.05% to
+       put the bolt on the page's center line, which everything below
+       centers on. */
+    transform: translateX(-1.05%);
   }
 
   /* Three columns with the middle one centered: WORK sits exactly on the
@@ -73,6 +74,9 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   }
 
   .nav a {
+    /* Matches the letter-spacing after the last letter, so the word (and
+       its underline) is centered in its box. */
+    padding-left: 0.08em;
     padding-bottom: 0.2rem;
     border-bottom: 1px solid transparent;
     color: var(--text-muted);
