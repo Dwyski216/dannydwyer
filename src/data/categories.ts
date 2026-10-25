@@ -11,7 +11,7 @@ export interface Category {
 }
 
 export const CATEGORIES: Category[] = [
-  { slug: 'documentary', tag: 'documentary', label: 'Documentary', title: 'Documentary | Danny Dwyer', noun: 'documentary films and branded docs' },
+  { slug: 'documentary', tag: 'documentary', label: 'Documentary', title: 'Danny Dwyer | Documentary Cinematographer & Director', noun: 'documentary films and branded docs' },
   { slug: 'commercial', tag: 'commercial', label: 'Commercial', title: 'Commercial | Danny Dwyer', noun: 'commercials and brand campaigns' },
   { slug: 'music-videos', tag: 'music video', label: 'Music Videos', title: 'Music Videos | Danny Dwyer', noun: 'music videos' },
 ];
