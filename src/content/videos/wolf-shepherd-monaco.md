@@ -7,7 +7,7 @@ videoId: "478342393"
 customThumbnail: "/images/thumbnails/wolf-shepherd-monaco-1792727681930.webp"
 credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Composer","name":"Werdperfect"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Mini S4"}]
-series: []
+series: [{"title":"Chukka","platform":"vimeo","videoId":"478341941","thumbnail":"/images/thumbnails/wolf-shepherd-monaco-series-2-1792893195133.webp"},{"title":"Swift Knit","platform":"vimeo","videoId":"478342177","thumbnail":"/images/thumbnails/wolf-shepherd-monaco-series-3-1792893312036.webp"}]
 client: "Wolf & Shepherd"
 projectName: "Summer Collection"
 uploadDate: "2017-08-01"
