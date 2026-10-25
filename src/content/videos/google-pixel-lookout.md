@@ -14,7 +14,7 @@ tags: ["commercial","technology","accessibility","branded documentary","document
 stills: []
 urlSlug: "google-pixel-lookout"
 hidden: false
-order: 320
+order: 250
 ---
 
 Think about how many decisions you make in a single aisle without noticing: brand, size, flavor, and price, all read at a glance.

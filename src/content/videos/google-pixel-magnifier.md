@@ -13,7 +13,7 @@ tags: ["commercial","technology","accessibility","documentary","branded document
 stills: []
 urlSlug: "google-pixel-magnifier"
 hidden: false
-order: 420
+order: 460
 ---
 
 Brendan collects coins, and he's not casual about it.

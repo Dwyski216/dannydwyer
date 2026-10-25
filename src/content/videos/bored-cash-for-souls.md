@@ -15,7 +15,7 @@ tags: ["fashion","short film"]
 stills: []
 urlSlug: "bored-cash-for-souls"
 hidden: false
-order: 270
+order: 230
 ---
 
 A friend was launching a streetwear brand and handed us full creative control. We built the whole piece around one of their shirts: "Cash for Souls."

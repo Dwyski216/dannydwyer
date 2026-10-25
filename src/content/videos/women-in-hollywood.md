@@ -15,7 +15,7 @@ tags: ["editorial","interview","Black and White","Elle"]
 stills: []
 urlSlug: "women-in-hollywood"
 hidden: false
-order: 170
+order: 130
 ---
 
 I still don't have the words for this one.

@@ -13,7 +13,7 @@ tags: ["editorial","celebrity","interview"]
 stills: []
 urlSlug: "jane-fonda-harpers-bazaar"
 hidden: false
-order: 580
+order: 590
 ---
 
 Some people need an introduction. Jane Fonda is not one of them.
