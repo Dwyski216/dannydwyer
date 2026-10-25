@@ -51,6 +51,13 @@ const { title, email } = Astro.props;
     margin-top: 4rem;
   }
 
+  /* Desktop: titles sit 36px closer to the nav (Work, Contact, 404 match). */
+  @media (min-width: 601px) {
+    .layout {
+      margin-top: calc(4rem - 36px);
+    }
+  }
+
   .contact-title {
     grid-area: title;
   }

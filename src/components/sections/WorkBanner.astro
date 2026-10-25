@@ -27,6 +27,13 @@ const { title } = Astro.props;
     }
   }
 
+  /* Desktop: titles sit 36px closer to the nav (Work, Contact, 404 match). */
+  @media (min-width: 601px) {
+    .description-banner {
+      margin-top: calc(4rem - 36px);
+    }
+  }
+
   .description-banner h1 {
     margin: 0 0 0.5rem;
   }
