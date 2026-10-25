@@ -387,18 +387,6 @@
     "order": 540
   },
   {
-    "slug": "nychos-sheryo-the-yok",
-    "title": "Nychos × Sheryo × The Yok",
-    "tags": [
-      "documentary",
-      "street art",
-      "graffiti"
-    ],
-    "uploadDate": "2013-08-01",
-    "hidden": false,
-    "order": 550
-  },
-  {
     "slug": "honduras-paralyzed",
     "title": "Honduras \"Paralyzed\"",
     "tags": [
@@ -806,5 +794,16 @@
     "uploadDate": "2023-05-01",
     "hidden": false,
     "order": 30
+  },
+  {
+    "slug": "nychos-sheryo-the-yok",
+    "title": "Nychos × Sheryo × The Yok",
+    "tags": [
+      "street art",
+      "graffiti"
+    ],
+    "uploadDate": "2013-08-01",
+    "hidden": false,
+    "order": 550
   }
 ]
