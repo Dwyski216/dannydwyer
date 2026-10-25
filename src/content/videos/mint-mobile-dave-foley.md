@@ -14,7 +14,7 @@ tags: ["commercial","comedy","celebrity"]
 stills: []
 urlSlug: "mint-mobile-dave-foley"
 hidden: false
-order: 270
+order: 260
 ---
 
 This might be the most demanding shoot I've ever done, which is exactly why you'll laugh when you watch it.

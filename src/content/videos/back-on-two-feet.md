@@ -14,7 +14,7 @@ tags: ["documentary","veterans","mini doc"]
 stills: []
 urlSlug: "back-on-two-feet"
 hidden: false
-order: 510
+order: 490
 ---
 
 I was on set the night before when the phone rang: "Can you fly to San Diego and film a Marine veteran going into surgery?"

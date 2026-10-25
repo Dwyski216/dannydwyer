@@ -14,7 +14,7 @@ tags: ["music video","comedy","Orange Grove","Vintage","Werdperfect"]
 stills: []
 urlSlug: "werdperfect-kickdrums-pretty-orange"
 hidden: false
-order: 260
+order: 330
 ---
 
 Matt and I have known each other since we were kids, and we've lived a lot of life side by side. When he gave me free rein to direct "Pretty Orange," we wanted to reach back to our rural roots.
