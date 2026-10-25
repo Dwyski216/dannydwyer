@@ -362,4 +362,12 @@ const personSchema = {
       --cols: 1;
     }
   }
+
+  /* Phones: cards 50% closer together. */
+  @media (max-width: 600px) {
+    .card-gallery {
+      --col-gap: calc(var(--gutter) * 0.5);
+      --row-gap: 1rem;
+    }
+  }
 </style>
