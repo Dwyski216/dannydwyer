@@ -142,7 +142,8 @@ const personSchema = {
      sized from the banner's width so its capital letters are always 10%
      shorter than the banner's letters, on every screen: a title font size
      of 10.54% of the banner's width (measured on screen, capital letters
-     against the banner's letters). */
+     against the banner's letters). On desktop, .page-title (Work, Contact,
+     404) sits 10pt under that. */
   :root {
     --banner-width: 472px;
     --title-size: calc(var(--banner-width) * 0.1054);
@@ -257,6 +258,8 @@ const personSchema = {
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--olympic-gold);
+    /* Centered on every screen (Contact's over its column). */
+    text-align: center;
   }
 
   /* Phones keep the full title size. */
@@ -264,11 +267,6 @@ const personSchema = {
     .page-title {
       font-size: var(--title-size);
     }
-  }
-
-  /* Page titles are centered on every screen (Contact's over its column). */
-  .page-title {
-    text-align: center;
   }
 
   a {

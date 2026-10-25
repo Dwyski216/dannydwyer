@@ -27,6 +27,13 @@ import SiteFooter from '../components/SiteFooter.astro';
     margin-top: 5rem;
   }
 
+  /* Phones: 60px below the nav underline, like Work and Contact. */
+  @media (max-width: 600px) {
+    .main .page-title {
+      margin-top: calc(5rem - 49px);
+    }
+  }
+
   /* Desktop: titles sit 36px closer to the nav (Work, Contact, 404 match). */
   @media (min-width: 601px) {
     .main .page-title {

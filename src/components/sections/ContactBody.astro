@@ -38,7 +38,7 @@ const { title, email } = Astro.props;
 <style>
   /* Phones: title, then photo, then copy, stacked. Desktop: photo on the
      left; the title sits over the copy on the right, its top level with the
-     photo's. The 4rem top margin matches the Work page title's distance
+     photo's. The top margins below match the Work page title's distance
      from the site header. */
   .layout {
     display: grid;
@@ -51,8 +51,8 @@ const { title, email } = Astro.props;
     margin-top: 4rem;
   }
 
-  /* Phones: the gap above the title (from the nav underline) is 15% more than
-     the gap below it, to the photo. */
+  /* Phones: 60px from the nav underline to the title, 15% more than the
+     52px below it to the photo (Work matches). */
   @media (max-width: 600px) {
     .layout {
       margin-top: calc(4rem - 49px);
