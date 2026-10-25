@@ -14,8 +14,8 @@ tags: ["commercial","product","16mm","fashion","film","car","western","Kodak"]
 stills: []
 urlSlug: "bandits-bandana"
 hidden: false
-order: 420
-categoryOrder: {"commercial": 140}
+order: 240
+categoryOrder: {"commercial":140}
 ---
 
 The last thing I shot before the world shut down.

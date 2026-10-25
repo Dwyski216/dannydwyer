@@ -13,8 +13,8 @@ tags: ["music video","short film","comedy","psychedelic"]
 stills: []
 urlSlug: "dark-bardo-midnight-cowboy"
 hidden: false
-order: 128
-categoryOrder: {"music video": 40}
+order: 200
+categoryOrder: {"music video":40}
 ---
 
 Truth is, nobody approached me for this one. I forced my way in.

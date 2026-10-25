@@ -13,7 +13,7 @@ tags: ["commercial","technology","accessibility","Sony","Angenieux EZ","Docu Ser
 stills: []
 urlSlug: "google-pixel-guided-frame"
 hidden: false
-order: 520
+order: 160
 categoryOrder: {"commercial":180,"documentary":70}
 ---
 

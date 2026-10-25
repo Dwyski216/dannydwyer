@@ -13,7 +13,7 @@ tags: ["commercial","technology","accessibility","documentary","branded document
 stills: []
 urlSlug: "google-pixel-magnifier"
 hidden: false
-order: 460
+order: 220
 categoryOrder: {"commercial":150,"documentary":110}
 ---
 

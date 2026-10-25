@@ -15,8 +15,8 @@ tags: ["documentary","film","narrative"]
 stills: []
 urlSlug: "jelly-roll-x-men-s-health-documentary"
 hidden: false
-order: 20
-categoryOrder: {"documentary": 10}
+order: 30
+categoryOrder: {"documentary":10}
 ---
 
 I've known Jelly Roll for years. We met through a mutual friend in Nashville, long before the sold out arenas.

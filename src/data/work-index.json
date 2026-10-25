@@ -41,7 +41,7 @@
     ],
     "uploadDate": "2025-02-01",
     "hidden": false,
-    "order": 150,
+    "order": 120,
     "categoryOrder": {
       "documentary": 40
     }
@@ -74,7 +74,7 @@
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
-    "order": 460,
+    "order": 220,
     "categoryOrder": {
       "commercial": 150,
       "documentary": 110
@@ -91,7 +91,7 @@
     ],
     "uploadDate": "2023-02-01",
     "hidden": false,
-    "order": 128,
+    "order": 200,
     "categoryOrder": {
       "music video": 40
     }
@@ -112,7 +112,7 @@
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
-    "order": 520,
+    "order": 160,
     "categoryOrder": {
       "commercial": 180,
       "documentary": 70
@@ -233,7 +233,7 @@
     ],
     "uploadDate": "2020-01-01",
     "hidden": false,
-    "order": 200
+    "order": 270
   },
   {
     "slug": "diana-marks-lexus",
@@ -246,7 +246,7 @@
     ],
     "uploadDate": "2018-01-01",
     "hidden": false,
-    "order": 330,
+    "order": 310,
     "categoryOrder": {
       "commercial": 120
     }
@@ -299,7 +299,7 @@
     ],
     "uploadDate": "2017-05-01",
     "hidden": false,
-    "order": 420,
+    "order": 240,
     "categoryOrder": {
       "commercial": 140
     }
@@ -315,7 +315,7 @@
     ],
     "uploadDate": "2017-03-01",
     "hidden": false,
-    "order": 320,
+    "order": 300,
     "categoryOrder": {
       "commercial": 110
     }
@@ -356,7 +356,7 @@
     ],
     "uploadDate": "2016-11-01",
     "hidden": false,
-    "order": 240,
+    "order": 210,
     "categoryOrder": {
       "documentary": 60
     }
@@ -468,7 +468,7 @@
     ],
     "uploadDate": "2018-09-01",
     "hidden": false,
-    "order": 130
+    "order": 250
   },
   {
     "slug": "joe-and-the-whale-trailer",
@@ -505,7 +505,7 @@
     ],
     "uploadDate": "2017-02-01",
     "hidden": false,
-    "order": 340,
+    "order": 320,
     "categoryOrder": {
       "music video": 50
     }
@@ -540,7 +540,7 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 10,
+    "order": 20,
     "categoryOrder": {
       "commercial": 10
     }
@@ -595,7 +595,7 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 190
+    "order": 330
   },
   {
     "slug": "pacific-shaving-company",
@@ -662,7 +662,7 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 30,
+    "order": 10,
     "categoryOrder": {
       "commercial": 20
     }
@@ -676,7 +676,7 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 124,
+    "order": 150,
     "categoryOrder": {
       "commercial": 80
     }
@@ -690,7 +690,7 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 140
+    "order": 260
   },
   {
     "slug": "brittany-howard-what-now-film-promo",
@@ -703,7 +703,7 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 120,
+    "order": 130,
     "categoryOrder": {
       "music video": 30
     }
@@ -730,7 +730,7 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 310,
+    "order": 290,
     "categoryOrder": {
       "commercial": 100
     }
@@ -745,7 +745,7 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 126,
+    "order": 190,
     "categoryOrder": {
       "commercial": 90
     }
@@ -795,7 +795,7 @@
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
-    "order": 250,
+    "order": 180,
     "categoryOrder": {
       "commercial": 60,
       "documentary": 90
@@ -861,7 +861,7 @@
     ],
     "uploadDate": "2018-04-01",
     "hidden": false,
-    "order": 122
+    "order": 140
   },
   {
     "slug": "jelly-roll-x-men-s-health-documentary",
@@ -873,7 +873,7 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 20,
+    "order": 30,
     "categoryOrder": {
       "documentary": 10
     }
@@ -890,7 +890,7 @@
     ],
     "uploadDate": "2023-02-01",
     "hidden": false,
-    "order": 400,
+    "order": 340,
     "categoryOrder": {
       "music video": 60
     }
@@ -904,7 +904,7 @@
     ],
     "uploadDate": "2018-08-01",
     "hidden": false,
-    "order": 230
+    "order": 280
   },
   {
     "slug": "shinola",
@@ -916,7 +916,7 @@
     ],
     "uploadDate": "2015-10-01",
     "hidden": false,
-    "order": 260,
+    "order": 230,
     "categoryOrder": {
       "commercial": 40
     }
