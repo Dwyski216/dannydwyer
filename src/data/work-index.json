@@ -350,18 +350,6 @@
     "order": 620
   },
   {
-    "slug": "shinola",
-    "title": "Shinola",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion"
-    ],
-    "uploadDate": "2015-10-01",
-    "hidden": false,
-    "order": 260
-  },
-  {
     "slug": "honduras-paralyzed",
     "title": "Honduras \"Paralyzed\"",
     "tags": [
@@ -805,5 +793,17 @@
     "uploadDate": "2018-08-01",
     "hidden": false,
     "order": 230
+  },
+  {
+    "slug": "shinola",
+    "title": "Shinola",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion"
+    ],
+    "uploadDate": "2015-10-01",
+    "hidden": false,
+    "order": 260
   }
 ]
