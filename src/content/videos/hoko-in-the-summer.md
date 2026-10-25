@@ -14,7 +14,7 @@ tags: ["music video","film"]
 stills: []
 urlSlug: "hoko-in-the-summer"
 hidden: true
-order: 60
+order: 70
 ---
 
 The song is called “In The Summer.” The Pacific didn’t get the memo.

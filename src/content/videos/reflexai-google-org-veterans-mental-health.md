@@ -13,7 +13,7 @@ tags: ["documentary","branded content","nonprofit","technology","Google","Google
 stills: []
 urlSlug: "reflexai-google-org-veterans-mental-health"
 hidden: false
-order: 20
+order: 50
 ---
 
 I never served, but family, and people I love closely did. I can't think of anything heavier than putting your life on the line so others can live free.
@@ -22,4 +22,4 @@ When this project came to the table, I knew what it would ask of us, and all I w
 
 ReflexAI uses AI to help veterans living with PTSD connect with other veterans who understand. That's the whole point. Those of us who haven't served can't truly know what it costs, and this gives veterans a way to reach someone who does. It's still changing lives as you read this.
 
-Every interview was heavy, and every one held the room silent. It was an honor to hold the camera. It's the least we can do. Thank you Nilou Safinya & WTBR for the opportunity. 
+Every interview was heavy, and every one held the room silent. It was an honor to hold the camera. It's the least we can do. Thank you Nilou Safinya & WTBR for the opportunity.

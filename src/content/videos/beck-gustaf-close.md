@@ -15,7 +15,7 @@ tags: ["music video","celebrity","Beck","Gustaf","Los Angeles","Punk","Black and
 stills: []
 urlSlug: "beck-gustaf-close"
 hidden: false
-order: 40
+order: 30
 ---
 
 I got an email: "Beck's going to call you." Funny, since I never gave Beck my number.

@@ -23,7 +23,7 @@
     ],
     "uploadDate": "2024-06-01",
     "hidden": false,
-    "order": 30
+    "order": 20
   },
   {
     "slug": "reflexai-google-org-veterans-mental-health",
@@ -38,7 +38,7 @@
     ],
     "uploadDate": "2025-02-01",
     "hidden": false,
-    "order": 20
+    "order": 50
   },
   {
     "slug": "ryan-gosling-mens-health",
@@ -51,7 +51,7 @@
     ],
     "uploadDate": "2024-02-01",
     "hidden": false,
-    "order": 50
+    "order": 40
   },
   {
     "slug": "google-pixel-magnifier",
@@ -699,7 +699,7 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 70
+    "order": 60
   },
   {
     "slug": "hoko-in-the-summer",
@@ -710,7 +710,7 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": true,
-    "order": 60
+    "order": 70
   },
   {
     "slug": "kimpton-hotel-hero-spot",
@@ -805,6 +805,6 @@
     ],
     "uploadDate": "2023-05-01",
     "hidden": false,
-    "order": 40
+    "order": 30
   }
 ]
