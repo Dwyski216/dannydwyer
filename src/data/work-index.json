@@ -216,17 +216,6 @@
     "order": 230
   },
   {
-    "slug": "bored-cash-for-souls",
-    "title": "Bored \"Cash For Souls\"",
-    "tags": [
-      "fashion",
-      "short film"
-    ],
-    "uploadDate": "2018-08-01",
-    "hidden": false,
-    "order": 260
-  },
-  {
     "slug": "diana-marks-lexus",
     "title": "Diana Marks × Lexus",
     "tags": [
@@ -805,5 +794,16 @@
     "uploadDate": "2023-02-01",
     "hidden": false,
     "order": 390
+  },
+  {
+    "slug": "bored-cash-for-souls",
+    "title": "Bored \"Cash For Souls\"",
+    "tags": [
+      "fashion",
+      "short film"
+    ],
+    "uploadDate": "2018-08-01",
+    "hidden": false,
+    "order": 260
   }
 ]
