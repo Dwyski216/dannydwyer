@@ -1,7 +1,7 @@
 ---
 title: "Jelly Roll x Men's Health Documentary"
 pageTitle: "Jelly Roll × Men’s Health Magazine | Cinematographer Danny Dwyer"
-summary: "A promise made ten years ago, kept: cinematographer Danny Dwyer films longtime friend Jelly Roll's weight-loss and fitness journey for Men’s Health Magazine"
+summary: "A promise made ten years ago, kept: cinematographer Danny Dwyer films longtime acquaintance Jelly Roll's weight-loss and fitness journey for Men’s Health Magazine"
 platform: "vimeo"
 videoId: "1238943364"
 customThumbnail: "/images/thumbnails/jelly-roll-x-men-s-health-documentary-1792791285457.webp"
