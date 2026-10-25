@@ -110,15 +110,17 @@ const { allTags, activeTag } = Astro.props;
 
   /* Everything centered: the preset buttons on one row, search and
      Filters on the row below. */
-  /* One even rhythm on the Work page: description -> buttons, buttons ->
-     search, and search -> first row of videos are all the same: 48px on
-     desktop, 40px on phones (the first is set in WorkBanner.astro). */
+  /* Spacing on the Work page: description -> buttons is set in
+     WorkBanner.astro (48px, 40px on phones), and the description's line
+     spacing adds a little invisible room under its last line, so it reads
+     as 54px (49px on phones). The search -> first row of videos gap is
+     sized to match that visible space; buttons -> search is 48px (40px). */
   .controls {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3rem;
-    margin-bottom: 3rem;
+    margin-bottom: calc(3rem + 6px);
   }
 
   /* Matches the preset buttons above: transparent on the page, a 1.2px
@@ -168,7 +170,7 @@ const { allTags, activeTag } = Astro.props;
   @media (max-width: 600px) {
     .controls {
       gap: 2.5rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: calc(2.5rem + 9px);
     }
 
     .filter-row {
