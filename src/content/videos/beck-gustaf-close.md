@@ -16,6 +16,7 @@ stills: []
 urlSlug: "beck-gustaf-close"
 hidden: false
 order: 60
+categoryOrder: {"music video": 10}
 ---
 
 I got an email: "Beck's going to call you." Funny, since I never gave Beck my number.

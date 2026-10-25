@@ -23,7 +23,10 @@
     ],
     "uploadDate": "2024-06-01",
     "hidden": false,
-    "order": 260
+    "order": 70,
+    "categoryOrder": {
+      "commercial": 70
+    }
   },
   {
     "slug": "reflexai-google-org-veterans-mental-health",
@@ -38,7 +41,10 @@
     ],
     "uploadDate": "2025-02-01",
     "hidden": false,
-    "order": 150
+    "order": 150,
+    "categoryOrder": {
+      "documentary": 40
+    }
   },
   {
     "slug": "ryan-gosling-mens-health",
@@ -68,7 +74,11 @@
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
-    "order": 460
+    "order": 460,
+    "categoryOrder": {
+      "commercial": 150,
+      "documentary": 90
+    }
   },
   {
     "slug": "dark-bardo-midnight-cowboy",
@@ -81,7 +91,10 @@
     ],
     "uploadDate": "2023-02-01",
     "hidden": false,
-    "order": 128
+    "order": 128,
+    "categoryOrder": {
+      "music video": 40
+    }
   },
   {
     "slug": "google-pixel-guided-frame",
@@ -99,7 +112,11 @@
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
-    "order": 520
+    "order": 520,
+    "categoryOrder": {
+      "commercial": 180,
+      "documentary": 120
+    }
   },
   {
     "slug": "mint-mobile-customer-awards",
@@ -110,7 +127,10 @@
     ],
     "uploadDate": "2021-06-01",
     "hidden": false,
-    "order": 90
+    "order": 90,
+    "categoryOrder": {
+      "commercial": 50
+    }
   },
   {
     "slug": "paramount-viking-funeral",
@@ -226,7 +246,10 @@
     ],
     "uploadDate": "2018-01-01",
     "hidden": false,
-    "order": 330
+    "order": 330,
+    "categoryOrder": {
+      "commercial": 120
+    }
   },
   {
     "slug": "young-women-in-hollywood",
@@ -256,7 +279,10 @@
     ],
     "uploadDate": "2017-06-01",
     "hidden": false,
-    "order": 110
+    "order": 110,
+    "categoryOrder": {
+      "documentary": 30
+    }
   },
   {
     "slug": "bandits-bandana",
@@ -273,7 +299,10 @@
     ],
     "uploadDate": "2017-05-01",
     "hidden": false,
-    "order": 420
+    "order": 420,
+    "categoryOrder": {
+      "commercial": 140
+    }
   },
   {
     "slug": "puma-performance-commercial",
@@ -286,7 +315,10 @@
     ],
     "uploadDate": "2017-03-01",
     "hidden": false,
-    "order": 320
+    "order": 320,
+    "categoryOrder": {
+      "commercial": 110
+    }
   },
   {
     "slug": "mint-mobile-dave-foley",
@@ -298,7 +330,10 @@
     ],
     "uploadDate": "2021-06-01",
     "hidden": false,
-    "order": 530
+    "order": 530,
+    "categoryOrder": {
+      "commercial": 190
+    }
   },
   {
     "slug": "mr-cartoon-cazadores-saucey",
@@ -321,7 +356,10 @@
     ],
     "uploadDate": "2016-11-01",
     "hidden": false,
-    "order": 240
+    "order": 240,
+    "categoryOrder": {
+      "documentary": 60
+    }
   },
   {
     "slug": "made-on-earth-trailer",
@@ -335,7 +373,10 @@
     ],
     "uploadDate": "2016-08-01",
     "hidden": false,
-    "order": 510
+    "order": 510,
+    "categoryOrder": {
+      "documentary": 110
+    }
   },
   {
     "slug": "chesterland-teaser",
@@ -358,7 +399,10 @@
     ],
     "uploadDate": "2012-11-01",
     "hidden": false,
-    "order": 470
+    "order": 470,
+    "categoryOrder": {
+      "music video": 70
+    }
   },
   {
     "slug": "honduras-hollywood",
@@ -369,7 +413,10 @@
     ],
     "uploadDate": "2013-06-01",
     "hidden": false,
-    "order": 540
+    "order": 540,
+    "categoryOrder": {
+      "music video": 80
+    }
   },
   {
     "slug": "peter-dinklage-esquire",
@@ -405,7 +452,10 @@
     ],
     "uploadDate": "2016-09-01",
     "hidden": false,
-    "order": 100
+    "order": 100,
+    "categoryOrder": {
+      "music video": 20
+    }
   },
   {
     "slug": "women-in-hollywood",
@@ -441,7 +491,10 @@
     ],
     "uploadDate": "2016-06-01",
     "hidden": false,
-    "order": 550
+    "order": 550,
+    "categoryOrder": {
+      "commercial": 200
+    }
   },
   {
     "slug": "copywrite-martin-shkreli-killa",
@@ -452,7 +505,10 @@
     ],
     "uploadDate": "2017-02-01",
     "hidden": false,
-    "order": 340
+    "order": 340,
+    "categoryOrder": {
+      "music video": 50
+    }
   },
   {
     "slug": "128-g-short-film-trailer",
@@ -466,7 +522,10 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 80
+    "order": 80,
+    "categoryOrder": {
+      "documentary": 20
+    }
   },
   {
     "slug": "lady-gaga-x-haus-labs",
@@ -481,7 +540,10 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 10
+    "order": 10,
+    "categoryOrder": {
+      "commercial": 10
+    }
   },
   {
     "slug": "columbia-intuitive-machines-nasa-v1",
@@ -500,7 +562,10 @@
     ],
     "uploadDate": "2024-02-01",
     "hidden": false,
-    "order": 170
+    "order": 170,
+    "categoryOrder": {
+      "documentary": 50
+    }
   },
   {
     "slug": "cotton-docu-series",
@@ -513,7 +578,11 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 480
+    "order": 480,
+    "categoryOrder": {
+      "commercial": 160,
+      "documentary": 100
+    }
   },
   {
     "slug": "hoka-the-race",
@@ -537,7 +606,10 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 580
+    "order": 580,
+    "categoryOrder": {
+      "commercial": 210
+    }
   },
   {
     "slug": "bridge",
@@ -576,7 +648,10 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 370
+    "order": 370,
+    "categoryOrder": {
+      "documentary": 80
+    }
   },
   {
     "slug": "bloomingdales-coastal-picnic",
@@ -587,7 +662,10 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 30
+    "order": 30,
+    "categoryOrder": {
+      "commercial": 20
+    }
   },
   {
     "slug": "bloomingdales-minimal-nature",
@@ -598,7 +676,10 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 124
+    "order": 124,
+    "categoryOrder": {
+      "commercial": 80
+    }
   },
   {
     "slug": "allergan-aesthetics",
@@ -622,7 +703,10 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 120
+    "order": 120,
+    "categoryOrder": {
+      "music video": 30
+    }
   },
   {
     "slug": "hoko-in-the-summer",
@@ -646,7 +730,10 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 310
+    "order": 310,
+    "categoryOrder": {
+      "commercial": 100
+    }
   },
   {
     "slug": "romer-hell-s-kitchen-hero-film",
@@ -658,7 +745,10 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 126
+    "order": 126,
+    "categoryOrder": {
+      "commercial": 90
+    }
   },
   {
     "slug": "the-huntington-hotel-sf",
@@ -670,7 +760,10 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 50
+    "order": 50,
+    "categoryOrder": {
+      "commercial": 30
+    }
   },
   {
     "slug": "the-atlas-hotel-in-cambridge",
@@ -682,7 +775,10 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
-    "order": 500
+    "order": 500,
+    "categoryOrder": {
+      "commercial": 170
+    }
   },
   {
     "slug": "google-pixel-lookout",
@@ -699,7 +795,11 @@
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
-    "order": 250
+    "order": 250,
+    "categoryOrder": {
+      "commercial": 60,
+      "documentary": 70
+    }
   },
   {
     "slug": "wolf-shepherd-monaco",
@@ -712,7 +812,10 @@
     ],
     "uploadDate": "2017-08-01",
     "hidden": false,
-    "order": 380
+    "order": 380,
+    "categoryOrder": {
+      "commercial": 130
+    }
   },
   {
     "slug": "beck-gustaf-close",
@@ -728,7 +831,10 @@
     ],
     "uploadDate": "2023-05-01",
     "hidden": false,
-    "order": 60
+    "order": 60,
+    "categoryOrder": {
+      "music video": 10
+    }
   },
   {
     "slug": "nychos-sheryo-the-yok",
@@ -767,7 +873,10 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 20
+    "order": 20,
+    "categoryOrder": {
+      "documentary": 10
+    }
   },
   {
     "slug": "werdperfect-kickdrums-pretty-orange",
@@ -781,7 +890,10 @@
     ],
     "uploadDate": "2023-02-01",
     "hidden": false,
-    "order": 400
+    "order": 400,
+    "categoryOrder": {
+      "music video": 60
+    }
   },
   {
     "slug": "bored-cash-for-souls",
@@ -804,6 +916,9 @@
     ],
     "uploadDate": "2015-10-01",
     "hidden": false,
-    "order": 70
+    "order": 260,
+    "categoryOrder": {
+      "commercial": 40
+    }
   }
 ]

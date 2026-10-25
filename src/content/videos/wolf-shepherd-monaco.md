@@ -16,6 +16,7 @@ stills: []
 urlSlug: "wolf-shepherd-monaco"
 hidden: false
 order: 380
+categoryOrder: {"commercial": 130}
 ---
 
 Wolf & Shepherd makes dress shoes that don’t act like dress shoes. Across five films, the Monaco, the Swiftknit, the Chukka, the Slip-On, and the Crossover, I directed, shot, and cut a series that put that idea to the test, from the Malibu Pier to the Santa Monica Mountains.

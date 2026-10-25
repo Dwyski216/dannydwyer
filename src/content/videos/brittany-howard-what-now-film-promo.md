@@ -16,6 +16,7 @@ stills: []
 urlSlug: "brittany-howard-what-now-film-promo"
 hidden: false
 order: 120
+categoryOrder: {"music video": 30}
 ---
 
 Poppy season in the San Jacinto Mountains, just outside Palm Springs, and Brittany Howard standing in the middle of an open field. Uh...Yes please.

@@ -16,6 +16,7 @@ stills: []
 urlSlug: "pacific-shaving-company"
 hidden: false
 order: 580
+categoryOrder: {"commercial": 210}
 ---
 
 The challenge was shooting through a two-way mirror in a space barely big enough to turn around in.

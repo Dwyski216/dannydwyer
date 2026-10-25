@@ -11,14 +11,18 @@ interface Props {
   // Rendered hidden (a category page shows only its own videos before the
   // filter script runs, so there's no flash of the full catalog).
   initiallyHidden?: boolean;
+  // Its position in the Work page order, for galleries that re-sort cards.
+  workRank?: number;
 }
-const { slug, title, summary, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false } = Astro.props;
+const { slug, title, summary, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank } = Astro.props;
 const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
 ---
 
 <a
   class="card"
   href={`/work/${slug}`}
+  data-slug={slug}
+  data-work-rank={workRank}
   data-tags={tags.join('|').toLowerCase()}
   data-search={searchText}
   style={initiallyHidden ? 'display: none' : undefined}

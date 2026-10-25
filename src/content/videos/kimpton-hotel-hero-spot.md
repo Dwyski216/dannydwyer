@@ -16,6 +16,7 @@ stills: []
 urlSlug: "kimpton-hotel-hero-spot"
 hidden: false
 order: 310
+categoryOrder: {"commercial": 100}
 ---
 
 Kimpton named this hotel after theta waves, the brain waves of deep relaxation. Then they put it in the Theater District. Bold move.

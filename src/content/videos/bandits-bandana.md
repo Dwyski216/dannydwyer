@@ -15,6 +15,7 @@ stills: []
 urlSlug: "bandits-bandana"
 hidden: false
 order: 420
+categoryOrder: {"commercial": 140}
 ---
 
 The last thing I shot before the world shut down.

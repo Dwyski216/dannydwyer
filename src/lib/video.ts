@@ -10,6 +10,21 @@ export function byDisplayOrder(a: { order: number; uploadDate: string }, b: { or
   return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
 }
 
+// A category page's display order: videos placed in that category's own
+// order (categoryOrder[tag]) first, by that number; any not placed yet
+// follow in the Work page order.
+export function byCategoryOrder(tag: string) {
+  return (
+    a: { order: number; uploadDate: string; categoryOrder: Record<string, number> },
+    b: { order: number; uploadDate: string; categoryOrder: Record<string, number> }
+  ): number => {
+    const pa = a.categoryOrder[tag] ?? Infinity;
+    const pb = b.categoryOrder[tag] ?? Infinity;
+    if (pa !== pb) return pa - pb;
+    return byDisplayOrder(a, b);
+  };
+}
+
 export type VideoPlatform = 'youtube' | 'vimeo';
 
 export interface VideoSource {

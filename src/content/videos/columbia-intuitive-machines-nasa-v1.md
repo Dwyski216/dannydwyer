@@ -15,6 +15,7 @@ stills: []
 urlSlug: "columbia-intuitive-machines-nasa-v1"
 hidden: false
 order: 170
+categoryOrder: {"documentary": 50}
 ---
 
 America last landed on the Moon in December 1972. So when the call came asking if I wanted to film a mission going to the Moon, I thought it was a prank.

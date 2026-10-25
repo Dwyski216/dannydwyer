@@ -9,8 +9,9 @@ interface Props {
   videos: CollectionEntry<'videos'>[];
   thumbnails: Thumbnail[];
   initialTag?: string; // category pages: show only this tag's videos at first
+  workRanks: number[]; // each video's position in the Work page order
 }
-const { videos, thumbnails, initialTag } = Astro.props;
+const { videos, thumbnails, initialTag, workRanks } = Astro.props;
 ---
 
 <div class="video-area">
@@ -24,6 +25,7 @@ const { videos, thumbnails, initialTag } = Astro.props;
         thumbnailUrl={thumbnails[i].src}
         fallbackUrl={thumbnails[i].fallback}
         initiallyHidden={!!initialTag && !v.data.tags.some((t) => t.toLowerCase() === initialTag)}
+        workRank={workRanks[i]}
       />
     ))}
   </div>

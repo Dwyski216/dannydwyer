@@ -4,6 +4,7 @@
 // note in wrangler.jsonc. No auth logic lives here; this page just assumes
 // it's already authenticated.
 import Layout from '../../layouts/Layout.astro';
+import { CATEGORIES } from '../../data/categories';
 ---
 
 <Layout title="Admin" description="Site content admin." noindex={true}>
@@ -110,6 +111,16 @@ import Layout from '../../layouts/Layout.astro';
               <input id="work-search" type="search" placeholder="Search by title…" />
               <button type="button" id="work-add-btn" class="btn btn-solid">+ Add Work Item</button>
             </div>
+            <label class="work-order-scope">Order for
+              <select id="work-order-scope">
+                <option value="">Work page (all videos)</option>
+                {CATEGORIES.map((c) => <option value={c.tag}>{c.label} page</option>)}
+              </select>
+            </label>
+            <p class="section-hint">
+              Each category page has its own order. Pick one to see just its videos and drag them into place; it
+              doesn't change the Work page. Videos not placed yet sit at the end, in the Work page order.
+            </p>
 
             <div id="work-bulk-bar" class="work-bulk-bar" hidden>
               <div class="wb-head">
@@ -159,6 +170,7 @@ import Layout from '../../layouts/Layout.astro';
             <form id="work-item-form">
               <input type="hidden" name="originalSlug" />
               <input type="hidden" name="order" value="0" />
+              <input type="hidden" name="categoryOrder" value="{}" />
               <label>Page Title (optional — SEO)
                 <input name="pageTitle" placeholder='e.g. Beck × Gustaf "Close" | Filmmaker Danny Dwyer' />
               </label>
@@ -361,6 +373,7 @@ import Layout from '../../layouts/Layout.astro';
     uploadDate: string;
     hidden: boolean;
     order: number;
+    categoryOrder?: Record<string, number>;
   };
 
   let settings: Settings | null = null;
@@ -698,6 +711,9 @@ import Layout from '../../layouts/Layout.astro';
   // An unsaved Work order (slugs, first to last) from dragging rows or the
   // arrows; null when the list matches what's saved. Save Order commits it.
   let pendingOrder: string[] | null = null;
+  // Which order the list shows and saves: '' for the Work page, or a
+  // category's tag for that category page's own order.
+  let orderScope = '';
   let sortKey: SortKey = 'order';
   let sortAsc = true;
 
@@ -731,6 +747,31 @@ import Layout from '../../layouts/Layout.astro';
   const workOrderBar = document.getElementById('work-order-bar') as HTMLElement;
   const workOrderStatus = document.getElementById('work-order-status')!;
 
+  function inOrderScope(item: WorkItem): boolean {
+    return !orderScope || item.tags.some((t) => t.toLowerCase() === orderScope);
+  }
+
+  // An item's saved position in the current order. In a category, one not
+  // placed yet counts as last (then the Work order breaks the tie).
+  function scopeRank(item: WorkItem): number {
+    return orderScope ? (item.categoryOrder?.[orderScope] ?? Infinity) : item.order;
+  }
+
+  const orderScopeSelect = document.getElementById('work-order-scope') as HTMLSelectElement;
+  orderScopeSelect.addEventListener('change', () => {
+    if (pendingOrder && !confirm('Discard the unsaved order changes?')) {
+      orderScopeSelect.value = orderScope;
+      return;
+    }
+    orderScope = orderScopeSelect.value;
+    pendingOrder = null;
+    clearDirty('work-order-bar');
+    workOrderStatus.textContent = '';
+    sortKey = 'order';
+    sortAsc = true;
+    renderWorkList();
+  });
+
   // Saved orders are renumbered 10, 20, 30, ... in list order, and only the
   // items whose number actually changes are sent (so videos that shared the
   // same number get untangled the first time, and later saves only touch
@@ -739,7 +780,11 @@ import Layout from '../../layouts/Layout.astro';
     if (!pendingOrder) return;
     const moves = pendingOrder
       .map((slug, i) => ({ slug, order: (i + 1) * 10 }))
-      .filter((m) => workItems.find((it) => it.slug === m.slug)?.order !== m.order);
+      .filter((m) => {
+        const item = workItems.find((it) => it.slug === m.slug);
+        return !item || scopeRank(item) !== m.order;
+      });
+    const category = orderScope || undefined;
     if (moves.length === 0) {
       pendingOrder = null;
       clearDirty('work-order-bar');
@@ -755,7 +800,7 @@ import Layout from '../../layouts/Layout.astro';
     for (let b = 0; b < batches; b++) {
       const batch = moves.slice(b * ORDER_BATCH, (b + 1) * ORDER_BATCH);
       workOrderStatus.textContent = batches > 1 ? `Saving… (${b + 1} of ${batches})` : 'Saving…';
-      const res = await fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ moves: batch }) });
+      const res = await fetch('/api/videos/reorder', { method: 'POST', body: JSON.stringify({ category, moves: batch }) });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         workOrderStatus.textContent = `Error: ${data.error ?? 'could not save the order'}${b > 0 ? ' (part of the order was saved; click Save Order again to finish)' : ''}`;
@@ -763,7 +808,9 @@ import Layout from '../../layouts/Layout.astro';
       }
       batch.forEach((m) => {
         const item = workItems.find((it) => it.slug === m.slug);
-        if (item) item.order = m.order;
+        if (!item) return;
+        if (category) item.categoryOrder = { ...item.categoryOrder, [category]: m.order };
+        else item.order = m.order;
       });
       if (data.indexWarning) alert(data.indexWarning);
     }
@@ -845,7 +892,8 @@ import Layout from '../../layouts/Layout.astro';
 
   function renderWorkList() {
     const query = workSearch.value.trim().toLowerCase();
-    const filtered = workItems.filter((i) => !query || i.title.toLowerCase().includes(query));
+    const scoped = workItems.filter(inOrderScope);
+    const filtered = scoped.filter((i) => !query || i.title.toLowerCase().includes(query));
 
     if (workItems.length === 0) {
       workListEl.innerHTML = '<p class="section-hint">No items match.</p>';
@@ -857,6 +905,9 @@ import Layout from '../../layouts/Layout.astro';
       if (sortKey === 'hidden') return (Number(a.hidden) - Number(b.hidden)) * dir;
       if (sortKey === 'order' && pendingOrder) return (pendingOrder.indexOf(a.slug) - pendingOrder.indexOf(b.slug)) * dir;
       if (sortKey === 'order') {
+        const ra = scopeRank(a);
+        const rb = scopeRank(b);
+        if (ra !== rb) return (ra < rb ? -1 : 1) * dir;
         if (a.order !== b.order) return (a.order - b.order) * dir;
         return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
       }
@@ -906,7 +957,7 @@ import Layout from '../../layouts/Layout.astro';
         <thead><tr><th><input type="checkbox" id="work-select-all" aria-label="Select all" /></th>${headerHtml}<th></th></tr></thead>
         <tbody>${rowsHtml}</tbody>
       </table></div>
-      <p class="work-count section-hint">${sorted.length} of ${workItems.length} item${workItems.length === 1 ? '' : 's'}${sortKey === 'order' ? ' — sorted by Order; switch sort to search by Title/Status' : ''}</p>
+      <p class="work-count section-hint">${sorted.length} of ${scoped.length} item${scoped.length === 1 ? '' : 's'}${sortKey === 'order' ? ' — sorted by Order; switch sort to search by Title/Status' : ''}</p>
     `;
 
     workListEl.querySelectorAll('th[data-sort-key]').forEach((th) => {
@@ -1355,6 +1406,7 @@ import Layout from '../../layouts/Layout.astro';
   function resetWorkItemForm() {
     workItemForm.reset();
     (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = '';
+    (workItemForm.elements.namedItem('categoryOrder') as HTMLInputElement).value = '{}';
     editingSlug = null;
     pendingTags = new Set();
     renderWorkTagPicker();
@@ -1495,6 +1547,7 @@ import Layout from '../../layouts/Layout.astro';
 
       (workItemForm.elements.namedItem('originalSlug') as HTMLInputElement).value = slug;
       (workItemForm.elements.namedItem('order') as HTMLInputElement).value = String(fields.order ?? 0);
+      (workItemForm.elements.namedItem('categoryOrder') as HTMLInputElement).value = JSON.stringify(fields.categoryOrder ?? {});
       (workItemForm.elements.namedItem('title') as HTMLInputElement).value = fields.title ?? '';
       (workItemForm.elements.namedItem('pageTitle') as HTMLInputElement).value = fields.pageTitle ?? '';
       (workItemForm.elements.namedItem('platform') as HTMLSelectElement).value = fields.platform ?? 'youtube';
@@ -1574,6 +1627,11 @@ import Layout from '../../layouts/Layout.astro';
     }));
     payload.hidden = fd.get('hidden') === 'on';
     payload.order = Number(payload.order) || 0;
+    try {
+      payload.categoryOrder = JSON.parse(String(payload.categoryOrder || '{}'));
+    } catch {
+      payload.categoryOrder = {};
+    }
     payload.stills = String(payload.stills || '')
       .split('\n')
       .map((line: string) => line.trim())
@@ -2224,6 +2282,17 @@ import Layout from '../../layouts/Layout.astro';
   .work-list-controls input {
     flex: 1;
     min-width: 200px;
+  }
+
+  .work-order-scope {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .work-order-scope select {
+    width: auto;
   }
 
   .work-list {

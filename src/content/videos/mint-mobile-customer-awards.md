@@ -14,6 +14,7 @@ stills: []
 urlSlug: "mint-mobile-customer-awards"
 hidden: false
 order: 90
+categoryOrder: {"commercial": 50}
 ---
 
 Mint Mobile threw its own awards show. The Mint Mobile Awards, a spin on the Oscars starring Ryan Reynolds, is exactly the kind of idea Maximum Effort lives for.

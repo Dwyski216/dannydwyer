@@ -64,6 +64,8 @@ durationISO: "PT8M12S"     # ISO 8601 duration, optional
 tags: ["narrative", "35mm", "noir", "night exterior"]
 urlSlug: "midnight-harbor"
 featured: true
+order: 10                  # position on the Work page (lower = earlier); set by dragging in the admin
+categoryOrder: {"commercial": 40}  # optional: its own position on a category page
 stills:                    # optional — renders as a gallery under the description
   - src: "/images/videos/midnight-harbor/01.jpg"
     alt: "Dock lamps lighting the wide shot"
@@ -269,3 +271,8 @@ defined in `src/data/categories.ts`. Each is also its own page
 pre-filtered to that tag, with its own title and description. A video shows
 up in a category when it has the category's tag (`documentary`,
 `commercial`, `music video`) in the admin.
+
+Each category page has its own order, separate from the Work page: in the
+admin's Work list, pick the page under **Order for**, drag its videos into
+place and click Save Order. Videos never placed in a category's order show
+at the end of that page, in the Work page order.

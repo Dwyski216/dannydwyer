@@ -13,6 +13,8 @@
 // full accounts system would be overkill. GITHUB_TOKEN is a third secret;
 // none of the three are ever exposed to the browser.
 
+import { CATEGORIES } from '../src/data/categories';
+
 export interface Env {
   ASSETS: Fetcher;
   GITHUB_TOKEN: string;
@@ -86,6 +88,23 @@ interface WorkIndexItem {
   uploadDate: string;
   hidden: boolean;
   order: number;
+  categoryOrder?: CategoryOrder;
+}
+
+// A video's own position on each category page (/documentary, ...), keyed
+// by the category's tag; a category without one falls back to `order`.
+type CategoryOrder = Record<string, number>;
+const CATEGORY_TAGS = CATEGORIES.map((c) => c.tag);
+
+// Keeps only real category tags with numeric positions; undefined when
+// nothing is left, so the frontmatter line is left out entirely.
+function cleanCategoryOrder(value: unknown): CategoryOrder | undefined {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  const out: CategoryOrder = {};
+  for (const [tag, n] of Object.entries(value)) {
+    if (CATEGORY_TAGS.includes(tag) && typeof n === 'number' && Number.isFinite(n)) out[tag] = n;
+  }
+  return Object.keys(out).length ? out : undefined;
 }
 
 function slugify(input: string): string {
@@ -408,9 +427,12 @@ async function commitFiles(env: Env, files: { path: string; content: string }[],
 }
 
 // Saves a new Work order: every moved video's `order` plus the Work index,
-// all in one commit (see commitFiles). All or nothing.
+// all in one commit (see commitFiles). All or nothing. With a `category`
+// (a category's tag), it saves that category page's own order instead.
 async function handleVideosReorder(request: Request, env: Env): Promise<Response> {
-  const body = (await request.json().catch(() => ({}))) as { moves?: { slug?: string; order?: number }[] };
+  const body = (await request.json().catch(() => ({}))) as { category?: string; moves?: { slug?: string; order?: number }[] };
+  const category = body.category;
+  if (category !== undefined && !CATEGORY_TAGS.includes(category)) return json({ error: `Unknown category: ${category}` }, 400);
   const moves = Array.isArray(body.moves) ? body.moves : [];
   if (moves.length === 0) return json({ error: 'Expects { moves: [{ slug, order }, ...] }' }, 400);
   for (const m of moves) {
@@ -426,9 +448,15 @@ async function handleVideosReorder(request: Request, env: Env): Promise<Response
   const missing = validMoves.filter((_, i) => !files[i]).map((m) => m.slug);
   if (missing.length) return json({ error: `Could not read: ${missing.join(', ')}` }, 502);
 
+  // The new position goes in `order`, or in the category's slot.
+  const withMove = <T extends { order?: unknown; categoryOrder?: unknown }>(item: T, order: number): T =>
+    category
+      ? { ...item, categoryOrder: { ...(cleanCategoryOrder(item.categoryOrder) ?? {}), [category]: order } }
+      : { ...item, order };
+
   const changes = validMoves.map((m, i) => {
     const { data, body: mdBody } = parseFrontmatter(files[i]!.content);
-    return { path: `${VIDEOS_DIR}/${m.slug}.md`, content: `${toFrontmatter({ ...data, order: m.order })}\n\n${mdBody}\n` };
+    return { path: `${VIDEOS_DIR}/${m.slug}.md`, content: `${toFrontmatter(withMove(data, m.order))}\n\n${mdBody}\n` };
   });
 
   const orderBySlug = new Map(validMoves.map((m) => [m.slug, m.order]));
@@ -437,11 +465,12 @@ async function handleVideosReorder(request: Request, env: Env): Promise<Response
   if ('error' in index) {
     indexWarning = index.error;
   } else {
-    const items = index.items.map((it) => (orderBySlug.has(it.slug) ? { ...it, order: orderBySlug.get(it.slug)! } : it));
+    const items = index.items.map((it) => (orderBySlug.has(it.slug) ? withMove(it, orderBySlug.get(it.slug)!) : it));
     changes.push({ path: INDEX_PATH, content: JSON.stringify(items, null, 2) + '\n' });
   }
 
-  const ok = await commitFiles(env, changes, `Reorder Work (${validMoves.length} item${validMoves.length === 1 ? '' : 's'})`);
+  const label = category ? (CATEGORIES.find((c) => c.tag === category)?.label ?? category) : 'Work';
+  const ok = await commitFiles(env, changes, `Reorder ${label} (${validMoves.length} item${validMoves.length === 1 ? '' : 's'})`);
   if (!ok) return json({ error: 'GitHub commit failed; nothing was changed. Try again.' }, 502);
   return json({ ok: true, ...(indexWarning ? { indexWarning } : {}) });
 }
@@ -601,6 +630,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     urlSlug: slug,
     hidden: !!body.hidden,
     order: typeof body.order === 'number' ? body.order : 0,
+    categoryOrder: cleanCategoryOrder(body.categoryOrder),
   });
 
   const fileContent = `${frontmatter}\n\n${linesToParagraphs(body.description || '')}\n`;
@@ -634,6 +664,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
       uploadDate: body.uploadDate || '',
       hidden: !!body.hidden,
       order: typeof body.order === 'number' ? body.order : 0,
+      ...(cleanCategoryOrder(body.categoryOrder) ? { categoryOrder: cleanCategoryOrder(body.categoryOrder) } : {}),
     });
     const updateRes = await writeIndex(env, items, index.sha, `Update work index for ${slug}`);
     if (!updateRes.ok) indexWarning = 'Video saved, but the Work index could not be updated — use "Rebuild Index".';
@@ -669,6 +700,7 @@ async function handleVideosReindex(_request: Request, env: Env): Promise<Respons
           uploadDate: data.uploadDate ?? '',
           hidden: !!data.hidden,
           order: typeof data.order === 'number' ? data.order : 0,
+          ...(cleanCategoryOrder(data.categoryOrder) ? { categoryOrder: cleanCategoryOrder(data.categoryOrder) } : {}),
         };
       })
     );

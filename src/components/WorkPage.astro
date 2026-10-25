@@ -10,7 +10,7 @@ import WorkBanner from './sections/WorkBanner.astro';
 import WorkControls from './sections/WorkControls.astro';
 import WorkGrid from './sections/WorkGrid.astro';
 import { getCollection, getEntry } from 'astro:content';
-import { getThumbnails, byDisplayOrder } from '../lib/video';
+import { getThumbnails, byDisplayOrder, byCategoryOrder } from '../lib/video';
 import { getEnabledSections } from '../data/layout';
 import { getSeoOverride } from '../data/seo';
 import { CATEGORIES, type Category } from '../data/categories';
@@ -25,6 +25,22 @@ const seo = getSeoOverride('work');
 const page = await getEntry('pages', 'work');
 const { Content } = await page.render();
 const videos = (await getCollection('videos', (v) => !v.data.hidden)).sort((a, b) => byDisplayOrder(a.data, b.data));
+// Each category page has its own order; the gallery's cards are put in the
+// right one for whichever single category is being shown (see the script).
+const categoryOrders = Object.fromEntries(
+  CATEGORIES.map((c) => [
+    c.tag,
+    videos
+      .filter((v) => v.data.tags.some((t) => t.toLowerCase() === c.tag))
+      .sort((a, b) => byCategoryOrder(c.tag)(a.data, b.data))
+      .map((v) => v.data.urlSlug),
+  ])
+);
+const workRank = new Map(videos.map((v, i) => [v.data.urlSlug, i]));
+if (category) {
+  const rank = new Map(categoryOrders[category.tag].map((slug, i) => [slug, i]));
+  videos.sort((a, b) => (rank.get(a.data.urlSlug) ?? Infinity) - (rank.get(b.data.urlSlug) ?? Infinity) || byDisplayOrder(a.data, b.data));
+}
 
 const thumbnails = await Promise.all(videos.map((v) => getThumbnails(v.data)));
 
@@ -63,7 +79,12 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <SiteHeader />
-  <main class="main container" data-category={category?.tag} data-categories={JSON.stringify(CATEGORIES.map((c) => ({ slug: c.slug, tag: c.tag })))}>
+  <main
+    class="main container"
+    data-category={category?.tag}
+    data-categories={JSON.stringify(CATEGORIES.map((c) => ({ slug: c.slug, tag: c.tag })))}
+    data-category-orders={JSON.stringify(categoryOrders)}
+  >
     {sections.map((section) => {
       if (section === 'banner') {
         return (
@@ -73,7 +94,14 @@ const jsonLd = [
         );
       }
       if (section === 'controls') return <WorkControls allTags={allTags} activeTag={category?.tag} />;
-      if (section === 'grid') return <WorkGrid videos={videos} thumbnails={thumbnails} initialTag={category?.tag} />;
+      if (section === 'grid') return (
+          <WorkGrid
+            videos={videos}
+            thumbnails={thumbnails}
+            initialTag={category?.tag}
+            workRanks={videos.map((v) => workRank.get(v.data.urlSlug)!)}
+          />
+        );
       return null;
     })}
   </main>
@@ -87,7 +115,30 @@ const jsonLd = [
   // every video just shows, unfiltered; no grid -> the controls still render
   // but there's nothing for them to filter.
   const searchInput = document.getElementById('search') as HTMLInputElement | null;
+  const videoList = document.getElementById('video-list');
   const rows = Array.from(document.querySelectorAll('#video-list .card')) as HTMLElement[];
+  // The Work page order (from each card's data-work-rank: a category page
+  // renders its cards in its own order) and each category's own order, as
+  // lists of slugs.
+  const pageMain = document.querySelector('main') as HTMLElement;
+  const categoryOrders: Record<string, string[]> = JSON.parse(pageMain.dataset.categoryOrders ?? '{}');
+  const workOrder = [...rows]
+    .sort((a, b) => Number(a.dataset.workRank) - Number(b.dataset.workRank))
+    .map((row) => row.dataset.slug!);
+
+  // Shows the cards in a category's own order when exactly that category
+  // is selected, and in the Work page order otherwise.
+  function arrangeRows(selected: Set<string>) {
+    if (!videoList) return;
+    const only = selected.size === 1 ? [...selected][0] : null;
+    const catOrder = only ? categoryOrders[only] : undefined;
+    const order = catOrder ? [...catOrder, ...workOrder.filter((slug) => !catOrder.includes(slug))] : workOrder;
+    const bySlug = new Map(rows.map((row) => [row.dataset.slug!, row]));
+    order.forEach((slug) => {
+      const row = bySlug.get(slug);
+      if (row) videoList.appendChild(row);
+    });
+  }
   const emptyState = document.getElementById('empty-state') as HTMLElement | null;
 
   const toggleBtn = document.getElementById('filters-toggle') as HTMLButtonElement | null;
@@ -100,6 +151,7 @@ const jsonLd = [
 
   function applyFilters(selected: Set<string>) {
     if (!searchInput) return;
+    arrangeRows(selected);
     const query = searchInput.value.trim().toLowerCase();
     let visibleCount = 0;
 

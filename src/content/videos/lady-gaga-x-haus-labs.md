@@ -16,6 +16,7 @@ stills: []
 urlSlug: "lady-gaga-x-haus-labs"
 hidden: false
 order: 10
+categoryOrder: {"commercial": 10}
 ---
 
 I just wrapped a 16-hour day when a close friend asked if I was free tomorrow, “For a little last minute shoot.” I seriously low key love those. 

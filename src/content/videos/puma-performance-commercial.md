@@ -15,6 +15,7 @@ stills: []
 urlSlug: "puma-performance-commercial"
 hidden: false
 order: 320
+categoryOrder: {"commercial": 110}
 ---
 
 Tight space, fast turnarounds, back-to-back setups. PUMA 24/7 was pure run-and-gun.

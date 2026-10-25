@@ -14,6 +14,7 @@ stills: []
 urlSlug: "diana-marks-lexus"
 hidden: false
 order: 330
+categoryOrder: {"commercial": 120}
 ---
 
 Following my friend Diana Marks for Lexus was a pretty sweet assignment. She lives in the world of luxury travel and cars, and for a moment, so did I, including some time behind the wheel of a seriously fast, seriously good-looking Lexus.

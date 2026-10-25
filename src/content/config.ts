@@ -85,6 +85,10 @@ const videos = defineCollection({
     // adjacent items — see worker/index.ts's reorder handler. Ties fall
     // back to uploadDate (newest first).
     order: z.number().default(0),
+    // This video's own position on each category page (/documentary, ...),
+    // keyed by the category's tag, e.g. {"commercial": 40}. Set by the
+    // admin's "Order for" picker; a category without one uses `order`.
+    categoryOrder: z.record(z.string(), z.number()).default({}),
   }),
 });
 

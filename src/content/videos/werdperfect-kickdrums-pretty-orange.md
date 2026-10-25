@@ -16,6 +16,7 @@ stills: []
 urlSlug: "werdperfect-kickdrums-pretty-orange"
 hidden: false
 order: 400
+categoryOrder: {"music video": 60}
 ---
 
 Matt and I have known each other since we were kids, and we've lived a lot of life side by side. When he gave me free rein to direct "Pretty Orange," we wanted to reach back to our rural roots.

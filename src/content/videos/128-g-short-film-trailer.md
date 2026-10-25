@@ -16,6 +16,7 @@ stills: []
 urlSlug: "128-g-short-film-trailer"
 hidden: false
 order: 80
+categoryOrder: {"documentary": 20}
 ---
 
 This is the longer cut. It's where the men of 128-G get the room to tell their own stories.
