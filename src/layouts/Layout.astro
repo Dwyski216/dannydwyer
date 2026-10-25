@@ -252,11 +252,18 @@ const personSchema = {
   .page-title {
     font-family: var(--font-title-light);
     font-weight: 300;
-    /* Work and Contact sit 10pt under the standard title size. */
+    /* Work and Contact sit 10pt under the standard title size on desktop. */
     font-size: calc(var(--title-size) - 10pt);
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--olympic-gold);
+  }
+
+  /* Phones keep the full title size. */
+  @media (max-width: 600px) {
+    .page-title {
+      font-size: var(--title-size);
+    }
   }
 
   /* Page titles are centered on every screen (Contact's over its column). */
