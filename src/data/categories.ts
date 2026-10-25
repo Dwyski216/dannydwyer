@@ -8,10 +8,31 @@ export interface Category {
   label: string; // button text
   title: string; // browser tab / Google / link-preview title
   noun: string; // used in the generated description
+  description?: string; // meta description; generated from the videos when unset
 }
 
 export const CATEGORIES: Category[] = [
-  { slug: 'documentary', tag: 'documentary', label: 'Documentary', title: 'Danny Dwyer | Documentary Cinematographer & Director', noun: 'documentary films and branded docs' },
-  { slug: 'commercial', tag: 'commercial', label: 'Commercial', title: 'Commercial | Danny Dwyer', noun: 'commercials and brand campaigns' },
-  { slug: 'music-videos', tag: 'music video', label: 'Music Videos', title: 'Music Videos | Danny Dwyer', noun: 'music videos' },
+  {
+    slug: 'documentary',
+    tag: 'documentary',
+    label: 'Documentary',
+    title: 'Danny Dwyer | Documentary Cinematographer & Director',
+    noun: 'documentary films and branded docs',
+    description:
+      'Documentaries by cinematographer and director Danny "Dwyski" Dwyer, from Jelly Roll\'s A Year for a Life to a maximum-security prison yard and the Moon.',
+  },
+  {
+    slug: 'commercial',
+    tag: 'commercial',
+    label: 'Commercial',
+    title: 'Danny Dwyer | Commercial Cinematographer & Director',
+    noun: 'commercials and brand campaigns',
+  },
+  {
+    slug: 'music-videos',
+    tag: 'music video',
+    label: 'Music Videos',
+    title: 'Danny Dwyer | Music Video Cinematographer & Director',
+    noun: 'music videos',
+  },
 ];

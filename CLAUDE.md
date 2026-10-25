@@ -23,7 +23,10 @@ When the owner is ready to move the domain off Squarespace, walk through this fi
    Known: the Lady Gaga series and the Jelly Roll series. Check the rest too.
 2. **Email DNS**: screenshot the domain's MX/TXT records at Squarespace before
    changing nameservers (contact@dannydwyer.com must keep working).
-3. After the domain is attached in Cloudflare: update `SITE_URL` in
-   `astro.config.mjs` (and anything else pointing at the workers.dev address),
-   add www → apex and old Squarespace URL redirects, then re-run full QA.
+3. `SITE_URL` in `astro.config.mjs` is already `https://www.dannydwyer.com`
+   (www is the canonical address), and the Worker marks everything on the
+   workers.dev test address noindex. After the domain is attached in
+   Cloudflare: add dannydwyer.com → www and dwyski.com → www redirects, map
+   obvious old Squarespace paths (/about, /contact, ...) to the new pages (the
+   owner wants nothing else kept; other old URLs may 404), then re-run full QA.
 4. Only then cancel the Squarespace website plan (not the domain).

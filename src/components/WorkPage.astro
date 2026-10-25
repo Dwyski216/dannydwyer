@@ -48,7 +48,8 @@ const allTags = [...new Set(videos.flatMap((v) => v.data.tags))].sort();
 
 const inCategory = category ? videos.filter((v) => v.data.tags.some((t) => t.toLowerCase() === category.tag)) : videos;
 const description = category
-  ? `${category.label}: ${inCategory.length} ${category.noun} by filmmaker, director, and cinematographer Danny Dwyer, including ${inCategory
+  ? category.description ??
+    `${category.label}: ${inCategory.length} ${category.noun} by filmmaker, director, and cinematographer Danny Dwyer, including ${inCategory
       .slice(0, 3)
       .map((v) => v.data.title)
       .join(', ')}.`

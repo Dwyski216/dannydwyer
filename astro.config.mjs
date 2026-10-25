@@ -3,7 +3,11 @@ import sitemap from '@astrojs/sitemap';
 import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-const SITE_URL = 'https://dannydwyer.rough-water-4697.workers.dev';
+// The site's one real address: every page's canonical link, og:url and
+// og:image, the sitemap and robots.txt are built from it. The workers.dev
+// test address serves the same pages but is kept out of Google by the
+// Worker (see noindexTestSite in worker/index.ts).
+const SITE_URL = 'https://www.dannydwyer.com';
 
 // The sitemap integration only sees final URLs, not content collection data,
 // so hidden work items (drafts, placeholders, old temp reels) and admin

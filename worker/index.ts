@@ -945,10 +945,34 @@ async function router(request: Request, env: Env): Promise<Response> {
   return env.ASSETS.fetch(request);
 }
 
+// The workers.dev address is the test copy of the site: everything it
+// serves is marked noindex (a header, plus a robots meta tag in each page),
+// so Google only ever indexes the real domain. Pages already marked noindex
+// (admin, 404, unlisted videos) keep a single tag.
+function noindexTestSite(request: Request, res: Response): Response {
+  if (!new URL(request.url).hostname.endsWith('.workers.dev')) return res;
+  const headers = new Headers(res.headers);
+  headers.set('X-Robots-Tag', 'noindex, nofollow');
+  const marked = new Response(res.body, { status: res.status, statusText: res.statusText, headers });
+  if (!headers.get('Content-Type')?.includes('text/html')) return marked;
+  return new HTMLRewriter()
+    .on('meta[name="robots"]', {
+      element: (el) => {
+        el.remove();
+      },
+    })
+    .on('head', {
+      element: (el) => {
+        el.append('<meta name="robots" content="noindex, nofollow" />', { html: true });
+      },
+    })
+    .transform(marked);
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     try {
-      return await router(request, env);
+      return noindexTestSite(request, await router(request, env));
     } catch (err) {
       // Anything uncaught here (a thrown exception mid-handler, hitting the
       // Worker's subrequest cap, etc.) would otherwise surface as
