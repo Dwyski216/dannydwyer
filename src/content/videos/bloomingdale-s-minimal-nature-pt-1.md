@@ -9,7 +9,7 @@ equipment: [{"category": "Camera", "item": "Sony FX6"}, {"category": "Lens", "it
 uploadDate: "2026-10-03"
 tags: []
 urlSlug: "bloomingdale-s-minimal-nature-pt-1"
-order: 660
+order: 730
 hidden: true
 stills: []
 ---

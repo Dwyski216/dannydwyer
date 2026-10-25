@@ -14,7 +14,7 @@ tags: ["music video","punk"]
 stills: []
 urlSlug: "honduras-hollywood"
 hidden: false
-order: 600
+order: 530
 ---
 
 A Brooklyn dive bar. A Dolly Parton look-alike, an Elvis look-alike, and a Frank Sinatra look-alike. By the end of the night, one of the guys in the band had turned into Elvis too.

@@ -9,7 +9,7 @@ equipment: [{"category": "Camera", "item": "Sony FX6"}, {"category": "Lens", "it
 uploadDate: "2026-10-03"
 tags: []
 urlSlug: "jelly-roll-men-s-health-magazine"
-order: 580
+order: 660
 hidden: true
 stills: []
 ---

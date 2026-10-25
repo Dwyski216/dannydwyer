@@ -14,7 +14,7 @@ tags: ["music video","psychedelic"]
 stills: []
 urlSlug: "pixies-on-graveyard-hill"
 hidden: false
-order: 60
+order: 120
 ---
 
 When Kii Arens and Mama Hot Dog asked me to shoot this, I said yes before I even knew who the band was. I'd follow Mama Hot Dog anywhere, and I'd wanted to work with Kii for a while. Two directors with bold, unmistakable styles, so I knew what I was walking into, a retro acid trip with an amazing band that was down. Say less.

@@ -14,7 +14,7 @@ tags: ["commercial","product","fashion"]
 stills: []
 urlSlug: "shinola"
 hidden: false
-order: 540
+order: 370
 ---
 
 A studio, a table full of Shinola watches, and a lot of room to play.
