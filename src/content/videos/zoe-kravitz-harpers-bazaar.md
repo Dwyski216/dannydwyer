@@ -14,7 +14,7 @@ tags: ["editorial","celebrity","interview","animals","wolves","fashion"]
 stills: []
 urlSlug: "zoe-kravitz-harpers-bazaar"
 hidden: false
-order: 480
+order: 490
 ---
 
 We were somewhere deep in the Mojave. The landscape was breathtaking, and so was the styling.

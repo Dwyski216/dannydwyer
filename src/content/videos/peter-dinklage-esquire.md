@@ -14,7 +14,7 @@ tags: ["editorial","celebrity","digital cover","fashion"]
 stills: []
 urlSlug: "peter-dinklage-esquire"
 hidden: false
-order: 420
+order: 430
 ---
 
 A custom Giorgio Armani suit, made for Peter Dinklage, for the digital cover of Esquire’s March 2014 Style Issue, one of the magazine’s biggest of the year. If you know, you know. The man is the greatest.

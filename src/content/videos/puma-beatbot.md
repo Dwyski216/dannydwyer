@@ -14,7 +14,7 @@ tags: ["commercial","sports","fashion"]
 stills: []
 urlSlug: "puma-beatbot"
 hidden: false
-order: 520
+order: 530
 ---
 
 PUMA built a robot that runs at Usain Bolt's world-record pace. Then they put it on the track for you to chase.

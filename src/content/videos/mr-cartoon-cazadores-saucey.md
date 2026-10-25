@@ -14,7 +14,7 @@ tags: ["branded content","collaboration"]
 stills: []
 urlSlug: "mr-cartoon-cazadores-saucey"
 hidden: false
-order: 340
+order: 350
 ---
 
 A day at Mr. Cartoon's studio, watching him freestyle a Día de los Muertos design. Which in turn ended up on a limited run Día de los Muertos Cazadores bottle. No sketch, no hesitation, just a master working.
