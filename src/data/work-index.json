@@ -368,19 +368,6 @@
     "order": 270
   },
   {
-    "slug": "wolf-shepherd-monaco",
-    "title": "Wolf & Shepherd Monaco",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion",
-      "shoes"
-    ],
-    "uploadDate": "2017-08-01",
-    "hidden": false,
-    "order": 420
-  },
-  {
     "slug": "wolf-shepherd-crossover",
     "title": "Wolf & Shepherd Crossover",
     "tags": [
@@ -845,5 +832,18 @@
     "uploadDate": "2023-09-01",
     "hidden": false,
     "order": 210
+  },
+  {
+    "slug": "wolf-shepherd-monaco",
+    "title": "Wolf & Shepherd Collection",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion",
+      "shoes"
+    ],
+    "uploadDate": "2017-08-01",
+    "hidden": false,
+    "order": 420
   }
 ]
