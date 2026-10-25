@@ -15,8 +15,8 @@ tags: ["commercial","hotel","hospitality"]
 stills: []
 urlSlug: "the-atlas-hotel-in-cambridge"
 hidden: false
-order: 500
-categoryOrder: {"commercial": 170}
+order: 400
+categoryOrder: {"commercial":170}
 ---
 
 The Atlas sits steps from Harvard Business School, right where the university’s next chapter is being built, so the whole place feels like a professor’s study that learned how to throw a party.

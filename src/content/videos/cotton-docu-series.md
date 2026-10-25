@@ -15,8 +15,8 @@ tags: ["documentary","docu series","branded content","commercial"]
 stills: []
 urlSlug: "cotton-docu-series"
 hidden: false
-order: 480
-categoryOrder: {"commercial": 160, "documentary": 100}
+order: 460
+categoryOrder: {"commercial":160,"documentary":100}
 ---
 
 Cotton is everywhere, which is exactly why nobody thinks about it.
