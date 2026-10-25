@@ -14,7 +14,7 @@ tags: ["street art","graffiti"]
 stills: []
 urlSlug: "nychos-sheryo-the-yok"
 hidden: false
-order: 600
+order: 590
 ---
 
 When some of the best street artists on the planet are also your friends, and they ask you to make them a video, the answer is always yes.
