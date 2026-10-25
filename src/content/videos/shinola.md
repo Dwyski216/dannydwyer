@@ -4,6 +4,7 @@ pageTitle: "Shinola Watches | Director of Photography Danny Dwyer"
 summary: "Motion, light, and precision. Director of photography Danny Dwyer on studio product cinematography for Shinola watches."
 platform: "vimeo"
 videoId: "196646985"
+customThumbnail: "/images/thumbnails/shinola-1792902510851.webp"
 credits: [{"role":"Director","name":"Sarah Carey"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Leica Summicron-C"}]
 series: []
