@@ -14,7 +14,7 @@ tags: ["music video","punk"]
 stills: []
 urlSlug: "honduras-paralyzed"
 hidden: false
-order: 630
+order: 600
 ---
 
 Josh Wehle, the drummer and a good friend, called with the pitch: "Small hotel upstate. No money. You in?"
