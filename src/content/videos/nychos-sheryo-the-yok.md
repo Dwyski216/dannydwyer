@@ -7,9 +7,10 @@ videoId: "72496004"
 customThumbnail: "/images/thumbnails/nychos-sheryo-the-yok-1792774717420.webp"
 credits: [{"role":"Cast","name":"Nychos"},{"role":"Cast","name":"The Yok"},{"role":"Cast","name":"Sheryo"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Blackmagic Pocket Cinema Camera"},{"category":"Lens","item":"Canon L Series"}]
+series: []
 projectName: "King Brown Magazine Issue 9 Release"
 uploadDate: "2013-08-01"
-tags: ["documentary","street art","graffiti"]
+tags: ["street art","graffiti"]
 stills: []
 urlSlug: "nychos-sheryo-the-yok"
 hidden: false
