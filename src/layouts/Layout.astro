@@ -252,7 +252,8 @@ const personSchema = {
   .page-title {
     font-family: var(--font-title-light);
     font-weight: 300;
-    font-size: var(--title-size);
+    /* Work and Contact sit 10pt under the standard title size. */
+    font-size: calc(var(--title-size) - 10pt);
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--olympic-gold);
