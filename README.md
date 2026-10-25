@@ -41,6 +41,7 @@ worker/
                             thumbnail uploads); everything else is served as a
                             static file from dist/
 wrangler.jsonc            ← Cloudflare Worker + static-assets config
+brand-assets/             ← style guide, monogram variations, spare fonts (saved here, not published)
 ```
 
 ### Video content model
