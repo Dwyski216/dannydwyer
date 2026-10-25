@@ -51,6 +51,14 @@ const { title, email } = Astro.props;
     margin-top: 4rem;
   }
 
+  /* Phones: the gap above the title (from the nav underline) matches
+     the gap below it, to the photo. */
+  @media (max-width: 600px) {
+    .layout {
+      margin-top: calc(4rem - 57px);
+    }
+  }
+
   /* Desktop: titles sit 36px closer to the nav (Work, Contact, 404 match). */
   @media (min-width: 601px) {
     .layout {
