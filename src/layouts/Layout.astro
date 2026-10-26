@@ -328,19 +328,19 @@ const personSchema = {
      always centered rather than left-aligned. */
   .card-gallery {
     --cols: 3;
-    --col-gap: var(--gutter);
-    --row-gap: 2rem;
+    --col-gap: calc(var(--gutter) * 0.8);
+    --row-gap: 1.6rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--row-gap) var(--col-gap);
   }
 
-  /* Desktop (three across): cards 30% closer together. */
+  /* Desktop (three across): cards closer together. */
   @media (min-width: 931px) {
     .card-gallery {
-      --col-gap: calc(var(--gutter) * 0.7);
-      --row-gap: 1.4rem;
+      --col-gap: calc(var(--gutter) * 0.56);
+      --row-gap: 1.12rem;
     }
   }
 
@@ -363,11 +363,11 @@ const personSchema = {
     }
   }
 
-  /* Phones: cards 50% closer together. */
+  /* Phones: cards closer together still. */
   @media (max-width: 600px) {
     .card-gallery {
-      --col-gap: calc(var(--gutter) * 0.5);
-      --row-gap: 1rem;
+      --col-gap: calc(var(--gutter) * 0.4);
+      --row-gap: 0.8rem;
     }
   }
 </style>
