@@ -2,7 +2,9 @@
 interface Props {
   slug: string;
   title: string;
-  summary: string;
+  // Shown under the title when given; the Work and category galleries leave
+  // it out, so their cards are just thumbnail and title.
+  summary?: string;
   tags: string[];
   thumbnailUrl: string;
   // Swapped in if thumbnailUrl fails to load (an uploaded thumbnail falls
@@ -15,7 +17,7 @@ interface Props {
   workRank?: number;
 }
 const { slug, title, summary, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank } = Astro.props;
-const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
+const searchText = `${title} ${summary ?? ''} ${tags.join(' ')}`.toLowerCase();
 ---
 
 <a
@@ -40,7 +42,7 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
   </div>
   <div class="meta">
     <h3>{title}</h3>
-    <p class="summary">{summary}</p>
+    {summary && <p class="summary">{summary}</p>}
     <div class="tags">
       {tags.map((t) => <span class="tag">{t}</span>)}
     </div>
@@ -98,6 +100,11 @@ const searchText = `${title} ${summary} ${tags.join(' ')}`.toLowerCase();
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
+  }
+
+  /* No summary: nothing below the title, so no gap under it either. */
+  .meta h3:has(+ .tags) {
+    margin-bottom: 0;
   }
 
   .card:hover h3 {
