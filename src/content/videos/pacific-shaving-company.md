@@ -2,6 +2,7 @@
 title: "Pacific Shaving Company"
 pageTitle: "Pacific Shaving Co. | Director of Photography Danny Dwyer"
 summary: "Shooting through a two-way mirror in tight quarters for Pacific Shaving Company. Director of photography Danny Dwyer."
+cardLine: "Pacific Shaving Company, shot clean and simple, the way a good shave should feel every morning."
 platform: "vimeo"
 videoId: "230197261"
 customThumbnail: "/images/thumbnails/pacific-shaving-company-1792787361695.webp"

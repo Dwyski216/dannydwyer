@@ -2,6 +2,7 @@
 title: "Audible \"Big Age\""
 pageTitle: "Big Age × Cedric the Entertainer | Director Danny Dwyer"
 summary: "Director Danny Dwyer on working with Cedric the Entertainer, Jennifer Lewis, and Niecy Nash-Betts for Audible's Big Age."
+cardLine: "Cedric the Entertainer, Jennifer Lewis, and Niecy Nash-Betts sell an Audible Original in one minute."
 platform: "vimeo"
 videoId: "1179055698"
 customThumbnail: "/images/thumbnails/big-age-audible-trailer-1792691205407.webp"

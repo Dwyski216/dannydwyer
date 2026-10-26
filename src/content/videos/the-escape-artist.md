@@ -2,6 +2,7 @@
 title: "Escape Artist  Art Film"
 pageTitle: "Escape Artist × Kimbra Audrey Lo | Filmmaker Danny Dwyer"
 summary: "An art film with Kimbra Audrey Lo at a secret New York spot, following her through her self-portraits. By filmmaker Danny Dwyer."
+cardLine: "An art film where fashion, movement, and a little mystery share the frame, and nothing stays still."
 platform: "vimeo"
 videoId: "144151076"
 customThumbnail: "/images/thumbnails/the-escape-artist-1792776192000.webp"

@@ -2,6 +2,7 @@
 title: "Cotton Docu-Series"
 pageTitle: "Cotton Docu-Series × BBDO | Filmmaker Danny Dwyer"
 summary: "A cross-country docu-series for BBDO on the designers who build their work around cotton. By filmmaker Danny Dwyer."
+cardLine: "A docu-series for Cotton with BBDO: real people, real stories, and the fabric of everyday life."
 platform: "vimeo"
 videoId: "115109226"
 customThumbnail: "/images/thumbnails/thumbnail-1792786519022.webp"

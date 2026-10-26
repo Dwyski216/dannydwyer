@@ -2,6 +2,7 @@
 title: "Reese Witherspoon × Harper's Bazaar"
 pageTitle: "Reese Witherspoon × Harper's Bazaar | DP Danny Dwyer"
 summary: "A snake, a cover story, and Reese Witherspoon, completely unbothered. Director of photography Danny Dwyer on her Harper's Bazaar video promo."
+cardLine: "Reese Witherspoon sits down with Harper's Bazaar for an interview that's as sharp as it is warm."
 platform: "vimeo"
 videoId: "368946293"
 credits: [{"role":"Cast","name":"Reese Witherspoon"},{"role":"Director","name":"Kathryn Rice"},{"role":"Director of Photography","name":"Danny Dwyer"}]

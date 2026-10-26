@@ -2,6 +2,7 @@
 title: "Shinola"
 pageTitle: "Shinola Watches | Director of Photography Danny Dwyer"
 summary: "Motion, light, and precision. Director of photography Danny Dwyer on studio product cinematography for Shinola watches."
+cardLine: "Shinola, the Detroit makers of watches and leather goods, filmed with the same care they build with."
 platform: "vimeo"
 videoId: "196646985"
 customThumbnail: "/images/thumbnails/shinola-1792902510851.webp"

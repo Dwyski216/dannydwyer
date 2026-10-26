@@ -2,6 +2,7 @@
 title: "Peter Dinklage × Esquire × Giorgio Armani"
 pageTitle: "Peter Dinklage × Esquire × Armani | Filmmaker Danny Dwyer"
 summary: "Peter Dinklage in custom Giorgio Armani for the digital cover of Esquire’s March 2014 Style Issue. By filmmaker Danny Dwyer."
+cardLine: "Peter Dinklage in custom Armani for Esquire's Style Issue, and a thank-you later, on a sidewalk."
 platform: "vimeo"
 videoId: "87905027"
 customThumbnail: "/images/thumbnails/peter-dinklage-esquire-1792775786238.webp"

@@ -2,6 +2,7 @@
 title: "Bandits Bandanas"
 pageTitle: "Bandits Bandanas 16mm | Director of Photography Danny Dwyer"
 summary: "Porsche donuts, desert dust, and 16mm reversal on a vintage Bolex. Danny Dwyer, director of photography on the Bandits Bandanas campaign."
+cardLine: "Bandits Bandanas shot on 16mm Kodak film, with a dusty western spirit and a car on the open road."
 platform: "vimeo"
 videoId: "414178591"
 customThumbnail: "/images/thumbnails/bandits-bandana-1792692420539.webp"

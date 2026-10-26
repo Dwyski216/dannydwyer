@@ -1,7 +1,8 @@
 ---
-title: "Bloomingdales Minimal Nature"
+title: "Bloomingdale's Minimal Nature"
 pageTitle: "Bloomingdale's at Saddle Peak | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer shoots Bloomingdale's at Saddle Peak House by Sant Architects, high in the Santa Monica Mountains above the Pacific."
+cardLine: "Fourteen board-formed concrete walls in Topanga and an infinity pool that mirrors the Pacific."
 platform: "vimeo"
 videoId: "1238952615"
 customThumbnail: "/images/thumbnails/bloomingdales-minimal-nature-1792791170494.webp"

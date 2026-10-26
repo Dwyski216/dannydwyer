@@ -2,6 +2,7 @@
 title: "Dave Foley × Mint Mobile"
 pageTitle: "Dave Foley × Mint Mobile | Cinematographer Danny Dwyer"
 summary: "A Dave Foley tweet became a Mint Mobile commercial in under 24 hours. Cinematographer Danny Dwyer on a spot produced, shot, and cut in under 12."
+cardLine: "Dave Foley tweeted, and Mint Mobile turned it into a commercial in under 24 hours. Fast and funny."
 platform: "vimeo"
 videoId: "701361560"
 customThumbnail: "/images/thumbnails/mint-mobile-dave-foley-1792721079782.webp"

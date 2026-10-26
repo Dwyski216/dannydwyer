@@ -2,6 +2,7 @@
 title: "Mint Mobile × Maximum Effort"
 pageTitle: "Mint Mobile Awards × Ryan Reynolds | Filmmaker Danny Dwyer"
 summary: "Mint Mobile's own spin on the Oscars, starring Ryan Reynolds. Filmmaker Danny Dwyer on directing, shooting, and cutting it with Maximum Effort."
+cardLine: "Ryan Reynolds and Mint Mobile hand out their own awards, an Oscars-night spin made fast and funny."
 platform: "vimeo"
 videoId: "701361598"
 credits: [{"role":"Cast","name":"Ryan Reynolds"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]

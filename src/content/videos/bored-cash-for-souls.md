@@ -2,6 +2,7 @@
 title: "Bored \"Cash For Souls\""
 pageTitle: "Bored \"Cash for Souls\" | Filmmaker Danny Dwyer"
 summary: "A streetwear launch film built around one T-shirt, \"Cash 4 Souls,\" with full creative freedom. Filmmaker Danny Dwyer."
+cardLine: "A fashion short film for Bored about what people will trade for a little cash, with style to spare."
 platform: "vimeo"
 videoId: "610269432"
 customThumbnail: "/images/thumbnails/bored-cash-for-souls-1792900076890.webp"

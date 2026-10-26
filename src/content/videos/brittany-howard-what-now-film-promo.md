@@ -2,6 +2,7 @@
 title: "Brittany Howard \"What Now\" Film Promo"
 pageTitle: "Brittany Howard \"What Now\" | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on Brittany Howard's What Now promo, shot during poppy season near Palm Springs with in-camera crystal effects, film, and choreographed zooms."
+cardLine: "Poppy season in the San Jacinto Mountains, 16mm film, and crystals bending the light, all in camera."
 platform: "vimeo"
 videoId: "1239091326"
 customThumbnail: "/images/thumbnails/thumbnail-1792855744411.webp"

@@ -2,6 +2,7 @@
 title: "The Atlas Hotel in Cambridge"
 pageTitle: "The Atlas Hotel, Boston | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on The Atlas Hotel in Allston, steps from Harvard Business School: a collector’s lobby, Ama, and Boston’s smartest new address."
+cardLine: "Harvard has a new front porch in Allston: a professor's study that learned how to throw a party."
 platform: "vimeo"
 videoId: "1239108533"
 customThumbnail: "/images/thumbnails/the-atlas-hotel-in-cambridge-1792876855489.webp"

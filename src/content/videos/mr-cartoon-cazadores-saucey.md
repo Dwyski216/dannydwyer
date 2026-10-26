@@ -2,6 +2,7 @@
 title: "Mr. Cartoon × Cazadores"
 pageTitle: "Mr. Cartoon × Cazadores | Filmmaker Danny Dwyer"
 summary: "Mr. Cartoon freestyles a Día de los Muertos Cazadores bottle, then a lowrider ride through the Valley with Estevan Oriol. By filmmaker Danny Dwyer."
+cardLine: "Tattoo and lowrider legend Mr. Cartoon teams up with Cazadores tequila on a collab with real flavor."
 platform: "vimeo"
 videoId: "244121988"
 customThumbnail: "/images/thumbnails/mr-cartoon-cazadores-saucey-1792728376658.webp"

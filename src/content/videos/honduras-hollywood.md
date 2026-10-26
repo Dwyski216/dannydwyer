@@ -2,6 +2,7 @@
 title: "Honduras \"Hollywood\""
 pageTitle: "Honduras \"Hollywood\" Music Video | DP Danny Dwyer"
 summary: "Dolly, Elvis, and Sinatra look-alikes in a Brooklyn dive bar. Honduras' \"Hollywood,\" shot by director of photography Danny Dwyer."
+cardLine: "A Brooklyn dive bar packed with celebrity look-alikes for Honduras, premiered on Vice's Noisey."
 platform: "vimeo"
 videoId: "158380205"
 customThumbnail: "/images/thumbnails/honduras-hollywood-1792775674045.webp"

@@ -2,6 +2,7 @@
 title: "Dark Bardo \"After Midnight Cowboy\""
 pageTitle: "Dark Bardo \"After Midnight Cowboy\" | Filmmaker Danny Dwyer"
 summary: "A runaway horse became a runaway trumpet. Filmmaker Danny Dwyer on the Dark Bardo music video he refused to let go of, filmed in Los Angeles."
+cardLine: "A psychedelic short with a sense of humor and a wink at a certain 1969 Best Picture winner."
 platform: "vimeo"
 videoId: "875659285"
 credits: [{"role":"Cast","name":"Harrison Roberts"},{"role":"Cast","name":"Jackie Spillane"},{"role":"Cast","name":"Hunter Holcombe"},{"role":"Cast","name":"Dean Holcombe"},{"role":"Cast","name":"Zack Birthday"},{"role":"Cast","name":"Jonah Feingold"},{"role":"Cast","name":"Dark Bardo"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]

@@ -2,6 +2,7 @@
 title: "Made on Earth"
 pageTitle: "Made on Earth Travel Show Pilot | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on Made on Earth, a travel show pilot following designer Heather Ross to the origins of the designs we use today."
+cardLine: "The pilot trailer for Made on Earth, a travel docu-series chasing stories from all over the map."
 platform: "vimeo"
 videoId: "230197221"
 customThumbnail: "/images/thumbnails/made-on-earth-trailer-1792773694387.webp"

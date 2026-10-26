@@ -2,6 +2,7 @@
 title: "Nychos × Sheryo × The Yok"
 pageTitle: "Nychos × Sheryo × The Yok | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer films graffiti artists Nychos, Sheryo, and The Yok freestyling a mural on a corrugated garage door for King Brown Magazine."
+cardLine: "Street artists Nychos, Sheryo, and The Yok take on one wall, and the city becomes their canvas."
 platform: "vimeo"
 videoId: "72496004"
 customThumbnail: "/images/thumbnails/nychos-sheryo-the-yok-1792774717420.webp"

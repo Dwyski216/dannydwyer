@@ -2,6 +2,7 @@
 title: "Wolf & Shepherd Collection"
 pageTitle: "Wolf & Shepherd Shoe Campaign | Filmmaker Danny Dwyer"
 summary: "Filmmaker Danny Dwyer’s five-film Wolf & Shepherd series, with the Monaco, Swiftknit, Chukka, Slip-On, and Crossover, shot from the Malibu Pier to the Santa Monica Mountains."
+cardLine: "Five dress shoes that don't act like it, filmed from the Malibu Pier to the Santa Monica Mountains."
 platform: "vimeo"
 videoId: "478342393"
 customThumbnail: "/images/thumbnails/wolf-shepherd-monaco-1792727681930.webp"

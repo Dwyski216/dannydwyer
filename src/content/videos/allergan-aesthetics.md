@@ -2,6 +2,7 @@
 title: "Allergan Aesthetics"
 pageTitle: "Allergan Aesthetics | Director of Photography Danny Dwyer"
 summary: "Director of photography Danny Dwyer on an Allergan Aesthetics studio campaign about vulnerability, self-worth, and feeling at home in your own skin."
+cardLine: "Professional models and real people side by side, so the confidence on screen feels true to life."
 platform: "vimeo"
 videoId: "712173614"
 customThumbnail: "/images/thumbnails/allergan-aesthetics-1792789495249.webp"

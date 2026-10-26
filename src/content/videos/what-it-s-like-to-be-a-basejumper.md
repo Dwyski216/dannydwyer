@@ -2,6 +2,7 @@
 title: "What It's Like To Be A Basejumper"
 pageTitle: "Clair Marie BASE Jumping Doc | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer hangs off a cliff to film pro BASE jumper Clair Marie, aka BASE Girl, on a shoot where everything has to go right."
+cardLine: "Clair Marie on what it really feels like to BASE jump, and why she keeps stepping off the edge."
 platform: "vimeo"
 videoId: "261248312"
 customThumbnail: "/images/thumbnails/what-it-s-like-to-be-a-basejumper-1792790161843.webp"

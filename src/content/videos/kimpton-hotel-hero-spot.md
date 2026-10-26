@@ -2,6 +2,7 @@
 title: "Kimpton Hotel Hero Spot"
 pageTitle: "Kimpton Hotel Theta | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on Kimpton Hotel Theta: a hotel named for deep relaxation, fun talent, and spritzes up on Bar Sprezzatura’s rooftop."
+cardLine: "Named after the brain waves of deep relaxation, then dropped right in the Theater District. Bold."
 platform: "vimeo"
 videoId: "1239106369"
 customThumbnail: "/images/thumbnails/kimpton-hotel-hero-spot-1792862513199.webp"

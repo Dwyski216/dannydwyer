@@ -1,7 +1,8 @@
 ---
-title: "Zoë Kravitz x Harper's Bazaar"
+title: "Zoë Kravitz × Harper's Bazaar"
 pageTitle: "Zoë Kravitz × Harper's Bazaar | Cinematographer Danny Dwyer"
 summary: "White gowns, blue sky, and wolves on the Mojave dunes. Cinematographer Danny Dwyer on shooting Zoë Kravitz for Harper's Bazaar."
+cardLine: "Zoë Kravitz for Harper's Bazaar, sharing the frame with real wolves and holding her own with ease."
 platform: "vimeo"
 videoId: "289597669"
 customThumbnail: "/images/thumbnails/zoe-kravitz-harpers-bazaar-1792701119487.webp"

@@ -2,6 +2,7 @@
 title: "Google Pixel \"Lookout\""
 pageTitle: "Google Pixel Lookout | Cinematographer Danny Dwyer"
 summary: "One aisle, a hundred choices, and a phone that reads them out loud. Lachi shops on her own with Google Pixel’s Lookout. Shot by Danny Dwyer."
+cardLine: "Recording artist Lachi shops on her own while her Pixel reads every label in the aisle out loud."
 platform: "vimeo"
 videoId: "970932116"
 credits: [{"role":"Agency","name":"WTBR"},{"role":"Cast","name":"Lachi"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]

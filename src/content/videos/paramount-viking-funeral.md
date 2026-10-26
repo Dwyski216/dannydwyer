@@ -2,6 +2,7 @@
 title: "Paramount Network Says Farewell to Spike TV"
 pageTitle: "Paramount Network: Farewell Spike TV | DP Danny Dwyer"
 summary: "Flaming arrows, dynamite, and an 1800s cannon. Director of photography Danny Dwyer on Spike TV's farewell and Paramount Network's launch."
+cardLine: "Paramount Network sends off Spike TV the only way it could: a full Viking funeral, fire and all."
 platform: "vimeo"
 videoId: "252745798"
 customThumbnail: "/images/thumbnails/paramount-viking-funeral-1792699280109.webp"

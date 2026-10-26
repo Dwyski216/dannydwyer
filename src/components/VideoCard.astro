@@ -2,7 +2,8 @@
 interface Props {
   slug: string;
   title: string;
-  // A short line under the title (Featured Work only; galleries leave it out).
+  // The video's Card Line, shown in full under the title. Never the SEO
+  // summary: that stays in the project page's meta tags.
   line?: string;
   tags: string[];
   thumbnailUrl: string;
@@ -16,7 +17,7 @@ interface Props {
   workRank?: number;
 }
 const { slug, title, line, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank } = Astro.props;
-const searchText = `${title} ${tags.join(' ')}`.toLowerCase();
+const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
 ---
 
 <a
@@ -78,9 +79,10 @@ const searchText = `${title} ${tags.join(' ')}`.toLowerCase();
     padding: 0.85rem 1rem 1rem;
   }
 
-  /* Cards are thumbnail and title only. The title takes the lines it
-     needs (up to 2, clamped with an ellipsis); cards in a row stretch to
-     equal height, so any extra space falls at the bottom. */
+  /* Cards are thumbnail, title and Card Line. The title takes the lines it
+     needs (up to 2, clamped with an ellipsis); the Card Line always shows in
+     full. Cards in a row stretch to equal height, so any extra space falls
+     at the bottom. */
   .meta h3 {
     /* Lighter than Trade Gothic Bold: the regular cut thickened with a
        hairline stroke so its stems measure about 72% of the bold's (the font
@@ -110,11 +112,6 @@ const searchText = `${title} ${tags.join(' ')}`.toLowerCase();
     font-size: 0.85rem;
     line-height: 1.5;
     text-align: center;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
   }
 
   .card:hover h3 {

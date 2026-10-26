@@ -2,6 +2,7 @@
 title: "Columbia × Intuitive Machines × NASA"
 pageTitle: "Columbia × Intuitive Machines Moon Landing | DP Danny Dwyer"
 summary: "Filming the first American Moon landing since 1972. Danny Dwyer on Columbia, Intuitive Machines, and NASA in Houston, featuring astronaut Jack Fischer."
+cardLine: "The first American Moon landing in 50+ years, told with astronaut Jack Fischer and Jeff Koons' art."
 platform: "vimeo"
 videoId: "914552796"
 credits: [{"role":"Cast","name":"Jack Fischer"},{"role":"Cast","name":"Steve Altemus"},{"role":"Cast","name":"Haskell Beckham"},{"role":"Director","name":"Jesse Canright"},{"role":"Director of Photography","name":"Danny Dwyer"}]

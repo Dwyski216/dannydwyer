@@ -2,6 +2,7 @@
 title: "The Pixies \"On Graveyard Hill\""
 pageTitle: "Pixies \"On Graveyard Hill\" | Cinematographer Danny Dwyer"
 summary: "Crash zooms, in-camera effects, and an underwater slow-mo scene. Danny Dwyer, director of photography on the Pixies' \"On Graveyard Hill.\""
+cardLine: "Jeff Ross's pool, the Pixies, 16mm reversal, and a vintage Cooke zoom. Premiered on Rolling Stone."
 platform: "vimeo"
 videoId: "397085201"
 customThumbnail: "/images/thumbnails/pixies-on-graveyard-hill-1792729738371.webp"

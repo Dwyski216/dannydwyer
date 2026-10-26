@@ -2,6 +2,7 @@
 title: "Romer Hell's Kitchen Hero Film"
 pageTitle: "Romer Hell’s Kitchen | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on filming Romer Hell’s Kitchen: chaos on Eighth Avenue, calm in the lobby, and a piano bar that turns into a show."
+cardLine: "Everybody says avoid Times Square. Walk one block over and Hell's Kitchen becomes the place to hang."
 platform: "vimeo"
 videoId: "1239103103"
 customThumbnail: "/images/thumbnails/thumbnail-1792861846050.webp"

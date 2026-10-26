@@ -2,6 +2,7 @@
 title: "The Huntington Hotel SF"
 pageTitle: "The Huntington Hotel, Nob Hill | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on The Huntington Hotel, Nob Hill’s grand dame since 1924: cable cars at the door, old-school class, and a blonde Afghan hound."
+cardLine: "Nob Hill since 1924: cable cars at the door, old-school class, and a blonde Afghan hound."
 platform: "vimeo"
 videoId: "1239108908"
 customThumbnail: "/images/thumbnails/thumbnail-1792876563787.webp"

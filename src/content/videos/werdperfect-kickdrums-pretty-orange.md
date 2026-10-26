@@ -1,7 +1,8 @@
 ---
-title: "Werdperfect x The Kickdrums \"Pretty Orange\""
+title: "Werdperfect × The Kickdrums \"Pretty Orange\""
 pageTitle: "Werdperfect \"Pretty Orange\" | Filmmaker Danny Dwyer"
 summary: "A childhood friend, a hidden LA orange grove, and 105° heat. Filmmaker Danny Dwyer on Werdperfect’s “Pretty Orange” music video, all in camera zooms. Nobody got stung."
+cardLine: "A childhood friend, a hidden LA orange grove, 105° heat, bees, and turtles. Every effect in camera."
 platform: "vimeo"
 videoId: "875654186"
 customThumbnail: "/images/thumbnails/werdperfect-kickdrums-pretty-orange-1792691784392.webp"

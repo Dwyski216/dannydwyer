@@ -2,6 +2,7 @@
 title: "Danny Dwyer Showreel"
 pageTitle: "Danny Dwyer 2026 Reel"
 summary: "Danny Dwyer's cinematography reel a cross-section of narrative, commercial, and documentary work."
+cardLine: "Fifteen years behind the camera in a few minutes. Choosing what made the cut was the hardest part."
 platform: "vimeo"
 videoId: "391333279"
 customThumbnail: "/images/thumbnails/dannydwyer-2026-reel-1792699823175.webp"

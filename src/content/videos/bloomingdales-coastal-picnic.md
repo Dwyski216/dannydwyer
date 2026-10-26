@@ -2,6 +2,7 @@
 title: "Bloomingdale's Coastal Picnic"
 pageTitle: "Bloomingdale's Coastal Picnic | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on Bloomingdale's summer collection, shot on Catalina Island aboard a sailboat with a Mediterranean-style hillside town behind it."
+cardLine: "Summer on the water off Catalina Island, with a hillside town that feels like Amalfi and Santorini."
 platform: "vimeo"
 videoId: "1238952618"
 customThumbnail: "/images/thumbnails/thumbnail-1792790858516.webp"

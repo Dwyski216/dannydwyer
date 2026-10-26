@@ -2,6 +2,7 @@
 title: "ELLE Women in Hollywood"
 pageTitle: "ELLE Women in Hollywood | Director of Photography Danny Dwyer"
 summary: "Twelve months filming ELLE's Women in Hollywood alongside photographer Zoey Grossman. Director of photography Danny Dwyer."
+cardLine: "ELLE's Women in Hollywood in black and white: close, honest interviews with the women running it."
 platform: "vimeo"
 videoId: "368942744"
 customThumbnail: "/images/thumbnails/women-in-hollywood-1792700200673.webp"

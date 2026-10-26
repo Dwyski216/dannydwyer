@@ -2,6 +2,7 @@
 title: "Honduras \"Paralyzed\""
 pageTitle: "Honduras \"Paralyzed\" Music Video | DP Danny Dwyer"
 summary: "A love hotel, a pillow fight, a blown breaker, and one hour to shoot it. Honduras' \"Paralyzed,\" shot by director of photography Danny Dwyer."
+cardLine: "An upstate New York love hotel, a tripped breaker, and a storm of feathers for Honduras."
 platform: "vimeo"
 videoId: "132994777"
 customThumbnail: "/images/thumbnails/honduras-paralyzed-1792775392293.webp"

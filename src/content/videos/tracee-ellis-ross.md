@@ -2,6 +2,7 @@
 title: "Tracee Ellis Ross × Harper's Bazaar"
 pageTitle: "Tracee Ellis Ross × Harper's Bazaar | DP Danny Dwyer"
 summary: "Hot tubs and nonstop laughs. Director of photography Danny Dwyer on shooting Tracee Ellis Ross for Harper's Bazaar."
+cardLine: "Tracee Ellis Ross sits down with Harper's Bazaar for an interview full of warmth, wit, and style."
 platform: "vimeo"
 videoId: "641269866"
 credits: [{"role":"Cast","name":"Tracee Ellis Ross"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Lauren Hampton"}]

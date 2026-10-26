@@ -2,6 +2,7 @@
 title: "Jane Fonda × Harper's Bazaar"
 pageTitle: "Jane Fonda × Harper's Bazaar | Cinematographer Danny Dwyer"
 summary: "A one-on-one sit-down with Jane Fonda for Harper's Bazaar. Cinematographer Danny Dwyer on filming a living legend."
+cardLine: "Hollywood icon Jane Fonda sits down with Harper's Bazaar and owns the frame like nobody else."
 platform: "vimeo"
 videoId: "744782971"
 credits: [{"role":"Cast","name":"Jane Fonda"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Kathryn Rice"}]
