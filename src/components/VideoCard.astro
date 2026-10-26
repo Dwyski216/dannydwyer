@@ -84,18 +84,13 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
      full. Cards in a row stretch to equal height, so any extra space falls
      at the bottom. */
   .meta h3 {
-    /* Lighter than Trade Gothic Bold: the regular cut thickened with a
-       hairline stroke so its stems measure about 72% of the bold's (the font
-       has no in-between weight). */
-    font-family: var(--font-body);
-    font-weight: 400;
-    -webkit-text-stroke: 0.035em currentColor;
+    font-family: var(--font-title);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.01em;
     font-size: 1rem;
     line-height: 1.3;
-    text-align: center;
-    color: var(--headlight);
+    color: var(--olympic-gold);
     transition: color 0.15s ease;
     max-height: 2.6em;
     margin: 0;
@@ -111,11 +106,10 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
     color: var(--headlight);
     font-size: 0.85rem;
     line-height: 1.5;
-    text-align: center;
   }
 
   .card:hover h3 {
-    color: var(--olympic-gold);
+    color: var(--headlight);
   }
 
   .tags {
