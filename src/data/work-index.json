@@ -47,19 +47,6 @@
     }
   },
   {
-    "slug": "ryan-gosling-mens-health",
-    "title": "Ryan Gosling x Men's Health",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "Ryan Gosling",
-      "Mens Health"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false,
-    "order": 40
-  },
-  {
     "slug": "google-pixel-magnifier",
     "title": "Google Pixel \"Magnifier\"",
     "tags": [
@@ -920,5 +907,18 @@
     "categoryOrder": {
       "commercial": 10
     }
+  },
+  {
+    "slug": "ryan-gosling-mens-health",
+    "title": "Ryan Gosling x Men's Health",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "Ryan Gosling",
+      "Mens Health"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 40
   }
 ]
