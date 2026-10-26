@@ -654,20 +654,6 @@
     }
   },
   {
-    "slug": "bloomingdales-coastal-picnic",
-    "title": "Bloomingdales Coastal Picnic",
-    "tags": [
-      "fashion",
-      "commercial"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 10,
-    "categoryOrder": {
-      "commercial": 20
-    }
-  },
-  {
     "slug": "bloomingdales-minimal-nature",
     "title": "Bloomingdales Minimal Nature",
     "tags": [
@@ -919,6 +905,20 @@
     "order": 230,
     "categoryOrder": {
       "commercial": 40
+    }
+  },
+  {
+    "slug": "bloomingdales-coastal-picnic",
+    "title": "Bloomingdale's Coastal Picnic",
+    "tags": [
+      "fashion",
+      "commercial"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 10,
+    "categoryOrder": {
+      "commercial": 20
     }
   }
 ]
