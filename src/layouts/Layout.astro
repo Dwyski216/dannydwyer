@@ -336,8 +336,8 @@ const personSchema = {
     gap: var(--row-gap) var(--col-gap);
   }
 
-  /* Desktop: cards 30% closer together. */
-  @media (min-width: 901px) {
+  /* Desktop (three across): cards 30% closer together. */
+  @media (min-width: 931px) {
     .card-gallery {
       --col-gap: calc(var(--gutter) * 0.7);
       --row-gap: 1.4rem;
@@ -349,13 +349,15 @@ const personSchema = {
     min-width: 0;
   }
 
-  @media (max-width: 900px) {
+  /* Column breakpoints sit where the longest title still fits on two
+     lines (Werdperfect × The Kickdrums "Pretty Orange"). */
+  @media (max-width: 930px) {
     .card-gallery {
       --cols: 2;
     }
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 620px) {
     .card-gallery {
       --cols: 1;
     }
