@@ -52,17 +52,20 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
         data-title={v.title}
         aria-label={`Play ${v.title}`}
       >
-        <img
-          src={v.src}
-          alt=""
-          loading="lazy"
-          width="320"
-          height="180"
-          data-thumb={v.src}
-          data-fallback={v.fallback ?? ''}
-          onerror={FALLBACK_ONERROR}
-        />
-        <span class="play" aria-hidden="true"></span>
+        <span class="series-thumb-frame">
+          <img
+            src={v.src}
+            alt=""
+            loading="lazy"
+            width="320"
+            height="180"
+            data-thumb={v.src}
+            data-fallback={v.fallback ?? ''}
+            onerror={FALLBACK_ONERROR}
+          />
+          <span class="play" aria-hidden="true"></span>
+        </span>
+        <span class="series-thumb-title">{v.title}</span>
       </button>
     ))}
   </div>
@@ -81,6 +84,7 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
     player.querySelectorAll<HTMLButtonElement>('.series-thumb').forEach((thumb) => {
       thumb.addEventListener('click', () => {
         const img = thumb.querySelector('img')!;
+        const label = thumb.querySelector('.series-thumb-title')!;
         const playing = { embed: frame.dataset.embed!, thumb: frame.dataset.thumb!, fallback: frame.dataset.fallback!, title: frame.title };
 
         frame.src = withAutoplay(thumb.dataset.embed!);
@@ -93,6 +97,7 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
 
         thumb.dataset.embed = playing.embed;
         thumb.dataset.title = playing.title;
+        label.textContent = playing.title;
         thumb.setAttribute('aria-label', `Play ${playing.title}`);
         img.dataset.fallback = playing.fallback;
         img.dataset.thumb = playing.thumb;
@@ -141,17 +146,38 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
     }
   }
 
+  /* Each thumbnail with its video's title underneath. */
   .series-thumb {
-    position: relative;
     display: block;
     flex: 0 0 calc((100% - (var(--per-row) - 1) * var(--gap)) / var(--per-row));
-    aspect-ratio: 16 / 9;
     padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .series-thumb-frame {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
     border: 1px solid var(--hairline);
     background: #000;
-    cursor: pointer;
     overflow: hidden;
     transition: border-color 0.15s ease;
+  }
+
+  /* Headlight, semi-bold: Trade Gothic has no semi-bold cut, so a hairline
+     stroke thickens the regular (same as the nav's current page). */
+  .series-thumb-title {
+    display: block;
+    margin-top: 0.45rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.35;
+    color: var(--headlight);
+    -webkit-text-stroke: 0.035em currentColor;
+    transition: color 0.15s ease;
   }
 
   .series-thumb img {
@@ -161,10 +187,18 @@ const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; fullsc
     object-fit: cover;
   }
 
-  .series-thumb:hover,
-  .series-thumb:focus-visible {
+  .series-thumb:hover .series-thumb-frame,
+  .series-thumb:focus-visible .series-thumb-frame {
     border-color: var(--olympic-gold);
     outline: 1px solid var(--olympic-gold);
+  }
+
+  .series-thumb:focus-visible {
+    outline: none;
+  }
+
+  .series-thumb:hover .series-thumb-title {
+    color: var(--olympic-gold);
   }
 
   /* Small play button so the thumbnails read as playable. */
