@@ -876,21 +876,6 @@
     }
   },
   {
-    "slug": "jelly-roll-x-men-s-health-documentary",
-    "title": "Jelly Roll × Men's Health Documentary",
-    "tags": [
-      "documentary",
-      "film",
-      "narrative"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 20,
-    "categoryOrder": {
-      "documentary": 10
-    }
-  },
-  {
     "slug": "lady-gaga-x-haus-labs",
     "title": "Lady Gaga × Haus Labs",
     "tags": [
@@ -920,5 +905,20 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 40
+  },
+  {
+    "slug": "jelly-roll-x-men-s-health-documentary",
+    "title": "Jelly Roll × Men's Health Documentary",
+    "tags": [
+      "documentary",
+      "film",
+      "narrative"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 20,
+    "categoryOrder": {
+      "documentary": 10
+    }
   }
 ]

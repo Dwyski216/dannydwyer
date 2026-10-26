@@ -8,7 +8,7 @@ videoId: "1238943364"
 customThumbnail: "/images/thumbnails/jelly-roll-x-men-s-health-documentary-1792791285457.webp"
 credits: [{"role":"Cast","name":"Jelly Roll"},{"role":"Cast","name":"Dana White"},{"role":"Cast","name":"Katherine H. Saunders"},{"role":"Cast","name":"Ian Larios"},{"role":"Cast","name":"Mike Miller"},{"role":"Cast","name":"Matt Johnson"},{"role":"Cast","name":"Hunter Campbell"},{"role":"Cast","name":"Gary Brecka"},{"role":"Producer","name":"Dorenna Newton"},{"role":"Director","name":"Dorenna Newton"},{"role":"LA // NSH Director of Photography","name":"Danny Dwyer"},{"role":"2nd Camera","name":"Sam Abu"},{"role":"Art Director","name":"Cameron Sherril"},{"role":"Editor","name":"Cory Vanderploeg & Martin Awano"},{"role":"Sound Mixer","name":"Matthew Leeb"},{"role":"Sound Designer","name":"Ben Chesneau"},{"role":"Colorist","name":"Daniel Silverman"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angenieux EZ-1"}]
-series: [{"title":"Teaser","platform":"vimeo","videoId":"1238945381","thumbnail":"/images/thumbnails/jelly-roll-x-men-s-health-documentary-series-2-1792789007910.webp"},{"title":"Trailer","platform":"vimeo","videoId":"1238945380","thumbnail":"/images/thumbnails/jelly-roll-x-men-s-health-documentary-series-3-1792789141766.webp"}]
+series: [{"title":"Jelly Roll Teaser","platform":"vimeo","videoId":"1238945381","thumbnail":"/images/thumbnails/jelly-roll-x-men-s-health-documentary-series-2-1792789007910.webp"},{"title":"Jelly Roll Trailer","platform":"vimeo","videoId":"1238945380","thumbnail":"/images/thumbnails/jelly-roll-x-men-s-health-documentary-series-3-1792789141766.webp"}]
 client: "Men's Health Magazine"
 projectName: "Jelly Roll \"A Year For Life\" Documentary"
 uploadDate: "2026-10-23"
