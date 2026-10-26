@@ -757,22 +757,6 @@
     }
   },
   {
-    "slug": "wolf-shepherd-monaco",
-    "title": "Wolf & Shepherd Collection",
-    "tags": [
-      "commercial",
-      "product",
-      "fashion",
-      "shoes"
-    ],
-    "uploadDate": "2017-08-01",
-    "hidden": false,
-    "order": 370,
-    "categoryOrder": {
-      "commercial": 130
-    }
-  },
-  {
     "slug": "beck-gustaf-close",
     "title": "Beck × Gustaf \"Close\"",
     "tags": [
@@ -919,6 +903,22 @@
     "order": 20,
     "categoryOrder": {
       "documentary": 10
+    }
+  },
+  {
+    "slug": "wolf-shepherd-shoe",
+    "title": "Wolf & Shepherd Collection",
+    "tags": [
+      "commercial",
+      "product",
+      "fashion",
+      "shoes"
+    ],
+    "uploadDate": "2017-08-01",
+    "hidden": false,
+    "order": 370,
+    "categoryOrder": {
+      "commercial": 130
     }
   }
 ]
