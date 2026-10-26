@@ -20,6 +20,7 @@ const { featured, thumbnails } = Astro.props;
         <VideoCard
           slug={v.data.urlSlug}
           title={v.data.title}
+          line={v.data.cardLine || v.data.summary}
           tags={v.data.tags}
           thumbnailUrl={thumbnails[i].src}
           fallbackUrl={thumbnails[i].fallback}

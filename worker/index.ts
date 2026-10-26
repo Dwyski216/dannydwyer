@@ -597,6 +597,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
     title: body.title,
     pageTitle: body.pageTitle || undefined,
     summary: body.summary,
+    cardLine: typeof body.cardLine === 'string' && body.cardLine.trim() ? body.cardLine.trim() : undefined,
     platform: body.platform === 'vimeo' ? 'vimeo' : 'youtube',
     videoId: body.videoId,
     thumbnailUrl: body.thumbnailUrl || undefined,

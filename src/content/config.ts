@@ -14,6 +14,9 @@ const videos = defineCollection({
     pageTitle: z.string().optional(),
     // Short version for <meta description> and search/AI snippets — aim for 150-160 characters.
     summary: z.string().max(200),
+    // Optional one-liner under the title on the home page's Featured Work
+    // cards; the cards fall back to the summary when it's blank.
+    cardLine: z.string().optional(),
     // Longer on-page description, can be a full paragraph or two. Written in the body (markdown) below the frontmatter.
 
     // Video embed — hosted on YouTube or Vimeo, never uploaded to this site

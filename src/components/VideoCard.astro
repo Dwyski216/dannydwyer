@@ -2,6 +2,8 @@
 interface Props {
   slug: string;
   title: string;
+  // A short line under the title (Featured Work only; galleries leave it out).
+  line?: string;
   tags: string[];
   thumbnailUrl: string;
   // Swapped in if thumbnailUrl fails to load (an uploaded thumbnail falls
@@ -13,7 +15,7 @@ interface Props {
   // Its position in the Work page order, for galleries that re-sort cards.
   workRank?: number;
 }
-const { slug, title, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank } = Astro.props;
+const { slug, title, line, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank } = Astro.props;
 const searchText = `${title} ${tags.join(' ')}`.toLowerCase();
 ---
 
@@ -39,6 +41,7 @@ const searchText = `${title} ${tags.join(' ')}`.toLowerCase();
   </div>
   <div class="meta">
     <h3>{title}</h3>
+    {line && <p class="line">{line}</p>}
     <div class="tags">
       {tags.map((t) => <span class="tag">{t}</span>)}
     </div>
@@ -99,6 +102,19 @@ const searchText = `${title} ${tags.join(' ')}`.toLowerCase();
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
+  }
+
+  .line {
+    margin: 0.4rem 0 0;
+    color: var(--headlight);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
 
   .card:hover h3 {
