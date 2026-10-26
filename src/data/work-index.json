@@ -846,20 +846,6 @@
     }
   },
   {
-    "slug": "bloomingdales-coastal-picnic",
-    "title": "Bloomingdale's Coastal Picnic",
-    "tags": [
-      "fashion",
-      "commercial"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 10,
-    "categoryOrder": {
-      "commercial": 20
-    }
-  },
-  {
     "slug": "lady-gaga-x-haus-labs",
     "title": "Lady Gaga × Haus Labs",
     "tags": [
@@ -919,6 +905,20 @@
     "order": 370,
     "categoryOrder": {
       "commercial": 130
+    }
+  },
+  {
+    "slug": "bloomingdales-coastal-picnic",
+    "title": "Bloomingdale's Coastal Picnic",
+    "tags": [
+      "fashion",
+      "commercial"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 10,
+    "categoryOrder": {
+      "commercial": 20
     }
   }
 ]
