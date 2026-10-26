@@ -2,9 +2,6 @@
 interface Props {
   slug: string;
   title: string;
-  // Shown under the title when given; the Work and category galleries leave
-  // it out, so their cards are just thumbnail and title.
-  summary?: string;
   tags: string[];
   thumbnailUrl: string;
   // Swapped in if thumbnailUrl fails to load (an uploaded thumbnail falls
@@ -16,8 +13,8 @@ interface Props {
   // Its position in the Work page order, for galleries that re-sort cards.
   workRank?: number;
 }
-const { slug, title, summary, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank } = Astro.props;
-const searchText = `${title} ${summary ?? ''} ${tags.join(' ')}`.toLowerCase();
+const { slug, title, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank } = Astro.props;
+const searchText = `${title} ${tags.join(' ')}`.toLowerCase();
 ---
 
 <a
@@ -42,7 +39,6 @@ const searchText = `${title} ${summary ?? ''} ${tags.join(' ')}`.toLowerCase();
   </div>
   <div class="meta">
     <h3>{title}</h3>
-    {summary && <p class="summary">{summary}</p>}
     <div class="tags">
       {tags.map((t) => <span class="tag">{t}</span>)}
     </div>
@@ -79,11 +75,9 @@ const searchText = `${title} ${summary ?? ''} ${tags.join(' ')}`.toLowerCase();
     padding: 0.85rem 1rem 1rem;
   }
 
-  /* The title takes only the lines it needs (up to 2, clamped with an
-     ellipsis), so the summary always sits the same 0.4rem below it whether
-     the title is one line or two. The summary keeps a fixed 3-line height,
-     and cards in a row stretch to equal height, so any extra space falls at
-     the bottom of a card, never between title and summary. */
+  /* Cards are thumbnail and title only. The title takes the lines it
+     needs (up to 2, clamped with an ellipsis); cards in a row stretch to
+     equal height, so any extra space falls at the bottom. */
   .meta h3 {
     font-family: var(--font-title);
     font-weight: 700;
@@ -95,7 +89,7 @@ const searchText = `${title} ${summary ?? ''} ${tags.join(' ')}`.toLowerCase();
     color: var(--olympic-gold);
     transition: color 0.15s ease;
     max-height: 2.6em;
-    margin-bottom: 0.4rem;
+    margin: 0;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -103,30 +97,8 @@ const searchText = `${title} ${summary ?? ''} ${tags.join(' ')}`.toLowerCase();
     line-clamp: 2;
   }
 
-  /* No summary: nothing below the title, so no gap under it either. */
-  .meta h3:has(+ .tags) {
-    margin-bottom: 0;
-  }
-
   .card:hover h3 {
     color: var(--headlight);
-  }
-
-  .summary {
-    color: var(--headlight);
-    font-size: 0.85rem;
-    line-height: 1.5;
-    height: 4.5em;
-    margin: 0 0 0.65rem;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
   }
 
   .tags {
