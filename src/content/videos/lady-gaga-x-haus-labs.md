@@ -7,7 +7,7 @@ videoId: "397077775"
 customThumbnail: "/images/thumbnails/lady-gaga-x-haus-labs-1792783705416.webp"
 credits: [{"role":"Cast","name":"Lady Gaga"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Composer","name":"Werdperfect"}]
 equipment: [{"category":"Camera","item":"RED Dragon"},{"category":"Lens","item":"Zeiss CP3 Primes"}]
-series: [{"title":"Lady Gaga X Haus Labs","platform":"vimeo","videoId":"397077623"},{"title":"Lady Gaga X Haus Labs","platform":"vimeo","videoId":"397078058"}]
+series: [{"title":"Lady Gaga x Haus Labs","platform":"vimeo","videoId":"397077623"},{"title":"Lady Gaga X Haus Labs","platform":"vimeo","videoId":"397078058"}]
 client: "Haus Labs"
 projectName: "Company Launch Series"
 uploadDate: "2026-10-23"
