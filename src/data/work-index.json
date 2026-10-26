@@ -877,21 +877,6 @@
     "order": 40
   },
   {
-    "slug": "jelly-roll-x-men-s-health-documentary",
-    "title": "Jelly Roll × Men's Health Documentary",
-    "tags": [
-      "documentary",
-      "film",
-      "narrative"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 20,
-    "categoryOrder": {
-      "documentary": 10
-    }
-  },
-  {
     "slug": "wolf-shepherd-shoe",
     "title": "Wolf & Shepherd Collection",
     "tags": [
@@ -919,6 +904,21 @@
     "order": 10,
     "categoryOrder": {
       "commercial": 20
+    }
+  },
+  {
+    "slug": "jelly-roll-x-men-s-health-documentary",
+    "title": "Jelly Roll \"A Year For A Life\" | Cinematographer Danny Dwyer",
+    "tags": [
+      "documentary",
+      "film",
+      "narrative"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 20,
+    "categoryOrder": {
+      "documentary": 10
     }
   }
 ]
