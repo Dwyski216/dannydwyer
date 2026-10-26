@@ -1,11 +1,11 @@
 ---
-title: "Bloomingdales Coastal Picnic"
+title: "Bloomingdale's Coastal Picnic"
 pageTitle: "Bloomingdale's Coastal Picnic | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on Bloomingdale's summer collection, shot on Catalina Island aboard a sailboat with a Mediterranean-style hillside town behind it."
 platform: "vimeo"
 videoId: "1238952618"
 customThumbnail: "/images/thumbnails/thumbnail-1792790858516.webp"
-credits: [{"role":"Director of Photography","name":"Danny Dwyer"}]
+credits: [{"role":"Agency","name":"Camp Productions"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Fer Santa Cruz"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"TLS Canon FD Primes"}]
 series: [{"title":"Coastal Picnic #2","platform":"vimeo","videoId":"1238952616","thumbnail":"/images/thumbnails/series-2-1792790817735.webp"}]
 client: "Bloomingdales"
