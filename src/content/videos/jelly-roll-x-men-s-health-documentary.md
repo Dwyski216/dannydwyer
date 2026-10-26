@@ -1,5 +1,5 @@
 ---
-title: "Jelly Roll \"A Year For A Life\" | Cinematographer Danny Dwyer"
+title: "Jelly Roll \"A Year For A Life\""
 pageTitle: "Jelly Roll \"A Year For A Life\" | Cinematographer Danny Dwyer"
 summary: "A promise made ten years ago, kept: cinematographer Danny Dwyer films longtime acquaintance Jelly Roll's weight-loss and fitness journey for Men’s Health Magazine"
 cardLine: "A promise made ten years ago, kept: Jelly Roll's weight-loss and fitness journey, shot by a friend."
