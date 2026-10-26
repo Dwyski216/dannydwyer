@@ -528,24 +528,6 @@
     }
   },
   {
-    "slug": "lady-gaga-x-haus-labs",
-    "title": "Lady Gaga X Haus Labs",
-    "tags": [
-      "fashion",
-      "celebrity",
-      "commercial",
-      "series",
-      "make up",
-      "beauty"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 30,
-    "categoryOrder": {
-      "commercial": 10
-    }
-  },
-  {
     "slug": "columbia-intuitive-machines-nasa-v1",
     "title": "Columbia × Intuitive Machines × NASA",
     "tags": [
@@ -919,6 +901,24 @@
     "order": 20,
     "categoryOrder": {
       "documentary": 10
+    }
+  },
+  {
+    "slug": "lady-gaga-x-haus-labs",
+    "title": "Lady Gaga X Haus Labs",
+    "tags": [
+      "fashion",
+      "celebrity",
+      "commercial",
+      "series",
+      "make up",
+      "beauty"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 30,
+    "categoryOrder": {
+      "commercial": 10
     }
   }
 ]
