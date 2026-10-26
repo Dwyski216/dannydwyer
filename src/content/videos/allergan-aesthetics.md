@@ -14,7 +14,7 @@ tags: ["branded content","medical"]
 stills: []
 urlSlug: "allergan-aesthetics"
 hidden: false
-order: 260
+order: 270
 ---
 
 What does it really mean to feel at confident in your own skin? That was the question we carried into the studio for Allergan Aesthetics. Professional models and everyday people stepped in front of the lens side by side, and every one of them let their guard down, fully aware of how exposed that feels, and chose to show up fearlessly.
