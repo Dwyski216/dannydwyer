@@ -869,9 +869,18 @@ async function handleThumbnailPost(request: Request, env: Env): Promise<Response
   return json({ ok: true, path: `/images/thumbnails/${fileName}` });
 }
 
+// Old addresses that moved, forwarded permanently (301) to where they live
+// now, so shared links keep working. Keys are paths without a trailing slash.
+const REDIRECTS: Record<string, string> = {
+  '/work/wolf-shepherd-monaco': '/work/wolf-shepherd-shoe/',
+};
+
 async function router(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const { pathname } = url;
+
+  const moved = REDIRECTS[pathname.replace(/\/+$/, '')];
+  if (moved) return Response.redirect(new URL(moved + url.search, url).toString(), 301);
 
   if (pathname === '/api/login' && request.method === 'POST') return handleLogin(request, env);
   if (pathname === '/api/logout' && request.method === 'POST') return handleLogout();
