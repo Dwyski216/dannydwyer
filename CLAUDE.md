@@ -13,6 +13,20 @@ The site owner wants code changes to go live without a manual pull request:
 - If a session is assigned a working branch, push there too to keep it
   in sync, but `main` is what ships.
 
+## How we work (set by the site owner)
+
+- **No shortcuts.** If a shortcut ever seems worth taking, present it to the
+  owner first, with the possible risk, and let them decide.
+- **"Live" means verified live.** A push, a passing local build, or a green
+  check on GitHub is not proof. Before telling the owner a change is live,
+  load the live site (https://dannydwyer.rough-water-4697.workers.dev, later
+  https://www.dannydwyer.com) and confirm the change is actually there.
+  Builds can be skipped or queued (as in the Cloudflare build-delay incident
+  of Oct 2026), and a check run may be for a preview branch, not production.
+- **Say what you can't see.** If something can't be verified from here (the
+  Cloudflare dashboard, the owner's browser), say so plainly instead of
+  sounding certain.
+
 ## Before switching to dannydwyer.com (remind the site owner)
 
 When the owner is ready to move the domain off Squarespace, walk through this first:
