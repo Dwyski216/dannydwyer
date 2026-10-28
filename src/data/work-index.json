@@ -971,5 +971,17 @@
     "uploadDate": "2026-10-28",
     "hidden": false,
     "order": 190
+  },
+  {
+    "slug": "accel-schools",
+    "title": "ACCEL Schools",
+    "tags": [
+      "commercial",
+      "kids",
+      "school"
+    ],
+    "uploadDate": "2026-10-28",
+    "hidden": false,
+    "order": 190
   }
 ]
