@@ -12,7 +12,7 @@ series: [{"title":"Coastal Picnic #2","platform":"vimeo","videoId":"1238952616",
 client: "Bloomingdales"
 projectName: "Coastal Picnic"
 uploadDate: "2026-10-23"
-tags: ["fashion","commercial","interview","lifestyle"]
+tags: ["fashion","commercial","lifestyle"]
 stills: []
 urlSlug: "bloomingdales-coastal-picnic"
 hidden: false
