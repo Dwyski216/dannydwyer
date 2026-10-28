@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "Lexus"
 projectName: "Diana Marks x Lexus"
 uploadDate: "2018-01-01"
-tags: ["commercial","automotive","Car","influencer"]
+tags: ["commercial","automotive","Car","influencer","lifestyle"]
 stills: []
 urlSlug: "diana-marks-lexus"
 hidden: false
