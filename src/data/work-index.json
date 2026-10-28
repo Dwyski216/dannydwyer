@@ -895,20 +895,6 @@
     }
   },
   {
-    "slug": "bloomingdales-coastal-picnic",
-    "title": "Bloomingdale's Coastal Picnic",
-    "tags": [
-      "fashion",
-      "commercial"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 10,
-    "categoryOrder": {
-      "commercial": 20
-    }
-  },
-  {
     "slug": "jelly-roll-x-men-s-health-documentary",
     "title": "Jelly Roll \"A Year For A Life\"",
     "tags": [
@@ -921,6 +907,22 @@
     "order": 20,
     "categoryOrder": {
       "documentary": 10
+    }
+  },
+  {
+    "slug": "bloomingdales-coastal-picnic",
+    "title": "Bloomingdale's Coastal Picnic",
+    "tags": [
+      "fashion",
+      "commercial",
+      "interview",
+      "lifestyle"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 10,
+    "categoryOrder": {
+      "commercial": 20
     }
   }
 ]
