@@ -7,7 +7,7 @@ platform: "vimeo"
 videoId: "1240317469"
 credits: [{"role":"Producer","name":"Joey Artino"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Caleb Crossen"},{"role":"Editor","name":"Joey Artino"}]
 equipment: [{"category":"Camera","item":"Arri Mini LF"},{"category":"Lens","item":"Leica Summilux-C Cine Primes"}]
-series: []
+series: [{"title":"","platform":"vimeo","videoId":"1240317467","thumbnail":"/images/thumbnails/accel-schools-series-2-1793205073664.webp"}]
 client: "ACCEL Schols"
 projectName: "Accel Hero Video"
 uploadDate: "2026-10-28"
