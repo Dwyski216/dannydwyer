@@ -945,5 +945,18 @@
     "categoryOrder": {
       "commercial": 10
     }
+  },
+  {
+    "slug": "pebble-beach-junior-golf",
+    "title": "Pebble Beach Junior Golf",
+    "tags": [
+      "athletics",
+      "athlete",
+      "kids",
+      "lifestyle"
+    ],
+    "uploadDate": "2026-10-28",
+    "hidden": false,
+    "order": 190
   }
 ]
