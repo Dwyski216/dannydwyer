@@ -9,7 +9,7 @@ credits: [{"role":"Director","name":"Chip Warren"},{"role":"Director of Photogra
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon FD Prime"}]
 projectName: "SB 1391 Awareness"
 uploadDate: "2018-09-01"
-tags: ["advocacy","social issue","PSA","Non-profit"]
+tags: ["advocacy","social issue","PSA","Non-profit","kids"]
 stills: []
 urlSlug: "sb1391-awareness"
 hidden: false
