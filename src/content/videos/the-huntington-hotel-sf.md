@@ -12,12 +12,12 @@ series: []
 client: "Huntington Hotel"
 projectName: "Huntington Hotel Spot"
 uploadDate: "2026-10-24"
-tags: ["commercial","hotel","hospitality"]
+tags: ["commercial","hotel","hospitality","lifestyle"]
 stills: []
 urlSlug: "the-huntington-hotel-sf"
 hidden: false
 order: 50
-categoryOrder: {"commercial": 30}
+categoryOrder: {"commercial":30}
 ---
 
 The Huntington has held the top of it for over a century. It was designed in 1922 as a luxury apartment building and opened as a hotel in 1924. Across the street sits Huntington Park and its fountain of turtles. Overhead, the spires of Grace Cathedral. At the curb, cable cars climbing California Street to the front door. Down the hill, the city runs on hurry. Up here, time moves at the pace of a good martini.
