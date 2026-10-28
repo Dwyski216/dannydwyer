@@ -12,7 +12,7 @@ series: []
 client: "Hot Juice Studios"
 projectName: "Pebble Beach Junior Golf"
 uploadDate: "2026-10-28"
-tags: ["athletics","athlete","kids","lifestyle"]
+tags: ["athletics","athlete","kids","lifestyle","commercial"]
 stills: []
 urlSlug: "pebble-beach-junior-golf"
 hidden: false
