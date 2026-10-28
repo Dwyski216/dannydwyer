@@ -11,12 +11,12 @@ equipment: [{"category":"Camera","item":"Arri Alexa 35"},{"category":"Lens","ite
 client: "Audible"
 projectName: "Big Age Trailer"
 uploadDate: "2024-06-01"
-tags: ["trailer","audio drama","commercial","Audible","celebrity","Cedric"]
+tags: ["trailer","audio drama","commercial","Audible","celebrity","Cedric","interview"]
 stills: []
 urlSlug: "big-age-audible-trailer"
 hidden: false
 order: 70
-categoryOrder: {"commercial": 70}
+categoryOrder: {"commercial":70}
 ---
 
 Cedric the Entertainer, Jennifer Lewis, Niecy Nash-Betts. A room full of comedy royalty, and I got to direct a really fun promo for Big Age, streaming on Audible. 

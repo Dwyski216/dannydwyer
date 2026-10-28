@@ -11,7 +11,7 @@ equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"A
 client: "Mint Mobile"
 projectName: "Dave Foley For Mint Mobile"
 uploadDate: "2021-06-01"
-tags: ["commercial","comedy","celebrity"]
+tags: ["commercial","comedy","celebrity","interview"]
 stills: []
 urlSlug: "mint-mobile-dave-foley"
 hidden: false

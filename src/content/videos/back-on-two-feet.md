@@ -11,7 +11,7 @@ equipment: [{"category":"Camera","item":"RED"},{"category":"Lens","item":"Cooke 
 client: "Cosmopolitan"
 projectName: "Back on Two Feet"
 uploadDate: "2016-11-01"
-tags: ["documentary","veterans","mini doc"]
+tags: ["documentary","veterans","mini doc","interview"]
 stills: []
 urlSlug: "back-on-two-feet"
 hidden: false

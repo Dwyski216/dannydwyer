@@ -11,7 +11,7 @@ series: []
 client: "Google"
 projectName: "Pixel Series Pt 2 \"Lookout\""
 uploadDate: "2023-09-01"
-tags: ["commercial","technology","accessibility","branded documentary","documentary","Sony","Angenieux EZ","low vision"]
+tags: ["commercial","technology","accessibility","branded documentary","documentary","Sony","Angenieux EZ","low vision","interview"]
 stills: []
 urlSlug: "google-pixel-lookout"
 hidden: false

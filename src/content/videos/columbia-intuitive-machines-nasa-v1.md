@@ -11,12 +11,12 @@ series: [{"title":"The Trailer","platform":"vimeo","videoId":"914546880","thumbn
 client: "Columbia Sportswear"
 projectName: "Intuitive Machines Lunar Lander (NASA CLPS mission)"
 uploadDate: "2024-02-01"
-tags: ["documentary","branded content","technology","space","NASA","Columbia","moon landing","universe","outer space","the moon"]
+tags: ["documentary","branded content","technology","space","NASA","Columbia","moon landing","universe","outer space","the moon","interview"]
 stills: []
 urlSlug: "columbia-intuitive-machines-nasa-v1"
 hidden: false
 order: 170
-categoryOrder: {"documentary": 50}
+categoryOrder: {"documentary":50}
 ---
 
 America last landed on the Moon in December 1972. So when the call came asking if I wanted to film a mission going to the Moon, I thought it was a prank.

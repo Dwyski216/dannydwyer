@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"Sony FX6, FX3 & GoPro"},{"category":"Le
 client: "Google"
 projectName: "Pixel Series Pt.1 \"Guided Frame\""
 uploadDate: "2023-09-01"
-tags: ["commercial","technology","accessibility","Sony","Angenieux EZ","Docu Series","branded doc","documentary","low vision"]
+tags: ["commercial","technology","accessibility","Sony","Angenieux EZ","Docu Series","branded doc","documentary","low vision","interview"]
 stills: []
 urlSlug: "google-pixel-guided-frame"
 hidden: false

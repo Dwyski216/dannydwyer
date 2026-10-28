@@ -19,7 +19,8 @@
       "commercial",
       "Audible",
       "celebrity",
-      "Cedric"
+      "Cedric",
+      "interview"
     ],
     "uploadDate": "2024-06-01",
     "hidden": false,
@@ -37,7 +38,8 @@
       "nonprofit",
       "technology",
       "Google",
-      "Google.org"
+      "Google.org",
+      "interview"
     ],
     "uploadDate": "2025-02-01",
     "hidden": false,
@@ -57,7 +59,8 @@
       "branded documentary",
       "low vision",
       "Angenieux EZ",
-      "Sony"
+      "Sony",
+      "interview"
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
@@ -95,7 +98,8 @@
       "Docu Series",
       "branded doc",
       "documentary",
-      "low vision"
+      "low vision",
+      "interview"
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
@@ -315,7 +319,8 @@
     "tags": [
       "commercial",
       "comedy",
-      "celebrity"
+      "celebrity",
+      "interview"
     ],
     "uploadDate": "2021-06-01",
     "hidden": false,
@@ -341,7 +346,8 @@
     "tags": [
       "documentary",
       "veterans",
-      "mini doc"
+      "mini doc",
+      "interview"
     ],
     "uploadDate": "2016-11-01",
     "hidden": false,
@@ -529,7 +535,8 @@
       "moon landing",
       "universe",
       "outer space",
-      "the moon"
+      "the moon",
+      "interview"
     ],
     "uploadDate": "2024-02-01",
     "hidden": false,
@@ -615,7 +622,8 @@
       "documentary",
       "athlete",
       "athletics",
-      "docu series"
+      "docu series",
+      "interview"
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
@@ -644,7 +652,8 @@
     "title": "Allergan Aesthetics",
     "tags": [
       "branded content",
-      "medical"
+      "medical",
+      "interview"
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
@@ -752,7 +761,8 @@
       "documentary",
       "Sony",
       "Angenieux EZ",
-      "low vision"
+      "low vision",
+      "interview"
     ],
     "uploadDate": "2023-09-01",
     "hidden": false,
@@ -886,7 +896,8 @@
     "tags": [
       "documentary",
       "film",
-      "narrative"
+      "narrative",
+      "interview"
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
@@ -920,7 +931,8 @@
       "series",
       "make up",
       "beauty",
-      "lifestyle"
+      "lifestyle",
+      "interview"
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,

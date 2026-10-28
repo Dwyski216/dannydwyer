@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"Sony FX6, FX3 & GoPro"},{"category":"Le
 client: "Google"
 projectName: "Pixel Series Pt.3 \"Magnifier\""
 uploadDate: "2023-09-01"
-tags: ["commercial","technology","accessibility","documentary","branded documentary","low vision","Angenieux EZ","Sony"]
+tags: ["commercial","technology","accessibility","documentary","branded documentary","low vision","Angenieux EZ","Sony","interview"]
 stills: []
 urlSlug: "google-pixel-magnifier"
 hidden: false

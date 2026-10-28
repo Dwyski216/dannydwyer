@@ -12,7 +12,7 @@ series: []
 client: "Cosmopolitan Magazine"
 projectName: "What It's Like To Be A Basejumper"
 uploadDate: "2026-10-23"
-tags: ["documentary","athlete","athletics","docu series"]
+tags: ["documentary","athlete","athletics","docu series","interview"]
 stills: []
 urlSlug: "what-it-s-like-to-be-a-basejumper"
 hidden: false

@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"A
 client: "Google.org"
 projectName: "ReflexAI Veteran Mental Health Training"
 uploadDate: "2025-02-01"
-tags: ["documentary","branded content","nonprofit","technology","Google","Google.org"]
+tags: ["documentary","branded content","nonprofit","technology","Google","Google.org","interview"]
 stills: []
 urlSlug: "reflexai-google-org-veterans-mental-health"
 hidden: false

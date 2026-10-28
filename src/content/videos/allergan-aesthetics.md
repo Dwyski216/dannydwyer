@@ -10,7 +10,7 @@ credits: [{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Dragon"},{"category":"Lens","item":"Angenieux EZ Zooms"}]
 series: []
 uploadDate: "2026-10-23"
-tags: ["branded content","medical"]
+tags: ["branded content","medical","interview"]
 stills: []
 urlSlug: "allergan-aesthetics"
 hidden: false
