@@ -283,7 +283,8 @@
       "film",
       "car",
       "western",
-      "Kodak"
+      "Kodak",
+      "lifestyle"
     ],
     "uploadDate": "2017-05-01",
     "hidden": false,
@@ -628,7 +629,8 @@
     "title": "Bloomingdale's Minimal Nature",
     "tags": [
       "fashion",
-      "commercial"
+      "commercial",
+      "lifestyle"
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
@@ -697,7 +699,8 @@
     "tags": [
       "commercial",
       "hotels",
-      "hospitality"
+      "hospitality",
+      "lifestyle"
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,
@@ -728,7 +731,8 @@
     "tags": [
       "commercial",
       "hotel",
-      "hospitality"
+      "hospitality",
+      "lifestyle"
     ],
     "uploadDate": "2026-10-24",
     "hidden": false,

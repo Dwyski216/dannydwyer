@@ -12,7 +12,7 @@ series: []
 client: "Atlas Hotel"
 projectName: "Atlas Hotel Spot"
 uploadDate: "2026-10-24"
-tags: ["commercial","hotel","hospitality"]
+tags: ["commercial","hotel","hospitality","lifestyle"]
 stills: []
 urlSlug: "the-atlas-hotel-in-cambridge"
 hidden: false

@@ -12,7 +12,7 @@ series: [{"title":"Minimal Nature #2","platform":"vimeo","videoId":"1238952617",
 client: "Bloomingdales"
 projectName: "Minimal Nature"
 uploadDate: "2026-10-23"
-tags: ["fashion","commercial"]
+tags: ["fashion","commercial","lifestyle"]
 stills: []
 urlSlug: "bloomingdales-minimal-nature"
 hidden: false

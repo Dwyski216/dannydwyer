@@ -12,7 +12,7 @@ series: []
 client: "Romer Hell's Kitchen"
 projectName: "Romer Hero Film"
 uploadDate: "2026-10-24"
-tags: ["commercial","hotels","hospitality"]
+tags: ["commercial","hotels","hospitality","lifestyle"]
 stills: []
 urlSlug: "romer-hell-s-kitchen-hero-film"
 hidden: false
