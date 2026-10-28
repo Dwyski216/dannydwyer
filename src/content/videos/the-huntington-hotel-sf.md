@@ -12,7 +12,7 @@ series: []
 client: "Huntington Hotel"
 projectName: "Huntington Hotel Spot"
 uploadDate: "2026-10-24"
-tags: ["commercial","hotel","hospitality","lifestyle"]
+tags: ["commercial","hotel","hospitality","lifestyle","animals"]
 stills: []
 urlSlug: "the-huntington-hotel-sf"
 hidden: false

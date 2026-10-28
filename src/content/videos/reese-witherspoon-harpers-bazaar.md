@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "Harper's Bazaar"
 projectName: "Reese Witherspoon Cover Story"
 uploadDate: "2018-09-01"
-tags: ["editorial","celebrity","interview"]
+tags: ["editorial","celebrity","interview","animals"]
 stills: []
 urlSlug: "reese-witherspoon-harpers-bazaar"
 hidden: false
