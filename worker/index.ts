@@ -543,38 +543,38 @@ async function handleTagsBulkPost(request: Request, env: Env): Promise<Response>
   if (slugs.length === 0) return json({ error: 'slugs must be a non-empty array' }, 400);
   if (add.length === 0 && remove.length === 0) return json({ error: 'Provide at least one tag to add or remove' }, 400);
 
+  // Cloudflare allows 50 subrequests per call: one read per video, plus the
+  // index and the commit's handful. The admin sends batches of 25.
+  if (slugs.length > 30) return json({ error: 'Too many videos in one save; send at most 30 at a time.' }, 400);
+
   const index = await readIndex(env);
   if ('error' in index) return json({ error: index.error }, 502);
 
   const newTagsFor = (tags: string[]) => [...new Set([...tags.filter((t) => !remove.includes(t)), ...add])];
 
-  // Each slug's read+patch+write only ever touches that one video file, so
-  // these are safe to run concurrently (in batches, to stay well under the
-  // Worker's per-invocation subrequest cap) — unlike the shared index
-  // below, which this does exactly once, after every file is settled.
-  const BATCH_SIZE = 10;
-  const updated: string[] = [];
-  const failed: string[] = [];
-  for (let i = 0; i < slugs.length; i += BATCH_SIZE) {
-    const batch = slugs.slice(i, i + BATCH_SIZE);
-    const results = await Promise.all(
-      batch.map((slug) =>
-        patchVideoFrontmatter(
-          env,
-          slug,
-          (data) => ({ ...data, tags: newTagsFor(Array.isArray(data.tags) ? data.tags : []) }),
-          `Bulk tag update: ${slug}`
-        )
-      )
-    );
-    batch.forEach((slug, idx) => (results[idx] ? updated : failed).push(slug));
-  }
+  // Every selected video plus the Work index go in ONE commit (see
+  // commitFiles). Writing them as separate commits at the same moment made
+  // all but one fail: each commit moves the branch, so GitHub rejects the
+  // rest as out of date.
+  const files = await Promise.all(slugs.map((slug) => getFile(env, `${VIDEOS_DIR}/${slug}.md`)));
+  const failed = slugs.filter((_, i) => !files[i]);
+  const updated = slugs.filter((_, i) => files[i]);
+  const changes: { path: string; content: string }[] = [];
+  slugs.forEach((slug, i) => {
+    const file = files[i];
+    if (!file) return;
+    const { data, body: mdBody } = parseFrontmatter(file.content);
+    const content = `${toFrontmatter({ ...data, tags: newTagsFor(Array.isArray(data.tags) ? data.tags : []) })}\n\n${mdBody}\n`;
+    if (content !== file.content) changes.push({ path: `${VIDEOS_DIR}/${slug}.md`, content });
+  });
+  if (changes.length === 0) return json({ ok: true, updated, failed, unchanged: true });
 
   const newIndexItems = index.items.map((it) => (updated.includes(it.slug) ? { ...it, tags: newTagsFor(it.tags) } : it));
-  const indexRes = await writeIndex(env, newIndexItems, index.sha, `Bulk tag update for ${updated.length} video(s)`);
-  const indexWarning = !indexRes.ok ? 'Tags updated, but the Work index could not be updated — use "Rebuild Index".' : undefined;
+  changes.push({ path: INDEX_PATH, content: JSON.stringify(newIndexItems, null, 2) + '\n' });
 
-  return json({ ok: true, updated, failed, ...(indexWarning ? { indexWarning } : {}) });
+  const ok = await commitFiles(env, changes, `Bulk tag update for ${updated.length} video(s)`);
+  if (!ok) return json({ error: 'GitHub commit failed; nothing was changed. Try again.' }, 502);
+  return json({ ok: true, updated, failed });
 }
 
 // The admin's text boxes are plain text: each line typed is meant as its own

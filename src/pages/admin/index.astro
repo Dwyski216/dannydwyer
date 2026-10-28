@@ -854,20 +854,34 @@ import { CATEGORIES } from '../../data/categories';
   async function applyBulkTags(add: string[], remove: string[]) {
     const statusEl = document.getElementById('work-bulk-status')!;
     if (selectedSlugs.size === 0) return;
-    statusEl.textContent = 'Saving…';
-    const res = await fetch('/api/tags/bulk', {
-      method: 'POST',
-      body: JSON.stringify({ slugs: [...selectedSlugs], add, remove }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      statusEl.textContent = `Error: ${data.error ?? 'failed'}`;
-      return;
+    // Each batch is saved as one commit (Cloudflare caps how many GitHub
+    // requests one save can make, so a big selection goes 25 at a time).
+    const slugs = [...selectedSlugs];
+    const BATCH = 25;
+    const failed: string[] = [];
+    let changed = false;
+    for (let i = 0; i < slugs.length; i += BATCH) {
+      statusEl.textContent = slugs.length > BATCH ? `Saving… (${i / BATCH + 1} of ${Math.ceil(slugs.length / BATCH)})` : 'Saving…';
+      const res = await fetch('/api/tags/bulk', {
+        method: 'POST',
+        body: JSON.stringify({ slugs: slugs.slice(i, i + BATCH), add, remove }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        statusEl.textContent = `Error: ${data.error ?? 'failed'}${i > 0 ? ' (the first batches were saved; select the rest and try again)' : ''}`;
+        await loadWorkItems(true);
+        renderWorkList();
+        renderTagManager();
+        return;
+      }
+      failed.push(...(data.failed ?? []));
+      if (!data.unchanged) changed = true;
     }
-    const failed: string[] = data.failed ?? [];
-    const parts = [failed.length ? `Updated, but failed on: ${failed.join(', ')}.` : 'Done.'];
-    if (data.indexWarning) parts.push(data.indexWarning);
-    statusEl.textContent = parts.join(' ');
+    statusEl.textContent = failed.length
+      ? `Updated, but couldn't read: ${failed.join(', ')}.`
+      : changed
+        ? 'Done.'
+        : 'Nothing to change: the selected videos already had that.';
     await loadWorkItems(true);
     renderWorkList();
     renderTagManager();
