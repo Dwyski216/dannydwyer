@@ -4,7 +4,7 @@ pageTitle: "Insight PA Cyber Charter School | Cinematographer Danny Dwyer"
 summary: "Cinematographer Danny Dwyer on Insight PA, a full-time online public school for K–12 students in Pennsylvania, and how to film a school with no building."
 cardLine: "A school with no hallways: Insight PA, the online public school where class can happen anywhere."
 platform: "vimeo"
-videoId: "1240307794"
+videoId: "1240317468"
 customThumbnail: "/images/thumbnails/thumbnail-1793203826096.webp"
 credits: [{"role":"Producer","name":"Joey Artino"},{"role":"Director","name":"Joey Artino"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Joey Artino"},{"role":"Drone Op","name":"Joey Artino"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"TLS Canon FD Primes"},{"category":"Drone","item":"DJI Mavic Pro"}]
