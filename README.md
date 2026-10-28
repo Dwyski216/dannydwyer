@@ -52,6 +52,7 @@ Each file in `src/content/videos/` has this frontmatter shape:
 ---
 title: "Midnight Harbor"
 summary: "150-160 character summary used for meta description and AI snippets."
+cardLine: "80-100 character line shown in full under the title on every video card."
 platform: "youtube"       # or "vimeo"
 videoId: "dQw4w9WgXcQ"    # YouTube's video ID, or Vimeo's numeric ID
 thumbnailUrl: ""           # optional; YouTube/Vimeo thumbnails are looked up automatically
@@ -222,7 +223,12 @@ Access is configured.
   appear under Featured Work.
 - **Work**: add, edit, reorder, hide or delete videos. Saving creates or
   updates a markdown file in `src/content/videos/` and commits it — the site
-  rebuilds automatically, no code changes required.
+  rebuilds automatically, no code changes required. Each video has a
+  **Card Line** (shown on its gallery card) and a separate **SEO Short
+  Summary** (only used for Google and link previews). Select several videos
+  to add or remove a tag on all of them in one save.
+- **Moved pages**: changing a video's URL slug gives it a new address; add
+  the old one to `REDIRECTS` in `worker/index.ts` so shared links forward.
 - **Contact**: edit the Contact page copy.
 - **Tags**: rename or delete a tag everywhere it's used.
 - **SEO**: per-page title, description and share-image overrides.

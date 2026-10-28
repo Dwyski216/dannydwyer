@@ -43,9 +43,6 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
   <div class="meta">
     <h3>{title}</h3>
     {line && <p class="line">{line}</p>}
-    <div class="tags">
-      {tags.map((t) => <span class="tag">{t}</span>)}
-    </div>
   </div>
 </a>
 
@@ -113,9 +110,5 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
 
   .card:hover h3 {
     color: var(--headlight);
-  }
-
-  .tags {
-    display: none;
   }
 </style>
