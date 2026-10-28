@@ -5,7 +5,7 @@ summary: "Cinematographer Danny Dwyer on Insight PA, a full-time online public s
 cardLine: "A school with no hallways: Insight PA, the online public school where class can happen anywhere."
 platform: "vimeo"
 videoId: "1240317468"
-customThumbnail: "/images/thumbnails/thumbnail-1793203826096.webp"
+customThumbnail: "/images/thumbnails/insight-pa-schools-1793205112500.webp"
 credits: [{"role":"Producer","name":"Joey Artino"},{"role":"Director","name":"Joey Artino"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Joey Artino"},{"role":"Drone Op","name":"Joey Artino"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"TLS Canon FD Primes"},{"category":"Drone","item":"DJI Mavic Pro"}]
 series: []
