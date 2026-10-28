@@ -106,6 +106,10 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
     color: var(--headlight);
     font-size: 0.85rem;
     line-height: 1.5;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 
   .card:hover h3 {
