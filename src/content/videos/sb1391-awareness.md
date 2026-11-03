@@ -5,8 +5,10 @@ summary: "Cinematographer Danny Dwyer on filming Human Rights Watch's campaign f
 cardLine: "Human Rights Watch on California's SB 1391, which stopped trying 14- and 15-year-olds as adults."
 platform: "vimeo"
 videoId: "287482631"
+customThumbnail: "/images/thumbnails/sb1391-awareness-1793744695486.webp"
 credits: [{"role":"Director","name":"Chip Warren"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon FD Prime"}]
+series: []
 projectName: "SB 1391 Awareness"
 uploadDate: "2018-09-01"
 tags: ["advocacy","social issue","PSA","Non-profit","kids"]
