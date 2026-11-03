@@ -5,8 +5,10 @@ summary: "Cinematographer Danny Dwyer rides along with luxury travel and car cre
 cardLine: "Creator Diana Marks takes the wheel of a Lexus for a collaboration built on style and a smooth ride."
 platform: "vimeo"
 videoId: "327413703"
+customThumbnail: "/images/thumbnails/diana-marks-lexus-1793744574431.webp"
 credits: [{"role":"Cast","name":"Diana Marks"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Fer Santa Cruz"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Angenieux Zooms"}]
+series: []
 client: "Lexus"
 projectName: "Diana Marks x Lexus"
 uploadDate: "2018-01-01"
