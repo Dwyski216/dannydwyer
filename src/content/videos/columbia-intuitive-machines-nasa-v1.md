@@ -8,7 +8,7 @@ videoId: "914546880"
 customThumbnail: "/images/thumbnails/columbia-intuitive-machines-nasa-v1-1793744120837.webp"
 credits: [{"role":"Cast","name":"Jack Fischer"},{"role":"Cast","name":"Steve Altemus"},{"role":"Cast","name":"Haskell Beckham"},{"role":"Director","name":"Jesse Canright"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Cooke S8i Primes 💥🧨🚬"}]
-series: [{"title":"The Trailer","platform":"vimeo","videoId":"914552796","thumbnail":"/images/thumbnails/columbia-intuitive-machines-nasa-v1-series-2-1793744416258.webp"}]
+series: [{"title":"The Mini Doc","platform":"vimeo","videoId":"914552796","thumbnail":"/images/thumbnails/columbia-intuitive-machines-nasa-v1-series-2-1793744416258.webp"}]
 client: "Columbia Sportswear"
 projectName: "Intuitive Machines Lunar Lander (NASA CLPS mission)"
 uploadDate: "2024-02-01"
