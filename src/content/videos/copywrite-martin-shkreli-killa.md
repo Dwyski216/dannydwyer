@@ -5,6 +5,7 @@ summary: "Filmmaker Danny Dwyer on rapper Copywrite's \"Martin Shkreli Killah,\"
 cardLine: "A black-and-white music video for Copywrite's \"Martin Shkreli Killah,\" co-directed with Bee Gats."
 platform: "vimeo"
 videoId: "177432830"
+customThumbnail: "/images/thumbnails/copywrite-martin-shkreli-killa-1793743495135.webp"
 credits: [{"role":"Cast","name":"Copywrite"},{"role":"Director","name":"Bee Gats & Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Thom Schwartzhoff"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Angenieux Zooms"}]
 series: []
