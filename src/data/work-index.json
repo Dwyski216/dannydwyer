@@ -358,18 +358,6 @@
     }
   },
   {
-    "slug": "allergan-aesthetics",
-    "title": "Allergan Aesthetics",
-    "tags": [
-      "branded content",
-      "medical",
-      "interview"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 270
-  },
-  {
     "slug": "brittany-howard-what-now-film-promo",
     "title": "Brittany Howard \"What Now\" Film Promo",
     "tags": [
@@ -985,5 +973,18 @@
     "categoryOrder": {
       "documentary": 20
     }
+  },
+  {
+    "slug": "allergan-aesthetics",
+    "title": "Allergan Aesthetics",
+    "tags": [
+      "branded content",
+      "medical",
+      "interview",
+      "commercial"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 270
   }
 ]
