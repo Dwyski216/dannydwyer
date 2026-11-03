@@ -5,15 +5,17 @@ summary: "Batting practice in the streets of New York with Nate Fish, the King o
 cardLine: "A comedy short about best friend Nate Fish, the King of Jewish Baseball, shot on a Canon 7D."
 platform: "vimeo"
 videoId: "49023898"
+customThumbnail: "/images/thumbnails/the-king-of-jewish-baseball-1793744829135.webp"
 credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Cast","name":"Nate Fish"}]
 equipment: [{"category":"Camera","item":"Canon 7D"},{"category":"Lens","item":"Thrift store primes"}]
+series: []
 projectName: "The King of Jewish Baseball"
 uploadDate: "2011-09-01"
 tags: ["short film","comedy"]
-urlSlug: "the-king-of-jewish-baseball"
-order: 510
-featured: false
 stills: []
+urlSlug: "the-king-of-jewish-baseball"
+hidden: false
+order: 510
 ---
 
 My best friend Nate Fish is the King of Jewish Baseball. His lifelong dream was to take batting practice in the streets of New York City, and he wanted me there to film it.
