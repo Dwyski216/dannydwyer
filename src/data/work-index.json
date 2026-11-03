@@ -457,29 +457,6 @@
     }
   },
   {
-    "slug": "columbia-intuitive-machines-nasa-v1",
-    "title": "Columbia × Intuitive Machines × NASA",
-    "tags": [
-      "documentary",
-      "branded content",
-      "technology",
-      "space",
-      "NASA",
-      "Columbia",
-      "moon landing",
-      "universe",
-      "outer space",
-      "the moon",
-      "interview"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false,
-    "order": 170,
-    "categoryOrder": {
-      "documentary": 50
-    }
-  },
-  {
     "slug": "cotton-docu-series",
     "title": "Cotton Docu-Series",
     "tags": [
@@ -982,6 +959,29 @@
     "categoryOrder": {
       "commercial": 180,
       "documentary": 70
+    }
+  },
+  {
+    "slug": "columbia-intuitive-machines-nasa-v1",
+    "title": "Columbia × Intuitive Machines × NASA",
+    "tags": [
+      "documentary",
+      "branded content",
+      "technology",
+      "space",
+      "NASA",
+      "Columbia",
+      "moon landing",
+      "universe",
+      "outer space",
+      "the moon",
+      "interview"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 170,
+    "categoryOrder": {
+      "documentary": 50
     }
   }
 ]
