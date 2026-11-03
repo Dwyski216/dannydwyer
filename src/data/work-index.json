@@ -44,19 +44,6 @@
     "order": 570
   },
   {
-    "slug": "reese-witherspoon-harpers-bazaar",
-    "title": "Reese Witherspoon × Harper's Bazaar",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "interview",
-      "animals"
-    ],
-    "uploadDate": "2018-09-01",
-    "hidden": false,
-    "order": 560
-  },
-  {
     "slug": "zoe-kravitz-harpers-bazaar",
     "title": "Zoë Kravitz × Harper's Bazaar",
     "tags": [
@@ -983,5 +970,18 @@
     "categoryOrder": {
       "commercial": 200
     }
+  },
+  {
+    "slug": "reese-witherspoon-harpers-bazaar",
+    "title": "Reese Witherspoon × Harper's Bazaar",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "interview",
+      "animals"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 560
   }
 ]
