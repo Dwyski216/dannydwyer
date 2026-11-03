@@ -32,18 +32,6 @@
     "order": 410
   },
   {
-    "slug": "jane-fonda-harpers-bazaar",
-    "title": "Jane Fonda × Harper's Bazaar",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "interview"
-    ],
-    "uploadDate": "2020-09-01",
-    "hidden": false,
-    "order": 570
-  },
-  {
     "slug": "zoe-kravitz-harpers-bazaar",
     "title": "Zoë Kravitz × Harper's Bazaar",
     "tags": [
@@ -983,5 +971,17 @@
     "uploadDate": "2018-09-01",
     "hidden": false,
     "order": 560
+  },
+  {
+    "slug": "jane-fonda-harpers-bazaar",
+    "title": "Jane Fonda × Harper's Bazaar",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "interview"
+    ],
+    "uploadDate": "2020-09-01",
+    "hidden": true,
+    "order": 570
   }
 ]
