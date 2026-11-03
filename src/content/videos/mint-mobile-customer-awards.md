@@ -5,8 +5,10 @@ summary: "Mint Mobile's own spin on the Oscars, starring Ryan Reynolds. Filmmake
 cardLine: "Ryan Reynolds and Mint Mobile hand out their own awards, an Oscars-night spin made fast and funny."
 platform: "vimeo"
 videoId: "701361598"
+customThumbnail: "/images/thumbnails/mint-mobile-customer-awards-1793743948755.webp"
 credits: [{"role":"Cast","name":"Ryan Reynolds"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon Cine Primes"}]
+series: []
 client: "Mint Mobile"
 projectName: "Customer Awards"
 uploadDate: "2021-06-01"
