@@ -5,8 +5,10 @@ summary: "Imaginary dragons and the Jonas Brothers. Director of photography Dann
 cardLine: "The Jonas Brothers sit down with Harper's Bazaar to talk Game of Thrones, family, and fandom."
 platform: "vimeo"
 videoId: "347821791"
+customThumbnail: "/images/thumbnails/jonas-brothers-harpers-bazaar-1793744776659.webp"
 credits: [{"role":"Cast","name":"Jonas Brothers"},{"role":"Director","name":"Robert Dumé"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon Cine Zooms"}]
+series: []
 client: "Harper's Bazaar"
 projectName: "Jonas Brothers Feature"
 uploadDate: "2019-05-01"
