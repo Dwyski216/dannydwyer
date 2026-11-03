@@ -55,18 +55,6 @@
     "order": 570
   },
   {
-    "slug": "tracee-ellis-ross",
-    "title": "Tracee Ellis Ross × Harper's Bazaar",
-    "tags": [
-      "celebrity",
-      "editorial",
-      "interview"
-    ],
-    "uploadDate": "2019-11-01",
-    "hidden": false,
-    "order": 390
-  },
-  {
     "slug": "jonas-brothers-harpers-bazaar",
     "title": "Jonas Brothers × Game of Thrones",
     "tags": [
@@ -983,5 +971,17 @@
     "uploadDate": "2013-05-01",
     "hidden": false,
     "order": 380
+  },
+  {
+    "slug": "tracee-ellis-ross",
+    "title": "Tracee Ellis Ross × Harper's Bazaar",
+    "tags": [
+      "celebrity",
+      "editorial",
+      "interview"
+    ],
+    "uploadDate": "2019-11-01",
+    "hidden": false,
+    "order": 390
   }
 ]
