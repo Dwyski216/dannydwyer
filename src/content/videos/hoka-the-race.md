@@ -12,7 +12,7 @@ series: []
 client: "HOKA"
 projectName: "Humans of HOKA"
 uploadDate: "2026-10-23"
-tags: ["interview","branded content","athlete","fitness"]
+tags: ["interview","branded content","athlete","fitness","documentary"]
 stills: []
 urlSlug: "hoka-the-race"
 hidden: false
