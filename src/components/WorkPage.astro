@@ -166,6 +166,7 @@ const jsonLd = [
     });
 
     if (emptyState) emptyState.hidden = visibleCount > 0;
+    window.dispatchEvent(new Event('cards:filtered'));
   }
 
   // The controls section (search/filters) only exists if WorkControls is

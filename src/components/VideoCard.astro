@@ -46,6 +46,32 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
   </div>
 </a>
 
+<script>
+  // Same-size cards: in each gallery, give every visible card's text area
+  // the height of the tallest one. Redone when the screen size changes,
+  // once the fonts load, and when the Work page's filters show other cards.
+  function equalizeCards() {
+    document.querySelectorAll('.card-gallery').forEach((gallery) => {
+      const metas = Array.from(gallery.querySelectorAll<HTMLElement>('.card'))
+        .filter((card) => card.offsetParent)
+        .map((card) => card.querySelector<HTMLElement>('.meta')!);
+      metas.forEach((m) => (m.style.minHeight = ''));
+      const tallest = Math.max(0, ...metas.map((m) => m.getBoundingClientRect().height));
+      metas.forEach((m) => (m.style.minHeight = `${tallest}px`));
+    });
+  }
+
+  let frame = 0;
+  const schedule = () => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(equalizeCards);
+  };
+  equalizeCards();
+  document.fonts.ready.then(schedule);
+  window.addEventListener('resize', schedule);
+  window.addEventListener('cards:filtered', schedule);
+</script>
+
 <style>
   .card {
     display: flex;
@@ -72,13 +98,12 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
     filter: grayscale(0);
   }
 
-  /* Room for a two-line title and a three-line Card Line on every card,
-     so all cards are the same size; the Card Line sits right under the
-     title, and any spare space falls at the bottom. (Padding 0.85 + 1rem,
-     title 2 × 1.3rem, gap 0.4rem, Card Line 3 × 0.85 × 1.5rem.) */
+  /* Every card in a gallery is made as tall as the tallest one there at
+     this screen width (see the script above), so they're all the same size
+     with no more empty space than that card needs; the Card Line sits right
+     under the title, and any spare space falls at the bottom. */
   .meta {
     padding: 0.85rem 1rem 1rem;
-    min-height: calc(1.85rem + 2.6rem + 0.4rem + 3.825rem);
   }
 
   /* The title takes the lines it needs (up to 2, clamped with an ellipsis
