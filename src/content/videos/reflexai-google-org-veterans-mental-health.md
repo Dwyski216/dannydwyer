@@ -5,8 +5,10 @@ summary: "Director of photography Danny Dwyer on ReflexAI, backed by Google, whi
 cardLine: "AI roleplay backed by Google.org, helping veterans practice the hardest mental health conversations."
 platform: "vimeo"
 videoId: "1074104148"
+customThumbnail: "/images/thumbnails/reflexai-google-org-veterans-mental-health-1793743871943.webp"
 credits: [{"role":"Agency","name":"WTBR"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Angénieux Zooms and Primes"}]
+series: []
 client: "Google.org"
 projectName: "ReflexAI Veteran Mental Health Training"
 uploadDate: "2025-02-01"
