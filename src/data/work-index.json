@@ -853,19 +853,6 @@
     }
   },
   {
-    "slug": "ryan-gosling-mens-health",
-    "title": "Ryan Gosling × Men's Health",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "Ryan Gosling",
-      "Mens Health"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false,
-    "order": 40
-  },
-  {
     "slug": "wolf-shepherd-shoe",
     "title": "Wolf & Shepherd Collection",
     "tags": [
@@ -983,5 +970,18 @@
     "categoryOrder": {
       "music video": 50
     }
+  },
+  {
+    "slug": "ryan-gosling-mens-health",
+    "title": "Ryan Gosling × Men's Health",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "Ryan Gosling",
+      "Mens Health"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 40
   }
 ]
