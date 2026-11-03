@@ -687,19 +687,6 @@
     }
   },
   {
-    "slug": "ryan-gosling-mens-health",
-    "title": "Ryan Gosling × Men's Health",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "Ryan Gosling",
-      "Mens Health"
-    ],
-    "uploadDate": "2024-02-01",
-    "hidden": false,
-    "order": 40
-  },
-  {
     "slug": "reflexai-google-org-veterans-mental-health",
     "title": "Reflex AI × Google for Veterans",
     "tags": [
@@ -983,5 +970,19 @@
     "uploadDate": "2020-09-01",
     "hidden": true,
     "order": 570
+  },
+  {
+    "slug": "ryan-gosling-mens-health",
+    "title": "Ryan Gosling × Men's Health",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "Ryan Gosling",
+      "Mens Health",
+      "commercial"
+    ],
+    "uploadDate": "2024-02-01",
+    "hidden": false,
+    "order": 40
   }
 ]
