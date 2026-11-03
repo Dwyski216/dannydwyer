@@ -12,7 +12,7 @@ series: []
 client: "Bored"
 projectName: "CA$H FOR SOULS"
 uploadDate: "2018-08-01"
-tags: ["fashion","short film"]
+tags: ["fashion","short film","commercial"]
 stills: []
 urlSlug: "bored-cash-for-souls"
 hidden: false
