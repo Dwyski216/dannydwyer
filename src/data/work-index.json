@@ -458,17 +458,6 @@
     }
   },
   {
-    "slug": "nychos-sheryo-the-yok",
-    "title": "Nychos × Sheryo × The Yok",
-    "tags": [
-      "street art",
-      "graffiti"
-    ],
-    "uploadDate": "2013-08-01",
-    "hidden": false,
-    "order": 600
-  },
-  {
     "slug": "werdperfect-kickdrums-pretty-orange",
     "title": "Werdperfect × The Kickdrums \"Pretty Orange\"",
     "tags": [
@@ -988,5 +977,16 @@
     "uploadDate": "2017-01-01",
     "hidden": false,
     "order": 350
+  },
+  {
+    "slug": "nychos-sheryo-the-yok",
+    "title": "Nychos × Sheryo × The Yok",
+    "tags": [
+      "street art",
+      "graffiti"
+    ],
+    "uploadDate": "2013-08-01",
+    "hidden": false,
+    "order": 600
   }
 ]
