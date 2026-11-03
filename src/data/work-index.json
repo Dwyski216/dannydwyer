@@ -663,28 +663,6 @@
     }
   },
   {
-    "slug": "google-pixel-lookout",
-    "title": "Google Pixel \"Lookout\"",
-    "tags": [
-      "commercial",
-      "technology",
-      "accessibility",
-      "branded documentary",
-      "documentary",
-      "Sony",
-      "Angenieux EZ",
-      "low vision",
-      "interview"
-    ],
-    "uploadDate": "2023-09-01",
-    "hidden": false,
-    "order": 180,
-    "categoryOrder": {
-      "commercial": 60,
-      "documentary": 90
-    }
-  },
-  {
     "slug": "beck-gustaf-close",
     "title": "Beck × Gustaf \"Close\"",
     "tags": [
@@ -982,6 +960,28 @@
     "order": 170,
     "categoryOrder": {
       "documentary": 50
+    }
+  },
+  {
+    "slug": "google-pixel-lookout",
+    "title": "Google Pixel \"Lookout\"",
+    "tags": [
+      "commercial",
+      "technology",
+      "accessibility",
+      "branded documentary",
+      "documentary",
+      "Sony",
+      "Angenieux EZ",
+      "low vision",
+      "interview"
+    ],
+    "uploadDate": "2023-09-01",
+    "hidden": false,
+    "order": 180,
+    "categoryOrder": {
+      "commercial": 60,
+      "documentary": 90
     }
   }
 ]
