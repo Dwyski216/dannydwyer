@@ -53,22 +53,6 @@
     }
   },
   {
-    "slug": "dark-bardo-midnight-cowboy",
-    "title": "Dark Bardo \"After Midnight Cowboy\"",
-    "tags": [
-      "music video",
-      "short film",
-      "comedy",
-      "psychedelic"
-    ],
-    "uploadDate": "2023-02-01",
-    "hidden": false,
-    "order": 200,
-    "categoryOrder": {
-      "music video": 40
-    }
-  },
-  {
     "slug": "paramount-viking-funeral",
     "title": "Paramount Network Says Farewell to Spike TV",
     "tags": [
@@ -982,6 +966,22 @@
     "categoryOrder": {
       "commercial": 60,
       "documentary": 90
+    }
+  },
+  {
+    "slug": "dark-bardo-midnight-cowboy",
+    "title": "Dark Bardo \"After Midnight Cowboy\"",
+    "tags": [
+      "music video",
+      "short film",
+      "comedy",
+      "psychedelic"
+    ],
+    "uploadDate": "2023-02-01",
+    "hidden": false,
+    "order": 200,
+    "categoryOrder": {
+      "music video": 40
     }
   }
 ]
