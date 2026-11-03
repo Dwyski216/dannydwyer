@@ -92,20 +92,6 @@
     "order": 560
   },
   {
-    "slug": "sb1391-awareness",
-    "title": "Human Rights Watch  SB 1391",
-    "tags": [
-      "advocacy",
-      "social issue",
-      "PSA",
-      "Non-profit",
-      "kids"
-    ],
-    "uploadDate": "2018-09-01",
-    "hidden": false,
-    "order": 360
-  },
-  {
     "slug": "zoe-kravitz-harpers-bazaar",
     "title": "Zoë Kravitz × Harper's Bazaar",
     "tags": [
@@ -983,5 +969,19 @@
     "uploadDate": "2026-10-23",
     "hidden": false,
     "order": 330
+  },
+  {
+    "slug": "sb1391-awareness",
+    "title": "Human Rights Watch  SB 1391",
+    "tags": [
+      "advocacy",
+      "social issue",
+      "PSA",
+      "Non-profit",
+      "kids"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 360
   }
 ]
