@@ -5,8 +5,10 @@ summary: "A snake, a cover story, and Reese Witherspoon, completely unbothered. 
 cardLine: "Reese Witherspoon sits down with Harper's Bazaar for an interview that's as sharp as it is warm."
 platform: "vimeo"
 videoId: "368946293"
+customThumbnail: "/images/thumbnails/reese-witherspoon-harpers-bazaar-1793744879079.webp"
 credits: [{"role":"Cast","name":"Reese Witherspoon"},{"role":"Director","name":"Kathryn Rice"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon Cine Zooms"}]
+series: []
 client: "Harper's Bazaar"
 projectName: "Reese Witherspoon Cover Story"
 uploadDate: "2018-09-01"
