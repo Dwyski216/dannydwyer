@@ -788,19 +788,6 @@
     }
   },
   {
-    "slug": "hoka-the-race",
-    "title": "HOKA The Race",
-    "tags": [
-      "interview",
-      "branded content",
-      "athlete",
-      "fitness"
-    ],
-    "uploadDate": "2026-10-23",
-    "hidden": false,
-    "order": 330
-  },
-  {
     "slug": "sb1391-awareness",
     "title": "Human Rights Watch  SB 1391",
     "tags": [
@@ -987,5 +974,19 @@
     "uploadDate": "2018-08-01",
     "hidden": false,
     "order": 280
+  },
+  {
+    "slug": "hoka-the-race",
+    "title": "HOKA The Race",
+    "tags": [
+      "interview",
+      "branded content",
+      "athlete",
+      "fitness",
+      "documentary"
+    ],
+    "uploadDate": "2026-10-23",
+    "hidden": false,
+    "order": 330
   }
 ]
