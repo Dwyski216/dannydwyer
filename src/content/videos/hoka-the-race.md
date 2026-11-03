@@ -5,6 +5,7 @@ summary: "Triathlete Heather Jackson on winning Escape from Alcatraz, for HOKA. 
 cardLine: "Pro athlete Heather Jackson and HOKA on the training, the mindset, and what it takes to race."
 platform: "vimeo"
 videoId: "279160994"
+customThumbnail: "/images/thumbnails/hoka-the-race-1793744645807.webp"
 credits: [{"role":"Cast","name":"Heather Jackson"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"RED Mysterium-X"},{"category":"Lens","item":"Zeiss CP2. Primes"}]
 series: []
