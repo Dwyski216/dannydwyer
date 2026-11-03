@@ -12,7 +12,7 @@ series: []
 client: "Men's Health"
 projectName: "Ryan Gosling Cover Story"
 uploadDate: "2024-02-01"
-tags: ["editorial","celebrity","Ryan Gosling","Mens Health"]
+tags: ["editorial","celebrity","Ryan Gosling","Mens Health","commercial"]
 stills: []
 urlSlug: "ryan-gosling-mens-health"
 hidden: false
