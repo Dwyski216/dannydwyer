@@ -5,6 +5,7 @@ summary: "Filming the first American Moon landing since 1972. Danny Dwyer on Col
 cardLine: "The first American Moon landing in 50+ years, told with astronaut Jack Fischer and Jeff Koons' art."
 platform: "vimeo"
 videoId: "914552796"
+customThumbnail: "/images/thumbnails/columbia-intuitive-machines-nasa-v1-1793744120837.webp"
 credits: [{"role":"Cast","name":"Jack Fischer"},{"role":"Cast","name":"Steve Altemus"},{"role":"Cast","name":"Haskell Beckham"},{"role":"Director","name":"Jesse Canright"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"Cooke S8i Primes 💥🧨🚬"}]
 series: [{"title":"The Trailer","platform":"vimeo","videoId":"914546880","thumbnail":"/images/thumbnails/columbia-intuitive-machines-nasa-v1-series-2-1792786229795.webp"}]
