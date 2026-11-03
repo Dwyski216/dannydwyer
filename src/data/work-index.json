@@ -92,20 +92,6 @@
     }
   },
   {
-    "slug": "mint-mobile-customer-awards",
-    "title": "Mint Mobile × Maximum Effort",
-    "tags": [
-      "commercial",
-      "comedy"
-    ],
-    "uploadDate": "2021-06-01",
-    "hidden": false,
-    "order": 130,
-    "categoryOrder": {
-      "commercial": 50
-    }
-  },
-  {
     "slug": "paramount-viking-funeral",
     "title": "Paramount Network Says Farewell to Spike TV",
     "tags": [
@@ -982,6 +968,20 @@
     "order": 120,
     "categoryOrder": {
       "documentary": 40
+    }
+  },
+  {
+    "slug": "mint-mobile-customer-awards",
+    "title": "Mint Mobile × Maximum Effort",
+    "tags": [
+      "commercial",
+      "comedy"
+    ],
+    "uploadDate": "2021-06-01",
+    "hidden": false,
+    "order": 130,
+    "categoryOrder": {
+      "commercial": 50
     }
   }
 ]
