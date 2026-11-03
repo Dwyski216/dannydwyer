@@ -55,18 +55,6 @@
     "order": 570
   },
   {
-    "slug": "jonas-brothers-harpers-bazaar",
-    "title": "Jonas Brothers × Game of Thrones",
-    "tags": [
-      "editorial",
-      "celebrity",
-      "interview"
-    ],
-    "uploadDate": "2019-05-01",
-    "hidden": false,
-    "order": 440
-  },
-  {
     "slug": "reese-witherspoon-harpers-bazaar",
     "title": "Reese Witherspoon × Harper's Bazaar",
     "tags": [
@@ -983,5 +971,17 @@
     "uploadDate": "2019-11-01",
     "hidden": false,
     "order": 390
+  },
+  {
+    "slug": "jonas-brothers-harpers-bazaar",
+    "title": "Jonas Brothers × Game of Thrones",
+    "tags": [
+      "editorial",
+      "celebrity",
+      "interview"
+    ],
+    "uploadDate": "2019-05-01",
+    "hidden": false,
+    "order": 440
   }
 ]
