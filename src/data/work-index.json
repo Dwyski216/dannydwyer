@@ -418,17 +418,6 @@
     }
   },
   {
-    "slug": "bridge",
-    "title": "Bridge — Short Film",
-    "tags": [
-      "short film",
-      "narrative"
-    ],
-    "uploadDate": "2013-05-01",
-    "hidden": false,
-    "order": 380
-  },
-  {
     "slug": "dextro-cardia-short-film",
     "title": "Dextro Cardia Short Film",
     "tags": [
@@ -983,5 +972,16 @@
     "uploadDate": "2018-09-01",
     "hidden": false,
     "order": 360
+  },
+  {
+    "slug": "bridge",
+    "title": "Bridge — Short Film",
+    "tags": [
+      "short film",
+      "narrative"
+    ],
+    "uploadDate": "2013-05-01",
+    "hidden": false,
+    "order": 380
   }
 ]
