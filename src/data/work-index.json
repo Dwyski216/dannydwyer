@@ -158,23 +158,6 @@
     "order": 260
   },
   {
-    "slug": "diana-marks-lexus",
-    "title": "Diana Marks × Lexus",
-    "tags": [
-      "commercial",
-      "automotive",
-      "Car",
-      "influencer",
-      "lifestyle"
-    ],
-    "uploadDate": "2018-01-01",
-    "hidden": false,
-    "order": 310,
-    "categoryOrder": {
-      "commercial": 120
-    }
-  },
-  {
     "slug": "young-women-in-hollywood",
     "title": "Young Women in Hollywood",
     "tags": [
@@ -982,6 +965,23 @@
     "order": 170,
     "categoryOrder": {
       "documentary": 50
+    }
+  },
+  {
+    "slug": "diana-marks-lexus",
+    "title": "Diana Marks × Lexus",
+    "tags": [
+      "commercial",
+      "automotive",
+      "Car",
+      "influencer",
+      "lifestyle"
+    ],
+    "uploadDate": "2018-01-01",
+    "hidden": false,
+    "order": 310,
+    "categoryOrder": {
+      "commercial": 120
     }
   }
 ]
