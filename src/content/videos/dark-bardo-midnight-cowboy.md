@@ -5,8 +5,10 @@ summary: "A runaway horse became a runaway trumpet. Filmmaker Danny Dwyer on the
 cardLine: "A psychedelic short with a sense of humor and a wink at a certain 1969 Best Picture winner."
 platform: "vimeo"
 videoId: "875659285"
+customThumbnail: "/images/thumbnails/dark-bardo-midnight-cowboy-1793744202992.webp"
 credits: [{"role":"Cast","name":"Harrison Roberts"},{"role":"Cast","name":"Jackie Spillane"},{"role":"Cast","name":"Hunter Holcombe"},{"role":"Cast","name":"Dean Holcombe"},{"role":"Cast","name":"Zack Birthday"},{"role":"Cast","name":"Jonah Feingold"},{"role":"Cast","name":"Dark Bardo"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony Burano"},{"category":"Lens","item":"TLS Canon FD Primes"}]
+series: []
 client: "Dark Bardo"
 projectName: "Dark Bardo \"Midnight Cowboy\" "
 uploadDate: "2023-02-01"
