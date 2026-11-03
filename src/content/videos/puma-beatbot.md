@@ -5,6 +5,7 @@ summary: "A brand doc on PUMA's BeatBot, a robot built with NASA and MIT enginee
 cardLine: "PUMA's BeatBot, the robot built to pace runners, and the race to see who can keep up with it."
 platform: "vimeo"
 videoId: "166239962"
+customThumbnail: "/images/thumbnails/puma-beatbot-1793744854648.webp"
 credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Florent Imbert"},{"role":"Cast","name":"Usain Bolt"}]
 equipment: [{"category":"Camera","item":"RED"},{"category":"Lens","item":"Canon FD Primes"}]
 series: []
