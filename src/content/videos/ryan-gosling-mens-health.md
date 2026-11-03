@@ -5,6 +5,7 @@ summary: "Universal Studios, stunt bikes, a burning script, and Ryan Gosling. Di
 cardLine: "Ryan Gosling, stunt bikes, and a burning script on the Universal lot, once seen only from the tram."
 platform: "vimeo"
 videoId: "1006770556"
+customThumbnail: "/images/thumbnails/ryan-gosling-mens-health-1793743748630.webp"
 credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Dorenna Newton"},{"role":"Cast","name":"Ryan Gosling"}]
 equipment: [{"category":"Camera","item":"FX6"},{"category":"Lens","item":"Canon FD Lenses"}]
 series: []
