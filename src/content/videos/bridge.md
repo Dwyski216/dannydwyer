@@ -5,6 +5,7 @@ summary: "A studio apartment set rotated by hand in a mechanic's garage. Bridge,
 cardLine: "A narrative short featuring Nate Fish that premiered at the Cleveland International Film Festival."
 platform: "vimeo"
 videoId: "153922218"
+customThumbnail: "/images/thumbnails/bridge-1793744723666.webp"
 credits: [{"role":"Cast","name":"Danielle Slavick"},{"role":"Cast","name":"Nate Fish"},{"role":"Cast","name":"Brian Mendes"},{"role":"Producer","name":"Callie Peck"},{"role":"Producer","name":"Jason Curtis"},{"role":"Director","name":"Callie Peck"},{"role":"Co-Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Production Design","name":"Callie Peck"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Colorist","name":"Callie Peck"}]
 equipment: [{"category":"Camera","item":"RED"},{"category":"Lens","item":"Cooke Mini S4"}]
 series: []
