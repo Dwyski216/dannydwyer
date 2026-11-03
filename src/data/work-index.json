@@ -30,25 +30,6 @@
     }
   },
   {
-    "slug": "reflexai-google-org-veterans-mental-health",
-    "title": "Reflex AI × Google for Veterans",
-    "tags": [
-      "documentary",
-      "branded content",
-      "nonprofit",
-      "technology",
-      "Google",
-      "Google.org",
-      "interview"
-    ],
-    "uploadDate": "2025-02-01",
-    "hidden": false,
-    "order": 120,
-    "categoryOrder": {
-      "documentary": 40
-    }
-  },
-  {
     "slug": "google-pixel-magnifier",
     "title": "Google Pixel \"Magnifier\"",
     "tags": [
@@ -983,5 +964,24 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 40
+  },
+  {
+    "slug": "reflexai-google-org-veterans-mental-health",
+    "title": "Reflex AI × Google for Veterans",
+    "tags": [
+      "documentary",
+      "branded content",
+      "nonprofit",
+      "technology",
+      "Google",
+      "Google.org",
+      "interview"
+    ],
+    "uploadDate": "2025-02-01",
+    "hidden": false,
+    "order": 120,
+    "categoryOrder": {
+      "documentary": 40
+    }
   }
 ]
