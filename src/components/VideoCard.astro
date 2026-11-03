@@ -48,14 +48,18 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
 
 <script>
   // Same-size cards: in each gallery, give every visible card's text area
-  // the height of the tallest one. Redone when the screen size changes,
-  // once the fonts load, and when the Work page's filters show other cards.
+  // the height of the tallest one. Phones (one card per row, a single
+  // scroll) skip it: each card ends right after its own Card Line. Redone
+  // when the screen size changes, once the fonts load, and when the Work
+  // page's filters show other cards.
   function equalizeCards() {
     document.querySelectorAll('.card-gallery').forEach((gallery) => {
       const metas = Array.from(gallery.querySelectorAll<HTMLElement>('.card'))
         .filter((card) => card.offsetParent)
         .map((card) => card.querySelector<HTMLElement>('.meta')!);
       metas.forEach((m) => (m.style.minHeight = ''));
+      const oneColumn = new Set(metas.map((m) => Math.round(m.getBoundingClientRect().left))).size <= 1;
+      if (oneColumn) return;
       const tallest = Math.max(0, ...metas.map((m) => m.getBoundingClientRect().height));
       metas.forEach((m) => (m.style.minHeight = `${tallest}px`));
     });
@@ -98,10 +102,9 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
     filter: grayscale(0);
   }
 
-  /* Every card in a gallery is made as tall as the tallest one there at
-     this screen width (see the script above), so they're all the same size
-     with no more empty space than that card needs; the Card Line sits right
-     under the title, and any spare space falls at the bottom. */
+  /* With two or three cards per row, every card in a gallery is made as
+     tall as the tallest one there (see the script above); any spare space
+     falls at the bottom. On phones each card fits its own text. */
   .meta {
     padding: 0.85rem 1rem 1rem;
   }
