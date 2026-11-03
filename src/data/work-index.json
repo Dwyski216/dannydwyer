@@ -509,22 +509,6 @@
     "order": 600
   },
   {
-    "slug": "128-g",
-    "title": "128-G × Brick of Gold",
-    "tags": [
-      "social issue",
-      "prison",
-      "handheld",
-      "book",
-      "MoMa",
-      "editor",
-      "trailer"
-    ],
-    "uploadDate": "2018-04-01",
-    "hidden": false,
-    "order": 140
-  },
-  {
     "slug": "werdperfect-kickdrums-pretty-orange",
     "title": "Werdperfect × The Kickdrums \"Pretty Orange\"",
     "tags": [
@@ -984,5 +968,22 @@
     "uploadDate": "2024-02-01",
     "hidden": false,
     "order": 40
+  },
+  {
+    "slug": "128-g",
+    "title": "128-G × Brick of Gold",
+    "tags": [
+      "social issue",
+      "prison",
+      "handheld",
+      "book",
+      "MoMa",
+      "editor",
+      "trailer",
+      "documentary"
+    ],
+    "uploadDate": "2018-04-01",
+    "hidden": false,
+    "order": 140
   }
 ]
