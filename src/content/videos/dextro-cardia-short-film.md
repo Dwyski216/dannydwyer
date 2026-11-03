@@ -5,6 +5,7 @@ summary: "Filmmaker Danny Dwyer's first film, 18 years old, shot on a 16mm Bolex
 cardLine: "The first film, made at 19 on black-and-white 16mm. Where the whole thing started."
 platform: "vimeo"
 videoId: "200261054"
+customThumbnail: "/images/thumbnails/dextro-cardia-short-film-1793744798952.webp"
 credits: [{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Christopher Peplin"},{"role":"Editor","name":"Johnny Bartuzzi"}]
 equipment: [{"category":"Camera","item":"16mm Bolex"}]
 series: []
