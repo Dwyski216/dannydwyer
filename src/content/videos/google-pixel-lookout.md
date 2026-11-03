@@ -5,6 +5,7 @@ summary: "One aisle, a hundred choices, and a phone that reads them out loud. La
 cardLine: "Recording artist Lachi shops on her own while her Pixel reads every label in the aisle out loud."
 platform: "vimeo"
 videoId: "970932116"
+customThumbnail: "/images/thumbnails/google-pixel-lookout-1793744159164.webp"
 credits: [{"role":"Agency","name":"WTBR"},{"role":"Cast","name":"Lachi"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"}]
 equipment: [{"category":"Camera","item":"Sony FX6, FX3 & GoPro"},{"category":"Lens","item":"Angenieux EZ Series & TLS Canon FD Primes"}]
 series: []
