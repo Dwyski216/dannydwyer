@@ -5,15 +5,17 @@ summary: "A one-on-one sit-down with Jane Fonda for Harper's Bazaar. Cinematogra
 cardLine: "Hollywood icon Jane Fonda sits down with Harper's Bazaar and owns the frame like nobody else."
 platform: "vimeo"
 videoId: "744782971"
+customThumbnail: "/images/thumbnails/jane-fonda-harpers-bazaar-1793744901054.webp"
 credits: [{"role":"Cast","name":"Jane Fonda"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Kathryn Rice"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Canon Cine Zooms"}]
+series: []
 client: "Harper's Bazaar"
 projectName: "Jane Fonda Feature"
 uploadDate: "2020-09-01"
 tags: ["editorial","celebrity","interview"]
 stills: []
 urlSlug: "jane-fonda-harpers-bazaar"
-hidden: false
+hidden: true
 order: 570
 ---
 
