@@ -955,12 +955,21 @@ async function router(request: Request, env: Env): Promise<Response> {
   return env.ASSETS.fetch(request);
 }
 
+// The site's real address (SITE_URL in astro.config.mjs). Pages are built
+// with it in their canonical/og:url/og:image tags.
+const SITE_ORIGIN = 'https://www.dannydwyer.com';
+
 // The workers.dev address is the test copy of the site: everything it
 // serves is marked noindex (a header, plus a robots meta tag in each page),
 // so Google only ever indexes the real domain. Pages already marked noindex
-// (admin, 404, unlisted videos) keep a single tag.
+// (admin, 404, unlisted videos) keep a single tag. Its link-preview images
+// (og:image, twitter:image) point at this address instead of the real one,
+// so a link shared before launch still shows the D/D monogram or the
+// video's thumbnail: until the domain moves, the real address doesn't have
+// those images.
 function noindexTestSite(request: Request, res: Response): Response {
-  if (!new URL(request.url).hostname.endsWith('.workers.dev')) return res;
+  const here = new URL(request.url);
+  if (!here.hostname.endsWith('.workers.dev')) return res;
   const headers = new Headers(res.headers);
   headers.set('X-Robots-Tag', 'noindex, nofollow');
   const marked = new Response(res.body, { status: res.status, statusText: res.statusText, headers });
@@ -974,6 +983,12 @@ function noindexTestSite(request: Request, res: Response): Response {
     .on('head', {
       element: (el) => {
         el.append('<meta name="robots" content="noindex, nofollow" />', { html: true });
+      },
+    })
+    .on('meta[property="og:image"], meta[name="twitter:image"]', {
+      element: (el) => {
+        const content = el.getAttribute('content');
+        if (content?.startsWith(SITE_ORIGIN + '/')) el.setAttribute('content', here.origin + content.slice(SITE_ORIGIN.length));
       },
     })
     .transform(marked);

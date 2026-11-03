@@ -43,4 +43,9 @@ When the owner is ready to move the domain off Squarespace, walk through this fi
    Cloudflare: add dannydwyer.com → www and dwyski.com → www redirects, map
    obvious old Squarespace paths (/about, /contact, ...) to the new pages (the
    owner wants nothing else kept; other old URLs may 404), then re-run full QA.
-4. Only then cancel the Squarespace website plan (not the domain).
+4. **Link previews**: after the domain is attached, confirm
+   https://www.dannydwyer.com/images/og-monogram.jpg loads, then test a share
+   with a fresh link (add `?v=1`; iMessage caches previews per link) and check
+   it shows the D/D monogram. (Until then the Worker points previews on the
+   workers.dev address at its own copy of the images.)
+5. Only then cancel the Squarespace website plan (not the domain).
