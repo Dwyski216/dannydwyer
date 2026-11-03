@@ -5,8 +5,10 @@ summary: "Cinematographer Danny Dwyer on Google Pixel’s Magnifier episode: Bre
 cardLine: "Brendan, coin collector extraordinaire, zooms in on every detail with his Pixel, then heads outside."
 platform: "vimeo"
 videoId: "970932751"
+customThumbnail: "/images/thumbnails/google-pixel-magnifier-1793744619393.webp"
 credits: [{"role":"Cast","name":"Brendan"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Director","name":"Nilou Safinya"},{"role":"Agency","name":"WTBR"}]
 equipment: [{"category":"Camera","item":"Sony FX6, FX3 & GoPro"},{"category":"Lens","item":"Angenieux EZ Zooms & TLS Canon FD Primes"}]
+series: []
 client: "Google"
 projectName: "Pixel Series Pt.3 \"Magnifier\""
 uploadDate: "2023-09-01"
