@@ -30,29 +30,6 @@
     }
   },
   {
-    "slug": "google-pixel-magnifier",
-    "title": "Google Pixel \"Magnifier\"",
-    "tags": [
-      "commercial",
-      "technology",
-      "accessibility",
-      "documentary",
-      "branded documentary",
-      "low vision",
-      "Angenieux EZ",
-      "Sony",
-      "interview",
-      "kids"
-    ],
-    "uploadDate": "2023-09-01",
-    "hidden": false,
-    "order": 220,
-    "categoryOrder": {
-      "commercial": 150,
-      "documentary": 110
-    }
-  },
-  {
     "slug": "paramount-viking-funeral",
     "title": "Paramount Network Says Farewell to Spike TV",
     "tags": [
@@ -982,6 +959,29 @@
     "order": 310,
     "categoryOrder": {
       "commercial": 120
+    }
+  },
+  {
+    "slug": "google-pixel-magnifier",
+    "title": "Google Pixel \"Magnifier\"",
+    "tags": [
+      "commercial",
+      "technology",
+      "accessibility",
+      "documentary",
+      "branded documentary",
+      "low vision",
+      "Angenieux EZ",
+      "Sony",
+      "interview",
+      "kids"
+    ],
+    "uploadDate": "2023-09-01",
+    "hidden": false,
+    "order": 220,
+    "categoryOrder": {
+      "commercial": 150,
+      "documentary": 110
     }
   }
 ]
