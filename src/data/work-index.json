@@ -320,21 +320,6 @@
     "order": 430
   },
   {
-    "slug": "puma-beatbot",
-    "title": "PUMA BeatBot",
-    "tags": [
-      "commercial",
-      "sports",
-      "fashion"
-    ],
-    "uploadDate": "2016-06-01",
-    "hidden": false,
-    "order": 530,
-    "categoryOrder": {
-      "commercial": 200
-    }
-  },
-  {
     "slug": "128-g-short-film-trailer",
     "title": "128-G Short Film Trailer",
     "tags": [
@@ -983,5 +968,20 @@
     "uploadDate": "2011-09-01",
     "hidden": false,
     "order": 510
+  },
+  {
+    "slug": "puma-beatbot",
+    "title": "PUMA BeatBot",
+    "tags": [
+      "commercial",
+      "sports",
+      "fashion"
+    ],
+    "uploadDate": "2016-06-01",
+    "hidden": false,
+    "order": 530,
+    "categoryOrder": {
+      "commercial": 200
+    }
   }
 ]
