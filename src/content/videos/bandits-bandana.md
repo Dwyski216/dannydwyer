@@ -15,7 +15,7 @@ tags: ["commercial","product","16mm","fashion","film","car","western","Kodak","l
 stills: []
 urlSlug: "bandits-bandana"
 hidden: false
-order: 240
+order: 270
 categoryOrder: {"commercial":140}
 ---
 

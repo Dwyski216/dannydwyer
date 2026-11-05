@@ -16,7 +16,7 @@ tags: ["documentary","branded content","technology","space","NASA","Columbia","m
 stills: []
 urlSlug: "columbia-intuitive-machines-nasa-v1"
 hidden: false
-order: 170
+order: 160
 categoryOrder: {"documentary":50}
 ---
 

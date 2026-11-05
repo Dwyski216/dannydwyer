@@ -16,7 +16,7 @@ tags: ["commercial","kids","school"]
 stills: []
 urlSlug: "accel-schools"
 hidden: false
-order: 190
+order: 180
 ---
 
 I didn’t go to film school. I went to film camp, put everything I had into a camera, and figured out the rest along the way. So ACCEL Schools’ whole philosophy landed with me right away: it’s not where you start, it’s where you’re going.

@@ -16,7 +16,7 @@ tags: ["commercial","technology","accessibility","branded documentary","document
 stills: []
 urlSlug: "google-pixel-lookout"
 hidden: false
-order: 180
+order: 170
 categoryOrder: {"commercial":60,"documentary":90}
 ---
 

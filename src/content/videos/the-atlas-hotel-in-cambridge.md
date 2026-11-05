@@ -16,7 +16,7 @@ tags: ["commercial","hotel","hospitality","lifestyle"]
 stills: []
 urlSlug: "the-atlas-hotel-in-cambridge"
 hidden: false
-order: 400
+order: 310
 categoryOrder: {"commercial":170}
 ---
 

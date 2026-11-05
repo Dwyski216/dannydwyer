@@ -16,7 +16,7 @@ tags: ["commercial","hotel","hospitality","lifestyle"]
 stills: []
 urlSlug: "kimpton-hotel-hero-spot"
 hidden: false
-order: 290
+order: 240
 categoryOrder: {"commercial":100}
 ---
 

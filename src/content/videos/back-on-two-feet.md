@@ -15,7 +15,7 @@ tags: ["documentary","veterans","mini doc","interview"]
 stills: []
 urlSlug: "back-on-two-feet"
 hidden: false
-order: 210
+order: 230
 categoryOrder: {"documentary":60}
 ---
 

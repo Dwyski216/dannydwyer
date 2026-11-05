@@ -16,7 +16,7 @@ tags: ["commercial","product","fashion"]
 stills: []
 urlSlug: "shinola"
 hidden: false
-order: 230
+order: 260
 categoryOrder: {"commercial":40}
 ---
 

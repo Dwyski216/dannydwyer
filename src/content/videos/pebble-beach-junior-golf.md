@@ -16,7 +16,7 @@ tags: ["athletics","athlete","kids","lifestyle","commercial"]
 stills: []
 urlSlug: "pebble-beach-junior-golf"
 hidden: false
-order: 190
+order: 200
 ---
 
 Pebble Beach is one of the most famous places in golf, and one of the hardest to get into. Since 1988, Pebble Beach Junior Golf has been opening those gates to local kids, ages 6 to 17, across the Monterey Peninsula.

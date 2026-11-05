@@ -16,7 +16,7 @@ tags: ["fashion","commercial","lifestyle"]
 stills: []
 urlSlug: "bloomingdales-minimal-nature"
 hidden: false
-order: 150
+order: 140
 categoryOrder: {"commercial":80}
 ---
 
