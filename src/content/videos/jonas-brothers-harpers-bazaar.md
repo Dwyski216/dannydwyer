@@ -16,7 +16,7 @@ tags: ["editorial","celebrity","interview"]
 stills: []
 urlSlug: "jonas-brothers-harpers-bazaar"
 hidden: false
-order: 440
+order: 470
 ---
 
 My friend Robert Dumé called me up: "Bro, we're doing something epic. Jonas Brothers. Game of Thrones. The final season."

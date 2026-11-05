@@ -16,7 +16,7 @@ tags: ["celebrity","editorial","interview"]
 stills: []
 urlSlug: "tracee-ellis-ross"
 hidden: false
-order: 390
+order: 450
 ---
 
 When you get to shoot the daughter of Diana Ross, you know it's going to be a good day.

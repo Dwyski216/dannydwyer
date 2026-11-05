@@ -15,7 +15,7 @@ tags: ["advocacy","social issue","PSA","Non-profit","kids"]
 stills: []
 urlSlug: "sb1391-awareness"
 hidden: false
-order: 360
+order: 430
 ---
 
 Kids make mistakes. That's what being a kid is.

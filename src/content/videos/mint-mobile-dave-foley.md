@@ -15,7 +15,7 @@ tags: ["commercial","comedy","celebrity","interview"]
 stills: []
 urlSlug: "mint-mobile-dave-foley"
 hidden: false
-order: 520
+order: 550
 categoryOrder: {"commercial":190}
 ---
 
