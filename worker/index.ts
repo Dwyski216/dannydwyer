@@ -957,7 +957,7 @@ async function router(request: Request, env: Env): Promise<Response> {
 
 // The site's real address (SITE_URL in astro.config.mjs). Pages are built
 // with it in their canonical/og:url/og:image tags.
-const SITE_ORIGIN = 'https://www.dannydwyer.com';
+const SITE_ORIGIN = 'https://dannydwyer.com';
 
 // The workers.dev address is the test copy of the site: everything it
 // serves is marked noindex (a header, plus a robots meta tag in each page),

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 // og:image, the sitemap and robots.txt are built from it. The workers.dev
 // test address serves the same pages but is kept out of Google by the
 // Worker (see noindexTestSite in worker/index.ts).
-const SITE_URL = 'https://www.dannydwyer.com';
+const SITE_URL = 'https://dannydwyer.com';
 
 // The sitemap integration only sees final URLs, not content collection data,
 // so hidden work items (drafts, placeholders, old temp reels) and admin

@@ -20,7 +20,7 @@ The site owner wants code changes to go live without a manual pull request:
 - **"Live" means verified live.** A push, a passing local build, or a green
   check on GitHub is not proof. Before telling the owner a change is live,
   load the live site (https://dannydwyer.rough-water-4697.workers.dev, later
-  https://www.dannydwyer.com) and confirm the change is actually there.
+  https://dannydwyer.com) and confirm the change is actually there.
   Builds can be skipped or queued (as in the Cloudflare build-delay incident
   of Oct 2026), and a check run may be for a preview branch, not production.
 - **Say what you can't see.** If something can't be verified from here (the
@@ -37,14 +37,16 @@ When the owner is ready to move the domain off Squarespace, walk through this fi
    Known: the Lady Gaga series and the Jelly Roll series. Check the rest too.
 2. **Email DNS**: screenshot the domain's MX/TXT records at Squarespace before
    changing nameservers (contact@dannydwyer.com must keep working).
-3. `SITE_URL` in `astro.config.mjs` is already `https://www.dannydwyer.com`
-   (www is the canonical address), and the Worker marks everything on the
-   workers.dev test address noindex. After the domain is attached in
-   Cloudflare: add dannydwyer.com → www and dwyski.com → www redirects, map
+3. `SITE_URL` in `astro.config.mjs` is already `https://dannydwyer.com`
+   (plain dannydwyer.com, no www, is the canonical address; set by the owner
+   in Nov 2026), and the Worker marks everything on the workers.dev test
+   address noindex. After the domain is attached in Cloudflare: add
+   www.dannydwyer.com → dannydwyer.com and dwyski.com → dannydwyer.com
+   redirects, map
    obvious old Squarespace paths (/about, /contact, ...) to the new pages (the
    owner wants nothing else kept; other old URLs may 404), then re-run full QA.
 4. **Link previews**: after the domain is attached, confirm
-   https://www.dannydwyer.com/images/og-monogram.jpg loads, then test a share
+   https://dannydwyer.com/images/og-monogram.jpg loads, then test a share
    with a fresh link (add `?v=1`; iMessage caches previews per link) and check
    it shows the D/D monogram. (Until then the Worker points previews on the
    workers.dev address at its own copy of the images.)
