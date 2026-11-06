@@ -33,15 +33,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': new URL('/#person', Astro.site).toString(),
   name: site.name,
   alternateName: site.alternateName,
-  jobTitle: site.role,
+  jobTitle: 'Cinematographer & Director',
+  disambiguatingDescription: 'Cinematographer and director of commercials, music videos, and documentaries.',
   description: site.tagline,
   email: `mailto:${site.email}`,
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: site.location,
-  },
+  image: new URL('/images/dwyer-sunglasses.webp', Astro.site).toString(), // the Contact page portrait
   sameAs: Object.values(site.socials).filter(Boolean),
   url: Astro.site?.toString(),
 };

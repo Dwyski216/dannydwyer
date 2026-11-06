@@ -65,7 +65,7 @@ const jsonLd = [
     itemListElement: inCategory.map((v, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: new URL(`/work/${v.data.urlSlug}`, Astro.site).toString(),
+      url: new URL(`/work/${v.data.urlSlug}/`, Astro.site).toString(),
       name: v.data.title,
     })),
   },

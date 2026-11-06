@@ -1,7 +1,7 @@
 ---
 title: "Danny Dwyer Showreel"
 pageTitle: "Danny Dwyer 2026 Reel"
-summary: "Danny Dwyer's cinematography reel a cross-section of narrative, commercial, and documentary work."
+summary: "Danny Dwyer's cinematography reel: a cross-section of narrative, commercial, and documentary work."
 cardLine: "Fifteen years behind the camera in a few minutes. Choosing what made the cut was the hardest part."
 platform: "vimeo"
 videoId: "391333279"
@@ -10,7 +10,7 @@ credits: [{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Edito
 equipment: []
 client: "👀"
 projectName: "Danny Dwyer Reel"
-uploadDate: "2020-01-01"
+uploadDate: "2026-01-01"
 tags: ["reel","showreel","fashion","celebrity","editing"]
 stills: []
 urlSlug: "dannydwyer-2026-reel"
