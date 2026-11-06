@@ -873,6 +873,8 @@ async function handleThumbnailPost(request: Request, env: Env): Promise<Response
 // now, so shared links keep working. Keys are paths without a trailing slash.
 const REDIRECTS: Record<string, string> = {
   '/work/wolf-shepherd-monaco': '/work/wolf-shepherd-shoe/',
+  // Old Squarespace pages still in Google.
+  '/photography': '/work/',
 };
 
 async function router(request: Request, env: Env): Promise<Response> {
