@@ -199,7 +199,7 @@ const jsonLd = [
       params.delete('tag');
       if (!cat) selected.forEach((tag) => params.append('tag', tag));
       const qs = params.toString();
-      history.replaceState(null, '', (cat ? `/${cat.slug}` : '/work') + (qs ? `?${qs}` : ''));
+      history.replaceState(null, '', (cat ? `/${cat.slug}/` : '/work/') + (qs ? `?${qs}` : ''));
       presetBtns.forEach((btn) => {
         const active = !!cat && btn.dataset.tag === cat.tag;
         btn.classList.toggle('is-active', active);

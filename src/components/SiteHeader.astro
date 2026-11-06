@@ -12,8 +12,8 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
   </a>
   <nav class="nav">
     <a href="/" class:list={{ active: isActive('/') && path === '/' }}>Home</a>
-    <a href="/work" class:list={{ active: isActive('/work') || CATEGORIES.some((c) => isActive(`/${c.slug}`)) }}>Work</a>
-    <a href="/contact" class:list={{ active: isActive('/contact') }}>Contact</a>
+    <a href="/work/" class:list={{ active: isActive('/work/') || CATEGORIES.some((c) => isActive(`/${c.slug}/`)) }}>Work</a>
+    <a href="/contact/" class:list={{ active: isActive('/contact/') }}>Contact</a>
   </nav>
 </header>
 

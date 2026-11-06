@@ -93,7 +93,9 @@ const jsonLd = [
   ...d.series.map((s, i) => ({
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
-    name: s.title ? `${d.title}: ${s.title}` : `${d.title} (part ${i + 2})`,
+    // A series video titled like "Lady Gaga × Haus Labs, Part 2" already
+    // names the project, so it isn't prefixed with the post title again.
+    name: s.title ? (s.title.startsWith(d.title) ? s.title : `${d.title}: ${s.title}`) : `${d.title} (part ${i + 2})`,
     description: d.summary,
     ...(thumbnailUrl ? { thumbnailUrl } : {}),
     uploadDate: d.uploadDate,
@@ -123,7 +125,7 @@ const jsonLd = [
   <SiteHeader />
   <main class="main container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a> / <a href="/work">Work</a> / <span>{d.title}</span>
+      <a href="/">Home</a> / <a href="/work/">Work</a> / <span>{d.title}</span>
     </nav>
 
     {seriesVideos.length ? (
@@ -202,11 +204,11 @@ const jsonLd = [
 
           <dt>Tags</dt>
           <dd class="tags">
-            {d.tags.map((t) => <a href={`/work?tag=${encodeURIComponent(t.toLowerCase())}`}>{t}</a>)}
+            {d.tags.map((t) => <a href={`/work/?tag=${encodeURIComponent(t.toLowerCase())}`}>{t}</a>)}
           </dd>
         </dl>
 
-        <a class="back" href="/work">← Back to all work</a>
+        <a class="back" href="/work/">← Back to all work</a>
       </aside>
     </div>
 
@@ -231,10 +233,10 @@ const jsonLd = [
 
     <nav class="project-nav" aria-label="Project navigation">
       {prevVideo ? (
-        <a class="prev" href={`/work/${prevVideo.data.urlSlug}`}>← Previous project</a>
+        <a class="prev" href={`/work/${prevVideo.data.urlSlug}/`}>← Previous project</a>
       ) : <span />}
       {nextVideo ? (
-        <a class="next" href={`/work/${nextVideo.data.urlSlug}`}>Next project →</a>
+        <a class="next" href={`/work/${nextVideo.data.urlSlug}/`}>Next project →</a>
       ) : <span />}
     </nav>
   </main>

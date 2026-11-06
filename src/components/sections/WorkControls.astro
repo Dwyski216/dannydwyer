@@ -18,7 +18,7 @@ const { allTags, activeTag } = Astro.props;
     {CATEGORIES.map((c) => (
       <a
         class:list={['preset-btn', { 'is-active': c.tag === activeTag }]}
-        href={`/${c.slug}`}
+        href={`/${c.slug}/`}
         data-tag={c.tag}
         aria-current={c.tag === activeTag ? 'page' : undefined}
       >

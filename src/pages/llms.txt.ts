@@ -23,7 +23,7 @@ export const GET: APIRoute = async ({ site: astroSite }) => {
     '',
     '## Work',
     '',
-    `Full catalog of ${videos.length} video projects, filterable by tag at ${base}/work.`,
+    `Full catalog of ${videos.length} video projects, filterable by tag at ${base}/work/.`,
     '',
     ...videos.map((v) => {
       const facts = [
@@ -35,7 +35,7 @@ export const GET: APIRoute = async ({ site: astroSite }) => {
       ]
         .filter(Boolean)
         .join(' · ');
-      return `- [${v.data.title}](${base}/work/${v.data.urlSlug}): ${v.data.summary} (${facts})`;
+      return `- [${v.data.title}](${base}/work/${v.data.urlSlug}/): ${v.data.summary} (${facts})`;
     }),
     '',
     '## Pages',
