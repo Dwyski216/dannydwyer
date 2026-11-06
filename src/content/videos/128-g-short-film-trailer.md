@@ -26,6 +26,6 @@ We shot close, face to face, and we listened. Some of what they shared was hard 
 
 I made this hoping it reaches young people before life does. Anyone can make a mistake. Choices carry consequences, and nobody here pretends otherwise, but every person still deserves a voice and a chance to be heard.
 
-Watch it, then read the book. Profits go to Words Uncaged and its workshops inside California's prisons.
+Watch it, then [read the book](https://www.thebrickofgold.com/shop/p/8cz2mny4aljdmjmtti3p3vpr2p33pq). Profits go to Words Uncaged and its workshops inside California's prisons.
 
 Start from the yard. Watch the book promo
