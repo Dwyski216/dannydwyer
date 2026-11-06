@@ -28,7 +28,7 @@ I made this hoping it reaches young people before life does. Anyone can make a m
 
 Watch it, then [read the book](https://www.thebrickofgold.com/shop/p/8cz2mny4aljdmjmtti3p3vpr2p33pq). Profits go to Words Uncaged and its workshops inside California's prisons.
 
-Start from the yard. Watch the book promo
+Start from the yard. [Watch](/work/128-g/) the book promo.
 
 For more info on [Nate Fish](https://medium.com/brick-of-gold/128-g-73eb05c177a3).
 
