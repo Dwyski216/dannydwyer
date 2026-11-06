@@ -882,6 +882,10 @@ async function router(request: Request, env: Env): Promise<Response> {
   const moved = REDIRECTS[pathname.replace(/\/+$/, '')];
   if (moved) return Response.redirect(new URL(moved + url.search, url).toString(), 301);
 
+  // The build names its sitemap /sitemap-index.xml (robots.txt points
+  // there); /sitemap.xml serves the same file for tools that expect it.
+  if (pathname === '/sitemap.xml') return env.ASSETS.fetch(new Request(new URL('/sitemap-index.xml', url), request));
+
   if (pathname === '/api/login' && request.method === 'POST') return handleLogin(request, env);
   if (pathname === '/api/logout' && request.method === 'POST') return handleLogout();
 
