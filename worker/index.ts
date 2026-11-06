@@ -875,6 +875,17 @@ const REDIRECTS: Record<string, string> = {
   '/work/wolf-shepherd-monaco': '/work/wolf-shepherd-shoe/',
   // Old Squarespace pages still in Google.
   '/photography': '/work/',
+  '/photos': '/work/',
+  '/work-1': '/work/',
+  '/portfolio': '/work/',
+  '/projects': '/work/',
+  '/videos': '/work/',
+  '/reel': '/work/dannydwyer-2026-reel/',
+  '/about': '/',
+  '/about-me': '/',
+  '/home': '/',
+  '/contact-1': '/contact/',
+  '/contact-us': '/contact/',
 };
 
 async function router(request: Request, env: Env): Promise<Response> {
