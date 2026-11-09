@@ -16,7 +16,7 @@ tags: ["commercial","shaving"]
 stills: []
 urlSlug: "pacific-shaving-company"
 hidden: false
-order: 610
+order: 620
 categoryOrder: {"commercial":210}
 ---
 
