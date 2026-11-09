@@ -981,25 +981,6 @@
     }
   },
   {
-    "slug": "beck-gustaf-close",
-    "title": "Beck × Gustaf \"Close\"",
-    "tags": [
-      "music video",
-      "celebrity",
-      "Beck",
-      "Gustaf",
-      "Los Angeles",
-      "Punk",
-      "Black and White"
-    ],
-    "uploadDate": "2023-05-01",
-    "hidden": false,
-    "order": 60,
-    "categoryOrder": {
-      "music video": 10
-    }
-  },
-  {
     "slug": "pacific-shaving-company",
     "title": "Pacific Shaving Company",
     "tags": [
@@ -1028,6 +1009,25 @@
     "order": 80,
     "categoryOrder": {
       "documentary": 20
+    }
+  },
+  {
+    "slug": "beck-gustaf-close",
+    "title": "Beck × Gustaf \"Close\"",
+    "tags": [
+      "music video",
+      "celebrity",
+      "Beck",
+      "Gustaf",
+      "Los Angeles",
+      "Punk",
+      "Black and White"
+    ],
+    "uploadDate": "2023-05-01",
+    "hidden": false,
+    "order": 60,
+    "categoryOrder": {
+      "music video": 10
     }
   }
 ]
