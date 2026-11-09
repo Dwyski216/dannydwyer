@@ -337,7 +337,10 @@
     ],
     "uploadDate": "2026-10-24",
     "hidden": true,
-    "order": 650
+    "order": 650,
+    "categoryOrder": {
+      "music video": 90
+    }
   },
   {
     "slug": "kimpton-hotel-hero-spot",
@@ -418,7 +421,7 @@
     "hidden": false,
     "order": 350,
     "categoryOrder": {
-      "music video": 60
+      "music video": 40
     }
   },
   {
@@ -552,7 +555,7 @@
     "hidden": false,
     "order": 450,
     "categoryOrder": {
-      "music video": 50
+      "music video": 60
     }
   },
   {
@@ -646,7 +649,7 @@
     "hidden": false,
     "order": 220,
     "categoryOrder": {
-      "music video": 40
+      "music video": 50
     }
   },
   {

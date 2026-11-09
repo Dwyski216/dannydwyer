@@ -16,7 +16,7 @@ stills: []
 urlSlug: "copywrite-martin-shkreli-killa"
 hidden: false
 order: 450
-categoryOrder: {"music video":50}
+categoryOrder: {"music video":60}
 ---
 
 If Columbus had a mayor of mischief, it'd be Copywrite.

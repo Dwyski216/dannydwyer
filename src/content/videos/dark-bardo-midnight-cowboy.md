@@ -17,7 +17,7 @@ stills: []
 urlSlug: "dark-bardo-midnight-cowboy"
 hidden: false
 order: 220
-categoryOrder: {"music video":40}
+categoryOrder: {"music video":50}
 ---
 
 Truth is, nobody approached me for this one. I forced my way in.
