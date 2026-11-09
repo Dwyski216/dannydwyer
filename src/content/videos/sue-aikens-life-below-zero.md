@@ -17,6 +17,7 @@ stills: []
 urlSlug: "sue-aikens-life-below-zero"
 hidden: false
 order: 0
+categoryOrder: {"documentary":140}
 ---
 
 Sue Aikens hadn’t been in a city in over 20 years. She lives alone at Kavik River Camp, 80 miles from the nearest road. Then Nat Geo brought her to New York.
