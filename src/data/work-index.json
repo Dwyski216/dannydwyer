@@ -1009,5 +1009,19 @@
     "categoryOrder": {
       "documentary": 80
     }
+  },
+  {
+    "slug": "sue-aikens-life-below-zero",
+    "title": "Sue Aikens × Life Below Zero",
+    "tags": [
+      "broadcast",
+      "television",
+      "documentary",
+      "nature",
+      "outdoors"
+    ],
+    "uploadDate": "2026-11-09",
+    "hidden": false,
+    "order": 0
   }
 ]
