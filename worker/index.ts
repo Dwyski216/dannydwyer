@@ -886,6 +886,7 @@ const REDIRECTS: Record<string, string> = {
   '/home': '/',
   '/contact-1': '/contact/',
   '/contact-us': '/contact/',
+  '/narrative': '/work/',
 };
 
 async function router(request: Request, env: Env): Promise<Response> {
