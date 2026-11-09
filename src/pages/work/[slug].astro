@@ -139,11 +139,6 @@ const jsonLd = [
         <h1>{d.title}</h1>
         <div class="prose">
           <Content />
-          {d.press.length > 0 && (
-            // Kept on one line: line breaks between these pieces would put
-            // stray spaces before the commas ("Hypebeast , ELLE").
-            <p class="press">Featured on {d.press.map((p, i) => <>{i > 0 && (i === d.press.length - 1 ? ' and ' : ', ')}<a href={p.url} target="_blank" rel="noopener">{p.outlet}</a></>)}</p>
-          )}
         </div>
 
         {d.stills.length > 0 && (
@@ -200,6 +195,22 @@ const jsonLd = [
                   {d.equipment.map((e) => (
                     <li>
                       {e.category}{e.category && e.item && ': '}{e.item}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </>
+          )}
+
+          {/* Shown only when the video has press entries in the admin. */}
+          {d.press.length > 0 && (
+            <>
+              <dt>Press</dt>
+              <dd>
+                <ul class="credits">
+                  {d.press.map((p) => (
+                    <li>
+                      <a class="press-link" href={p.url} target="_blank" rel="noopener noreferrer">{p.outlet}</a>
                     </li>
                   ))}
                 </ul>
@@ -375,6 +386,16 @@ const jsonLd = [
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+  }
+
+  .press-link {
+    color: var(--headlight);
+    text-decoration: underline;
+    transition: color 0.15s ease;
+  }
+
+  .press-link:hover {
+    color: var(--olympic-gold);
   }
 
   dd.tags {
