@@ -15,7 +15,7 @@ uploadDate: "2026-10-23"
 tags: ["commercial","shaving"]
 stills: []
 urlSlug: "pacific-shaving-company"
-hidden: false
+hidden: true
 order: 620
 categoryOrder: {"commercial":210}
 ---
