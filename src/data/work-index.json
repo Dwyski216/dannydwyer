@@ -74,26 +74,6 @@
     "order": 590
   },
   {
-    "slug": "the-war-for-home",
-    "title": "Born x Raised \"War for Home\"",
-    "tags": [
-      "documentary",
-      "Los Angeles",
-      "Spanto",
-      "Venice",
-      "history",
-      "film",
-      "Mini Doc",
-      "Branded Doc"
-    ],
-    "uploadDate": "2017-06-01",
-    "hidden": false,
-    "order": 110,
-    "categoryOrder": {
-      "documentary": 30
-    }
-  },
-  {
     "slug": "bandits-bandana",
     "title": "Bandits Bandanas",
     "tags": [
@@ -1025,6 +1005,26 @@
     "order": 570,
     "categoryOrder": {
       "documentary": 140
+    }
+  },
+  {
+    "slug": "the-war-for-home",
+    "title": "Born x Raised \"War for Home\"",
+    "tags": [
+      "documentary",
+      "Los Angeles",
+      "Spanto",
+      "Venice",
+      "history",
+      "film",
+      "Mini Doc",
+      "Branded Doc"
+    ],
+    "uploadDate": "2017-06-01",
+    "hidden": false,
+    "order": 110,
+    "categoryOrder": {
+      "documentary": 30
     }
   }
 ]
