@@ -14,7 +14,7 @@ tags: ["editorial","celebrity","interview","fashion"]
 stills: []
 urlSlug: "young-women-in-hollywood"
 hidden: false
-order: 570
+order: 580
 ---
 
 Kathryn Newton, Sasha Lane, and Lovie Simone. An abandoned pool tucked into the Los Angeles hills. A whole afternoon to play.

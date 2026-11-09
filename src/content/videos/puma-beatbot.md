@@ -16,7 +16,7 @@ tags: ["commercial","sports","fashion"]
 stills: []
 urlSlug: "puma-beatbot"
 hidden: false
-order: 560
+order: 570
 categoryOrder: {"commercial":200}
 ---
 

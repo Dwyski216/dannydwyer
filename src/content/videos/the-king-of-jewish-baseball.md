@@ -15,7 +15,7 @@ tags: ["short film","comedy"]
 stills: []
 urlSlug: "the-king-of-jewish-baseball"
 hidden: false
-order: 540
+order: 550
 ---
 
 My best friend Nate Fish is the King of Jewish Baseball. His lifelong dream was to take batting practice in the streets of New York City, and he wanted me there to film it.

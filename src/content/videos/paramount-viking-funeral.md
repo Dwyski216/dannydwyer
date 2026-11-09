@@ -15,7 +15,7 @@ tags: ["branded content","event","entertainment","pyro"]
 stills: []
 urlSlug: "paramount-viking-funeral"
 hidden: false
-order: 510
+order: 520
 ---
 
 The brief, more or less: blow shit up in the desert.
