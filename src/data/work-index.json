@@ -159,7 +159,7 @@
     "hidden": false,
     "order": 230,
     "categoryOrder": {
-      "documentary": 60
+      "documentary": 90
     }
   },
   {
@@ -176,7 +176,7 @@
     "hidden": false,
     "order": 400,
     "categoryOrder": {
-      "documentary": 80
+      "documentary": 100
     }
   },
   {
@@ -297,7 +297,7 @@
     "order": 330,
     "categoryOrder": {
       "commercial": 160,
-      "documentary": 100
+      "documentary": 130
     }
   },
   {
@@ -328,7 +328,7 @@
     "hidden": false,
     "order": 480,
     "categoryOrder": {
-      "documentary": 120
+      "documentary": 150
     }
   },
   {
@@ -661,7 +661,7 @@
     "order": 150,
     "categoryOrder": {
       "commercial": 180,
-      "documentary": 70
+      "documentary": 110
     }
   },
   {
@@ -683,7 +683,7 @@
     "order": 170,
     "categoryOrder": {
       "commercial": 60,
-      "documentary": 90
+      "documentary": 120
     }
   },
   {
@@ -762,7 +762,7 @@
     "order": 250,
     "categoryOrder": {
       "commercial": 150,
-      "documentary": 110
+      "documentary": 80
     }
   },
   {
@@ -909,7 +909,10 @@
     ],
     "uploadDate": "2018-04-01",
     "hidden": false,
-    "order": 130
+    "order": 130,
+    "categoryOrder": {
+      "documentary": 60
+    }
   },
   {
     "slug": "128-g-short-film-trailer",
@@ -965,7 +968,10 @@
     ],
     "uploadDate": "2026-10-23",
     "hidden": false,
-    "order": 420
+    "order": 420,
+    "categoryOrder": {
+      "documentary": 140
+    }
   },
   {
     "slug": "mr-cartoon-cazadores-saucey",
@@ -999,6 +1005,9 @@
     ],
     "uploadDate": "2026-11-05",
     "hidden": false,
-    "order": 630
+    "order": 630,
+    "categoryOrder": {
+      "documentary": 70
+    }
   }
 ]

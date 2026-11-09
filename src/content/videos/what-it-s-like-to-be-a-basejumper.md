@@ -17,7 +17,7 @@ stills: []
 urlSlug: "what-it-s-like-to-be-a-basejumper"
 hidden: false
 order: 480
-categoryOrder: {"documentary":120}
+categoryOrder: {"documentary":150}
 ---
 
 On some shoots, everything has to go right. On this one, it wasn't optional.
