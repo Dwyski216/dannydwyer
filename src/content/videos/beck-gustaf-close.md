@@ -22,7 +22,7 @@ categoryOrder: {"music video":10}
 
 I got an email: "Beck's going to call you." Funny, since I never gave Beck my number.
 
-As a teenager I wore out my "Loser" cassette, so the idea of co-directing with him felt unreal. Then the phone rang. Beck.
+As a teenager I wore out my "Loser" cassette, so the idea of working with him felt unreal. Then the phone rang. Beck.
 
 From day one he knew it would be black and white. Beck brought in references from 1970s French photography, and he was specific in the best way, the kind of clarity a filmmaker dreams about. Gustaf went from strangers to friends to family in about a day. Lydia Gammill is pure electricity on camera, and we got almost everything in one or two takes. What you can't see is how brutally cold it was when we shot this. It was even snowing during the balloon explosion scene.
 
