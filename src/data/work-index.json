@@ -176,7 +176,7 @@
     "hidden": false,
     "order": 410,
     "categoryOrder": {
-      "documentary": 100
+      "documentary": 110
     }
   },
   {
@@ -661,7 +661,7 @@
     "order": 150,
     "categoryOrder": {
       "commercial": 180,
-      "documentary": 110
+      "documentary": 100
     }
   },
   {

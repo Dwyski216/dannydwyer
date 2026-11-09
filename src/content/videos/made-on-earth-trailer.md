@@ -15,7 +15,7 @@ stills: []
 urlSlug: "made-on-earth-trailer"
 hidden: false
 order: 410
-categoryOrder: {"documentary":100}
+categoryOrder: {"documentary":110}
 ---
 
 Every pattern starts somewhere.

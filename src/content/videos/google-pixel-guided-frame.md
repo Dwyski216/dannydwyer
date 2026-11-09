@@ -17,7 +17,7 @@ stills: []
 urlSlug: "google-pixel-guided-frame"
 hidden: false
 order: 150
-categoryOrder: {"commercial":180,"documentary":110}
+categoryOrder: {"commercial":180,"documentary":100}
 ---
 
 Framing is my whole job. Where the edges go, what’s in, what’s out. I’ve spent fifteen years learning to see a shot before it exists.
