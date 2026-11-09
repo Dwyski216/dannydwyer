@@ -16,7 +16,7 @@ tags: ["documentary","docu series","branded content","commercial"]
 stills: []
 urlSlug: "cotton-docu-series"
 hidden: false
-order: 330
+order: 340
 categoryOrder: {"commercial":160,"documentary":130}
 ---
 

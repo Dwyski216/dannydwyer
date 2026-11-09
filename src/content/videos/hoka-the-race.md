@@ -16,7 +16,7 @@ tags: ["interview","branded content","athlete","fitness","documentary"]
 stills: []
 urlSlug: "hoka-the-race"
 hidden: false
-order: 420
+order: 430
 categoryOrder: {"documentary":140}
 ---
 
