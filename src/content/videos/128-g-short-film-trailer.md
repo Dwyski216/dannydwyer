@@ -22,7 +22,7 @@ categoryOrder: {"documentary":20}
 
 This is the longer cut. It's where the men of 128-G get the room to tell their own stories.
 
-We shot close, face to face, and we listened. Some of what they shared was hard to hear. All of it was important to tell.
+We shot with wide angle lenses on the yard. We wanted the viewer to feel close, face to face, and then we simply listened. Some of what they shared was hard to hear. All of it was important to tell.
 
 I made this hoping it reaches young people before life does. Anyone can make a mistake. Choices carry consequences, and nobody here pretends otherwise, but every person still deserves a voice and a chance to be heard.
 
