@@ -17,7 +17,7 @@ stills: []
 urlSlug: "google-pixel-magnifier"
 hidden: false
 order: 260
-categoryOrder: {"commercial":150,"documentary":80}
+categoryOrder: {"commercial":150,"documentary":60}
 ---
 
 Brendan collects coins, and he's not casual about it.

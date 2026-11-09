@@ -17,7 +17,7 @@ stills: []
 urlSlug: "white-nine-trailer"
 hidden: false
 order: 230
-categoryOrder: {"documentary":70}
+categoryOrder: {"documentary":80}
 ---
 
 In the 1960s, three teenage boys, Joe, Christos, and Charlie, were paralyzed by spinal cord injuries. Back then, that usually meant a life locked away in an institution. Instead, they became friends, then activists, then pioneers.
