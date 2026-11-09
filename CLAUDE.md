@@ -19,35 +19,24 @@ The site owner wants code changes to go live without a manual pull request:
   owner first, with the possible risk, and let them decide.
 - **"Live" means verified live.** A push, a passing local build, or a green
   check on GitHub is not proof. Before telling the owner a change is live,
-  load the live site (https://dannydwyer.rough-water-4697.workers.dev, later
-  https://dannydwyer.com) and confirm the change is actually there.
+  load the live site (https://dannydwyer.com) and confirm the change is
+  actually there.
   Builds can be skipped or queued (as in the Cloudflare build-delay incident
   of Oct 2026), and a check run may be for a preview branch, not production.
 - **Say what you can't see.** If something can't be verified from here (the
   Cloudflare dashboard, the owner's browser), say so plainly instead of
   sounding certain.
 
-## Before switching to dannydwyer.com (remind the site owner)
+## Domain
 
-When the owner is ready to move the domain off Squarespace, walk through this first:
-
-1. **Vimeo embed domains**: every Vimeo video set to "Specific domains" must allow
-   `dannydwyer.com` (and `dannydwyer.rough-water-4697.workers.dev` until the move is
-   done), or it shows "Sorry, because of its privacy settings…" / "Hey There!".
-   Known: the Lady Gaga series and the Jelly Roll series. Check the rest too.
-2. **Email DNS**: screenshot the domain's MX/TXT records at Squarespace before
-   changing nameservers (contact@dannydwyer.com must keep working).
-3. `SITE_URL` in `astro.config.mjs` is already `https://dannydwyer.com`
-   (plain dannydwyer.com, no www, is the canonical address; set by the owner
-   in Nov 2026), and the Worker marks everything on the workers.dev test
-   address noindex. After the domain is attached in Cloudflare: add
-   www.dannydwyer.com → dannydwyer.com and dwyski.com → dannydwyer.com
-   redirects, map
-   obvious old Squarespace paths (/about, /contact, ...) to the new pages (the
-   owner wants nothing else kept; other old URLs may 404), then re-run full QA.
-4. **Link previews**: after the domain is attached, confirm
-   https://dannydwyer.com/images/og-monogram.jpg loads, then test a share
-   with a fresh link (add `?v=1`; iMessage caches previews per link) and check
-   it shows the D/D monogram. (Until then the Worker points previews on the
-   workers.dev address at its own copy of the images.)
-5. Only then cancel the Squarespace website plan (not the domain).
+- https://dannydwyer.com is the live site: a Cloudflare custom domain on this
+  Worker since Nov 2026. The old Squarespace site is gone.
+  www.dannydwyer.com redirects to dannydwyer.com (plain, no www, is the
+  canonical address; `SITE_URL` in `astro.config.mjs`).
+- https://dannydwyer.rough-water-4697.workers.dev serves the same deploy
+  (pushing `main` updates both at once; it is not a separate preview stage).
+  The Worker marks everything there noindex (see `noindexTestSite`).
+- Old Squarespace URLs that are still in Google forward via `REDIRECTS` in
+  `worker/index.ts`.
+- Vimeo videos set to "Specific domains" must allow `dannydwyer.com`, or the
+  embed shows "Sorry, because of its privacy settings…" / "Hey There!".
