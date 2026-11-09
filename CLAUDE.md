@@ -38,5 +38,8 @@ The site owner wants code changes to go live without a manual pull request:
   The Worker marks everything there noindex (see `noindexTestSite`).
 - Old Squarespace URLs that are still in Google forward via `REDIRECTS` in
   `worker/index.ts`.
+- dwyski.com is not on Cloudflare: a forwarding service outside this repo
+  (likely the registrar's) answers it. As of Nov 2026 only its home page
+  forwards, to http://www.dannydwyer.com; any other dwyski.com path 404s.
 - Vimeo videos set to "Specific domains" must allow `dannydwyer.com`, or the
   embed shows "Sorry, because of its privacy settings…" / "Hey There!".

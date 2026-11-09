@@ -12,6 +12,9 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
+    // Unknown addresses get the site's own "Page Not Found" page
+    // (src/pages/404.astro) with a 404 status, instead of an empty page.
+    "not_found_handling": "404-page",
     // Without this, Cloudflare serves static files (including /admin's own
     // HTML) directly and the Worker never runs for them — which means the
     // login gate below could never intercept a request for the admin page

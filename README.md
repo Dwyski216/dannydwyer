@@ -58,14 +58,16 @@ videoId: "dQw4w9WgXcQ"    # YouTube's video ID, or Vimeo's numeric ID
 thumbnailUrl: ""           # optional; YouTube/Vimeo thumbnails are looked up automatically
 customThumbnail: ""        # set by "Upload Thumbnail" in the admin; falls back to the platform thumbnail
 series: []                 # extra videos (thumbnail strip under the player), e.g. [{"title":"Part 2","platform":"vimeo","videoId":"311786362","thumbnail":"/images/thumbnails/x.webp"}]
-role: "Director of Photography"
+credits: [{"role":"Director of Photography","name":"Danny Dwyer"}]   # ordered; shown in the item page's side panel
+equipment: [{"category":"Camera","item":"Sony Venice 2"}]             # ordered, same idea as credits
+press: [{"outlet":"Hypebeast","url":"https://hypebeast.com/..."}]     # optional; "Featured on ..." under the description
 client: "Independent"
 projectName: "Midnight Harbor (short film)"
 uploadDate: "2026-03-14"
 durationISO: "PT8M12S"     # ISO 8601 duration, optional
 tags: ["narrative", "35mm", "noir", "night exterior"]
 urlSlug: "midnight-harbor"
-featured: true
+hidden: false              # true = own page still works, but left out of /work, the sitemap and llms.txt
 order: 10                  # position on the Work page (lower = earlier); set by dragging in the admin
 categoryOrder: {"commercial": 40}  # optional: its own position on a category page
 stills:                    # optional — renders as a gallery under the description
@@ -100,6 +102,8 @@ npm run dev
 Visit `http://localhost:4321`.
 
 ## 3. Before your first deploy
+
+*(Done: these were the first-time setup steps. Kept for reference.)*
 
 1. Open `astro.config.mjs` and replace `SITE_URL` with your real domain
    (e.g. `https://www.yourname.com`). This is used for the sitemap and
@@ -137,6 +141,9 @@ it's the same free static hosting; only the dashboard labels changed.
    check that it works before moving on.
 
 ## 5. Point your GoDaddy domain at Cloudflare
+
+*(Done: dannydwyer.com has been a Cloudflare custom domain on this Worker
+since Nov 2026; see the Domain section of `CLAUDE.md`. Kept for reference.)*
 
 You keep the domain at GoDaddy — you're only changing where its DNS is
 managed, which is free.
@@ -225,7 +232,9 @@ Access is configured.
   updates a markdown file in `src/content/videos/` and commits it — the site
   rebuilds automatically, no code changes required. Each video has a
   **Card Line** (shown on its gallery card) and a separate **SEO Short
-  Summary** (only used for Google and link previews). Select several videos
+  Summary** (only used for Google and link previews). **Credits**,
+  **Press** and **Equipment** are lists of rows you add, reorder and remove;
+  Press shows as one "Featured on ..." line under the description. Select several videos
   to add or remove a tag on all of them in one save.
 - **Moved pages**: changing a video's URL slug gives it a new address; add
   the old one to `REDIRECTS` in `worker/index.ts` so shared links forward.
