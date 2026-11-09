@@ -593,6 +593,16 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
   if (!slug) return json({ error: 'Could not derive a valid slug from the title/slug given' }, 400);
   const filePath = `${VIDEOS_DIR}/${slug}.md`;
 
+  // Press rows: skip empty ones; every other row needs an outlet and an
+  // http(s) link (the admin checks this too, before it ever sends).
+  const press = (Array.isArray(body.press) ? body.press : [])
+    .filter((p: any) => p && (String(p.outlet || '').trim() || String(p.url || '').trim()))
+    .map((p: any) => ({ outlet: String(p.outlet || '').trim(), url: String(p.url || '').trim() }));
+  const badPress = press.find((p: { outlet: string; url: string }) => !p.outlet || !/^https?:\/\//i.test(p.url));
+  if (badPress) {
+    return json({ error: `Press entry "${badPress.outlet || badPress.url}" needs an outlet name and a URL starting with https:// or http://` }, 400);
+  }
+
   const frontmatter = toFrontmatter({
     title: body.title,
     pageTitle: body.pageTitle || undefined,
@@ -607,6 +617,9 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
           .filter((c: any) => c && (c.role || c.name))
           .map((c: any) => ({ role: String(c.role || ''), name: String(c.name || '') }))
       : [],
+    // Written only when there is at least one entry, so items without press
+    // keep their files unchanged (the content schema defaults it to []).
+    press: press.length ? press : undefined,
     equipment: Array.isArray(body.equipment)
       ? body.equipment
           .filter((e: any) => e && (e.category || e.item))

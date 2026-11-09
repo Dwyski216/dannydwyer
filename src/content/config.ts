@@ -62,6 +62,17 @@ const videos = defineCollection({
         })
       )
       .default([]),
+    // Articles that feature this project, shown as one "Featured on ..."
+    // line at the end of the description on the item's page (never on
+    // cards). Same admin mechanism as credits, just outlet + URL.
+    press: z
+      .array(
+        z.object({
+          outlet: z.string(),
+          url: z.string(),
+        })
+      )
+      .default([]),
     // A flexible, ordered list of gear used on the shoot — same shape and
     // admin mechanism as credits (add/remove/reorder rows), just category +
     // item instead of role + name.

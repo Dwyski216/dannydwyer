@@ -246,6 +246,13 @@ import { CATEGORIES } from '../../data/categories';
               </fieldset>
 
               <fieldset>
+                <legend>Press</legend>
+                <p class="section-hint">Articles that feature this project. Add as many or as few as apply.</p>
+                <div id="press-list" class="credits-list"></div>
+                <button type="button" id="press-add-btn" class="btn btn-ghost">+ Add Press</button>
+              </fieldset>
+
+              <fieldset>
                 <legend>Equipment</legend>
                 <p class="section-hint">Gear used on the shoot, by category — add as many or as few as apply.</p>
                 <div id="equipment-list" class="credits-list"></div>
@@ -706,6 +713,7 @@ import { CATEGORIES } from '../../data/categories';
   let pendingCredits: { role: string; name: string }[] = [];
   // status is a transient upload message for the row; it's never saved.
   let pendingSeries: { title: string; link: string; thumbnail?: string; status?: string }[] = [];
+  let pendingPress: { outlet: string; url: string }[] = [];
   let pendingEquipment: { category: string; item: string }[] = [];
   let selectedSlugs = new Set<string>();
 
@@ -1281,6 +1289,20 @@ import { CATEGORIES } from '../../data/categories';
     emptyText: 'No credits yet — add one below.',
   });
 
+  const pressListEl = document.getElementById('press-list') as HTMLElement;
+  const renderPressList = setupRepeatableRowList({
+    listEl: pressListEl,
+    addBtnId: 'press-add-btn',
+    getItems: () => pendingPress,
+    fieldA: 'outlet',
+    labelA: 'Outlet',
+    placeholderA: 'e.g. Hypebeast',
+    fieldB: 'url',
+    labelB: 'URL',
+    placeholderB: 'e.g. https://hypebeast.com/...',
+    emptyText: 'No press yet — add one below.',
+  });
+
   const equipmentListEl = document.getElementById('equipment-list') as HTMLElement;
   const renderEquipmentList = setupRepeatableRowList({
     listEl: equipmentListEl,
@@ -1433,6 +1455,8 @@ import { CATEGORIES } from '../../data/categories';
     // single-Role field used to — editable/removable like any other row.
     pendingCredits = [{ role: 'Director of Photography', name: 'Danny Dwyer' }];
     renderCreditsList();
+    pendingPress = [];
+    renderPressList();
     pendingEquipment = [];
     renderEquipmentList();
     pendingSeries = [];
@@ -1580,6 +1604,10 @@ import { CATEGORIES } from '../../data/categories';
         ? fields.credits.map((c: any) => ({ role: c.role ?? '', name: c.name ?? '' }))
         : [{ role: 'Director of Photography', name: 'Danny Dwyer' }];
       renderCreditsList();
+      pendingPress = Array.isArray(fields.press)
+        ? fields.press.map((p: any) => ({ outlet: p.outlet ?? '', url: p.url ?? '' }))
+        : [];
+      renderPressList();
       pendingEquipment = Array.isArray(fields.equipment)
         ? fields.equipment.map((e: any) => ({ category: e.category ?? '', item: e.item ?? '' }))
         : [];
@@ -1631,6 +1659,17 @@ import { CATEGORIES } from '../../data/categories';
     payload.credits = pendingCredits
       .map((c) => ({ role: c.role.trim(), name: c.name.trim() }))
       .filter((c) => c.role || c.name);
+    const pressRows = pendingPress
+      .map((p) => ({ outlet: p.outlet.trim(), url: p.url.trim() }))
+      .filter((p) => p.outlet || p.url);
+    const badPress = pressRows.find((p) => !p.outlet || !/^https?:\/\//i.test(p.url));
+    if (badPress) {
+      status.textContent = !badPress.outlet
+        ? `Error: the Press link "${badPress.url}" needs an outlet name, e.g. Hypebeast.`
+        : `Error: the Press URL for "${badPress.outlet}" must start with https:// or http://`;
+      return;
+    }
+    payload.press = pressRows;
     payload.equipment = pendingEquipment
       .map((e) => ({ category: e.category.trim(), item: e.item.trim() }))
       .filter((e) => e.category || e.item);

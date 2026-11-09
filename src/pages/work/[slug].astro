@@ -139,6 +139,11 @@ const jsonLd = [
         <h1>{d.title}</h1>
         <div class="prose">
           <Content />
+          {d.press.length > 0 && (
+            // Kept on one line: line breaks between these pieces would put
+            // stray spaces before the commas ("Hypebeast , ELLE").
+            <p class="press">Featured on {d.press.map((p, i) => <>{i > 0 && (i === d.press.length - 1 ? ' and ' : ', ')}<a href={p.url} target="_blank" rel="noopener">{p.outlet}</a></>)}</p>
+          )}
         </div>
 
         {d.stills.length > 0 && (
