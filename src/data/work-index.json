@@ -419,25 +419,6 @@
     }
   },
   {
-    "slug": "beck-gustaf-close",
-    "title": "Beck × Gustaf \"Close\"",
-    "tags": [
-      "music video",
-      "celebrity",
-      "Beck",
-      "Gustaf",
-      "Los Angeles",
-      "Punk",
-      "Black and White"
-    ],
-    "uploadDate": "2023-05-01",
-    "hidden": false,
-    "order": 60,
-    "categoryOrder": {
-      "music video": 10
-    }
-  },
-  {
     "slug": "werdperfect-kickdrums-pretty-orange",
     "title": "Werdperfect × The Kickdrums \"Pretty Orange\"",
     "tags": [
@@ -1025,6 +1006,25 @@
     "order": 110,
     "categoryOrder": {
       "documentary": 30
+    }
+  },
+  {
+    "slug": "beck-gustaf-close",
+    "title": "Beck × Gustaf \"Close\"",
+    "tags": [
+      "music video",
+      "celebrity",
+      "Beck",
+      "Gustaf",
+      "Los Angeles",
+      "Punk",
+      "Black and White"
+    ],
+    "uploadDate": "2023-05-01",
+    "hidden": false,
+    "order": 60,
+    "categoryOrder": {
+      "music video": 10
     }
   }
 ]
