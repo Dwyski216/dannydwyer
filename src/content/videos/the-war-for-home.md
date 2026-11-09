@@ -7,7 +7,9 @@ platform: "vimeo"
 videoId: "279539335"
 customThumbnail: "/images/thumbnails/the-war-for-home-1792692765761.webp"
 credits: [{"role":"Cast","name":"Spanto"},{"role":"Director","name":"Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"}]
+press: [{"outlet":"Hypebeast","url":"https://hypebeast.com/2018/6/the-war-for-home-bornxraised-unlock-tomorrow-film-spanto-interview"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Angenieux Ez Zooms"}]
+series: []
 client: "Born x Raised"
 projectName: "The War for Home"
 uploadDate: "2017-06-01"
@@ -16,7 +18,7 @@ stills: []
 urlSlug: "the-war-for-home"
 hidden: false
 order: 110
-categoryOrder: {"documentary": 30}
+categoryOrder: {"documentary":30}
 ---
 
 This one lives close to my heart.
