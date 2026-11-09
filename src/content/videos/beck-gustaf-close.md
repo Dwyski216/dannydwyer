@@ -1,12 +1,12 @@
 ---
 title: "Beck × Gustaf \"Close\""
 pageTitle: "Beck × Gustaf \"Close\" | Filmmaker Danny Dwyer"
-summary: "Filmmaker Danny Dwyer co-directed, shot, and cut Gustaf's black-and-white punk video \"Close\" with Beck, inspired by 1970s French photography."
+summary: "Filmmaker Danny Dwyer shot, and cut Gustaf's black-and-white punk video \"Close\" with Beck, inspired by 1970s French photography."
 cardLine: "A black-and-white punk video for Gustaf, co-directed with Beck and inspired by 1970s French photos."
 platform: "vimeo"
 videoId: "938288114"
 customThumbnail: "/images/thumbnails/beck-gustaf-close-1792691554035.webp"
-credits: [{"role":"Director","name":"Beck & Danny Dwyer"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Cast","name":"Gustaf"}]
+credits: [{"role":"Director","name":"Beck"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Danny Dwyer"},{"role":"Cast","name":"Gustaf"}]
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Speed Panchros"}]
 series: []
 client: "Beck"
@@ -17,7 +17,7 @@ stills: []
 urlSlug: "beck-gustaf-close"
 hidden: false
 order: 60
-categoryOrder: {"music video": 10}
+categoryOrder: {"music video":10}
 ---
 
 I got an email: "Beck's going to call you." Funny, since I never gave Beck my number.
