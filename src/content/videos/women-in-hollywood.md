@@ -23,4 +23,4 @@ I still don't have the words for this one.
 
 For twelve months I was wall to wall with some of the most powerful women in entertainment. Every shoot was its own world.
 
-I worked hand in hand with photographer Zoey Grossman, and we fed off each other the whole way. The atmosphere was so creatively alive that you'd have to remind yourself it was work. Being around these women changed how I shoot, and it still does. I'm grateful to have been part of it.
+I worked with photographer Zoey Grossman, and we fed off each other the whole way. The atmosphere was so creatively alive that you'd have to remind yourself it was work. Being around these women changed how I shoot, and it still does. I'm grateful to have been part of it.
