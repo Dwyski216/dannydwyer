@@ -109,7 +109,7 @@ Visit `http://localhost:4321`.
    (e.g. `https://www.yourname.com`). This is used for the sitemap and
    canonical URLs.
 2. The default link-preview image (shown when the site is shared on social
-   media or texted) is `public/images/og-monogram.jpg`, 1200×630px. Video
+   media or texted) is `public/images/og-headshot.jpg`, 1200×630px. Video
    pages use their own thumbnail instead; any page can override it in the
    admin's SEO tab.
 3. Edit `src/data/site.json` with your real name, bio, email, and social
