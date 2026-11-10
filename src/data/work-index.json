@@ -240,19 +240,6 @@
     }
   },
   {
-    "slug": "women-in-hollywood",
-    "title": "ELLE Women in Hollywood",
-    "tags": [
-      "editorial",
-      "interview",
-      "Black and White",
-      "Elle"
-    ],
-    "uploadDate": "2018-09-01",
-    "hidden": false,
-    "order": 290
-  },
-  {
     "slug": "joe-and-the-whale-trailer",
     "title": "Joe and the Whale Short Film",
     "tags": [
@@ -1029,5 +1016,18 @@
     "categoryOrder": {
       "music video": 10
     }
+  },
+  {
+    "slug": "women-in-hollywood",
+    "title": "ELLE Women in Hollywood",
+    "tags": [
+      "editorial",
+      "interview",
+      "Black and White",
+      "Elle"
+    ],
+    "uploadDate": "2018-09-01",
+    "hidden": false,
+    "order": 290
   }
 ]
