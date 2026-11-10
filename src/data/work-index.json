@@ -139,7 +139,7 @@
     "hidden": false,
     "order": 240,
     "categoryOrder": {
-      "documentary": 90
+      "documentary": 80
     }
   },
   {
@@ -156,7 +156,7 @@
     "hidden": false,
     "order": 410,
     "categoryOrder": {
-      "documentary": 110
+      "documentary": 100
     }
   },
   {
@@ -264,7 +264,7 @@
     "order": 340,
     "categoryOrder": {
       "commercial": 160,
-      "documentary": 130
+      "documentary": 110
     }
   },
   {
@@ -281,7 +281,7 @@
     "hidden": false,
     "order": 490,
     "categoryOrder": {
-      "documentary": 150
+      "documentary": 140
     }
   },
   {
@@ -579,29 +579,6 @@
     }
   },
   {
-    "slug": "google-pixel-guided-frame",
-    "title": "Google Pixel \"Guided Frame\"",
-    "tags": [
-      "commercial",
-      "technology",
-      "accessibility",
-      "Sony",
-      "Angenieux EZ",
-      "Docu Series",
-      "branded doc",
-      "documentary",
-      "low vision",
-      "interview"
-    ],
-    "uploadDate": "2023-09-01",
-    "hidden": false,
-    "order": 150,
-    "categoryOrder": {
-      "commercial": 180,
-      "documentary": 100
-    }
-  },
-  {
     "slug": "google-pixel-lookout",
     "title": "Google Pixel \"Lookout\"",
     "tags": [
@@ -699,7 +676,7 @@
     "order": 260,
     "categoryOrder": {
       "commercial": 150,
-      "documentary": 60
+      "documentary": 90
     }
   },
   {
@@ -890,7 +867,7 @@
     "hidden": false,
     "order": 430,
     "categoryOrder": {
-      "documentary": 160
+      "documentary": 150
     }
   },
   {
@@ -927,7 +904,7 @@
     "hidden": false,
     "order": 230,
     "categoryOrder": {
-      "documentary": 80
+      "documentary": 60
     }
   },
   {
@@ -944,7 +921,7 @@
     "hidden": false,
     "order": 570,
     "categoryOrder": {
-      "documentary": 140
+      "documentary": 130
     }
   },
   {
@@ -1029,5 +1006,27 @@
     "uploadDate": "2018-09-01",
     "hidden": false,
     "order": 290
+  },
+  {
+    "slug": "google-pixel-guided-frame",
+    "title": "Google Pixel \"Guided Frame\"",
+    "tags": [
+      "commercial",
+      "technology",
+      "accessibility",
+      "Sony",
+      "Angenieux EZ",
+      "Docu Series",
+      "branded doc",
+      "low vision",
+      "interview"
+    ],
+    "uploadDate": "2023-09-01",
+    "hidden": false,
+    "order": 150,
+    "categoryOrder": {
+      "commercial": 180,
+      "documentary": 100
+    }
   }
 ]
