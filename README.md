@@ -39,9 +39,11 @@ worker/
   index.ts               ← Cloudflare Worker: guards /admin and handles the admin's
                             /api/* endpoints (videos, reorder, settings, SEO, tags,
                             thumbnail uploads); everything else is served as a
-                            static file from dist/
+                            static file from dist/ (fonts, thumbnails and the
+                            build's own files with long browser-cache lifetimes)
 wrangler.jsonc            ← Cloudflare Worker + static-assets config
-brand-assets/             ← style guide, monogram variations, spare fonts (saved here, not published)
+brand-assets/             ← style guide, monogram variations, original font files (saved here, not published;
+                            the site's fonts are the .woff2 copies in public/webfonts/)
 ```
 
 ### Video content model

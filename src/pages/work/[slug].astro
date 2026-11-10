@@ -123,9 +123,9 @@ const jsonLd = [
   noindex={d.hidden}
 >
   <SiteHeader />
-  <main class="main container">
+  <main id="main" class="main container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a> / <a href="/work/">Work</a> / <span>{d.title}</span>
+      <a class="tap-target" href="/">Home</a> / <a class="tap-target" href="/work/">Work</a> / <span>{d.title}</span>
     </nav>
 
     {seriesVideos.length ? (
@@ -137,7 +137,7 @@ const jsonLd = [
     <div class="grid detail-grid">
       <div class="body col-8">
         <h1>{d.title}</h1>
-        <div class="prose">
+        <div class="prose body-copy">
           <Content />
         </div>
 
@@ -210,7 +210,7 @@ const jsonLd = [
                 <ul class="credits">
                   {d.press.map((p) => (
                     <li>
-                      <a class="press-link" href={p.url} target="_blank" rel="noopener noreferrer">{p.outlet}</a>
+                      <a class="press-link tap-target" href={p.url} target="_blank" rel="noopener noreferrer">{p.outlet}</a>
                     </li>
                   ))}
                 </ul>
@@ -224,10 +224,9 @@ const jsonLd = [
           </dd>
         </dl>
 
-        <a class="back" href="/work/">← Back to all work</a>
+        <a class="back tap-target" href="/work/">← Back to all work</a>
       </aside>
     </div>
-
 
     {relatedByClient.length > 0 && (
       <section class="related" aria-label={`More for ${d.client}`}>
@@ -249,10 +248,10 @@ const jsonLd = [
 
     <nav class="project-nav" aria-label="Project navigation">
       {prevVideo ? (
-        <a class="prev" href={`/work/${prevVideo.data.urlSlug}/`}>← Previous project</a>
+        <a class="prev tap-target" href={`/work/${prevVideo.data.urlSlug}/`}>← Previous project</a>
       ) : <span />}
       {nextVideo ? (
-        <a class="next" href={`/work/${nextVideo.data.urlSlug}/`}>Next project →</a>
+        <a class="next tap-target" href={`/work/${nextVideo.data.urlSlug}/`}>Next project →</a>
       ) : <span />}
     </nav>
   </main>
@@ -268,6 +267,12 @@ const jsonLd = [
     font-size: 0.8rem;
     color: var(--text-muted);
     padding: 1rem 0;
+  }
+
+  /* Home and Work sit a few pixels apart, so their tap areas only reach a
+     little past each word. */
+  .breadcrumb a {
+    --tap-pad: 0.2rem;
   }
 
   .breadcrumb a:hover {
@@ -289,15 +294,7 @@ const jsonLd = [
   }
 
   .prose {
-    font-family: var(--font-body);
-    color: color-mix(in srgb, var(--headlight) 88%, transparent);
     max-width: 68ch;
-    font-size: 1.1rem;
-    line-height: 1.75;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
-    -webkit-hyphens: auto;
   }
 
   .prose :global(p) {
@@ -388,7 +385,10 @@ const jsonLd = [
     gap: 0.3rem;
   }
 
+  /* Press links stack about 22px apart, so their tap areas stay just
+     short of that (the default would overlap the next link). */
   .press-link {
+    --tap-height: 24px;
     color: var(--headlight);
     text-decoration: underline;
     transition: color 0.15s ease;

@@ -52,7 +52,7 @@ const jsonLd = heroVideo
 >
   <SiteHeader />
 
-  <main class="main container">
+  <main id="main" class="main container">
     <div class="grid">
       {sections.map((section) => {
         if (section === 'hero') return <Hero heroVideo={heroVideo} title={matchedReel?.data.title ?? site.name} />;

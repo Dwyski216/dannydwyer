@@ -21,7 +21,7 @@ const { Content } = await page.render();
   ogImage={seo.ogImage || undefined}
 >
   <SiteHeader />
-  <main class="main container">
+  <main id="main" class="main container">
     {sections.map((section) => {
       if (section === 'body') {
         return (

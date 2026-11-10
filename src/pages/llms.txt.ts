@@ -8,6 +8,24 @@ import { getCollection } from 'astro:content';
 import { site } from '../data/site';
 import { byDisplayOrder } from '../lib/video';
 
+// The bio is stored as HTML (the admin's rich text editor); this file is
+// plain text, so paragraphs become blank lines and the tags come out.
+function htmlToText(html: string): string {
+  return html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 export const GET: APIRoute = async ({ site: astroSite }) => {
   const videos = (await getCollection('videos', (v) => !v.data.hidden)).sort((a, b) => byDisplayOrder(a.data, b.data));
   const base = astroSite?.toString().replace(/\/$/, '') ?? '';
@@ -17,7 +35,7 @@ export const GET: APIRoute = async ({ site: astroSite }) => {
     '',
     `> ${site.tagline}`,
     '',
-    site.introCopy,
+    htmlToText(site.introCopy),
     '',
     `${site.name} is a ${site.role} based in ${site.location}. Contact: ${site.email}.`,
     '',
@@ -40,7 +58,7 @@ export const GET: APIRoute = async ({ site: astroSite }) => {
     '',
     '## Pages',
     '',
-    `- [Contact](${base}/contact)`,
+    `- [Contact](${base}/contact/)`,
     `- [Sitemap](${base}/sitemap-index.xml)`,
   ];
 

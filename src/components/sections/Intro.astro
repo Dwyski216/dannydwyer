@@ -10,7 +10,7 @@ const { role, introCopy } = Astro.props;
 
 <section class="intro col-12">
   <h1>{role}</h1>
-  <div class="intro-copy" set:html={introCopy} />
+  <div class="intro-copy body-copy" set:html={introCopy} />
   <div class="actions">
     <a class="button" href="/work/">Collection of Work</a>
   </div>
@@ -36,18 +36,6 @@ const { role, introCopy } = Astro.props;
     text-align: center;
     /* About 41px: a clear blank line between the title and the bio. */
     margin-bottom: calc(1rem + 1.05rem * 1.5);
-  }
-
-  /* Set like the Contact and Work pages' body copy. */
-  .intro-copy {
-    font-family: var(--font-body);
-    color: color-mix(in srgb, var(--headlight) 88%, transparent);
-    font-size: 1.1rem;
-    line-height: 1.75;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
-    -webkit-hyphens: auto;
   }
 
   /* The bio is rich text from the admin editor. Text pasted in from other
@@ -82,30 +70,5 @@ const { role, introCopy } = Astro.props;
     display: flex;
     justify-content: center;
     margin-top: 4.375rem;
-  }
-
-  /* Hollow button: Olympic Gold outline (10% thinner than 2pt) with
-     Headlight text on the page background, filling Olympic Gold with Ink
-     text on hover. The outline is an inset shadow so browsers draw its
-     exact width instead of rounding a border to whole pixels; padding
-     includes the 2pt a border used to take, so the size is unchanged. */
-  .button {
-    display: inline-block;
-    background: transparent;
-    border: 0;
-    box-shadow: inset 0 0 0 calc(2pt * 0.9) var(--olympic-gold);
-    color: var(--headlight);
-    font-family: var(--font-title);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-size: 1rem;
-    padding: calc(0.9rem + 2pt) calc(1.75rem + 2pt);
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-
-  .button:hover {
-    background: var(--olympic-gold);
-    color: var(--ink);
   }
 </style>

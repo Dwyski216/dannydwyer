@@ -1025,10 +1025,35 @@ function noindexTestSite(request: Request, res: Response): Response {
     .transform(marked);
 }
 
+// Files a browser can keep instead of re-checking on every page: their
+// address changes whenever their content does (the build's own hashed
+// files, and uploaded thumbnails, whose names end in the upload time) or
+// they never change (the brand fonts). Pages and every other file keep
+// Cloudflare's default (check on each visit), so edits show up right away.
+const LONG_CACHED: { test: RegExp; cacheControl: string }[] = [
+  { test: /^\/_astro\//, cacheControl: 'public, max-age=31536000, immutable' },
+  { test: /^\/webfonts\/[^/]+\.woff2$/, cacheControl: 'public, max-age=2592000' },
+  { test: /^\/images\/thumbnails\/[^/]+-\d{13}\.webp$/, cacheControl: 'public, max-age=2592000' },
+];
+
+// Headers every response carries: files are only ever treated as the type
+// they're served as, plus the long cache lifetimes above (successful
+// responses only, so a missing file is never remembered).
+function deliveryHeaders(request: Request, res: Response): Response {
+  const headers = new Headers(res.headers);
+  headers.set('X-Content-Type-Options', 'nosniff');
+  if (res.status === 200 || res.status === 304) {
+    const { pathname } = new URL(request.url);
+    const longCached = LONG_CACHED.find((rule) => rule.test.test(pathname));
+    if (longCached) headers.set('Cache-Control', longCached.cacheControl);
+  }
+  return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     try {
-      return noindexTestSite(request, await router(request, env));
+      return deliveryHeaders(request, noindexTestSite(request, await router(request, env)));
     } catch (err) {
       // Anything uncaught here (a thrown exception mid-handler, hitting the
       // Worker's subrequest cap, etc.) would otherwise surface as

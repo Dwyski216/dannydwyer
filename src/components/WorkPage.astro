@@ -47,12 +47,17 @@ const thumbnails = await Promise.all(videos.map((v) => getThumbnails(v.data)));
 const allTags = [...new Set(videos.flatMap((v) => v.data.tags))].sort();
 
 const inCategory = category ? videos.filter((v) => v.data.tags.some((t) => t.toLowerCase() === category.tag)) : videos;
+// A category without its own description gets one written from its videos:
+// as many of the first three titles as fit in the ~160 characters Google
+// shows.
+function categoryDescription(c: Category): string {
+  const lead = `${c.label}: ${inCategory.length} ${c.noun} by filmmaker, director, and cinematographer Danny Dwyer`;
+  const titles = inCategory.slice(0, 3).map((v) => v.data.title);
+  while (titles.length && `${lead}, including ${titles.join(', ')}.`.length > 160) titles.pop();
+  return titles.length ? `${lead}, including ${titles.join(', ')}.` : `${lead}.`;
+}
 const description = category
-  ? category.description ??
-    `${category.label}: ${inCategory.length} ${category.noun} by filmmaker, director, and cinematographer Danny Dwyer, including ${inCategory
-      .slice(0, 3)
-      .map((v) => v.data.title)
-      .join(', ')}.`
+  ? category.description ?? categoryDescription(category)
   : seo.description ||
     `Selected narrative, commercial, and documentary cinematography — ${videos.length} projects, searchable by tag, role, and format.`;
 
@@ -81,6 +86,7 @@ const jsonLd = [
 >
   <SiteHeader />
   <main
+    id="main"
     class="main container"
     data-category={category?.tag}
     data-categories={JSON.stringify(CATEGORIES.map((c) => ({ slug: c.slug, tag: c.tag })))}
@@ -177,15 +183,14 @@ const jsonLd = [
     // "pending" until Apply commits it (or Clear All zeroes everything).
     let selected = new Set<string>();
 
-    const main = document.querySelector('main') as HTMLElement;
-    const categories: { slug: string; tag: string }[] = JSON.parse(main.dataset.categories ?? '[]');
+    const categories: { slug: string; tag: string }[] = JSON.parse(pageMain.dataset.categories ?? '[]');
     const presetBtns = Array.from(document.querySelectorAll('.preset-btn')) as HTMLElement[];
 
     // A category page starts filtered to its tag; /work starts from any
     // ?tag= params in the address (old shared links keep working).
     const initialTags = new URLSearchParams(location.search).getAll('tag');
     if (initialTags.length) initialTags.forEach((tag) => selected.add(tag.toLowerCase()));
-    else if (main.dataset.category) selected.add(main.dataset.category);
+    else if (pageMain.dataset.category) selected.add(pageMain.dataset.category);
 
     // Keep the address bar in sync with the active filters so the current
     // view can always be copied and shared (or reloaded) as-is: exactly one
@@ -290,6 +295,14 @@ const jsonLd = [
       renderChips();
       applyFilters(selected);
       syncUrl();
+    });
+
+    // Escape closes the panel (nothing applied) and puts the keyboard back
+    // on the Filters button.
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || panel!.hidden) return;
+      closePanel();
+      toggleBtn!.focus();
     });
 
     document.addEventListener('click', (e) => {

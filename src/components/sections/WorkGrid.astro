@@ -26,6 +26,7 @@ const { videos, thumbnails, initialTag, workRanks } = Astro.props;
         fallbackUrl={thumbnails[i].fallback}
         initiallyHidden={!!initialTag && !v.data.tags.some((t) => t.toLowerCase() === initialTag)}
         workRank={workRanks[i]}
+        headingLevel={2}
       />
     ))}
   </div>

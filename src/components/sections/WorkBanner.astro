@@ -10,7 +10,7 @@ const { title } = Astro.props;
 
 <section class="description-banner">
   <h1 class="page-title">{title}</h1>
-  <div class="description"><slot /></div>
+  <div class="description body-copy"><slot /></div>
 </section>
 
 <style>
@@ -43,19 +43,6 @@ const { title } = Astro.props;
     .description-banner {
       margin-top: calc(4rem - 36px);
     }
-  }
-
-  /* Set like the Contact page's body copy (ContactBody.astro .prose). */
-  .description {
-    font-family: var(--font-body);
-    color: color-mix(in srgb, var(--headlight) 88%, transparent);
-    font-size: 1.1rem;
-    line-height: 1.75;
-    margin: 0;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
-    -webkit-hyphens: auto;
   }
 
   .description :global(p) {

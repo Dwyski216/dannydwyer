@@ -15,8 +15,13 @@ interface Props {
   initiallyHidden?: boolean;
   // Its position in the Work page order, for galleries that re-sort cards.
   workRank?: number;
+  // The title's heading level: 3 under a section heading (Featured Work,
+  // More for ...), 2 on the Work pages, where cards sit right under the
+  // page title. Looks the same either way.
+  headingLevel?: 2 | 3;
 }
-const { slug, title, line, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank } = Astro.props;
+const { slug, title, line, tags, thumbnailUrl, fallbackUrl, initiallyHidden = false, workRank, headingLevel = 3 } = Astro.props;
+const Heading = `h${headingLevel}` as const;
 const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
 ---
 
@@ -41,7 +46,7 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
     />
   </div>
   <div class="meta">
-    <h3>{title}</h3>
+    <Heading class="card-title">{title}</Heading>
     {line && <p class="line">{line}</p>}
   </div>
 </a>
@@ -111,7 +116,7 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
 
   /* The title takes the lines it needs (up to 2, clamped with an ellipsis
      past that); the Card Line (80-100 characters) always shows in full. */
-  .meta h3 {
+  .card-title {
     font-family: var(--font-title);
     font-weight: 700;
     text-transform: uppercase;
@@ -140,7 +145,7 @@ const searchText = `${title} ${line ?? ''} ${tags.join(' ')}`.toLowerCase();
     -webkit-hyphens: auto;
   }
 
-  .card:hover h3 {
+  .card:hover .card-title {
     color: var(--headlight);
   }
 </style>
