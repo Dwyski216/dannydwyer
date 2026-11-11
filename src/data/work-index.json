@@ -893,21 +893,6 @@
     "order": 640
   },
   {
-    "slug": "white-nine-trailer",
-    "title": "White Nine Trailer",
-    "tags": [
-      "documentary",
-      "film",
-      "short film"
-    ],
-    "uploadDate": "2026-11-05",
-    "hidden": false,
-    "order": 230,
-    "categoryOrder": {
-      "documentary": 60
-    }
-  },
-  {
     "slug": "sue-aikens-life-below-zero",
     "title": "Sue Aikens × Life Below Zero",
     "tags": [
@@ -1027,6 +1012,21 @@
     "categoryOrder": {
       "commercial": 180,
       "documentary": 100
+    }
+  },
+  {
+    "slug": "white-nine-trailer",
+    "title": "White Nine Trailer",
+    "tags": [
+      "documentary",
+      "film",
+      "short film"
+    ],
+    "uploadDate": "2026-11-05",
+    "hidden": false,
+    "order": 230,
+    "categoryOrder": {
+      "documentary": 60
     }
   }
 ]
