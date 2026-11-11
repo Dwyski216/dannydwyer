@@ -6,7 +6,7 @@ cardLine: "Three paralyzed teens, one friendship, and a fight for disability rig
 platform: "vimeo"
 videoId: "1243836711"
 customThumbnail: "/images/thumbnails/thumbnail-1793902418085.webp"
-credits: [{"role":"Cast","name":"Joseph Tringali"},{"role":"Cast","name":"Christos Palames"},{"role":"Cast","name":"Charles Carr"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Nicle Amyx"}]
+credits: [{"role":"Cast","name":"Joseph Tringali"},{"role":"Cast","name":"Christos Palames"},{"role":"Cast","name":"Charles Carr"},{"role":"Director","name":"Nilou Safinya"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Nicole Amyx"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Camera","item":"Sony FX3"},{"category":"Lensing","item":"Angenieux EZ Zooms"}]
 series: []
 client: "Eyes Up Here Productions"
