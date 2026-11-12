@@ -12,7 +12,7 @@ series: []
 client: "Harper's Bazaar"
 projectName: "Jane Fonda Feature"
 uploadDate: "2020-09-01"
-tags: ["editorial","celebrity","interview"]
+tags: ["editorial","interview"]
 stills: []
 urlSlug: "jane-fonda-harpers-bazaar"
 hidden: true
