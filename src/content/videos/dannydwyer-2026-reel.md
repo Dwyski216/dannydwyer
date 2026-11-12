@@ -11,7 +11,7 @@ equipment: []
 client: "👀"
 projectName: "Danny Dwyer Reel"
 uploadDate: "2026-01-01"
-tags: ["reel","showreel","fashion","celebrity","editing"]
+tags: ["reel","showreel","fashion","editing"]
 stills: []
 urlSlug: "dannydwyer-2026-reel"
 hidden: false
