@@ -7,7 +7,6 @@
       "audio drama",
       "commercial",
       "Audible",
-      "celebrity",
       "Cedric",
       "interview"
     ],
@@ -36,7 +35,6 @@
     "title": "Zoë Kravitz × Harper's Bazaar",
     "tags": [
       "editorial",
-      "celebrity",
       "interview",
       "animals",
       "wolves",
@@ -53,7 +51,6 @@
       "reel",
       "showreel",
       "fashion",
-      "celebrity",
       "editing"
     ],
     "uploadDate": "2026-01-01",
@@ -65,7 +62,6 @@
     "title": "Young Women in Hollywood",
     "tags": [
       "editorial",
-      "celebrity",
       "interview",
       "fashion"
     ],
@@ -100,8 +96,7 @@
     "tags": [
       "commercial",
       "sports",
-      "fashion",
-      "celebrity"
+      "fashion"
     ],
     "uploadDate": "2017-03-01",
     "hidden": false,
@@ -116,7 +111,6 @@
     "tags": [
       "commercial",
       "comedy",
-      "celebrity",
       "interview"
     ],
     "uploadDate": "2021-06-01",
@@ -204,7 +198,6 @@
     "title": "Peter Dinklage × Esquire × Giorgio Armani",
     "tags": [
       "editorial",
-      "celebrity",
       "digital cover",
       "fashion"
     ],
@@ -462,7 +455,6 @@
     "title": "Lady Gaga × Haus Labs",
     "tags": [
       "fashion",
-      "celebrity",
       "commercial",
       "series",
       "make up",
@@ -692,7 +684,6 @@
     "slug": "tracee-ellis-ross",
     "title": "Tracee Ellis Ross × Harper's Bazaar",
     "tags": [
-      "celebrity",
       "editorial",
       "interview"
     ],
@@ -771,7 +762,6 @@
     "title": "Jane Fonda × Harper's Bazaar",
     "tags": [
       "editorial",
-      "celebrity",
       "interview"
     ],
     "uploadDate": "2020-09-01",
