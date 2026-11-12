@@ -11,7 +11,7 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "PUMA"
 projectName: "Performance 24/7"
 uploadDate: "2017-03-01"
-tags: ["commercial","sports","fashion","celebrity"]
+tags: ["commercial","sports","fashion"]
 stills: []
 urlSlug: "puma-performance-commercial"
 hidden: false
