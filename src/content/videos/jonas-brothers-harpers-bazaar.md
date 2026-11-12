@@ -12,7 +12,7 @@ series: []
 client: "Harper's Bazaar"
 projectName: "Jonas Brothers Feature"
 uploadDate: "2019-05-01"
-tags: ["editorial","celebrity","interview"]
+tags: ["editorial","interview"]
 stills: []
 urlSlug: "jonas-brothers-harpers-bazaar"
 hidden: false
