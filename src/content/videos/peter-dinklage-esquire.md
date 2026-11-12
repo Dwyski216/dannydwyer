@@ -11,7 +11,7 @@ equipment: [{"category":"Camera","item":"RED"},{"category":"Lens","item":"Cooke 
 client: "Esquire"
 projectName: "Peter Dinklage Cover Story"
 uploadDate: "2012-02-01"
-tags: ["editorial","celebrity","digital cover","fashion"]
+tags: ["editorial","digital cover","fashion"]
 stills: []
 urlSlug: "peter-dinklage-esquire"
 hidden: false
