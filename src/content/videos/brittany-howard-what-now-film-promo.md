@@ -10,6 +10,7 @@ credits: [{"role":"Director","name":"Mama Hotdog"},{"role":"Director of Photogra
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Camera","item":"Bolex"},{"category":"Lens","item":"Cooke Varotal Zoom & Prisms"}]
 series: []
 client: "Brittany Howard"
+clientUrl: "https://www.brittanyhoward.com/"
 projectName: "What Now Album Release"
 uploadDate: "2026-10-24"
 tags: ["music video","film","psychedelic","celebrity"]
