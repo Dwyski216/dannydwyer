@@ -13,7 +13,7 @@ client: "Brittany Howard"
 clientUrl: "https://www.brittanyhoward.com/"
 projectName: "What Now Album Release"
 uploadDate: "2026-10-24"
-tags: ["music video","film","psychedelic","celebrity"]
+tags: ["music video","film","psychedelic"]
 stills: []
 urlSlug: "brittany-howard-what-now-film-promo"
 hidden: false
