@@ -636,6 +636,7 @@ async function handleVideosPost(request: Request, env: Env): Promise<Response> {
           }))
       : [],
     client: body.client || undefined,
+    clientUrl: typeof body.clientUrl === 'string' && /^https?:\/\//i.test(body.clientUrl.trim()) ? body.clientUrl.trim() : undefined,
     projectName: body.projectName || undefined,
     uploadDate: body.uploadDate || new Date().toISOString().slice(0, 10),
     durationISO: body.durationISO || undefined,

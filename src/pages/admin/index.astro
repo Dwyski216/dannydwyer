@@ -237,6 +237,10 @@ import { CATEGORIES } from '../../data/categories';
                 <label>Client <input name="client" /></label>
                 <label>Project Name <input name="projectName" /></label>
               </div>
+              <label>Client link (optional)
+                <input name="clientUrl" type="url" placeholder="https://www.beck.com/" />
+              </label>
+              <p class="section-hint">Makes the Client name in the project's info box a link (opens in a new window). Leave blank for plain text.</p>
 
               <fieldset>
                 <legend>Credits</legend>
@@ -1621,6 +1625,7 @@ import { CATEGORIES } from '../../data/categories';
         : [];
       renderSeriesList();
       (workItemForm.elements.namedItem('client') as HTMLInputElement).value = fields.client ?? '';
+      (workItemForm.elements.namedItem('clientUrl') as HTMLInputElement).value = fields.clientUrl ?? '';
       (workItemForm.elements.namedItem('projectName') as HTMLInputElement).value = fields.projectName ?? '';
       (workItemForm.elements.namedItem('uploadDate') as HTMLInputElement).value = fields.uploadDate || todayISO();
       (workItemForm.elements.namedItem('slug') as HTMLInputElement).value = fields.urlSlug ?? slug;
@@ -1670,6 +1675,11 @@ import { CATEGORIES } from '../../data/categories';
       return;
     }
     payload.press = pressRows;
+    payload.clientUrl = String(payload.clientUrl || '').trim();
+    if (payload.clientUrl && !/^https?:\/\//i.test(payload.clientUrl)) {
+      status.textContent = 'Error: the Client link must start with https:// or http://';
+      return;
+    }
     payload.equipment = pendingEquipment
       .map((e) => ({ category: e.category.trim(), item: e.item.trim() }))
       .filter((e) => e.category || e.item);

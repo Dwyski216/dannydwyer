@@ -10,6 +10,7 @@ credits: [{"role":"Director","name":"Beck"},{"role":"Director of Photography","n
 equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":"Cooke Speed Panchros"}]
 series: []
 client: "Beck"
+clientUrl: "https://www.beck.com/"
 projectName: "Beck × Gustaf \"Close\""
 uploadDate: "2023-05-01"
 tags: ["music video","celebrity","Beck","Gustaf","Los Angeles","Punk","Black and White"]

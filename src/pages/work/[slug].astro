@@ -168,7 +168,13 @@ const jsonLd = [
           {d.client && (
             <>
               <dt>Client</dt>
-              <dd>{d.client}</dd>
+              <dd>
+                {d.clientUrl ? (
+                  <a class="press-link" href={d.clientUrl} target="_blank" rel="noopener noreferrer">{d.client}</a>
+                ) : (
+                  d.client
+                )}
+              </dd>
             </>
           )}
 

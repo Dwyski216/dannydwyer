@@ -85,6 +85,7 @@ const videos = defineCollection({
       )
       .default([]),
     client: z.string().optional(), // e.g. "A24" or "Independent"
+    clientUrl: z.string().optional(), // optional link for the Client name in the info box, e.g. "https://www.beck.com/"
     projectName: z.string().optional(), // e.g. "Midnight Harbor (short film)"
     uploadDate: z.string(), // ISO date, e.g. "2026-03-14" — used for both display and schema
     durationISO: z.string().optional(), // ISO 8601 duration, e.g. "PT4M32S" — optional, nice-to-have for schema
