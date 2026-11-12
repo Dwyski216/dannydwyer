@@ -13,7 +13,7 @@ client: "Beck"
 clientUrl: "https://www.beck.com/"
 projectName: "Beck × Gustaf \"Close\""
 uploadDate: "2023-05-01"
-tags: ["music video","celebrity","Beck","Gustaf","Los Angeles","Punk","Black and White"]
+tags: ["music video","Beck","Gustaf","Los Angeles","Punk","Black and White"]
 stills: []
 urlSlug: "beck-gustaf-close"
 hidden: false
