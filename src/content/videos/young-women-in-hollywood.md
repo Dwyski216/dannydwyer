@@ -10,7 +10,7 @@ equipment: [{"category":"Camera","item":"Red Dragon"},{"category":"Lens","item":
 client: "Elle"
 projectName: "Young Women in Hollywood"
 uploadDate: "2017-10-01"
-tags: ["editorial","celebrity","interview","fashion"]
+tags: ["editorial","interview","fashion"]
 stills: []
 urlSlug: "young-women-in-hollywood"
 hidden: false
