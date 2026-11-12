@@ -11,7 +11,7 @@ equipment: [{"category":"Camera","item":"Arri Alexa 35"},{"category":"Lens","ite
 client: "Audible"
 projectName: "Big Age Trailer"
 uploadDate: "2024-06-01"
-tags: ["trailer","audio drama","commercial","Audible","celebrity","Cedric","interview"]
+tags: ["trailer","audio drama","commercial","Audible","Cedric","interview"]
 stills: []
 urlSlug: "big-age-audible-trailer"
 hidden: false
