@@ -12,7 +12,7 @@ series: []
 client: "Harper's Bazaar"
 projectName: "Tracee Ellis Ross cover shoot"
 uploadDate: "2019-11-01"
-tags: ["celebrity","editorial","interview"]
+tags: ["editorial","interview"]
 stills: []
 urlSlug: "tracee-ellis-ross"
 hidden: false
