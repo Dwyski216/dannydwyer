@@ -11,7 +11,7 @@ equipment: [{"category":"Camera","item":"RED Raptor"},{"category":"Lens","item":
 client: "Harper's Bazaar"
 projectName: "Zoë Kravitz Cover Shoot"
 uploadDate: "2018-08-24"
-tags: ["editorial","celebrity","interview","animals","wolves","fashion"]
+tags: ["editorial","interview","animals","wolves","fashion"]
 stills: []
 urlSlug: "zoe-kravitz-harpers-bazaar"
 hidden: false
