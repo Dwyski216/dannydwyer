@@ -300,22 +300,6 @@
     }
   },
   {
-    "slug": "brittany-howard-what-now-film-promo",
-    "title": "Brittany Howard \"What Now\" Film Promo",
-    "tags": [
-      "music video",
-      "film",
-      "psychedelic",
-      "celebrity"
-    ],
-    "uploadDate": "2026-10-24",
-    "hidden": false,
-    "order": 90,
-    "categoryOrder": {
-      "music video": 30
-    }
-  },
-  {
     "slug": "hoko-in-the-summer",
     "title": "Hoko \"In The Summer\"",
     "tags": [
@@ -1027,6 +1011,22 @@
     "order": 60,
     "categoryOrder": {
       "music video": 10
+    }
+  },
+  {
+    "slug": "brittany-howard-what-now-film-promo",
+    "title": "Brittany Howard \"What Now\" Film Promo",
+    "tags": [
+      "music video",
+      "film",
+      "psychedelic",
+      "celebrity"
+    ],
+    "uploadDate": "2026-10-24",
+    "hidden": false,
+    "order": 90,
+    "categoryOrder": {
+      "music video": 30
     }
   }
 ]
