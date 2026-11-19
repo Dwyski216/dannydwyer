@@ -25,5 +25,3 @@ The Huntington has held the top of it for over a century. It was designed in 192
 San Francisco’s own Ken Fulk reimagined it as a grand private residence, and you feel it everywhere: a painted, vaulted ceiling, Arabella’s, a jewel box of a cocktail salon, and The Big Four, a dining room with half a century of the city’s stories behind it. There’s even a majordomo. Old school, all the way down.
 
 Our co-star was a blonde Afghan hound, all silk and posture, and more at home in that lobby than any of us.
-
-I shot it the way it deserves: unhurried, composed, and patient enough to let the room reveal itself. Some places you film. This one, you frame like a portrait.
