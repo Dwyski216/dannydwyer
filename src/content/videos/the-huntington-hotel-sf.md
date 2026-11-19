@@ -6,7 +6,7 @@ cardLine: "Nob Hill since 1924: cable cars at the door, old-school class, and a 
 platform: "vimeo"
 videoId: "1239108908"
 customThumbnail: "/images/thumbnails/thumbnail-1792876563787.webp"
-credits: [{"role":"Director","name":"Callie Peck"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Fer Santa Cruz"}]
+credits: [{"role":"Cast","name":"Lauren Aperfine"},{"role":"Director","name":"Callie Peck"},{"role":"Director of Photography","name":"Danny Dwyer"},{"role":"Editor","name":"Fer Santa Cruz"}]
 equipment: [{"category":"Camera","item":"Sony FX6"},{"category":"Lens","item":"TLS Canon FD Primes"}]
 series: []
 client: "Huntington Hotel"
